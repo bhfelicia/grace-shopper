@@ -1,9 +1,9 @@
-const Sequelize = require('sequelize');
-const { db } = require('../db');
+const Sequelize = require("sequelize");
+const { db } = require("../db");
 
 //define your model
 
-const User = db.define('user', {
+const User = db.define("user", {
   isAdmin: {
     type: Sequelize.BOOLEAN,
     allowNull: false,
@@ -13,9 +13,9 @@ const User = db.define('user', {
     },
   },
   role: {
-    type: Sequelize.ENUM(['AUTHENTICATED', 'GUEST']),
+    type: Sequelize.ENUM(["AUTHENTICATED", "GUEST"]),
     allowNull: false,
-    defaultValue: 'GUEST',
+    defaultValue: "GUEST",
     validate: {
       notEmpty: true,
     },
@@ -23,7 +23,7 @@ const User = db.define('user', {
   username: {
     type: Sequelize.STRING,
     allowNull: false,
-    defaultValue: 'guest',
+    defaultValue: "guest",
     validate: {
       notEmpty: true,
     },
@@ -31,7 +31,7 @@ const User = db.define('user', {
   password: {
     type: Sequelize.STRING,
     allowNull: false,
-    defaultValue: 'guest_pw',
+    defaultValue: "guest_pw",
     validate: {
       notEmpty: true,
     },
@@ -39,9 +39,10 @@ const User = db.define('user', {
   email: {
     type: Sequelize.STRING,
     allowNull: false,
-    defaultValue: 'guestEmail',
+    defaultValue: "guestEmail@gmail.com",
     validate: {
       notEmpty: true,
+      isEmail: true,
     },
   },
 });
