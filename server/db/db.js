@@ -1,6 +1,6 @@
 const Sequelize = require('sequelize');
 const db = new Sequelize(
-  process.env.DATABASE_URL || 'postgres://localhost/grace-shopper'
+  process.env.DATABASE_URL || 'postgres://localhost/grace_shopper'
 );
 
 module.exports = { db };
