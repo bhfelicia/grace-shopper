@@ -1,10 +1,10 @@
 const { db } = require('./db');
-const seed = require('./seed');
+//const seed = require('./seed');
 
 const init = async () => {
   try {
     await db.sync({ force: true });
-    await seed();
+    //await seed();
     console.log('connected');
   } catch (error) {
     console.log(error);
