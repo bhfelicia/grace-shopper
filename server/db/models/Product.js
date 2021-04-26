@@ -38,6 +38,9 @@ const Product = db.define("product", {
     type: Sequelize.ENUM(["active", "not active"]),
     defaultValue: "active",
   },
+  averageRating: {
+    type: Sequelize.DECIMAL(1),
+  },
 });
 
 module.exports = Product;

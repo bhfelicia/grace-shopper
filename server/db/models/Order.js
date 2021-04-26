@@ -25,8 +25,18 @@ const Order = db.define("order", {
     },
   },
   status: {
-    type: Sequelize.ENUM(["created", "processing", "canceled", "completed"]),
-    defaultValue: "created",
+    type: Sequelize.ENUM([
+      "in progress",
+      "created",
+      "processing",
+      "canceled",
+      "completed",
+    ]),
+    defaultValue: "in progress",
+  },
+  isCreated: {
+    type: Sequelize.BOOLEAN,
+    defaultValue: false,
   },
   tracking_number: {
     type: Sequelize.UUID,
