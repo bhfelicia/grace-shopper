@@ -2,6 +2,7 @@ const router = require('express').Router();
 const User = require('../../db/models/User');
 const Order = require('../../db/models/Order');
 
+//get routes
 router.get('/', async (req, res, next) => {
   try {
     const users = await User.findAll();
@@ -29,6 +30,31 @@ router.get('/:id/orders', async (req, res, next) => {
       includes: [Order],
     });
     res.status(200).send(userWithOrders);
+  } catch (error) {
+    next(error);
+  }
+});
+
+//post routes
+
+router.post('/', async (req, res, next) => {
+  try {
+    const newUserData = req.body;
+    const newUser = await User.create(newUserData);
+    res.status(201).send(newUser);
+  } catch (error) {
+    next(error);
+  }
+});
+
+//put routes
+router.put('/:id', async (req, res, next) => {
+  try {
+    const updateData = req.body;
+    await User.update(updateData, {
+      where: { id: req.params.id },
+    });
+    res.sendStatus(204);
   } catch (error) {
     next(error);
   }

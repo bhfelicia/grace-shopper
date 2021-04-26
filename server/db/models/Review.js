@@ -1,7 +1,7 @@
-const Sequelize = require("sequelize");
-const { db } = require("../db");
+const Sequelize = require('sequelize');
+const { db } = require('../db');
 
-const Review = db.define("review", {
+const Review = db.define('review', {
   title: {
     type: Sequelize.STRING,
     allowNull: false,
@@ -21,7 +21,8 @@ const Review = db.define("review", {
     allowNull: false,
     validate: {
       notEmpty: true,
-      len: [0, 6],
+      min: 1,
+      max: 5,
     },
   },
 });
