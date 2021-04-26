@@ -9,6 +9,7 @@ const port = process.env.PORT || 9000;
 
 app.use(morgan('dev'));
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 app.use('/public', express.static(path.join(__dirname, '..', 'public')));
 
 app.get('/', (req, res, next) => {
