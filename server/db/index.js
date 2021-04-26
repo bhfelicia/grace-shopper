@@ -1,11 +1,13 @@
-const { db } = require('./db');
+const { db } = require("./db");
+const User = require("./models/User");
+const Product = require("./models/Product");
 //const seed = require('./seed');
 
 const init = async () => {
   try {
     await db.sync({ force: true });
     //await seed();
-    console.log('connected');
+    console.log("connected");
   } catch (error) {
     console.log(error);
   }

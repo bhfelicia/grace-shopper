@@ -51,4 +51,4 @@ const User = db.define("user", {
 
 //export your model
 
-module.exports = { User };
+module.exports = User;
