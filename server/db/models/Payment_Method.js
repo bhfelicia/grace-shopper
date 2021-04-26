@@ -1,67 +1,60 @@
 const Sequelize = require("sequelize");
 const { db } = require("../db");
 
-//define your model
-
-const User = db.define("user", {
-  isAdmin: {
+const Payment_Method = db.define("payment_method", {
+  isPrimary: {
     type: Sequelize.BOOLEAN,
-    allowNull: false,
-    defaultValue: false,
-    validate: {
-      notEmpty: true,
-    },
+    defaultValue: true,
   },
-  role: {
-    type: Sequelize.ENUM(["AUTHENTICATED", "GUEST"]),
-    allowNull: false,
-    defaultValue: "GUEST",
-    validate: {
-      notEmpty: true,
-    },
-  },
-  first: {
+  institution: {
     type: Sequelize.STRING,
     allowNull: false,
     validate: {
       notEmpty: true,
     },
   },
-  last: {
+  firstName: {
     type: Sequelize.STRING,
     allowNull: false,
     validate: {
       notEmpty: true,
     },
   },
-  fullName: {
-    type: Sequelize.VIRTUAL,
-    defaultValue: "guest",
-    get() {
-      return `${this.first} ${this.last}`;
-    },
-  },
-  password: {
+  lastName: {
     type: Sequelize.STRING,
     allowNull: false,
-    defaultValue: "guest_pw",
     validate: {
       notEmpty: true,
     },
   },
-  email: {
-    type: Sequelize.STRING,
+  number: {
+    type: Sequelize.INTEGER(16),
     allowNull: false,
-    defaultValue: "guestEmail@gmail.com",
     validate: {
       notEmpty: true,
-      isEmail: true,
+    },
+  },
+  month_expiry: {
+    type: Sequelize.INTEGER(2),
+    allowNull: false,
+    validate: {
+      notEmpty: true,
+    },
+  },
+  year_expiry: {
+    type: Sequelize.INTEGER(2),
+    allowNull: false,
+    validate: {
+      notEmpty: true,
+    },
+  },
+  billing_address: {
+    type: Sequelize.STRING,
+    allowNull: false,
+    validate: {
+      notEmpty: true,
     },
   },
 });
 
-//define any class or instance methods
-
-//export your model
-
-module.exports = User;
+module.exports = Payment_Method;
