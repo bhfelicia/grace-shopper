@@ -26,9 +26,8 @@ const Product = db.define("product", {
     defaultValue: "medium",
   },
   image: {
-    type: Sequelize.STRING,
-    defaultValue:
-      "https://hgtvhome.sndimg.com/content/dam/images/grdn/fullset/2014/6/25/0/CI_04-fbfd01d70004.jpg.rend.hgtvcom.966.725.suffix/1452664590074.jpeg",
+    type: Sequelize.TEXT,
+    defaultValue: "https://images1.novica.net/pictures/7/p361950_2a_400.jpg",
   },
   inventory: {
     type: Sequelize.INTEGER,
