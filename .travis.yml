@@ -5,3 +5,6 @@ services:
   - postgresql
 before_script:
   - psql -c 'create database grace_shopper;' -U postgres
+env:
+  global:
+    - "postgres://localhost/grace_shopper"
