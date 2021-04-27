@@ -1,5 +1,7 @@
 const Sequelize = require('sequelize');
+const { WebpackOptionsValidationError } = require('webpack');
 const { db } = require('../db');
+const Product = require('./Product');
 
 const Order = db.define('order', {
   id: {
@@ -50,5 +52,19 @@ const Order = db.define('order', {
     },
   },
 });
+
+Order.getProducts = async function (orderId) {
+  try {
+    const products = await Order.findAll({
+      where: {
+        id: orderId,
+      },
+      include: Product,
+    });
+    return products;
+  } catch (error) {
+    console(error);
+  }
+};
 
 module.exports = Order;
