@@ -11,9 +11,9 @@ const seed = require("./seed");
 const init = async () => {
   try {
     await db.sync({ force: true });
-    const productArr = await seed();
+    const seedData = await seed();
     console.log("connected");
-    return productArr;
+    return seedData;
   } catch (error) {
     console.log(error);
   }
