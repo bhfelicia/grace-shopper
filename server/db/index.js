@@ -1,18 +1,19 @@
-const { db } = require('./db');
-const User = require('./models/User');
-const Product = require('./models/Product');
-const Order = require('./models/Order');
-const Order_Product = require('./models/Order_Product');
-const Payment_Method = require('./models/Payment_Method');
-const Review = require('./models/Review');
-const Category = require('./models/Category');
-const seed = require('./seed');
+const { db } = require("./db");
+const User = require("./models/User");
+const Product = require("./models/Product");
+const Order = require("./models/Order");
+const Order_Product = require("./models/Order_Product");
+const Payment_Method = require("./models/Payment_Method");
+const Review = require("./models/Review");
+const Category = require("./models/Category");
+const seed = require("./seed");
 
 const init = async () => {
   try {
     await db.sync({ force: true });
-    await seed();
-    console.log('connected');
+    const productArr = await seed();
+    console.log("connected");
+    return productArr;
   } catch (error) {
     console.log(error);
   }
@@ -30,7 +31,7 @@ Review.belongsTo(User);
 Product.hasMany(Review);
 Review.belongsTo(Product);
 Category.hasMany(Product);
-Product.belongsToMany(Category, { through: 'Category_Product' });
+Product.belongsToMany(Category, { through: "Category_Product" });
 
 //export your db and Models (so they all can be imported from a single central location)
 
