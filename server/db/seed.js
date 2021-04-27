@@ -280,6 +280,11 @@ const seed = async () => {
       productId: 19,
       orderId: arjanOrder1.id,
     });
+    const arjanOrder1Product3 = await Order_Product.create({
+      product_quantity: 1,
+      productId: 7,
+      orderId: arjanOrder1.id,
+    });
 
     const inderpritOrder1 = await Order.create({
       total: 75.0,
