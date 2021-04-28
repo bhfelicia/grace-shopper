@@ -1,15 +1,53 @@
 import axios from 'axios';
-import store from '../store'
-import actions from '../actions'
-import {editUser, deleteUser, loadUsers, loadUser, createUser} from '../actionCreators/userActionCreators';
+import store from '../store';
+import actions from '../actions';
+import {
+  editUser,
+  deleteUser,
+  loadUsers,
+  loadUser,
+  createUser,
+} from '../actionCreators/userActionCreators';
 
-const fetchUsers = ()=>{
-    return async (dispatch) => {
-        const response = await axios.get('/api/users');
-        const users = response.data;
-        dispatch (loadUsers(users));
-    }
-}
+//pass in entire user object to dispatch because reducer needs user object to filter out
 
+const fetchUsers = () => {
+  return async (dispatch) => {
+    const response = await axios.get('/api/users');
+    const users = response.data;
+    dispatch(loadUsers(users));
+  };
+};
 
-export {fetchUsers}
+const fetchUser = (userId) => {
+  return async (dispatch) => {
+    const { data: user } = await axios.get(`/api/users/${userId}`);
+    dispatch(loadUser(user));
+  };
+};
+
+const addUser = (newUser) => {
+  return async (dispatch) => {
+    const { data: user } = await axios.post(`/api/users/`, newUser);
+    dispatch(createUser(user));
+  };
+};
+
+const destroyUser = (user) => {
+  return async (dispatch) => {
+    await axios.delete(`/api/users/${user.id}`);
+    dispatch(deleteUser(user));
+  };
+};
+
+const updateUser = (user) => {
+  return async (dispatch) => {
+    const { data: updatedUser } = await axios.put(
+      `/api/users/${user.id}`,
+      user
+    );
+    dispatch(editUser(updatedUser));
+  };
+};
+
+export { fetchUsers, fetchUser, updateUser, destroyUser, addUser };

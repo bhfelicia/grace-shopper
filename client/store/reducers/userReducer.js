@@ -4,11 +4,11 @@ import {
   LOAD_USER,
   LOAD_USERS,
   CREATE_USER,
-} from "../actions/index";
+} from '../actions/index';
 
 const initialState = {
   users: [],
-  user: {},
+  selectedUser: {},
 };
 
 const userReducer = (state = initialState, action) => {
@@ -16,12 +16,15 @@ const userReducer = (state = initialState, action) => {
     case LOAD_USERS:
       return { ...state, users: action.users };
     case LOAD_USER:
-      return { ...state, user: action.user };
+      return { ...state, selectedUser: action.user };
     case CREATE_USER:
-      return { users: [...state.users, action.user], user: action.user };
+      return {
+        users: [...state.users, action.user],
+        selectedUser: action.user,
+      };
     case EDIT_USER:
-      const theUser = state.users.filter((user) => user !== action.user.id);
-      return { ...state, users: [...theUser, action.user] };
+      const theUsers = state.users.filter((user) => user !== action.user.id);
+      return { ...state, users: [...theUsers, action.user] };
     case DELETE_USER:
       const withoutDeletedUser = state.users.filter(
         (user) => user.id !== action.user.id
