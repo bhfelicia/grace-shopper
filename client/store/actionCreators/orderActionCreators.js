@@ -1,4 +1,9 @@
-import { LOAD_ORDERS, EDIT_ORDER, LOAD_ORDER } from '../actions/index';
+import {
+  LOAD_ORDERS,
+  EDIT_CART,
+  LOAD_CART,
+  DELETE_CART,
+} from "../actions/index";
 
 export const loadOrders = (orders) => {
   return {
@@ -7,16 +12,23 @@ export const loadOrders = (orders) => {
   };
 };
 
-export const editOrders = (order) => {
+export const editCart = (cart) => {
   return {
-    type: EDIT_ORDER,
-    order,
+    type: EDIT_CART,
+    cart,
   };
 };
 
-export const loadOrder = (order) => {
+export const loadCart = (cart) => {
   return {
-    type: LOAD_ORDER,
-    order,
+    type: LOAD_CART,
+    cart,
+  };
+};
+
+export const deleteCart = (cart) => {
+  return {
+    type: DELETE_CART,
+    cart,
   };
 };
