@@ -51,10 +51,10 @@ router.post('/', async (req, res, next) => {
 router.put('/:id', async (req, res, next) => {
   try {
     const updateData = req.body;
-    await User.update(updateData, {
-      where: { id: req.params.id },
-    });
-    res.sendStatus(204);
+    const { id } = req.params;
+    const userToBeUpdated = await User.findByPk(id);
+    const editedUser = await userToBeUpdated.update(updateData);
+    res.send(editedUser.dataValues).status(204);
   } catch (error) {
     next(error);
   }

@@ -9,7 +9,7 @@ import {
   CREATE_PRODUCT,
   EDIT_PRODUCT,
   DELETE_PRODUCT,
-} from "../actions/index";
+} from '../actions/index';
 
 const productReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -18,7 +18,11 @@ const productReducer = (state = initialState, action) => {
     case LOAD_PRODUCT:
       return { ...state, singleProduct: action.product };
     case CREATE_PRODUCT:
-      return { ...state, products: [...state.products, action.product] };
+      return {
+        ...state,
+        products: [...state.products, action.product],
+        selectedProduct: action.product,
+      };
     case EDIT_PRODUCT:
       const theProducts = state.products.filter(
         (product) => product.id !== action.product.id
