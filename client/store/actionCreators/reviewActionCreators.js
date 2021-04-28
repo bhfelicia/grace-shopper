@@ -5,6 +5,8 @@ import {
   DELETE_REVIEW,
 } from '../actions/index';
 
+//do we need a singular LOAD_REVIEW?
+
 export const loadReviews = (reviews) => {
   return {
     type: LOAD_REVIEWS,
