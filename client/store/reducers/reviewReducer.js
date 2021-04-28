@@ -21,7 +21,10 @@ import {
                     review.id !== action.review.id);
                 return {...state, reviews:[...theReview, action.review]}
                 case DELETE_REVIEW:
-                return {...state}
+                    const withoutDeletedReview = state.reviews.filter(
+                        (review) => review.id !== action.review.id
+                      );
+                      return { ...state, reviews: withoutDeletedReview };
             default:
                 return state
         };
