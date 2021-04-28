@@ -2491,19 +2491,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../store */ "./client/store/store.js");
-/* harmony import */ var _actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../actions */ "./client/store/actions/index.js");
-/* harmony import */ var _actionCreators_userActionCreators__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../actionCreators/userActionCreators */ "./client/store/actionCreators/userActionCreators.js");
-
-
+/* harmony import */ var _actionCreators_userActionCreators__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../actionCreators/userActionCreators */ "./client/store/actionCreators/userActionCreators.js");
 
  //pass in entire user object to dispatch because reducer needs user object to filter out
 
 const fetchUsers = () => {
   return async dispatch => {
-    const response = await axios__WEBPACK_IMPORTED_MODULE_0___default().get('/api/users');
+    const response = await axios__WEBPACK_IMPORTED_MODULE_0___default().get("/api/users");
     const users = response.data;
-    dispatch((0,_actionCreators_userActionCreators__WEBPACK_IMPORTED_MODULE_3__.loadUsers)(users));
+    dispatch((0,_actionCreators_userActionCreators__WEBPACK_IMPORTED_MODULE_1__.loadUsers)(users));
   };
 };
 
@@ -2512,7 +2508,7 @@ const fetchUser = userId => {
     const {
       data: user
     } = await axios__WEBPACK_IMPORTED_MODULE_0___default().get(`/api/users/${userId}`);
-    dispatch((0,_actionCreators_userActionCreators__WEBPACK_IMPORTED_MODULE_3__.loadUser)(user));
+    dispatch((0,_actionCreators_userActionCreators__WEBPACK_IMPORTED_MODULE_1__.loadUser)(user));
   };
 };
 
@@ -2521,14 +2517,14 @@ const addUser = newUser => {
     const {
       data: user
     } = await axios__WEBPACK_IMPORTED_MODULE_0___default().post(`/api/users/`, newUser);
-    dispatch((0,_actionCreators_userActionCreators__WEBPACK_IMPORTED_MODULE_3__.createUser)(user));
+    dispatch((0,_actionCreators_userActionCreators__WEBPACK_IMPORTED_MODULE_1__.createUser)(user));
   };
 };
 
 const destroyUser = user => {
   return async dispatch => {
     await axios__WEBPACK_IMPORTED_MODULE_0___default().delete(`/api/users/${user.id}`);
-    dispatch((0,_actionCreators_userActionCreators__WEBPACK_IMPORTED_MODULE_3__.deleteUser)(user));
+    dispatch((0,_actionCreators_userActionCreators__WEBPACK_IMPORTED_MODULE_1__.deleteUser)(user));
   };
 };
 
@@ -2537,7 +2533,7 @@ const updateUser = user => {
     const {
       data: updatedUser
     } = await axios__WEBPACK_IMPORTED_MODULE_0___default().put(`/api/users/${user.id}`, user);
-    dispatch((0,_actionCreators_userActionCreators__WEBPACK_IMPORTED_MODULE_3__.editUser)(updatedUser));
+    dispatch((0,_actionCreators_userActionCreators__WEBPACK_IMPORTED_MODULE_1__.editUser)(updatedUser));
   };
 };
 

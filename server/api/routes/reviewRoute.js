@@ -1,8 +1,8 @@
-const router = require('express').Router();
-const Review = require('../../db/models/Review');
+const router = require("express").Router();
+const Review = require("../../db/models/Review");
 
 //get routes
-router.get('/', async (req, res, next) => {
+router.get("/", async (req, res, next) => {
   try {
     const reviews = await Review.findAll();
     res.status(200).send(reviews);
@@ -11,9 +11,9 @@ router.get('/', async (req, res, next) => {
   }
 });
 
-router.get('/:id', async (req, res, next) => {
+router.get("/:id", async (req, res, next) => {
   try {
-    const review = await review.findByPk(req.params.id);
+    const review = await Review.findByPk(req.params.id);
     res.status(200).send(review);
   } catch (error) {
     next(error);
@@ -21,7 +21,7 @@ router.get('/:id', async (req, res, next) => {
 });
 
 //post routes
-router.post('/', async (req, res, next) => {
+router.post("/", async (req, res, next) => {
   try {
     const newReviewData = req.body;
     const newReview = await Review.create(newReviewData);
@@ -33,15 +33,30 @@ router.post('/', async (req, res, next) => {
 
 //put routes
 
-router.put('/:id', async (req, res, next) => {
+router.put("/:id", async (req, res, next) => {
   try {
     const updateData = req.body;
-    await Review.update(updateData, {
-      where: { id: req.params.id },
-    });
-    res.sendStatus(204);
+    const { id } = req.params;
+
+    const reviewToBeUpdated = await Review.findByPk(id);
+    const editedReview = await reviewToBeUpdated.update(updateData);
+
+    res.send(editedReview.dataValues).status(204);
   } catch (error) {
     next(error);
   }
 });
+
+//delete routes
+router.delete("/:id", async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const reviewToBeDeleted = await Review.findByPk(id);
+    await reviewToBeDeleted.destroy();
+    res.send(reviewToBeDeleted).status(204);
+  } catch (error) {
+    next(error);
+  }
+});
+
 module.exports = router;
