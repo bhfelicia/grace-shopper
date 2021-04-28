@@ -335,18 +335,24 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
+/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
 /* harmony import */ var _categoryReducer__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./categoryReducer */ "./client/store/reducers/categoryReducer.js");
 /* harmony import */ var _productReducer__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./productReducer */ "./client/store/reducers/productReducer.js");
 /* harmony import */ var _orderReducer__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./orderReducer */ "./client/store/reducers/orderReducer.js");
+/* harmony import */ var _reviewReducer__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./reviewReducer */ "./client/store/reducers/reviewReducer.js");
+/* harmony import */ var _userReducer__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./userReducer */ "./client/store/reducers/userReducer.js");
 
 
 
 
-const rootReducer = (0,redux__WEBPACK_IMPORTED_MODULE_3__.combineReducers)({
+
+
+const rootReducer = (0,redux__WEBPACK_IMPORTED_MODULE_5__.combineReducers)({
   categoryReducer: _categoryReducer__WEBPACK_IMPORTED_MODULE_0__.default,
   productReducer: _productReducer__WEBPACK_IMPORTED_MODULE_1__.default,
-  orderReducer: _orderReducer__WEBPACK_IMPORTED_MODULE_2__.default
+  orderReducer: _orderReducer__WEBPACK_IMPORTED_MODULE_2__.default,
+  reviewReducer: _reviewReducer__WEBPACK_IMPORTED_MODULE_3__.default,
+  userReducer: _userReducer__WEBPACK_IMPORTED_MODULE_4__.default
 });
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (rootReducer);
 
@@ -455,6 +461,110 @@ const productReducer = (state = initialState, action) => {
 };
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (productReducer);
+
+/***/ }),
+
+/***/ "./client/store/reducers/reviewReducer.js":
+/*!************************************************!*\
+  !*** ./client/store/reducers/reviewReducer.js ***!
+  \************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _actions_index__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../actions/index */ "./client/store/actions/index.js");
+
+const initialState = {
+  reviews: [],
+  review: {}
+};
+
+const reviewReducer = (state = initialState, action) => {
+  switch (action.type) {
+    case _actions_index__WEBPACK_IMPORTED_MODULE_0__.LOAD_REVIEWS:
+      return { ...state,
+        reviews: action.reviews
+      };
+
+    case _actions_index__WEBPACK_IMPORTED_MODULE_0__.CREATE_REVIEW:
+      return { ...state,
+        review: action.review
+      };
+
+    case _actions_index__WEBPACK_IMPORTED_MODULE_0__.EDIT_REVIEW:
+      const theReview = state.reviews.filter(review => review.id !== action.review.id);
+      return { ...state,
+        reviews: [...theReview, action.review]
+      };
+
+    case _actions_index__WEBPACK_IMPORTED_MODULE_0__.DELETE_REVIEW:
+      const withoutDeletedReview = state.reviews.filter(review => review.id !== action.review.id);
+      return { ...state,
+        reviews: withoutDeletedReview
+      };
+
+    default:
+      return state;
+  }
+
+  ;
+};
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (reviewReducer);
+
+/***/ }),
+
+/***/ "./client/store/reducers/userReducer.js":
+/*!**********************************************!*\
+  !*** ./client/store/reducers/userReducer.js ***!
+  \**********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _actions_index__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../actions/index */ "./client/store/actions/index.js");
+
+const initialState = {
+  users: [],
+  user: {}
+};
+
+const userReducer = (state = initialState, action) => {
+  switch (action.type) {
+    case _actions_index__WEBPACK_IMPORTED_MODULE_0__.LOAD_USERS:
+      return { ...state,
+        users: action.users
+      };
+
+    case _actions_index__WEBPACK_IMPORTED_MODULE_0__.LOAD_USER:
+      return { ...state,
+        user: action.user
+      };
+
+    case _actions_index__WEBPACK_IMPORTED_MODULE_0__.EDIT_USER:
+      const theUser = state.users.filter(user => user !== action.user.id);
+      return { ...state,
+        users: [...theUser, action.user]
+      };
+
+    case _actions_index__WEBPACK_IMPORTED_MODULE_0__.DELETE_USER:
+      const withoutDeletedUser = state.users.filter(user => user.id !== action.user.id);
+      return { ...state,
+        users: withoutDeletedUser
+      };
+
+    default:
+      return state;
+  }
+};
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (userReducer);
 
 /***/ }),
 
