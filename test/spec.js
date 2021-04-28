@@ -1,5 +1,4 @@
 const { expect } = require("chai");
-// const Product = require("../server/db/models/Product");
 const { initTest, Product, User } = require("./testDb");
 const app = require("supertest")(require("./app"));
 //probably will have to install supertest for some test specs (I believe more so for routing tests)
@@ -35,7 +34,7 @@ describe("Grace Shopper Tests", () => {
     });
 
     describe("GET /api/users", () => {
-      it("returns 3 users", async () => {
+      it("returns 4 users", async () => {
         const response = await app.get("/api/users");
         expect(response.status).to.equal(200);
         expect(response.body.length).to.equal(4);
@@ -50,7 +49,7 @@ describe("Grace Shopper Tests", () => {
     });
 
     describe("GET /api/products/:id", () => {
-      it("returns a single user", async () => {
+      it("returns a single product", async () => {
         const response = await app.get(
           `/api/users/${seedData.productArr[0].id}`
         );
