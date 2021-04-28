@@ -26,3 +26,5 @@ import {
                 return state
         };
     }
+
+    export default reviewReducer
