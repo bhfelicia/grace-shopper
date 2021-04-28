@@ -222,11 +222,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "LOAD_PRODUCTS": () => (/* binding */ LOAD_PRODUCTS),
 /* harmony export */   "LOAD_PRODUCT": () => (/* binding */ LOAD_PRODUCT),
+/* harmony export */   "CREATE_USER": () => (/* binding */ CREATE_USER),
 /* harmony export */   "EDIT_USER": () => (/* binding */ EDIT_USER),
 /* harmony export */   "DELETE_USER": () => (/* binding */ DELETE_USER),
 /* harmony export */   "LOAD_USER": () => (/* binding */ LOAD_USER),
 /* harmony export */   "LOAD_CATEGORIES": () => (/* binding */ LOAD_CATEGORIES),
 /* harmony export */   "LOAD_ORDERS": () => (/* binding */ LOAD_ORDERS),
+/* harmony export */   "CREATE_CART": () => (/* binding */ CREATE_CART),
 /* harmony export */   "EDIT_CART": () => (/* binding */ EDIT_CART),
 /* harmony export */   "DELETE_CART": () => (/* binding */ DELETE_CART),
 /* harmony export */   "LOAD_CART": () => (/* binding */ LOAD_CART),
@@ -244,7 +246,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 //all users
 const LOAD_PRODUCTS = "LOAD_PRODUCTS";
-const LOAD_PRODUCT = "LOAD_PRODUCT";
+const LOAD_PRODUCT = "LOAD_PRODUCT"; //when a user creates an accounts, must update database and redux store w new user
+
+const CREATE_USER = "CREATE_USER";
 const EDIT_USER = "EDIT_USER";
 const DELETE_USER = "DELETE_USER";
 const LOAD_USER = "LOAD_USER";
@@ -254,7 +258,9 @@ const LOAD_CATEGORIES = "LOAD_CATEGORIES"; //admin should not be able to edit an
 //loading orders is to look at all past, COMPLETE orders
 
 const LOAD_ORDERS = "LOAD_ORDERS"; //a cart is an order that's status is "in progress"
+//when a user first adds a product to their cart, that cart is then going to be created and added to the database and our redux store
 
+const CREATE_CART = "CREATE_CART";
 const EDIT_CART = "EDIT_CART";
 const DELETE_CART = "DELETE_CART";
 const LOAD_CART = "LOAD_CART";
@@ -384,6 +390,11 @@ const orderReducer = (state = initialState, action) => {
         orders: createdOrders
       };
 
+    case _actions_index__WEBPACK_IMPORTED_MODULE_0__.CREATE_CART:
+      return { ...state,
+        currentCart: action.cart
+      };
+
     case _actions_index__WEBPACK_IMPORTED_MODULE_0__.LOAD_CART:
       const currCart = state.orders.filter(order => order.status === "in progress")[0];
       return { ...state,
@@ -509,8 +520,6 @@ const reviewReducer = (state = initialState, action) => {
     default:
       return state;
   }
-
-  ;
 };
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (reviewReducer);
@@ -543,6 +552,11 @@ const userReducer = (state = initialState, action) => {
       };
 
     case _actions_index__WEBPACK_IMPORTED_MODULE_0__.LOAD_USER:
+      return { ...state,
+        user: action.user
+      };
+
+    case _actions_index__WEBPACK_IMPORTED_MODULE_0__.CREATE_USER:
       return { ...state,
         user: action.user
       };
