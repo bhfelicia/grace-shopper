@@ -9,11 +9,12 @@ export const LOAD_USER = "LOAD_USER";
 export const LOAD_ORDERS = "LOAD_ORDERS";
 
 export const LOAD_CATEGORIES = "LOAD_CATEGORIES";
-
-export const EDIT_ORDER = "EDIT_ORDER";
+//admin should not be able to edit an order (unless something becomes out of stock - edge case to deal with later?)
+// export const EDIT_ORDER = "EDIT_ORDER";
 //export const DELETE_ORDER = 'DELETE_ORDER';
-export const LOAD_ORDER = "LOAD_ORDER";
-
+//loading orders is to look at all past, COMPLETE orders
+export const LOAD_ORDERS = "LOAD_ORDERS";
+//a cart is an order that's status is "in progress"
 export const EDIT_CART = "EDIT_CART";
 export const DELETE_CART = "DELETE_CART";
 export const LOAD_CART = "LOAD_CART";
