@@ -60,4 +60,16 @@ router.put('/:id', async (req, res, next) => {
   }
 });
 
+//delete routes
+router.delete('/:id', async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const userToBeDeleted = await User.findByPk(id);
+    await userToBeDeleted.destroy();
+    res.send(userToBeDeleted).status(204);
+  } catch (error) {
+    next(error);
+  }
+});
+
 module.exports = router;

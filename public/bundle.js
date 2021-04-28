@@ -2484,7 +2484,10 @@ const store = (0,redux__WEBPACK_IMPORTED_MODULE_3__.createStore)(_reducers_index
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "fetchUsers": () => (/* binding */ fetchUsers),
-/* harmony export */   "updateUser": () => (/* binding */ updateUser)
+/* harmony export */   "fetchUser": () => (/* binding */ fetchUser),
+/* harmony export */   "updateUser": () => (/* binding */ updateUser),
+/* harmony export */   "destroyUser": () => (/* binding */ destroyUser),
+/* harmony export */   "addUser": () => (/* binding */ addUser)
 /* harmony export */ });
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
@@ -2494,13 +2497,38 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-
+ //pass in entire user object to dispatch because reducer needs user object to filter out
 
 const fetchUsers = () => {
   return async dispatch => {
     const response = await axios__WEBPACK_IMPORTED_MODULE_0___default().get('/api/users');
     const users = response.data;
     dispatch((0,_actionCreators_userActionCreators__WEBPACK_IMPORTED_MODULE_3__.loadUsers)(users));
+  };
+};
+
+const fetchUser = userId => {
+  return async dispatch => {
+    const {
+      data: user
+    } = await axios__WEBPACK_IMPORTED_MODULE_0___default().get(`/api/users/${userId}`);
+    dispatch((0,_actionCreators_userActionCreators__WEBPACK_IMPORTED_MODULE_3__.loadUser)(user));
+  };
+};
+
+const addUser = newUser => {
+  return async dispatch => {
+    const {
+      data: user
+    } = await axios__WEBPACK_IMPORTED_MODULE_0___default().post(`/api/users/`, newUser);
+    dispatch((0,_actionCreators_userActionCreators__WEBPACK_IMPORTED_MODULE_3__.createUser)(user));
+  };
+};
+
+const destroyUser = user => {
+  return async dispatch => {
+    await axios__WEBPACK_IMPORTED_MODULE_0___default().delete(`/api/users/${user.id}`);
+    dispatch((0,_actionCreators_userActionCreators__WEBPACK_IMPORTED_MODULE_3__.deleteUser)(user));
   };
 };
 
