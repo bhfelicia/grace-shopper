@@ -342,4 +342,4 @@ const initTest = async () => {
   }
 };
 
-module.exports = initTest;
+module.exports = { initTest, Product, User };
