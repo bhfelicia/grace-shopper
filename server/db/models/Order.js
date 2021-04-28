@@ -53,6 +53,10 @@ const Order = db.define('order', {
   },
 });
 
+Order.prototype.getTotal = function () {
+  return Number(this.total) + this.tax;
+};
+
 Order.getProducts = async function (orderId) {
   try {
     const products = await Order.findAll({

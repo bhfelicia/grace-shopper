@@ -412,7 +412,7 @@ const seed = async () => {
       productId: 16,
     });
     const inderpritReviewProduct17 = await Review.create({
-      title: 'I love me some hooters... I mean hooty friends!',
+      title: 'I LOVE hooty friends!',
       description: 'This is a great asset to have.',
       rating: 5,
       userId: 3,
