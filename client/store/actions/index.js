@@ -1,10 +1,10 @@
 //all users
 export const LOAD_PRODUCTS = "LOAD_PRODUCTS";
 export const LOAD_PRODUCT = "LOAD_PRODUCT";
-
+//when a user creates an accounts, must update database and redux store w new user
+export const CREATE_USER = "CREATE_USER";
 export const EDIT_USER = "EDIT_USER";
 export const DELETE_USER = "DELETE_USER";
-
 export const LOAD_USER = "LOAD_USER";
 
 export const LOAD_CATEGORIES = "LOAD_CATEGORIES";
@@ -14,6 +14,8 @@ export const LOAD_CATEGORIES = "LOAD_CATEGORIES";
 //loading orders is to look at all past, COMPLETE orders
 export const LOAD_ORDERS = "LOAD_ORDERS";
 //a cart is an order that's status is "in progress"
+//when a user first adds a product to their cart, that cart is then going to be created and added to the database and our redux store
+export const CREATE_CART = "CREATE_CART";
 export const EDIT_CART = "EDIT_CART";
 export const DELETE_CART = "DELETE_CART";
 export const LOAD_CART = "LOAD_CART";

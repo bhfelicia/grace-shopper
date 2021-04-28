@@ -2,8 +2,9 @@ import {
   EDIT_USER,
   DELETE_USER,
   LOAD_USER,
+  CREATE_USER,
   LOAD_USERS,
-} from '../actions/index';
+} from "../actions/index";
 
 export const editUser = (user) => {
   return {
@@ -21,6 +22,13 @@ export const deleteUser = (user) => {
 export const loadUser = (user) => {
   return {
     type: LOAD_USER,
+    user,
+  };
+};
+
+export const createUser = (user) => {
+  return {
+    type: CREATE_USER,
     user,
   };
 };

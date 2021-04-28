@@ -1,5 +1,6 @@
 import {
   LOAD_ORDERS,
+  CREATE_CART,
   EDIT_CART,
   DELETE_CART,
   LOAD_CART,
@@ -17,6 +18,8 @@ const orderReducer = (state = initialState, action) => {
         (order) => order.status !== "in progress"
       );
       return { ...state, orders: createdOrders };
+    case CREATE_CART:
+      return { ...state, currentCart: action.cart };
     case LOAD_CART:
       const currCart = state.orders.filter(
         (order) => order.status === "in progress"
