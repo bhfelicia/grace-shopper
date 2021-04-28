@@ -6,7 +6,6 @@ export const EDIT_USER = "EDIT_USER";
 export const DELETE_USER = "DELETE_USER";
 
 export const LOAD_USER = "LOAD_USER";
-export const LOAD_ORDERS = "LOAD_ORDERS";
 
 export const LOAD_CATEGORIES = "LOAD_CATEGORIES";
 //admin should not be able to edit an order (unless something becomes out of stock - edge case to deal with later?)

@@ -225,10 +225,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "EDIT_USER": () => (/* binding */ EDIT_USER),
 /* harmony export */   "DELETE_USER": () => (/* binding */ DELETE_USER),
 /* harmony export */   "LOAD_USER": () => (/* binding */ LOAD_USER),
-/* harmony export */   "LOAD_ORDERS": () => (/* binding */ LOAD_ORDERS),
 /* harmony export */   "LOAD_CATEGORIES": () => (/* binding */ LOAD_CATEGORIES),
-/* harmony export */   "EDIT_ORDER": () => (/* binding */ EDIT_ORDER),
-/* harmony export */   "LOAD_ORDER": () => (/* binding */ LOAD_ORDER),
+/* harmony export */   "LOAD_ORDERS": () => (/* binding */ LOAD_ORDERS),
 /* harmony export */   "EDIT_CART": () => (/* binding */ EDIT_CART),
 /* harmony export */   "DELETE_CART": () => (/* binding */ DELETE_CART),
 /* harmony export */   "LOAD_CART": () => (/* binding */ LOAD_CART),
@@ -250,11 +248,13 @@ const LOAD_PRODUCT = "LOAD_PRODUCT";
 const EDIT_USER = "EDIT_USER";
 const DELETE_USER = "DELETE_USER";
 const LOAD_USER = "LOAD_USER";
-const LOAD_ORDERS = "LOAD_ORDERS";
-const LOAD_CATEGORIES = "LOAD_CATEGORIES";
-const EDIT_ORDER = "EDIT_ORDER"; //export const DELETE_ORDER = 'DELETE_ORDER';
+const LOAD_CATEGORIES = "LOAD_CATEGORIES"; //admin should not be able to edit an order (unless something becomes out of stock - edge case to deal with later?)
+// export const EDIT_ORDER = "EDIT_ORDER";
+//export const DELETE_ORDER = 'DELETE_ORDER';
+//loading orders is to look at all past, COMPLETE orders
 
-const LOAD_ORDER = "LOAD_ORDER";
+const LOAD_ORDERS = "LOAD_ORDERS"; //a cart is an order that's status is "in progress"
+
 const EDIT_CART = "EDIT_CART";
 const DELETE_CART = "DELETE_CART";
 const LOAD_CART = "LOAD_CART";
@@ -335,17 +335,70 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
+/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
 /* harmony import */ var _categoryReducer__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./categoryReducer */ "./client/store/reducers/categoryReducer.js");
 /* harmony import */ var _productReducer__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./productReducer */ "./client/store/reducers/productReducer.js");
+/* harmony import */ var _orderReducer__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./orderReducer */ "./client/store/reducers/orderReducer.js");
 
 
 
-const rootReducer = (0,redux__WEBPACK_IMPORTED_MODULE_2__.combineReducers)({
+
+const rootReducer = (0,redux__WEBPACK_IMPORTED_MODULE_3__.combineReducers)({
   categoryReducer: _categoryReducer__WEBPACK_IMPORTED_MODULE_0__.default,
-  productReducer: _productReducer__WEBPACK_IMPORTED_MODULE_1__.default
+  productReducer: _productReducer__WEBPACK_IMPORTED_MODULE_1__.default,
+  orderReducer: _orderReducer__WEBPACK_IMPORTED_MODULE_2__.default
 });
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (rootReducer);
+
+/***/ }),
+
+/***/ "./client/store/reducers/orderReducer.js":
+/*!***********************************************!*\
+  !*** ./client/store/reducers/orderReducer.js ***!
+  \***********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _actions_index__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../actions/index */ "./client/store/actions/index.js");
+
+const initialState = {
+  orders: [],
+  currentCart: {}
+};
+
+const orderReducer = (state = initialState, action) => {
+  switch (action.type) {
+    case _actions_index__WEBPACK_IMPORTED_MODULE_0__.LOAD_ORDERS:
+      const createdOrders = state.orders.filter(order => order.status !== "in progress");
+      return { ...state,
+        orders: createdOrders
+      };
+
+    case _actions_index__WEBPACK_IMPORTED_MODULE_0__.LOAD_CART:
+      const currCart = state.orders.filter(order => order.status === "in progress")[0];
+      return { ...state,
+        currentCart: currCart
+      };
+
+    case _actions_index__WEBPACK_IMPORTED_MODULE_0__.EDIT_CART:
+      return { ...state,
+        currentCart: action.cart
+      };
+
+    case _actions_index__WEBPACK_IMPORTED_MODULE_0__.DELETE_CART:
+      return { ...state
+      };
+
+    default:
+      return state;
+  }
+};
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (orderReducer);
 
 /***/ }),
 
@@ -424,6 +477,8 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+ // thunk or thunkMiddleware?
+// createLogger ?
 
 const store = (0,redux__WEBPACK_IMPORTED_MODULE_3__.createStore)(_reducers_index__WEBPACK_IMPORTED_MODULE_2__.default, (0,redux__WEBPACK_IMPORTED_MODULE_3__.applyMiddleware)(redux_thunk__WEBPACK_IMPORTED_MODULE_1__.default, (0,redux_logger__WEBPACK_IMPORTED_MODULE_0__.createLogger)({
   collapsed: true
