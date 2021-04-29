@@ -1,1 +1,1 @@
-Hey all, this is our Grace Shopper, Plant Parenthood!
+Hey all, this is our Grace Shopper, Dynamic Ceramics!

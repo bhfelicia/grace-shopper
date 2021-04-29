@@ -76,10 +76,8 @@ router.put("/:id", async (req, res, next) => {
   try {
     const updateData = req.body;
     const { id } = req.params;
-
     const orderToBeUpdated = await Order.findByPk(id);
     const editedOrder = await orderToBeUpdated.update(updateData);
-
     res.send(editedOrder.dataValues).status(204);
   } catch (error) {
     next(error);
