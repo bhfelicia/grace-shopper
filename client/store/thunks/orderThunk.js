@@ -31,11 +31,11 @@ const updateCart = (cart) => {
   };
 };
 
-// const loadCart = (userId) => {
-//   return async (dispatch) => {
-//     const { data: cart } = await axios.get(`/api/orders/${}`
-//   }
-// }
+const loadCart = (userId) => {
+  return async (dispatch) => {
+    const { data: cart } = await axios.get(`/api/orders/${}`)
+  }
+}
 
 //Test!!!!!!!!!!!!!!!!!!!!!
 const destroyCart = (cart) => {

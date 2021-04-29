@@ -36,6 +36,20 @@ router.get('/:id/orders', async (req, res, next) => {
   }
 });
 
+router.get('/:id/cart', async (req, res, next) => {
+  try {
+    const userWithOrders = await User.findAll({
+      where: {
+        id: req.params.id,
+      },
+      includes: [Order],
+    });
+    res.status(200).send(userWithOrders);
+  } catch (error) {
+    next(error);
+  }
+});
+
 //post routes
 
 router.post('/', async (req, res, next) => {

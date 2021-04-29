@@ -4,7 +4,7 @@ import {
   EDIT_CART,
   LOAD_CART,
   DELETE_CART,
-} from "../actions/index";
+} from '../actions/index';
 
 export const loadOrders = (orders) => {
   return {
