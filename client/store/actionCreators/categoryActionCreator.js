@@ -3,7 +3,15 @@ import {
   CREATE_CATEGORY,
   EDIT_CATEGORY,
   DELETE_CATEGORY,
+  LOAD_CATEGORY,
 } from "../actions/index";
+
+export const loadCategory = (category) => {
+  return {
+    type: LOAD_CATEGORY,
+    category,
+  };
+};
 
 export const loadCategories = (categories) => {
   return {
