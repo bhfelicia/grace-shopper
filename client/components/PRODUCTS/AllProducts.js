@@ -23,10 +23,10 @@ class AllProducts extends Component {
                 <img src={product.image}></img>
               </Link>
               <h2>{product.name}</h2>
-              <p>{product.description}</p>
-              <p>Size: {product.size} </p>
+              {/* <p>{product.description}</p> */}
+              {/* <p>Size: {product.size} </p> */}
               <h3>${product.price}</h3>
-              <p>{product.inventory} of these beauties in stock!</p>
+              {/* <p>{product.inventory} of these beauties in stock!</p> */}
             </div>
           ))}
       </div>
