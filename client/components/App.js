@@ -1,9 +1,10 @@
-import React, { Component } from "react";
-import { HashRouter as Router, Route, Switch } from "react-router-dom";
-import store from "../store/store";
-import { connect } from "react-redux";
-import { fetchUsers } from "../store/thunks/userThunk";
-import AllProducts from "./PRODUCTS/AllProducts";
+import React, { Component } from 'react';
+import { HashRouter as Router, Route, Switch } from 'react-router-dom';
+import store from '../store/store';
+import { connect } from 'react-redux';
+import { fetchUsers } from '../store/thunks/userThunk';
+import AllProducts from './PRODUCTS/AllProducts';
+import Login from './NAVBAR/Login';
 
 class App extends Component {
   componentDidMount() {
@@ -15,13 +16,8 @@ class App extends Component {
     return (
       <Router>
         <div>
-          <h1>Is this working?</h1>
-          <AllProducts />
-          <div>
-            {this.props.userReducer.users.map((user) => {
-              return user.fullName;
-            })}
-          </div>
+          <Route path="/" component={AllProducts} exact />
+          <Route path="/login" component={Login} exact />
         </div>
       </Router>
     );
