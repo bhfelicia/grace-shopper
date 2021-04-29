@@ -1,15 +1,15 @@
-import axios from "axios";
+import axios from 'axios';
 import {
   loadOrders,
   createCart,
   editCart,
   loadCart,
   deleteCart,
-} from "../actionCreators/orderActionCreators";
+} from '../actionCreators/orderActionCreators';
 
 const fetchOrders = () => {
   return async (dispatch) => {
-    const { data: orders } = await axios.get("/api/orders");
+    const { data: orders } = await axios.get('/api/orders');
     dispatch(loadOrders(orders));
   };
 };
@@ -31,7 +31,7 @@ const updateCart = (cart) => {
   };
 };
 
-const loadCart = (userId) => {
+const fetchCart = (userId) => {
   return async (dispatch) => {
     const { data: cart } = await axios.get(`/api/orders/user/${userId}/cart`);
     dispatch(loadCart(cart));
@@ -45,4 +45,4 @@ const destroyCart = (cart) => {
   };
 };
 
-export { fetchOrders, addCart, updateCart, destroyCart };
+export { fetchOrders, addCart, updateCart, destroyCart, fetchCart };

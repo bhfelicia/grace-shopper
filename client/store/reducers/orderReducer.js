@@ -14,10 +14,12 @@ const initialState = {
 const orderReducer = (state = initialState, action) => {
   switch (action.type) {
     case LOAD_ORDERS:
-      const createdOrders = state.orders.filter(
-        (order) => order.status !== 'in progress'
-      );
-      return { ...state, orders: createdOrders };
+      //state = { ...state, orders: action.orders };
+      // const createdOrders = state.orders.filter(
+      //   (order) => order.status !== 'in progress'
+      // );
+      // arjan/IP changed this, consult before uncommenting
+      return { ...state, orders: action.orders };
     case CREATE_CART:
       return { ...state, currentCart: action.cart };
     case LOAD_CART:

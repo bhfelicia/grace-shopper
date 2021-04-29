@@ -2025,11 +2025,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/esm/react-router.js");
 /* harmony import */ var _store_store__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../store/store */ "./client/store/store.js");
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var _store_thunks_userThunk__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../store/thunks/userThunk */ "./client/store/thunks/userThunk.js");
 /* harmony import */ var _PRODUCTS_AllProducts__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./PRODUCTS/AllProducts */ "./client/components/PRODUCTS/AllProducts.js");
+/* harmony import */ var _NAVBAR_Login__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./NAVBAR/Login */ "./client/components/NAVBAR/Login.js");
+
 
 
 
@@ -2044,9 +2047,15 @@ class App extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
 
   render() {
     console.log(_store_store__WEBPACK_IMPORTED_MODULE_1__.default.getState());
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_5__.HashRouter, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h1", null, "Is this working?"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_PRODUCTS_AllProducts__WEBPACK_IMPORTED_MODULE_4__.default, null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, this.props.userReducer.users.map(user => {
-      return user.fullName;
-    }))));
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_6__.HashRouter, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_7__.Route, {
+      path: "/",
+      component: _PRODUCTS_AllProducts__WEBPACK_IMPORTED_MODULE_4__.default,
+      exact: true
+    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_7__.Route, {
+      path: "/login",
+      component: _NAVBAR_Login__WEBPACK_IMPORTED_MODULE_5__.default,
+      exact: true
+    })));
   }
 
 }
@@ -2064,6 +2073,162 @@ const mapDispatch = dispatch => {
 };
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_redux__WEBPACK_IMPORTED_MODULE_2__.connect)(mapState, mapDispatch)(App));
+
+/***/ }),
+
+/***/ "./client/components/NAVBAR/Login.js":
+/*!*******************************************!*\
+  !*** ./client/components/NAVBAR/Login.js ***!
+  \*******************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_2__);
+
+
+
+
+
+class Login extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
+  constructor() {
+    super();
+    this.state = {
+      email: '',
+      password: '',
+      auth: {}
+    };
+    this.onChange = this.onChange.bind(this);
+    this.onSubmit = this.onSubmit.bind(this);
+    this.signIn = this.signIn.bind(this);
+    this.logout = this.logout.bind(this);
+    this.attemptTokenLogin = this.attemptTokenLogin.bind(this);
+  }
+
+  componentDidMount() {
+    this.attemptTokenLogin();
+  }
+
+  onChange(ev) {
+    this.setState({
+      [ev.target.name]: ev.target.value
+    });
+  }
+
+  onSubmit(ev) {
+    ev.preventDefault();
+    const {
+      email,
+      password
+    } = this.state;
+    this.signIn({
+      email,
+      password
+    });
+  }
+
+  async signIn(credentials) {
+    let response = await axios__WEBPACK_IMPORTED_MODULE_2___default().post('/api/auth', credentials);
+    const {
+      token
+    } = response.data;
+    window.localStorage.setItem('token', token);
+    this.attemptTokenLogin();
+  }
+
+  logout() {
+    window.localStorage.removeItem('token');
+    this.setState({
+      auth: {}
+    });
+  }
+
+  async attemptTokenLogin() {
+    const token = window.localStorage.getItem('token');
+
+    if (token) {
+      const response = await axios__WEBPACK_IMPORTED_MODULE_2___default().get('/api/auth', {
+        headers: {
+          authorization: token
+        }
+      });
+      this.setState({
+        auth: response.data
+      });
+    }
+  }
+
+  render() {
+    const {
+      onChange,
+      onSubmit,
+      logout
+    } = this;
+    const {
+      email,
+      password,
+      auth
+    } = this.state;
+
+    if (!auth.id) {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("form", {
+        onSubmit: onSubmit
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
+        value: email,
+        onChange: onChange,
+        name: "email"
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
+        value: password,
+        onChange: onChange,
+        name: "password"
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", null, "Sign In"));
+    } else {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, "Welcome ", auth.username, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+        onClick: logout
+      }, "Logout"));
+    }
+  }
+
+}
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_redux__WEBPACK_IMPORTED_MODULE_1__.connect)()(Login)); // class App extends React.Component {
+//   constructor() {
+//     super();
+//     this.state = {
+//       auth: {},
+//     };
+//     this.signIn = this.signIn.bind(this);
+//     this.logout = this.logout.bind(this);
+//   }
+//   componentDidMount() {
+//     this.attemptTokenLogin();
+//   }
+//   render() {
+//     const { auth } = this.state;
+//     const { signIn, logout } = this;
+//     if (!auth.id) {
+//       return <SignIn signIn={signIn} />;
+//     } else {
+//       return (
+//         <div>
+//           Welcome {auth.username}
+//           <button onClick={logout}>Logout</button>
+//         </div>
+//       );
+//     }
+//   }
+// }
+// class Login extends React.Component {
+//   constructor(props) {
+//     super(props);
+//   }
+// }
 
 /***/ }),
 
@@ -2408,9 +2573,13 @@ const initialState = {
 const orderReducer = (state = initialState, action) => {
   switch (action.type) {
     case _actions_index__WEBPACK_IMPORTED_MODULE_0__.LOAD_ORDERS:
-      const createdOrders = state.orders.filter(order => order.status !== 'in progress');
+      //state = { ...state, orders: action.orders };
+      // const createdOrders = state.orders.filter(
+      //   (order) => order.status !== 'in progress'
+      // );
+      // arjan/IP changed this, consult before uncommenting
       return { ...state,
-        orders: createdOrders
+        orders: action.orders
       };
 
     case _actions_index__WEBPACK_IMPORTED_MODULE_0__.CREATE_CART:
