@@ -1,8 +1,9 @@
-import React, { Component } from 'react';
-import { HashRouter as Router, Route, Switch } from 'react-router-dom';
-import store from '../store/store';
-import { connect } from 'react-redux';
-import { fetchUsers } from '../store/thunks/userThunk';
+import React, { Component } from "react";
+import { HashRouter as Router, Route, Switch } from "react-router-dom";
+import store from "../store/store";
+import { connect } from "react-redux";
+import { fetchUsers } from "../store/thunks/userThunk";
+import AllProducts from "./PRODUCTS/AllProducts";
 
 class App extends Component {
   componentDidMount() {
@@ -12,14 +13,17 @@ class App extends Component {
   render() {
     console.log(store.getState());
     return (
-      <div>
-        <h1>Is this working?</h1>
+      <Router>
         <div>
-          {this.props.userReducer.users.map((user) => {
-            return user.fullName;
-          })}
+          <h1>Is this working?</h1>
+          <AllProducts />
+          <div>
+            {this.props.userReducer.users.map((user) => {
+              return user.fullName;
+            })}
+          </div>
         </div>
-      </div>
+      </Router>
     );
   }
 }

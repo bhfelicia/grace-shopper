@@ -168,7 +168,7 @@ const seed = async () => {
       size: "large",
       categoryId: plantPots.id,
       image:
-        "https://i.pinimg.com/originals/36/d7/90/36d79095c4f5274ba22a0323c03a9fbd.jpg",
+        "https://images.thdstatic.com/productImages/7a1d27cc-94e7-41ba-80f4-bb6024ff0d9c/svn/blue-trendspot-plant-pots-cr10467-12-64_600.jpg",
     });
     const classic = await Product.create({
       name: "Classic",
