@@ -1,4 +1,5 @@
 import {
+  LOAD_CATEGORY,
   LOAD_CATEGORIES,
   CREATE_CATEGORY,
   EDIT_CATEGORY,
@@ -12,6 +13,8 @@ const initialState = {
 
 const categoryReducer = (state = initialState, action) => {
   switch (action.type) {
+    case LOAD_CATEGORY:
+      return { ...state, selectedCategory: action.category };
     case LOAD_CATEGORIES:
       return { ...state, categories: action.categories };
     case CREATE_CATEGORY:

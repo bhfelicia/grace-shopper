@@ -8,6 +8,7 @@ export const DELETE_USER = "DELETE_USER";
 export const LOAD_USER = "LOAD_USER";
 
 export const LOAD_CATEGORIES = "LOAD_CATEGORIES";
+export const LOAD_CATEGORY = "LOAD_CATEGORY";
 //admin should not be able to edit an order (unless something becomes out of stock - edge case to deal with later?)
 // export const EDIT_ORDER = "EDIT_ORDER";
 //export const DELETE_ORDER = 'DELETE_ORDER';
