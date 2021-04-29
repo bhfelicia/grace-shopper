@@ -1,5 +1,6 @@
 const router = require("express").Router();
 const Order = require("../../db/models/Order");
+const User = require("../../db/models/User");
 
 //get routes
 router.get("/", async (req, res, next) => {
@@ -30,6 +31,34 @@ router.get("/:id/products", async (req, res, next) => {
   }
 });
 
+router.get("/user/:userId/cart", async (req, res, next) => {
+  try {
+    const currentCart = await Order.findOne({
+      where: {
+        userId: req.params.userId,
+        status: "in progress",
+      },
+    });
+    res.send(currentCart).status(200);
+  } catch (error) {
+    next(error);
+  }
+});
+
+router.get("/user/:userId/orders", async (req, res, next) => {
+  try {
+    const pastOrders = await Order.findAll({
+      where: {
+        userId: req.params.userId,
+        status: ["created", "processing", "canceled", "completed"],
+      },
+    });
+    res.send(pastOrders).status(200);
+  } catch (error) {
+    next(error);
+  }
+});
+
 //post routes
 router.post("/", async (req, res, next) => {
   try {
@@ -47,10 +76,8 @@ router.put("/:id", async (req, res, next) => {
   try {
     const updateData = req.body;
     const { id } = req.params;
-
     const orderToBeUpdated = await Order.findByPk(id);
     const editedOrder = await orderToBeUpdated.update(updateData);
-
     res.send(editedOrder.dataValues).status(204);
   } catch (error) {
     next(error);

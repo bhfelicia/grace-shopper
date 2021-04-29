@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios from 'axios';
 
 import {
   editUser,
@@ -6,13 +6,13 @@ import {
   loadUsers,
   loadUser,
   createUser,
-} from "../actionCreators/userActionCreators";
+} from '../actionCreators/userActionCreators';
 
 //pass in entire user object to dispatch because reducer needs user object to filter out
 
 const fetchUsers = () => {
   return async (dispatch) => {
-    const response = await axios.get("/api/users");
+    const response = await axios.get('/api/users');
     const users = response.data;
     dispatch(loadUsers(users));
   };

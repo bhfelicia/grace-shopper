@@ -2497,7 +2497,7 @@ __webpack_require__.r(__webpack_exports__);
 
 const fetchUsers = () => {
   return async dispatch => {
-    const response = await axios__WEBPACK_IMPORTED_MODULE_0___default().get("/api/users");
+    const response = await axios__WEBPACK_IMPORTED_MODULE_0___default().get('/api/users');
     const users = response.data;
     dispatch((0,_actionCreators_userActionCreators__WEBPACK_IMPORTED_MODULE_1__.loadUsers)(users));
   };
