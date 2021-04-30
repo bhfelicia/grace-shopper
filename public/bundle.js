@@ -2218,6 +2218,7 @@ class Login extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
       });
       this.props.authorizeUser(this.state.auth);
       window.localStorage.setItem('userId', this.state.auth.id);
+      window.localStorage.setItem('isAdmin', this.state.auth.isAdmin);
     }
   }
 
