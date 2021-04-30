@@ -1,14 +1,14 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
-import axios from 'axios';
+import React from "react";
+import { connect } from "react-redux";
+import { Link } from "react-router-dom";
+import axios from "axios";
 
 class Login extends React.Component {
   constructor() {
     super();
     this.state = {
-      email: '',
-      password: '',
+      email: "",
+      password: "",
       auth: {},
     };
     this.onChange = this.onChange.bind(this);
@@ -32,19 +32,19 @@ class Login extends React.Component {
     });
   }
   async signIn(credentials) {
-    let response = await axios.post('/api/auth', credentials);
+    let response = await axios.post("/api/auth", credentials);
     const { token } = response.data;
-    window.localStorage.setItem('token', token);
+    window.localStorage.setItem("token", token);
     this.attemptTokenLogin();
   }
   logout() {
-    window.localStorage.removeItem('token');
+    window.localStorage.removeItem("token");
     this.setState({ auth: {} });
   }
   async attemptTokenLogin() {
-    const token = window.localStorage.getItem('token');
+    const token = window.localStorage.getItem("token");
     if (token) {
-      const response = await axios.get('/api/auth', {
+      const response = await axios.get("/api/auth", {
         headers: {
           authorization: token,
         },
