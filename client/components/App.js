@@ -3,6 +3,10 @@ import { HashRouter as Router, Route, Switch } from 'react-router-dom';
 import store from '../store/store';
 import { connect } from 'react-redux';
 import { fetchUsers } from '../store/thunks/userThunk';
+import Nav from './NAVBAR/Navbar'
+import Home from './NAVBAR/Home'
+import LoginForm from './FORMS/LoginForm';
+import SignUpForm from './FORMS/SignUpForm';
 
 class App extends Component {
   componentDidMount() {
@@ -12,14 +16,12 @@ class App extends Component {
   render() {
     console.log(store.getState());
     return (
-      <div>
-        <h1>Is this working?</h1>
-        <div>
-          {this.props.userReducer.users.map((user) => {
-            return user.fullName;
-          })}
-        </div>
-      </div>
+      <Router>
+        <Route component={Nav} path='/' exact/> 
+        <Route component={Home} path='/' exact/> 
+        <Route component={LoginForm} path='/LoginPage' exact/> 
+        <Route component={SignUpForm} path='/SignUpPage' exact/>
+      </Router>
     );
   }
 }
