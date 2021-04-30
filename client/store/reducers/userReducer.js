@@ -4,7 +4,7 @@ import {
   LOAD_USER,
   LOAD_USERS,
   CREATE_USER,
-} from '../actions/index';
+} from "../actions/index";
 
 const initialState = {
   users: [],
@@ -27,8 +27,9 @@ const userReducer = (state = initialState, action) => {
       return { ...state, users: [...theUsers, action.user] };
     case DELETE_USER:
       const withoutDeletedUser = state.users.filter(
-        (user) => user.id !== action.user.id
+        (user) => user.id !== action.userId
       );
+      console.log(withoutDeletedUser);
       return { ...state, users: withoutDeletedUser };
     default:
       return state;
