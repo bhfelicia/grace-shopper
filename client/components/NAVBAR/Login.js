@@ -63,11 +63,35 @@ class Login extends React.Component {
     const { email, password, auth } = this.state;
     if (!auth.id) {
       return (
-        <form onSubmit={onSubmit}>
-          <input value={email} onChange={onChange} name="email" />
-          <input value={password} onChange={onChange} name="password" />
-          <button>Sign In</button>
-        </form>
+        <div className="login-container">
+          <form onSubmit={onSubmit} className="login-form">
+            <div className="form-group">
+              <input
+                type="text"
+                className="form-input"
+                value={email}
+                onChange={onChange}
+                name="email"
+                placeholder="email@example.com"
+              />
+            </div>
+            <div className="form-group">
+              <input
+                type="password"
+                className="form-input"
+                value={password}
+                onChange={onChange}
+                name="password"
+                placeholder="password"
+              />
+            </div>
+            <div className="form-group">
+              <button type="submit" className="form-button">
+                Sign In
+              </button>
+            </div>
+          </form>
+        </div>
       );
     } else {
       return (
