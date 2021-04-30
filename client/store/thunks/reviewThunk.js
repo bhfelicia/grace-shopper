@@ -1,14 +1,16 @@
-import axios from 'axios';
+import axios from "axios";
 import {
   loadReviews,
   createReview,
   editReview,
   deleteReview,
-} from '../actionCreators/reviewActionCreators';
+} from "../actionCreators/reviewActionCreators";
 
-const fetchReviews = () => {
+const fetchReviews = (productId) => {
   return async (dispatch) => {
-    const { data: reviews } = await axios.get('/api/reviews');
+    const { data: reviews } = await axios.get(
+      `/api/products/${productId}/reviews`
+    );
     dispatch(loadReviews(reviews));
   };
 };

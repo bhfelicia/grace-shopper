@@ -1,6 +1,7 @@
 const router = require("express").Router();
 const Product = require("../../db/models/Product");
 const Review = require("../../db/models/Review");
+const User = require("../../db/models/User");
 
 //get routes
 router.get("/", async (req, res, next) => {
@@ -23,13 +24,13 @@ router.get("/:id", async (req, res, next) => {
 
 router.get("/:id/reviews", async (req, res, next) => {
   try {
-    const product = await Product.findAll({
+    const reviews = await Review.findAll({
       where: {
-        id: req.params.id,
+        productId: req.params.id,
       },
-      includes: [Review],
+      include: User,
     });
-    res.status(200).send(product);
+    res.status(200).send(reviews);
   } catch (error) {
     next(error);
   }

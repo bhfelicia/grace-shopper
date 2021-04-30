@@ -1,14 +1,15 @@
-import React, { Component } from 'react';
-import { HashRouter as Router, Route, Switch } from 'react-router-dom';
-import store from '../store/store';
-import { connect } from 'react-redux';
-import { fetchUser, fetchUsers } from '../store/thunks/userThunk';
-import AllProducts from './PRODUCTS/AllProducts';
-import SingleProduct from './PRODUCTS/SingleProduct';
-import AllOrders from './ORDERS/AllOrders';
-import SingleOrder from './ORDERS/SingleOrder';
+import React, { Component } from "react";
+import { HashRouter as Router, Route, Switch } from "react-router-dom";
+import store from "../store/store";
+import { connect } from "react-redux";
+import { fetchUser, fetchUsers } from "../store/thunks/userThunk";
+import AllProducts from "./PRODUCTS/AllProducts";
+import SingleProduct from "./PRODUCTS/SingleProduct";
+import AllOrders from "./ORDERS/AllOrders";
+import SingleOrder from "./ORDERS/SingleOrder";
+import ProductReviews from "./REVIEWS/ProductReviews";
 
-import Login from './NAVBAR/Login';
+import Login from "./NAVBAR/Login";
 
 class App extends Component {
   componentDidMount() {
@@ -24,6 +25,11 @@ class App extends Component {
         <div>
           <Switch>
             <Route exact path="/" component={AllProducts} exact />
+            <Route
+              exact
+              path="/products/:id/reviews"
+              component={ProductReviews}
+            />
             <Route exact path="/products" component={AllProducts} exact />
             <Route exact path="/login" component={Login} exact />
             <Route exact path="/products/:id" component={SingleProduct}></Route>
@@ -45,7 +51,6 @@ const mapDispatch = (dispatch) => {
       dispatch(fetchUsers());
     },
     loadUser: async () => {
-      console.log(JSON.parse(window.localStorage.user), 'HERE!!!!');
       dispatch(fetchUser(Number(window.localStorage.userId)));
     },
   };
