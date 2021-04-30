@@ -17,7 +17,9 @@ import SignUp from './NAVBAR/SignUp';
 class App extends Component {
   componentDidMount() {
     this.props.loadUsers();
-    this.props.loadUser();
+    if (window.localStorage.getItem("userId")) {
+      this.props.loadUser();
+    }
   }
 
   render() {
