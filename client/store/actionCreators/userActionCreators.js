@@ -13,10 +13,10 @@ export const editUser = (user) => {
   };
 };
 
-export const deleteUser = (user) => {
+export const deleteUser = (userId) => {
   return {
     type: DELETE_USER,
-    user,
+    userId,
   };
 };
 export const loadUser = (user) => {
