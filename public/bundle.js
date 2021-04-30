@@ -2100,8 +2100,8 @@ class Login extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
   constructor() {
     super();
     this.state = {
-      email: '',
-      password: '',
+      email: "",
+      password: "",
       auth: {}
     };
     this.onChange = this.onChange.bind(this);
@@ -2134,26 +2134,26 @@ class Login extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
   }
 
   async signIn(credentials) {
-    let response = await axios__WEBPACK_IMPORTED_MODULE_2___default().post('/api/auth', credentials);
+    let response = await axios__WEBPACK_IMPORTED_MODULE_2___default().post("/api/auth", credentials);
     const {
       token
     } = response.data;
-    window.localStorage.setItem('token', token);
+    window.localStorage.setItem("token", token);
     this.attemptTokenLogin();
   }
 
   logout() {
-    window.localStorage.removeItem('token');
+    window.localStorage.removeItem("token");
     this.setState({
       auth: {}
     });
   }
 
   async attemptTokenLogin() {
-    const token = window.localStorage.getItem('token');
+    const token = window.localStorage.getItem("token");
 
     if (token) {
-      const response = await axios__WEBPACK_IMPORTED_MODULE_2___default().get('/api/auth', {
+      const response = await axios__WEBPACK_IMPORTED_MODULE_2___default().get("/api/auth", {
         headers: {
           authorization: token
         }
