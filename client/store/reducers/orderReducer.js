@@ -14,11 +14,6 @@ const initialState = {
 const orderReducer = (state = initialState, action) => {
   switch (action.type) {
     case LOAD_ORDERS:
-      //state = { ...state, orders: action.orders };
-      // const createdOrders = state.orders.filter(
-      //   (order) => order.status !== 'in progress'
-      // );
-      // arjan/IP changed this, consult before uncommenting
       return { ...state, orders: action.orders };
     case CREATE_CART:
       return { ...state, currentCart: action.cart };
@@ -28,7 +23,13 @@ const orderReducer = (state = initialState, action) => {
       )[0];
       return { ...state, currentCart: currCart };
     case EDIT_CART:
-      return { ...state, currentCart: action.cart }; //revisit cause arjan can't think right now
+      const filteredOrder = state.orders.filter((order) => {
+        return order.id !== state.currentCart.id;
+      });
+      return {
+        orders: [...filteredOrder, action.cart],
+        currentCart: action.cart,
+      }; //revisit cause arjan can't think right now
     case DELETE_CART:
       return { ...state, currentCart: {} };
     default:

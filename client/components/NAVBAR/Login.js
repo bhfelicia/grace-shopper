@@ -75,38 +75,3 @@ class Login extends React.Component {
 }
 
 export default connect()(Login);
-
-// class App extends React.Component {
-//   constructor() {
-//     super();
-//     this.state = {
-//       auth: {},
-//     };
-//     this.signIn = this.signIn.bind(this);
-//     this.logout = this.logout.bind(this);
-//   }
-
-//   componentDidMount() {
-//     this.attemptTokenLogin();
-//   }
-//   render() {
-//     const { auth } = this.state;
-//     const { signIn, logout } = this;
-//     if (!auth.id) {
-//       return <SignIn signIn={signIn} />;
-//     } else {
-//       return (
-//         <div>
-//           Welcome {auth.username}
-//           <button onClick={logout}>Logout</button>
-//         </div>
-//       );
-//     }
-//   }
-// }
-
-// class Login extends React.Component {
-//   constructor(props) {
-//     super(props);
-//   }
-// }

@@ -2197,38 +2197,7 @@ class Login extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
 
 }
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_redux__WEBPACK_IMPORTED_MODULE_1__.connect)()(Login)); // class App extends React.Component {
-//   constructor() {
-//     super();
-//     this.state = {
-//       auth: {},
-//     };
-//     this.signIn = this.signIn.bind(this);
-//     this.logout = this.logout.bind(this);
-//   }
-//   componentDidMount() {
-//     this.attemptTokenLogin();
-//   }
-//   render() {
-//     const { auth } = this.state;
-//     const { signIn, logout } = this;
-//     if (!auth.id) {
-//       return <SignIn signIn={signIn} />;
-//     } else {
-//       return (
-//         <div>
-//           Welcome {auth.username}
-//           <button onClick={logout}>Logout</button>
-//         </div>
-//       );
-//     }
-//   }
-// }
-// class Login extends React.Component {
-//   constructor(props) {
-//     super(props);
-//   }
-// }
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_redux__WEBPACK_IMPORTED_MODULE_1__.connect)()(Login));
 
 /***/ }),
 
@@ -2573,11 +2542,6 @@ const initialState = {
 const orderReducer = (state = initialState, action) => {
   switch (action.type) {
     case _actions_index__WEBPACK_IMPORTED_MODULE_0__.LOAD_ORDERS:
-      //state = { ...state, orders: action.orders };
-      // const createdOrders = state.orders.filter(
-      //   (order) => order.status !== 'in progress'
-      // );
-      // arjan/IP changed this, consult before uncommenting
       return { ...state,
         orders: action.orders
       };
@@ -2594,7 +2558,11 @@ const orderReducer = (state = initialState, action) => {
       };
 
     case _actions_index__WEBPACK_IMPORTED_MODULE_0__.EDIT_CART:
-      return { ...state,
+      const filteredOrder = state.orders.filter(order => {
+        return order.id !== state.currentCart.id;
+      });
+      return {
+        orders: [...filteredOrder, action.cart],
         currentCart: action.cart
       };
     //revisit cause arjan can't think right now
