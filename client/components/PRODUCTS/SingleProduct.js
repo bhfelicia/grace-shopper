@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 
 import { fetchProduct } from "../../store/thunks/productThunk";
+import ProductReviews from "../REVIEWS/ProductReviews";
 
 class SingleProduct extends Component {
   componentDidMount() {
@@ -9,12 +10,6 @@ class SingleProduct extends Component {
   }
   render() {
     const { singleProduct } = this.props.productReducer;
-
-    // if (!this.props.productReducer) return null;
-    // console.log(this.props);
-    // console.log("props are: ", this.props.productReducer.singleProduct);
-    // const { singleProduct } = this.props.productReducer;
-    // console.log("single product is: ", singleProduct);
     return (
       <div id="single-product">
         <h1>{singleProduct.name}</h1>
@@ -23,6 +18,7 @@ class SingleProduct extends Component {
         <h3>${singleProduct.price}</h3>
         <p>Size: {singleProduct.size} </p>
         <p>{singleProduct.inventory} of these beauties in stock!</p>
+        <ProductReviews productId={singleProduct.id} />
       </div>
     );
   }

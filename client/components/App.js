@@ -7,6 +7,7 @@ import AllProducts from "./PRODUCTS/AllProducts";
 import SingleProduct from "./PRODUCTS/SingleProduct";
 import AllOrders from "./ORDERS/AllOrders";
 import SingleOrder from "./ORDERS/SingleOrder";
+import ProductReviews from "./REVIEWS/ProductReviews";
 import AllUsers from "./USERS/AllUsers";
 import SingleUser from "./USERS/SingleUser";
 
@@ -26,6 +27,11 @@ class App extends Component {
         <div>
           <Switch>
             <Route exact path="/" component={AllProducts} exact />
+            <Route
+              exact
+              path="/products/:id/reviews"
+              component={ProductReviews}
+            />
             <Route exact path="/products" component={AllProducts} exact />
             <Route exact path="/login" component={Login} exact />
             <Route exact path="/products/:id" component={SingleProduct}></Route>
