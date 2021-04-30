@@ -1,5 +1,6 @@
 import {
   LOAD_ORDERS,
+  LOAD_ORDER,
   CREATE_CART,
   EDIT_CART,
   LOAD_CART,
@@ -10,6 +11,13 @@ export const loadOrders = (orders) => {
   return {
     type: LOAD_ORDERS,
     orders,
+  };
+};
+
+export const loadOrder = (order) => {
+  return {
+    type: LOAD_ORDER,
+    order,
   };
 };
 
