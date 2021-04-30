@@ -2025,14 +2025,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/esm/react-router.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/esm/react-router.js");
 /* harmony import */ var _store_store__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../store/store */ "./client/store/store.js");
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var _store_thunks_userThunk__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../store/thunks/userThunk */ "./client/store/thunks/userThunk.js");
 /* harmony import */ var _PRODUCTS_AllProducts__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./PRODUCTS/AllProducts */ "./client/components/PRODUCTS/AllProducts.js");
 /* harmony import */ var _PRODUCTS_SingleProduct__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./PRODUCTS/SingleProduct */ "./client/components/PRODUCTS/SingleProduct.js");
-/* harmony import */ var _NAVBAR_Login__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./NAVBAR/Login */ "./client/components/NAVBAR/Login.js");
+/* harmony import */ var _ORDERS_AllOrders__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./ORDERS/AllOrders */ "./client/components/ORDERS/AllOrders.js");
+/* harmony import */ var _ORDERS_SingleOrder__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./ORDERS/SingleOrder */ "./client/components/ORDERS/SingleOrder.js");
+/* harmony import */ var _NAVBAR_Login__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./NAVBAR/Login */ "./client/components/NAVBAR/Login.js");
+
+
 
 
 
@@ -2044,25 +2048,40 @@ __webpack_require__.r(__webpack_exports__);
 
 class App extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
   componentDidMount() {
-    this.props.load();
+    this.props.loadUsers();
+    this.props.loadUser();
   }
 
   render() {
     console.log(_store_store__WEBPACK_IMPORTED_MODULE_1__.default.getState());
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_7__.HashRouter, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_8__.Switch, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_8__.Route, {
+    console.log(window.localStorage);
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_9__.HashRouter, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_10__.Switch, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_10__.Route, {
       exact: true,
       path: "/",
       component: _PRODUCTS_AllProducts__WEBPACK_IMPORTED_MODULE_4__.default,
       exact: true
-    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_8__.Route, {
+    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_10__.Route, {
+      exact: true,
+      path: "/products",
+      component: _PRODUCTS_AllProducts__WEBPACK_IMPORTED_MODULE_4__.default,
+      exact: true
+    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_10__.Route, {
       exact: true,
       path: "/login",
-      component: _NAVBAR_Login__WEBPACK_IMPORTED_MODULE_6__.default,
+      component: _NAVBAR_Login__WEBPACK_IMPORTED_MODULE_8__.default,
       exact: true
-    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_8__.Route, {
+    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_10__.Route, {
       exact: true,
       path: "/products/:id",
       component: _PRODUCTS_SingleProduct__WEBPACK_IMPORTED_MODULE_5__.default
+    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_10__.Route, {
+      exact: true,
+      path: "/orders",
+      component: _ORDERS_AllOrders__WEBPACK_IMPORTED_MODULE_6__.default
+    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_10__.Route, {
+      exact: true,
+      path: "/orders/:id",
+      component: _ORDERS_SingleOrder__WEBPACK_IMPORTED_MODULE_7__.default
     }))));
   }
 
@@ -2074,8 +2093,12 @@ const mapState = state => {
 
 const mapDispatch = dispatch => {
   return {
-    load: async () => {
+    loadUsers: async () => {
       dispatch((0,_store_thunks_userThunk__WEBPACK_IMPORTED_MODULE_3__.fetchUsers)());
+    },
+    loadUser: async () => {
+      console.log(JSON.parse(window.localStorage.user), 'HERE!!!!');
+      dispatch((0,_store_thunks_userThunk__WEBPACK_IMPORTED_MODULE_3__.fetchUser)(Number(window.localStorage.userId)));
     }
   };
 };
@@ -2099,6 +2122,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _store_actionCreators_userActionCreators__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../store/actionCreators/userActionCreators */ "./client/store/actionCreators/userActionCreators.js");
+
 
 
 
@@ -2108,8 +2133,8 @@ class Login extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
   constructor() {
     super();
     this.state = {
-      email: "",
-      password: "",
+      email: '',
+      password: '',
       auth: {}
     };
     this.onChange = this.onChange.bind(this);
@@ -2142,26 +2167,28 @@ class Login extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
   }
 
   async signIn(credentials) {
-    let response = await axios__WEBPACK_IMPORTED_MODULE_2___default().post("/api/auth", credentials);
+    let response = await axios__WEBPACK_IMPORTED_MODULE_2___default().post('/api/auth', credentials);
     const {
       token
     } = response.data;
-    window.localStorage.setItem("token", token);
+    window.localStorage.setItem('token', token);
     this.attemptTokenLogin();
   }
 
   logout() {
-    window.localStorage.removeItem("token");
+    window.localStorage.removeItem('token');
     this.setState({
       auth: {}
     });
+    this.props.authorizeUser({});
+    window.localStorage.removeItem('userId');
   }
 
   async attemptTokenLogin() {
-    const token = window.localStorage.getItem("token");
+    const token = window.localStorage.getItem('token');
 
     if (token) {
-      const response = await axios__WEBPACK_IMPORTED_MODULE_2___default().get("/api/auth", {
+      const response = await axios__WEBPACK_IMPORTED_MODULE_2___default().get('/api/auth', {
         headers: {
           authorization: token
         }
@@ -2169,6 +2196,8 @@ class Login extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
       this.setState({
         auth: response.data
       });
+      this.props.authorizeUser(this.state.auth);
+      window.localStorage.setItem('userId', this.state.auth.id);
     }
   }
 
@@ -2205,7 +2234,136 @@ class Login extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
 
 }
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_redux__WEBPACK_IMPORTED_MODULE_1__.connect)()(Login));
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_redux__WEBPACK_IMPORTED_MODULE_1__.connect)(({
+  userReducer
+}) => {
+  return {
+    userReducer
+  };
+}, dispatch => {
+  return {
+    authorizeUser: user => dispatch((0,_store_actionCreators_userActionCreators__WEBPACK_IMPORTED_MODULE_3__.loadUser)(user))
+  };
+})(Login));
+
+/***/ }),
+
+/***/ "./client/components/ORDERS/AllOrders.js":
+/*!***********************************************!*\
+  !*** ./client/components/ORDERS/AllOrders.js ***!
+  \***********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var _store_thunks_orderThunk__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../store/thunks/orderThunk */ "./client/store/thunks/orderThunk.js");
+
+
+
+
+
+class AllOrders extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
+  constructor(props) {
+    super(props);
+  }
+
+  componentDidMount() {
+    this.props.getOrders();
+  }
+
+  render() {
+    const activeUser = this.props.userReducer.selectedUser;
+
+    if (activeUser.isAdmin) {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, this.props.orderReducer.orders.map(order => {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__.Link, {
+          key: order.id,
+          to: `/orders/${order.id}`
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, order.tracking_number), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, order.shipping_address)));
+      }));
+    } else {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, this.props.orderReducer.orders.filter(order => order.userId === activeUser.id).map(filteredOrder => {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__.Link, {
+          to: `/orders/${order.id}`
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+          key: filteredOrder.id
+        }, filteredOrder.tracking_number));
+      }));
+    }
+  }
+
+}
+
+const mapStateToProps = ({
+  orderReducer,
+  userReducer
+}) => ({
+  orderReducer,
+  userReducer
+});
+
+const mapDispatchToProps = dispatch => ({
+  getOrders: () => dispatch((0,_store_thunks_orderThunk__WEBPACK_IMPORTED_MODULE_2__.fetchOrders)())
+});
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_redux__WEBPACK_IMPORTED_MODULE_1__.connect)(mapStateToProps, mapDispatchToProps)(AllOrders));
+
+/***/ }),
+
+/***/ "./client/components/ORDERS/SingleOrder.js":
+/*!*************************************************!*\
+  !*** ./client/components/ORDERS/SingleOrder.js ***!
+  \*************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _store_thunks_orderThunk__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../store/thunks/orderThunk */ "./client/store/thunks/orderThunk.js");
+
+
+
+
+
+class SingleOrder extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
+  constructor(props) {
+    super(props);
+  }
+
+  componentDidMount() {
+    this.props.getOrder(this.props.match.params.id);
+  }
+
+  render() {
+    const order = this.props.orderReducer.order;
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, order.tracking_number);
+  }
+
+}
+
+const mapStateToProps = ({
+  orderReducer,
+  userReducer
+}) => ({
+  orderReducer,
+  userReducer
+});
+
+const mapDispatchToProps = dispatch => ({
+  getOrder: id => dispatch((0,_store_thunks_orderThunk__WEBPACK_IMPORTED_MODULE_2__.fetchOrder)(id))
+});
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_redux__WEBPACK_IMPORTED_MODULE_1__.connect)(mapStateToProps, mapDispatchToProps)(SingleOrder));
 
 /***/ }),
 
@@ -2321,6 +2479,63 @@ const mapDispatchToProps = dispatch => ({
 });
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_redux__WEBPACK_IMPORTED_MODULE_1__.connect)(mapStateToProps, mapDispatchToProps)(SingleProduct));
+
+/***/ }),
+
+/***/ "./client/store/actionCreators/orderActionCreators.js":
+/*!************************************************************!*\
+  !*** ./client/store/actionCreators/orderActionCreators.js ***!
+  \************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "loadOrders": () => (/* binding */ loadOrders),
+/* harmony export */   "loadOrder": () => (/* binding */ loadOrder),
+/* harmony export */   "createCart": () => (/* binding */ createCart),
+/* harmony export */   "editCart": () => (/* binding */ editCart),
+/* harmony export */   "loadCart": () => (/* binding */ loadCart),
+/* harmony export */   "deleteCart": () => (/* binding */ deleteCart)
+/* harmony export */ });
+/* harmony import */ var _actions_index__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../actions/index */ "./client/store/actions/index.js");
+
+const loadOrders = orders => {
+  return {
+    type: _actions_index__WEBPACK_IMPORTED_MODULE_0__.LOAD_ORDERS,
+    orders
+  };
+};
+const loadOrder = order => {
+  return {
+    type: _actions_index__WEBPACK_IMPORTED_MODULE_0__.LOAD_ORDER,
+    order
+  };
+};
+const createCart = cart => {
+  return {
+    type: _actions_index__WEBPACK_IMPORTED_MODULE_0__.CREATE_CART,
+    cart
+  };
+};
+const editCart = cart => {
+  return {
+    type: _actions_index__WEBPACK_IMPORTED_MODULE_0__.EDIT_CART,
+    cart
+  };
+};
+const loadCart = cart => {
+  return {
+    type: _actions_index__WEBPACK_IMPORTED_MODULE_0__.LOAD_CART,
+    cart
+  };
+};
+const deleteCart = cart => {
+  return {
+    type: _actions_index__WEBPACK_IMPORTED_MODULE_0__.DELETE_CART,
+    cart
+  };
+};
 
 /***/ }),
 
@@ -2442,6 +2657,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "LOAD_CATEGORIES": () => (/* binding */ LOAD_CATEGORIES),
 /* harmony export */   "LOAD_CATEGORY": () => (/* binding */ LOAD_CATEGORY),
 /* harmony export */   "LOAD_ORDERS": () => (/* binding */ LOAD_ORDERS),
+/* harmony export */   "LOAD_ORDER": () => (/* binding */ LOAD_ORDER),
 /* harmony export */   "CREATE_CART": () => (/* binding */ CREATE_CART),
 /* harmony export */   "EDIT_CART": () => (/* binding */ EDIT_CART),
 /* harmony export */   "DELETE_CART": () => (/* binding */ DELETE_CART),
@@ -2459,38 +2675,39 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "LOAD_USERS": () => (/* binding */ LOAD_USERS)
 /* harmony export */ });
 //all users
-const LOAD_PRODUCTS = "LOAD_PRODUCTS";
-const LOAD_PRODUCT = "LOAD_PRODUCT"; //when a user creates an accounts, must update database and redux store w new user
+const LOAD_PRODUCTS = 'LOAD_PRODUCTS';
+const LOAD_PRODUCT = 'LOAD_PRODUCT'; //when a user creates an accounts, must update database and redux store w new user
 
-const CREATE_USER = "CREATE_USER";
-const EDIT_USER = "EDIT_USER";
-const DELETE_USER = "DELETE_USER";
-const LOAD_USER = "LOAD_USER";
-const LOAD_CATEGORIES = "LOAD_CATEGORIES";
-const LOAD_CATEGORY = "LOAD_CATEGORY"; //admin should not be able to edit an order (unless something becomes out of stock - edge case to deal with later?)
+const CREATE_USER = 'CREATE_USER';
+const EDIT_USER = 'EDIT_USER';
+const DELETE_USER = 'DELETE_USER';
+const LOAD_USER = 'LOAD_USER';
+const LOAD_CATEGORIES = 'LOAD_CATEGORIES';
+const LOAD_CATEGORY = 'LOAD_CATEGORY'; //admin should not be able to edit an order (unless something becomes out of stock - edge case to deal with later?)
 // export const EDIT_ORDER = "EDIT_ORDER";
 //export const DELETE_ORDER = 'DELETE_ORDER';
 //loading orders is to look at all past, COMPLETE orders
 
-const LOAD_ORDERS = "LOAD_ORDERS"; //a cart is an order that's status is "in progress"
+const LOAD_ORDERS = 'LOAD_ORDERS';
+const LOAD_ORDER = 'LOAD_ORDER'; //a cart is an order that's status is "in progress"
 //when a user first adds a product to their cart, that cart is then going to be created and added to the database and our redux store
 
-const CREATE_CART = "CREATE_CART";
-const EDIT_CART = "EDIT_CART";
-const DELETE_CART = "DELETE_CART";
-const LOAD_CART = "LOAD_CART";
-const LOAD_REVIEWS = "LOAD_REVIEWS";
-const CREATE_REVIEW = "CREATE_REVIEW";
-const EDIT_REVIEW = "EDIT_REVIEW";
-const DELETE_REVIEW = "DELETE_REVIEW"; //admin actions
+const CREATE_CART = 'CREATE_CART';
+const EDIT_CART = 'EDIT_CART';
+const DELETE_CART = 'DELETE_CART';
+const LOAD_CART = 'LOAD_CART';
+const LOAD_REVIEWS = 'LOAD_REVIEWS';
+const CREATE_REVIEW = 'CREATE_REVIEW';
+const EDIT_REVIEW = 'EDIT_REVIEW';
+const DELETE_REVIEW = 'DELETE_REVIEW'; //admin actions
 
-const CREATE_CATEGORY = "CREATE_CATEGORY";
-const EDIT_CATEGORY = "EDIT_CATEGORY";
-const DELETE_CATEGORY = "DELETE_CATEGORY";
-const CREATE_PRODUCT = "CREATE_PRODUCT";
-const EDIT_PRODUCT = "EDIT_PRODUCT";
-const DELETE_PRODUCT = "DELETE_PRODUCT";
-const LOAD_USERS = "LOAD_USERS";
+const CREATE_CATEGORY = 'CREATE_CATEGORY';
+const EDIT_CATEGORY = 'EDIT_CATEGORY';
+const DELETE_CATEGORY = 'DELETE_CATEGORY';
+const CREATE_PRODUCT = 'CREATE_PRODUCT';
+const EDIT_PRODUCT = 'EDIT_PRODUCT';
+const DELETE_PRODUCT = 'DELETE_PRODUCT';
+const LOAD_USERS = 'LOAD_USERS';
 
 /***/ }),
 
@@ -2599,7 +2816,8 @@ __webpack_require__.r(__webpack_exports__);
 
 const initialState = {
   orders: [],
-  currentCart: {}
+  currentCart: {},
+  order: []
 };
 
 const orderReducer = (state = initialState, action) => {
@@ -2607,6 +2825,11 @@ const orderReducer = (state = initialState, action) => {
     case _actions_index__WEBPACK_IMPORTED_MODULE_0__.LOAD_ORDERS:
       return { ...state,
         orders: action.orders
+      };
+
+    case _actions_index__WEBPACK_IMPORTED_MODULE_0__.LOAD_ORDER:
+      return { ...state,
+        order: action.order
       };
 
     case _actions_index__WEBPACK_IMPORTED_MODULE_0__.CREATE_CART:
@@ -2834,6 +3057,84 @@ const store = (0,redux__WEBPACK_IMPORTED_MODULE_3__.createStore)(_reducers_index
 }))); //store: redux creates a store using the reducer defined above. it can accept changes using dispatch
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (store);
+
+/***/ }),
+
+/***/ "./client/store/thunks/orderThunk.js":
+/*!*******************************************!*\
+  !*** ./client/store/thunks/orderThunk.js ***!
+  \*******************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "fetchOrders": () => (/* binding */ fetchOrders),
+/* harmony export */   "addCart": () => (/* binding */ addCart),
+/* harmony export */   "updateCart": () => (/* binding */ updateCart),
+/* harmony export */   "destroyCart": () => (/* binding */ destroyCart),
+/* harmony export */   "fetchCart": () => (/* binding */ fetchCart),
+/* harmony export */   "fetchOrder": () => (/* binding */ fetchOrder)
+/* harmony export */ });
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _actionCreators_orderActionCreators__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../actionCreators/orderActionCreators */ "./client/store/actionCreators/orderActionCreators.js");
+
+
+
+const fetchOrders = () => {
+  return async dispatch => {
+    const {
+      data: orders
+    } = await axios__WEBPACK_IMPORTED_MODULE_0___default().get('/api/orders');
+    dispatch((0,_actionCreators_orderActionCreators__WEBPACK_IMPORTED_MODULE_1__.loadOrders)(orders));
+  };
+};
+
+const fetchOrder = orderId => {
+  return async dispatch => {
+    const {
+      data: order
+    } = await axios__WEBPACK_IMPORTED_MODULE_0___default().get(`/api/orders/${orderId}`);
+    dispatch((0,_actionCreators_orderActionCreators__WEBPACK_IMPORTED_MODULE_1__.loadOrder)(order));
+  };
+};
+
+const addCart = newCart => {
+  return async dispatch => {
+    const {
+      data: cart
+    } = await axios__WEBPACK_IMPORTED_MODULE_0___default().post(`/api/orders/`, newCart);
+    dispatch((0,_actionCreators_orderActionCreators__WEBPACK_IMPORTED_MODULE_1__.createCart)(cart));
+  };
+};
+
+const updateCart = cart => {
+  return async dispatch => {
+    const {
+      data: updatedCart
+    } = await axios__WEBPACK_IMPORTED_MODULE_0___default().put(`/api/orders/${cart.id}`, cart);
+    dispatch((0,_actionCreators_orderActionCreators__WEBPACK_IMPORTED_MODULE_1__.editCart)(updatedCart));
+  };
+};
+
+const fetchCart = userId => {
+  return async dispatch => {
+    const {
+      data: cart
+    } = await axios__WEBPACK_IMPORTED_MODULE_0___default().get(`/api/orders/user/${userId}/cart`);
+    dispatch((0,_actionCreators_orderActionCreators__WEBPACK_IMPORTED_MODULE_1__.loadCart)(cart));
+  };
+};
+
+const destroyCart = cart => {
+  return async dispatch => {
+    await axios__WEBPACK_IMPORTED_MODULE_0___default().delete(`/api/orders/${cart.id}`);
+    dispatch((0,_actionCreators_orderActionCreators__WEBPACK_IMPORTED_MODULE_1__.deleteCart)(cart));
+  };
+};
+
+
 
 /***/ }),
 

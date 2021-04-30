@@ -1,5 +1,6 @@
 import {
   LOAD_ORDERS,
+  LOAD_ORDER,
   CREATE_CART,
   EDIT_CART,
   DELETE_CART,
@@ -9,12 +10,15 @@ import {
 const initialState = {
   orders: [],
   currentCart: {},
+  order: [],
 };
 
 const orderReducer = (state = initialState, action) => {
   switch (action.type) {
     case LOAD_ORDERS:
       return { ...state, orders: action.orders };
+    case LOAD_ORDER:
+      return { ...state, order: action.order };
     case CREATE_CART:
       return { ...state, currentCart: action.cart };
     case LOAD_CART:
