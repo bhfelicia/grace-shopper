@@ -1,10 +1,11 @@
-import React, { Component } from 'react';
-import { HashRouter as Router, Route, Switch } from 'react-router-dom';
-import store from '../store/store';
-import { connect } from 'react-redux';
-import { fetchUsers } from '../store/thunks/userThunk';
-import AllProducts from './PRODUCTS/AllProducts';
-import Login from './NAVBAR/Login';
+import React, { Component } from "react";
+import { HashRouter as Router, Route, Switch } from "react-router-dom";
+import store from "../store/store";
+import { connect } from "react-redux";
+import { fetchUsers } from "../store/thunks/userThunk";
+import AllProducts from "./PRODUCTS/AllProducts";
+import SingleProduct from "./PRODUCTS/SingleProduct";
+import Login from "./NAVBAR/Login";
 
 class App extends Component {
   componentDidMount() {
@@ -16,8 +17,11 @@ class App extends Component {
     return (
       <Router>
         <div>
-          <Route path="/" component={AllProducts} exact />
-          <Route path="/login" component={Login} exact />
+          <Switch>
+            <Route exact path="/" component={AllProducts} exact />
+            <Route exact path="/login" component={Login} exact />
+            <Route exact path="/products/:id" component={SingleProduct}></Route>
+          </Switch>
         </div>
       </Router>
     );
