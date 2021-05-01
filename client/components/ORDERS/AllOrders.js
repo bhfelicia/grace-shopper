@@ -6,35 +6,67 @@ import { fetchOrders } from '../../store/thunks/orderThunk';
 class AllOrders extends React.Component {
   constructor(props) {
     super(props);
+    this.renderOrders = this.renderOrders.bind(this);
+    this.state = {
+      orders: [],
+    };
   }
-  componentDidMount() {
-    this.props.getOrders();
+  async componentDidMount() {
+    await this.props.getOrders();
+    this.setState({ orders: this.props.orderReducer.orders });
+  }
+  renderOrders(orderType) {
+    const filteredOrders = this.props.orderReducer.orders.filter(
+      (order) => order.status === orderType
+    );
+    console.log(filteredOrders);
+    this.setState({ orders: filteredOrders });
   }
   render() {
     const activeUser = this.props.userReducer.selectedUser;
     if (activeUser.isAdmin) {
       return (
         <div>
-          {this.props.orderReducer.orders.map((order) => {
-            return (
-              <Link key={order.id} to={`/orders/${order.id}`}>
-                <div>
-                  <div>{order.tracking_number}</div>
-                  <div>{order.shipping_address}</div>
-                </div>
-              </Link>
-            );
-          })}
+          <div>
+            <button onClick={() => this.renderOrders('in progress')}>
+              in progress
+            </button>
+            <button onClick={() => this.renderOrders('created')}>
+              created
+            </button>
+            <button onClick={() => this.renderOrders('processing')}>
+              processing
+            </button>
+            <button onClick={() => this.renderOrders('cancelled')}>
+              cancelled
+            </button>
+            <button onClick={() => this.renderOrders('completed')}>
+              completed
+            </button>
+          </div>
+          <div>
+            {this.state.orders.map((order) => {
+              return (
+                <Link key={order.id} to={`/orders/${order.id}`}>
+                  <div>
+                    <div>
+                      {order.tracking_number}: {order.status}
+                    </div>
+                  </div>
+                </Link>
+              );
+            })}
+          </div>
         </div>
       );
-    } else {
+    } else if (activeUser.isAdmin === false) {
       return (
         <div>
           {this.props.orderReducer.orders
             .filter((order) => order.userId === activeUser.id)
             .map((filteredOrder) => {
               return (
-                <Link to={`/orders/${order.id}`}>
+                <Link key={filteredOrder.id} to={`/orders/${filteredOrder.id}`}>
                   <div key={filteredOrder.id}>
                     {filteredOrder.tracking_number}
                   </div>
@@ -43,6 +75,8 @@ class AllOrders extends React.Component {
             })}
         </div>
       );
+    } else {
+      return <div>Log in to view your orders!</div>;
     }
   }
 }

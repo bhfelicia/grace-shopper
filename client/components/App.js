@@ -1,21 +1,23 @@
-import React, { Component } from "react";
-import { HashRouter as Router, Route, Switch } from "react-router-dom";
-import store from "../store/store";
-import { connect } from "react-redux";
-import { fetchUser, fetchUsers } from "../store/thunks/userThunk";
-import AllProducts from "./PRODUCTS/AllProducts";
-import SingleProduct from "./PRODUCTS/SingleProduct";
-import AllOrders from "./ORDERS/AllOrders";
-import SingleOrder from "./ORDERS/SingleOrder";
-import ProductReviews from "./REVIEWS/ProductReviews";
-import AllUsers from "./USERS/AllUsers";
-import SingleUser from "./USERS/SingleUser";
-import EditUser from "./USERS/EditUser";
-import Cart from "./Cart";
+import React, { Component } from 'react';
+import { HashRouter as Router, Route, Switch } from 'react-router-dom';
+import store from '../store/store';
+import { connect } from 'react-redux';
+import { fetchUser, fetchUsers } from '../store/thunks/userThunk';
+import AllProducts from './PRODUCTS/AllProducts';
+import SingleProduct from './PRODUCTS/SingleProduct';
+import AllOrders from './ORDERS/AllOrders';
+import SingleOrder from './ORDERS/SingleOrder';
+import EditOrder from './ORDERS/EditOrder';
+import ProductReviews from './REVIEWS/ProductReviews';
+import AllUsers from './USERS/AllUsers';
+import SingleUser from './USERS/SingleUser';
+import EditUser from './USERS/EditUser';
+import ProductReviews from './REVIEWS/ProductReviews';
+import Cart from './Cart';
 
-import Login from "./NAVBAR/Login";
-import SignUp from "./NAVBAR/SignUp";
-import Navbar from "./NAVBAR/Navbar";
+import Login from './NAVBAR/Login';
+import SignUp from './NAVBAR/SignUp';
+import Navbar from './NAVBAR/Navbar';
 
 class App extends Component {
   componentDidMount() {
@@ -49,6 +51,7 @@ class App extends Component {
             <Route exact path="/products/:id" component={SingleProduct} />
             <Route exact path="/orders" component={AllOrders}></Route>
             <Route exact path="/orders/:id" component={SingleOrder}></Route>
+            <Route exact path="/orders/:id/edit" component={EditOrder}></Route>
             <Route exact path="/users" component={AllUsers}></Route>
             <Route exact path="/users/:id" component={SingleUser}></Route>
             <Route exact path="/users/:id/edit" component={EditUser}></Route>

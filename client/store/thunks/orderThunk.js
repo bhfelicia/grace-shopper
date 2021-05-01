@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios from 'axios';
 import {
   loadOrders,
   loadOrder,
@@ -6,11 +6,11 @@ import {
   editCart,
   loadCart,
   deleteCart,
-} from "../actionCreators/orderActionCreators";
+} from '../actionCreators/orderActionCreators';
 
 const fetchOrders = () => {
   return async (dispatch) => {
-    const { data: orders } = await axios.get("/api/orders");
+    const { data: orders } = await axios.get('/api/orders');
     dispatch(loadOrders(orders));
   };
 };
@@ -19,6 +19,16 @@ const fetchOrder = (orderId) => {
   return async (dispatch) => {
     const { data: order } = await axios.get(`/api/orders/${orderId}`);
     dispatch(loadOrder(order));
+  };
+};
+
+const updateOrder = (newOrderData) => {
+  return async (dispatch) => {
+    const { data: order } = await axios.put(
+      `/api/orders/${newOrderData.id}`,
+      newOrderData
+    );
+    dispatch(editOrder(order));
   };
 };
 
@@ -53,4 +63,12 @@ const destroyCart = (cart) => {
   };
 };
 
-export { fetchOrders, addCart, updateCart, destroyCart, fetchCart, fetchOrder };
+export {
+  fetchOrders,
+  addCart,
+  updateCart,
+  destroyCart,
+  fetchCart,
+  fetchOrder,
+  updateOrder,
+};

@@ -31,7 +31,7 @@ const Order = db.define('order', {
       'in progress',
       'created',
       'processing',
-      'canceled',
+      'cancelled',
       'completed',
     ]),
     defaultValue: 'in progress',
