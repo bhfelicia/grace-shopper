@@ -11,6 +11,7 @@ import ProductReviews from "./REVIEWS/ProductReviews";
 import AllUsers from "./USERS/AllUsers";
 import SingleUser from "./USERS/SingleUser";
 import EditUser from "./USERS/EditUser";
+import Cart from "./Cart";
 
 import Login from "./NAVBAR/Login";
 import SignUp from "./NAVBAR/SignUp";
@@ -51,6 +52,7 @@ class App extends Component {
             <Route exact path="/users" component={AllUsers}></Route>
             <Route exact path="/users/:id" component={SingleUser}></Route>
             <Route exact path="/users/:id/edit" component={EditUser}></Route>
+            <Route exact path="/cart" component={Cart}></Route>
             {/* <Route exact path="/users/:id/edit" component={EditUser}></Route> Most likely don't need this if I am going to include the edit user form on a single user view regardless!*/}
           </Switch>
         </div>

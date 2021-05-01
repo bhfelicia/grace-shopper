@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios from "axios";
 import {
   loadOrders,
   loadOrder,
@@ -6,11 +6,11 @@ import {
   editCart,
   loadCart,
   deleteCart,
-} from '../actionCreators/orderActionCreators';
+} from "../actionCreators/orderActionCreators";
 
 const fetchOrders = () => {
   return async (dispatch) => {
-    const { data: orders } = await axios.get('/api/orders');
+    const { data: orders } = await axios.get("/api/orders");
     dispatch(loadOrders(orders));
   };
 };

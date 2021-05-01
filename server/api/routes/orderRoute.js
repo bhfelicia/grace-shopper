@@ -1,6 +1,7 @@
 const router = require("express").Router();
 const Order = require("../../db/models/Order");
 const User = require("../../db/models/User");
+const Product = require("../../db/models/Product");
 
 //get routes
 router.get("/", async (req, res, next) => {
@@ -38,6 +39,7 @@ router.get("/user/:userId/cart", async (req, res, next) => {
         userId: req.params.userId,
         status: "in progress",
       },
+      include: Product,
     });
     res.send(currentCart).status(200);
   } catch (error) {
