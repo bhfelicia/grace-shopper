@@ -12,8 +12,7 @@ import ProductReviews from './REVIEWS/ProductReviews';
 import AllUsers from './USERS/AllUsers';
 import SingleUser from './USERS/SingleUser';
 import EditUser from './USERS/EditUser';
-import ProductReviews from './REVIEWS/ProductReviews';
-import Cart from './Cart';
+import Cart from './CART/Cart';
 
 import Login from './NAVBAR/Login';
 import SignUp from './NAVBAR/SignUp';
