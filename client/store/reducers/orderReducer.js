@@ -22,9 +22,6 @@ const orderReducer = (state = initialState, action) => {
     case CREATE_CART:
       return { ...state, currentCart: action.cart };
     case LOAD_CART:
-      // const currCart = state.orders.filter(
-      //   (order) => order.status === 'in progress'
-      // )[0];
       return { ...state, currentCart: action.cart };
     case EDIT_CART:
       const filteredOrder = state.orders.filter((order) => {
