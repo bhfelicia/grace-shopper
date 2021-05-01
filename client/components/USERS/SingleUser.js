@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import EditUser from "./EditUser";
 
 import { fetchUser } from "../../store/thunks/userThunk";
 
@@ -18,12 +19,18 @@ class SingleUser extends Component {
       <div>
         <h3>{selectedUser.fullName}</h3>
         <h3>{selectedUser.email}</h3>
+        <br></br>
+        <EditUser />
       </div>
     );
   }
 
   render() {
-    return <div>{this.displayUser()}</div>;
+    let isValid = null;
+    if (window.localStorage.isAdmin && window.localStorage.role !== "GUEST") {
+      isValid = this.displayUser();
+    }
+    return <div>{isValid}</div>;
   }
 }
 
