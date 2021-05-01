@@ -23,6 +23,8 @@ export const EDIT_CART = 'EDIT_CART';
 export const DELETE_CART = 'DELETE_CART';
 export const LOAD_CART = 'LOAD_CART';
 
+export const LOAD_ORDER_PRODUCT = 'LOAD_ORDER_PRODUCT';
+
 export const LOAD_REVIEWS = 'LOAD_REVIEWS';
 export const CREATE_REVIEW = 'CREATE_REVIEW';
 export const EDIT_REVIEW = 'EDIT_REVIEW';
