@@ -6,6 +6,7 @@ import {
   editCart,
   loadCart,
   deleteCart,
+  editOrder,
 } from '../actionCreators/orderActionCreators';
 
 const fetchOrders = () => {
@@ -19,6 +20,16 @@ const fetchOrder = (orderId) => {
   return async (dispatch) => {
     const { data: order } = await axios.get(`/api/orders/${orderId}`);
     dispatch(loadOrder(order));
+  };
+};
+
+const updateOrder = (newOrderData) => {
+  return async (dispatch) => {
+    const { data: order } = await axios.put(
+      `/api/orders/${newOrderData.id}`,
+      newOrderData
+    );
+    dispatch(editOrder(order));
   };
 };
 
@@ -53,4 +64,12 @@ const destroyCart = (cart) => {
   };
 };
 
-export { fetchOrders, addCart, updateCart, destroyCart, fetchCart, fetchOrder };
+export {
+  fetchOrders,
+  addCart,
+  updateCart,
+  destroyCart,
+  fetchCart,
+  fetchOrder,
+  updateOrder,
+};

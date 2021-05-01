@@ -5,6 +5,7 @@ import {
   EDIT_CART,
   LOAD_CART,
   DELETE_CART,
+  UPDATE_ORDER,
 } from '../actions/index';
 
 export const loadOrders = (orders) => {
@@ -17,6 +18,13 @@ export const loadOrders = (orders) => {
 export const loadOrder = (order) => {
   return {
     type: LOAD_ORDER,
+    order,
+  };
+};
+
+export const editOrder = (order) => {
+  return {
+    type: UPDATE_ORDER,
     order,
   };
 };
