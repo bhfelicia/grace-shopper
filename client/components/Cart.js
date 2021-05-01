@@ -14,8 +14,15 @@ class Cart extends Component {
   }
 
   render() {
-    console.log(this.props);
+    const { currentCart } = this.props.orderReducer;
+    console.log(currentCart.products);
+    // if (!currentCart) return null;
     return null;
+    // <div id="cart">
+    //   {currentCart.products.map((product) => (
+    //     <div>{product.name}</div>
+    //   ))}
+    // </div>
   }
 }
 

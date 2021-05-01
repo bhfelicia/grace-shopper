@@ -5,7 +5,7 @@ import {
   EDIT_CART,
   DELETE_CART,
   LOAD_CART,
-} from '../actions/index';
+} from "../actions/index";
 
 const initialState = {
   orders: [],
@@ -22,10 +22,10 @@ const orderReducer = (state = initialState, action) => {
     case CREATE_CART:
       return { ...state, currentCart: action.cart };
     case LOAD_CART:
-      const currCart = state.orders.filter(
-        (order) => order.status === 'in progress'
-      )[0];
-      return { ...state, currentCart: currCart };
+      // const currCart = state.orders.filter(
+      //   (order) => order.status === 'in progress'
+      // )[0];
+      return { ...state, currentCart: action.cart };
     case EDIT_CART:
       const filteredOrder = state.orders.filter((order) => {
         return order.id !== state.currentCart.id;
