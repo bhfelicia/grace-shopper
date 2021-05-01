@@ -12,7 +12,21 @@ class SingleOrder extends React.Component {
   }
   render() {
     const order = this.props.orderReducer.order;
-    return <div>{order.tracking_number}</div>;
+    return (
+      <div>
+        <div>
+          {order.tracking_number}: {order.status}
+        </div>
+        <div>
+          {order.ordered_date} - {order.delivered_date}
+        </div>
+        <div>Shipping Address: {order.shipping_address}</div>
+        <div>Total: {order.total}</div>
+        <Link to={`/orders/${order.id}/edit`}>
+          <button>Edit</button>
+        </Link>
+      </div>
+    );
   }
 }
 

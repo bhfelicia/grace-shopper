@@ -27,14 +27,14 @@ class AllOrders extends React.Component {
           })}
         </div>
       );
-    } else {
+    } else if (activeUser.isAdmin === false) {
       return (
         <div>
           {this.props.orderReducer.orders
             .filter((order) => order.userId === activeUser.id)
             .map((filteredOrder) => {
               return (
-                <Link to={`/orders/${order.id}`}>
+                <Link to={`/orders/${filteredOrder.id}`}>
                   <div key={filteredOrder.id}>
                     {filteredOrder.tracking_number}
                   </div>
@@ -43,6 +43,8 @@ class AllOrders extends React.Component {
             })}
         </div>
       );
+    } else {
+      return <div>Log in to view your orders!</div>;
     }
   }
 }
