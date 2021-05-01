@@ -6,6 +6,9 @@ import { fetchCart, fetchOrders } from "../store/thunks/orderThunk";
 class Cart extends Component {
   constructor(props) {
     super(props);
+    // this.state = {
+    //   currentCart: {},
+    // };
   }
 
   componentDidMount() {
@@ -14,10 +17,30 @@ class Cart extends Component {
   }
 
   render() {
-    const { currentCart } = this.props.orderReducer;
-    console.log(currentCart.products);
+    const currentCart = this.props.orderReducer.currentCart || {};
+    console.log(currentCart);
+    if (!Object.keys(currentCart).length) return null;
+    else
+      return (
+        <div>
+          <ol>
+            {currentCart.products.map((product) => (
+              <li key={product.id}>
+                <img src={product.image}></img>
+                <hr />
+                {product.name} - ${product.price}
+              </li>
+            ))}
+          </ol>
+          <hr />
+          <h5>Subtotal: ${currentCart.total}.00</h5>
+          <h5>Tax: ${currentCart.tax}0</h5>
+          <h3>Grand total: ${Number(currentCart.total) + currentCart.tax}0</h3>
+        </div>
+      );
+    // console.log(currentCart.products);
     // if (!currentCart) return null;
-    return null;
+    // return null;
     // <div id="cart">
     //   {currentCart.products.map((product) => (
     //     <div>{product.name}</div>
