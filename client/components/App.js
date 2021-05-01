@@ -13,21 +13,27 @@ import SingleUser from './USERS/SingleUser';
 
 import Login from './NAVBAR/Login';
 import SignUp from './NAVBAR/SignUp';
+import Navbar from './NAVBAR/Navbar';
 
 class App extends Component {
   componentDidMount() {
     this.props.loadUsers();
-    if (window.localStorage.getItem("userId")) {
-      this.props.loadUser();
+    this.props.loadUser();
+  }
+
+  componentDidUpdate(prevProps) {
+    if (
+      prevProps.userReducer.selectedUser !== this.props.userReducer.selectedUser
+    ) {
+      this.render();
     }
   }
 
   render() {
-    console.log(store.getState());
-    console.log(window.localStorage);
     return (
       <Router>
         <div>
+          <Navbar />
           <Switch>
             <Route exact path="/" component={AllProducts} />
             <Route
