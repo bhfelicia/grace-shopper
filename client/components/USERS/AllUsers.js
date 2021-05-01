@@ -1,9 +1,9 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import { Link } from "react-router-dom";
-import { fetchProducts } from "../../store/thunks/productThunk";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
+import { fetchProducts } from '../../store/thunks/productThunk';
 // import userReducer from "../../store/reducers/userReducer";
-import { fetchUsers, destroyUser } from "../../store/thunks/userThunk";
+import { fetchUsers, destroyUser } from '../../store/thunks/userThunk';
 
 class AllUsers extends Component {
   constructor(props) {
@@ -45,11 +45,15 @@ class AllUsers extends Component {
   }
 
   render() {
-    return (
-      <div>
-        <ul>{this.displayUsers()}</ul>
-      </div>
-    );
+    if (window.localStorage.isAdmin) {
+      return (
+        <div>
+          <ul>{this.displayUsers()}</ul>
+        </div>
+      );
+    } else {
+      return <div>No Access!</div>;
+    }
   }
 }
 
