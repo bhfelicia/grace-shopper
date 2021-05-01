@@ -1,19 +1,20 @@
-import React, { Component } from 'react';
-import { HashRouter as Router, Route, Switch } from 'react-router-dom';
-import store from '../store/store';
-import { connect } from 'react-redux';
-import { fetchUser, fetchUsers } from '../store/thunks/userThunk';
-import AllProducts from './PRODUCTS/AllProducts';
-import SingleProduct from './PRODUCTS/SingleProduct';
-import AllOrders from './ORDERS/AllOrders';
-import SingleOrder from './ORDERS/SingleOrder';
-import ProductReviews from './REVIEWS/ProductReviews';
-import AllUsers from './USERS/AllUsers';
-import SingleUser from './USERS/SingleUser';
+import React, { Component } from "react";
+import { HashRouter as Router, Route, Switch } from "react-router-dom";
+import store from "../store/store";
+import { connect } from "react-redux";
+import { fetchUser, fetchUsers } from "../store/thunks/userThunk";
+import AllProducts from "./PRODUCTS/AllProducts";
+import SingleProduct from "./PRODUCTS/SingleProduct";
+import AllOrders from "./ORDERS/AllOrders";
+import SingleOrder from "./ORDERS/SingleOrder";
+import ProductReviews from "./REVIEWS/ProductReviews";
+import AllUsers from "./USERS/AllUsers";
+import SingleUser from "./USERS/SingleUser";
+import EditUser from "./USERS/EditUser";
 
-import Login from './NAVBAR/Login';
-import SignUp from './NAVBAR/SignUp';
-import Navbar from './NAVBAR/Navbar';
+import Login from "./NAVBAR/Login";
+import SignUp from "./NAVBAR/SignUp";
+import Navbar from "./NAVBAR/Navbar";
 
 class App extends Component {
   componentDidMount() {
@@ -49,6 +50,8 @@ class App extends Component {
             <Route exact path="/orders/:id" component={SingleOrder}></Route>
             <Route exact path="/users" component={AllUsers}></Route>
             <Route exact path="/users/:id" component={SingleUser}></Route>
+            <Route exact path="/users/:id/edit" component={EditUser}></Route>
+            {/* <Route exact path="/users/:id/edit" component={EditUser}></Route> Most likely don't need this if I am going to include the edit user form on a single user view regardless!*/}
           </Switch>
         </div>
       </Router>
