@@ -41,6 +41,3 @@ app.get("/api/users/:id", async (req, res, next) => {
 });
 
 module.exports = app;
-
-//TODO: SET UP DUMMY DATA FOR ORDERS SO I CAN SET UP A TEST SPEC FOR GET /api/orders/:id/products
-//Add post route tests, profs video around 52-54mins ish
