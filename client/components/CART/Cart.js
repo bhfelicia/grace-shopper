@@ -1,7 +1,7 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
-import { fetchCart, fetchOrders } from "../store/thunks/orderThunk";
+import { fetchCart, fetchOrders } from '../../store/thunks/orderThunk';
 
 class Cart extends Component {
   constructor(props) {

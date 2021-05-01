@@ -6,6 +6,7 @@ import {
   editCart,
   loadCart,
   deleteCart,
+  editOrder,
 } from '../actionCreators/orderActionCreators';
 
 const fetchOrders = () => {

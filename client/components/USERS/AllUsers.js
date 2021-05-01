@@ -1,8 +1,8 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import { Link } from "react-router-dom";
-import { fetchProducts } from "../../store/thunks/productThunk";
-import { fetchUsers, destroyUser } from "../../store/thunks/userThunk";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
+import { fetchProducts } from '../../store/thunks/productThunk';
+import { fetchUsers, destroyUser } from '../../store/thunks/userThunk';
 
 class AllUsers extends Component {
   constructor(props) {
@@ -44,7 +44,10 @@ class AllUsers extends Component {
   }
 
   render() {
-    if (window.localStorage.isAdmin && window.localStorage.role !== "GUEST") {
+    if (
+      window.localStorage.isAdmin === 'true' &&
+      window.localStorage.role !== 'GUEST'
+    ) {
       return (
         <div>
           <ul>{this.displayUsers()}</ul>

@@ -64,6 +64,7 @@ class AllOrders extends React.Component {
         <div>
           {this.props.orderReducer.orders
             .filter((order) => order.userId === activeUser.id)
+            .filter((order) => order.status !== 'in progress')
             .map((filteredOrder) => {
               return (
                 <Link key={filteredOrder.id} to={`/orders/${filteredOrder.id}`}>
