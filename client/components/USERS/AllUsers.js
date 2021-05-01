@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { fetchProducts } from "../../store/thunks/productThunk";
-// import userReducer from "../../store/reducers/userReducer";
 import { fetchUsers, destroyUser } from "../../store/thunks/userThunk";
 
 class AllUsers extends Component {

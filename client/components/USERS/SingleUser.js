@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import EditUser from "./EditUser";
 
 import { fetchUser } from "../../store/thunks/userThunk";
+import { Link } from "react-router-dom";
 
 class SingleUser extends Component {
   constructor() {
@@ -20,7 +21,8 @@ class SingleUser extends Component {
         <h3>{selectedUser.fullName}</h3>
         <h3>{selectedUser.email}</h3>
         <br></br>
-        <EditUser />
+        <Link to={`/users/${selectedUser.id}/edit`}>Edit User</Link>
+        {/* <EditUser user={selectedUser} /> */}
       </div>
     );
   }

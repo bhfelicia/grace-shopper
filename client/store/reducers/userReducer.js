@@ -29,7 +29,6 @@ const userReducer = (state = initialState, action) => {
       const withoutDeletedUser = state.users.filter(
         (user) => user.id !== action.userId
       );
-      console.log(withoutDeletedUser);
       return { ...state, users: withoutDeletedUser };
     default:
       return state;

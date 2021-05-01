@@ -40,13 +40,14 @@ const destroyUser = (userId) => {
   };
 };
 
-const updateUser = (user) => {
+const updateUser = (user, history) => {
   return async (dispatch) => {
     const { data: updatedUser } = await axios.put(
       `/api/users/${user.id}`,
       user
     );
     dispatch(editUser(updatedUser));
+    history.push(`/users/${user.id}`);
   };
 };
 
