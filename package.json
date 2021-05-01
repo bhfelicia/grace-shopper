@@ -4,7 +4,7 @@
   "description": "Hey all, this is our Grace Shopper, Plant Parenthood!",
   "main": "index.js",
   "scripts": {
-    "test": "jest --runInBand --forceExit",
+    "test": "jest --detectOpenHandles --forceExit",
     "test:dev": "npm run test -- --watch",
     "build": "webpack",
     "build:dev": "webpack -w --mode=development",
