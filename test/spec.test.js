@@ -1,4 +1,4 @@
-const { Product, initTest } = require("./testdb");
+const { Product, initTest } = require("./testDb");
 const app = require("./app");
 const request = require("supertest");
 
