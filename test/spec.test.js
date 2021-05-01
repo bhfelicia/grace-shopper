@@ -12,6 +12,11 @@ describe("GraceShopper Tests", () => {
       expect(addTwo(1, 2)).toBe(3);
     });
   });
+
+  beforeEach(async () => {
+    await initTest();
+  });
+
   let seedData;
   describe("Product Model", () => {
     it("is truthy", async () => {
