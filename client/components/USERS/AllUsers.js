@@ -47,10 +47,7 @@ class AllUsers extends Component {
     const style = {
       width: 600,
     };
-    if (
-      window.localStorage.isAdmin === "true" &&
-      window.localStorage.role !== "GUEST"
-    ) {
+    if (this.props.userReducer.selectedUser.isAdmin) {
       return (
         <div>
           <ul>{this.displayUsers()}</ul>

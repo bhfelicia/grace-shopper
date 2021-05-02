@@ -60,7 +60,10 @@ class EditUser extends Component {
       this.props,
       "HERE MY DUDE WHY ARE THESE PROPS LOADING 4 TIMES DF?"
     );
-    if (!!window.localStorage.isAdmin && window.localStorage.role !== "GUEST") {
+    if (
+      this.props.userReducer.selectedUser.isAdmin &&
+      this.props.userReducer.selectedUser.role !== "GUEST"
+    ) {
       return (
         <div>
           <form onSubmit={this.submitUpdateHandler}>
