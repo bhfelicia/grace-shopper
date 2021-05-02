@@ -4,6 +4,18 @@ const Order = require("../../db/models/Order");
 
 //update req.body
 //get routes
+
+async function requireToken(req, res, next) {
+  try {
+    const token = req.headers.authorization;
+    const user = await User.byToken(token);
+    req.user = user;
+    next();
+  } catch (error) {
+    next(error);
+  }
+}
+
 router.get("/", async (req, res, next) => {
   try {
     const users = await User.findAll();
@@ -13,9 +25,10 @@ router.get("/", async (req, res, next) => {
   }
 });
 
-router.get("/:id", async (req, res, next) => {
+router.get("/:id", requireToken, async (req, res, next) => {
   try {
-    const user = await User.findByPk(req.params.id);
+    const user = await User.findByPk(req.user.id);
+
     res.status(200).send(user);
   } catch (error) {
     next(error);
@@ -51,7 +64,7 @@ router.put("/:id", async (req, res, next) => {
 });
 
 //delete routes
-router.delete("/:id", async (req, res, next) => {
+router.delete("/:id", requireToken, async (req, res, next) => {
   try {
     const { id } = req.params;
     const userToBeDeleted = await User.findByPk(id);
