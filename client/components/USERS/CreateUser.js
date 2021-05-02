@@ -9,6 +9,7 @@ class CreateUser extends Component {
       last: "",
       password: "",
       email: "",
+      role: "",
       message: "Please Enter Proper Credentials",
       isCreated: false,
     };
