@@ -64,10 +64,10 @@ router.get('/user/:userId/orders', async (req, res, next) => {
 
 router.post('/:userId/cart/create', async (req, res, next) => {
   try {
-    console.log(req.body);
     const { productId } = req.body.data;
     //const { userId } = req.params;
-    const user = User.byToken(req.body.headers.authorization);
+    const user = await User.byToken(req.body.headers.authorization);
+    console.log(user);
     const now = new Date();
     const theProduct = await Product.findByPk(productId);
     const makeAnOrder = await Order.create({
@@ -79,17 +79,18 @@ router.post('/:userId/cart/create', async (req, res, next) => {
       shipping_address: 'PLACEHOLDER',
     });
     await Order_Product.create({
-      orderId: makeAnOrder.id,
+      orderId: makeAnOrder.dataValues.id,
       //userId: user.id,
       productId,
       product_quantity: 1,
     });
     const theOrder = await Order.findOne({
       where: {
-        id: makeAnOrder.id,
+        id: makeAnOrder.dataValues.id,
       },
       include: Product,
     });
+    console.log(theOrder);
     res.send({ order: theOrder }).status(204);
   } catch (error) {
     next(error);
