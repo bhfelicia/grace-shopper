@@ -21,13 +21,14 @@ const fetchCategory = (categoryId) => {
   };
 };
 
-const addCategory = (newCategory) => {
+const addCategory = (newCategory,{history}) => {
   return async (dispatch) => {
     const { data: category } = await axios.post(
       `/api/categories/`,
       newCategory
     );
     dispatch(createCategory(category));
+    history.push('/categories')
   };
 };
 
