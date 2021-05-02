@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
+import React, { Component } from "react";
+import { connect } from "react-redux";
 
-import { fetchCart, fetchOrders } from '../../store/thunks/orderThunk';
+import { fetchCart, fetchOrders } from "../../store/thunks/orderThunk";
 
 class Cart extends Component {
   constructor(props) {
@@ -28,7 +28,8 @@ class Cart extends Component {
               <li key={product.id}>
                 <img src={product.image}></img>
                 <hr />
-                {product.name} - ${product.price}
+                {product.order_product.product_quantity} x {product.name} - $
+                {product.price * product.order_product.product_quantity}
               </li>
             ))}
           </ol>
