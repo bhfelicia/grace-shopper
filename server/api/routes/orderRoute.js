@@ -33,11 +33,12 @@ router.get('/:id/products', async (req, res, next) => {
   }
 });
 
-router.get('/user/:userId/cart', async (req, res, next) => {
+router.get('/user/cart', async (req, res, next) => {
   try {
+    const currentUser = await User.byToken(req.headers.authorization);
     const currentCart = await Order.findOne({
       where: {
-        userId: req.params.userId,
+        userId: currentUser.id,
         status: 'in progress',
       },
       include: Product,
@@ -62,12 +63,13 @@ router.get('/user/:userId/orders', async (req, res, next) => {
   }
 });
 
-router.post('/:userId/cart/create', async (req, res, next) => {
+//post routes
+
+router.post('/cart/create', async (req, res, next) => {
   try {
     const { productId } = req.body.data;
     //const { userId } = req.params;
     const user = await User.byToken(req.body.headers.authorization);
-    console.log(user);
     const now = new Date();
     const theProduct = await Product.findByPk(productId);
     const makeAnOrder = await Order.create({
@@ -90,14 +92,12 @@ router.post('/:userId/cart/create', async (req, res, next) => {
       },
       include: Product,
     });
-    console.log(theOrder);
     res.send({ order: theOrder }).status(204);
   } catch (error) {
     next(error);
   }
 });
 
-//post routes
 router.post('/', async (req, res, next) => {
   try {
     const newOrderData = req.body;
@@ -119,6 +119,37 @@ router.put('/:id', async (req, res, next) => {
     res.send(editedOrder.dataValues).status(204);
   } catch (error) {
     next(error);
+  }
+});
+
+router.put('/cart/add', async (req, res, next) => {
+  try {
+    const { productExists, productId, cartId } = req.body.data;
+    if (productExists) {
+      const updatedProductInCart = await Order_Product.findOne({
+        where: {
+          productId,
+        },
+      });
+      const newAmount = updatedProductInCart.product_quantity + 1;
+      await updatedProductInCart.update({
+        product_quantity: newAmount,
+      });
+    } else {
+      const newProductInCart = await Order_Product.create({
+        orderId: req.body.data.cartId,
+        productId: req.body.data.productId,
+        product_quantity: 1,
+      });
+    }
+    const updatedOrder = await Order.findOne({
+      where: {
+        id: cartId,
+      },
+    });
+    res.send(updatedOrder).status(204);
+  } catch (error) {
+    console.log(error);
   }
 });
 

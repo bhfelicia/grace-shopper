@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 import { fetchProducts } from '../../store/thunks/productThunk';
-import { addCart } from '../../store/thunks/orderThunk';
+import { addCart, addToCart, fetchCart } from '../../store/thunks/orderThunk';
 
 class AllProducts extends Component {
   constructor() {
@@ -12,15 +12,23 @@ class AllProducts extends Component {
   }
   componentDidMount() {
     this.props.getProducts();
+    this.props.getCart();
   }
   addToCart(productId) {
-    //const { id } = this.props.userReducer.selectedUser;
+    const cartId = this.props.orderReducer.currentCart.id;
     if (!this.props.orderReducer.currentCart) {
-      this.props.createCart(productId, this.props.userReducer.selectedUser.id);
+      this.props.createCart(productId);
     } else {
-      //update cart
+      const productExistsInCart = this.props.orderReducer.currentCart.products.filter(
+        (product) => product.id === productId
+      ).length;
+      if (productExistsInCart > 0) {
+        //then the product exists, we must update the product quantity of the existing record in order_product
+        this.props.amendCart(productId, cartId, true);
+      } else {
+        this.props.amendCart(productId, cartId, false);
+      }
     }
-    //for now, this is just going to be to add to a cart to create a new order in progress
   }
   render() {
     const { products } = this.props.productReducer;
@@ -56,7 +64,10 @@ const mapStateToProps = ({ productReducer, userReducer, orderReducer }) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   getProducts: () => dispatch(fetchProducts()),
-  createCart: (id, userId) => dispatch(addCart(id, userId)),
+  createCart: (id) => dispatch(addCart(id)),
+  amendCart: (id, cartId, productExists) =>
+    dispatch(addToCart(id, cartId, productExists)),
+  getCart: () => dispatch(fetchCart()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(AllProducts);

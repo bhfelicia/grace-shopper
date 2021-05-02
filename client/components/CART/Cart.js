@@ -12,10 +12,9 @@ class Cart extends Component {
     //   currentCart: {},
     // };
   }
-
   componentDidMount() {
     this.props.getOrders();
-    this.props.getCart(Number(window.localStorage.userId));
+    this.props.getCart();
   }
 
   render() {
@@ -54,7 +53,7 @@ class Cart extends Component {
 const mapStateToProps = ({ orderReducer }) => ({ orderReducer });
 
 const mapDispatchToProps = (dispatch) => ({
-  getCart: (id) => dispatch(fetchCart(id)),
+  getCart: () => dispatch(fetchCart()),
   getOrders: () => dispatch(fetchOrders()),
 });
 

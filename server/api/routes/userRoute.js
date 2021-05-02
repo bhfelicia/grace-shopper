@@ -8,7 +8,6 @@ const Order = require('../../db/models/Order');
 async function requireToken(req, res, next) {
   try {
     const token = req.headers.authorization;
-    console.log(req.headers);
     const user = await User.byToken(token);
     req.user = user;
     next();
