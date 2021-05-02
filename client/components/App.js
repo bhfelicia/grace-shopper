@@ -14,7 +14,6 @@ import SingleUser from "./USERS/SingleUser";
 import EditUser from "./USERS/EditUser";
 import CreateUser from "./USERS/CreateUser";
 import Cart from "./CART/Cart";
-
 import Login from "./NAVBAR/Login";
 import SignUp from "./NAVBAR/SignUp";
 import Navbar from "./NAVBAR/Navbar";
@@ -27,16 +26,16 @@ import EditCategory from "./CATEGORIES/EditCategory";
 class App extends Component {
   componentDidMount() {
     this.props.loadUsers();
-    this.props.loadUser();
+    this.props.loadUser(this.props.userReducer.selectedUser.id);
   }
 
-  componentDidUpdate(prevProps) {
-    if (
-      prevProps.userReducer.selectedUser !== this.props.userReducer.selectedUser
-    ) {
-      this.render();
-    }
-  }
+  // componentDidUpdate(prevProps) {
+  //   if (
+  //     prevProps.userReducer.selectedUser !== this.props.userReducer.selectedUser
+  //   ) {
+  //     this.render();
+  //   }
+  // }
 
   render() {
     return (
@@ -80,12 +79,8 @@ const mapState = (state) => {
 
 const mapDispatch = (dispatch) => {
   return {
-    loadUsers: async () => {
-      dispatch(fetchUsers());
-    },
-    loadUser: async () => {
-      dispatch(fetchUser(Number(window.localStorage.userId)));
-    },
+    loadUsers: () => dispatch(fetchUsers()),
+    loadUser: (id) => dispatch(fetchUser(id)),
   };
 };
 export default connect(mapState, mapDispatch)(App);

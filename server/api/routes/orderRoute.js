@@ -64,7 +64,6 @@ router.get("/user/:userId/orders", async (req, res, next) => {
 
 router.post("/:userId/cart/create", async (req, res, next) => {
   try {
-    const newOrder = req.body;
     const { productId } = req.body;
     const { userId } = req.params;
     const now = new Date();
@@ -77,13 +76,19 @@ router.post("/:userId/cart/create", async (req, res, next) => {
       isCreated: false,
       shipping_address: "PLACEHOLDER",
     });
-    const orderProduct = await Order_Product.create({
+    await Order_Product.create({
       orderId: makeAnOrder.id,
       userId,
       productId,
       product_quantity: 1,
     });
-    res.send(makeAnOrder).status(204);
+    const theOrder = await Order.findOne({
+      where: {
+        id: makeAnOrder.id,
+      },
+      include: Product,
+    });
+    res.send({ order: theOrder }).status(204);
   } catch (error) {
     next(error);
   }
