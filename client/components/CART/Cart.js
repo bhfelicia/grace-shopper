@@ -1,7 +1,9 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
-import { fetchCart, fetchOrders } from "../../store/thunks/orderThunk";
+import { fetchCart, fetchOrders } from '../../store/thunks/orderThunk';
+
+let theCart;
 
 class Cart extends Component {
   constructor(props) {
@@ -13,13 +15,12 @@ class Cart extends Component {
 
   componentDidMount() {
     this.props.getOrders();
-    this.props.getCart(window.localStorage.userId);
+    this.props.getCart(Number(window.localStorage.userId));
   }
 
   render() {
-    const currentCart = this.props.orderReducer.currentCart || {};
-    console.log(currentCart);
-    if (!Object.keys(currentCart).length) return null;
+    const currentCart = this.props.orderReducer.currentCart || [];
+    if (!currentCart.products) return <div>Your cart is empty!</div>;
     else
       return (
         <div>

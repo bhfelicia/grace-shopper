@@ -1,6 +1,6 @@
-const router = require("express").Router();
-const User = require("../../db/models/User");
-const Order = require("../../db/models/Order");
+const router = require('express').Router();
+const User = require('../../db/models/User');
+const Order = require('../../db/models/Order');
 
 //update req.body
 //get routes
@@ -8,6 +8,7 @@ const Order = require("../../db/models/Order");
 async function requireToken(req, res, next) {
   try {
     const token = req.headers.authorization;
+    console.log(req.headers);
     const user = await User.byToken(token);
     req.user = user;
     next();
@@ -16,7 +17,7 @@ async function requireToken(req, res, next) {
   }
 }
 
-router.get("/", async (req, res, next) => {
+router.get('/', async (req, res, next) => {
   try {
     const users = await User.findAll();
     res.status(200).send(users);
@@ -25,10 +26,9 @@ router.get("/", async (req, res, next) => {
   }
 });
 
-router.get("/:id", requireToken, async (req, res, next) => {
+router.get('/:id', requireToken, async (req, res, next) => {
   try {
     const user = await User.findByPk(req.user.id);
-
     res.status(200).send(user);
   } catch (error) {
     next(error);
@@ -37,12 +37,12 @@ router.get("/:id", requireToken, async (req, res, next) => {
 
 //post routes
 
-router.post("/", async (req, res, next) => {
+router.post('/', async (req, res, next) => {
   try {
     const newUserData = req.body;
     const newUser = await User.create({
       ...newUserData,
-      role: "AUTHENTICATED",
+      role: 'AUTHENTICATED',
     });
     res.status(201).send(newUser);
   } catch (error) {
@@ -51,7 +51,7 @@ router.post("/", async (req, res, next) => {
 });
 
 //put routes
-router.put("/:id", async (req, res, next) => {
+router.put('/:id', async (req, res, next) => {
   try {
     const updateData = req.body;
     const { id } = req.params;
@@ -64,7 +64,7 @@ router.put("/:id", async (req, res, next) => {
 });
 
 //delete routes
-router.delete("/:id", requireToken, async (req, res, next) => {
+router.delete('/:id', requireToken, async (req, res, next) => {
   try {
     const { id } = req.params;
     const userToBeDeleted = await User.findByPk(id);

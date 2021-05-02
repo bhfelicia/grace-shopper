@@ -1,11 +1,11 @@
-const router = require("express").Router();
-const Order = require("../../db/models/Order");
-const User = require("../../db/models/User");
-const Product = require("../../db/models/Product");
-const Order_Product = require("../../db/models/Order_Product");
+const router = require('express').Router();
+const Order = require('../../db/models/Order');
+const User = require('../../db/models/User');
+const Product = require('../../db/models/Product');
+const Order_Product = require('../../db/models/Order_Product');
 
 //get routes
-router.get("/", async (req, res, next) => {
+router.get('/', async (req, res, next) => {
   try {
     const orders = await Order.findAll();
     res.status(200).send(orders);
@@ -14,7 +14,7 @@ router.get("/", async (req, res, next) => {
   }
 });
 
-router.get("/:id", async (req, res, next) => {
+router.get('/:id', async (req, res, next) => {
   try {
     const order = await Order.findByPk(req.params.id);
     res.status(200).send(order);
@@ -23,7 +23,7 @@ router.get("/:id", async (req, res, next) => {
   }
 });
 
-router.get("/:id/products", async (req, res, next) => {
+router.get('/:id/products', async (req, res, next) => {
   try {
     //const order = await Order.findByPk(req.params.id);
     const products = await Order.getProducts(req.params.id);
@@ -33,12 +33,12 @@ router.get("/:id/products", async (req, res, next) => {
   }
 });
 
-router.get("/user/:userId/cart", async (req, res, next) => {
+router.get('/user/:userId/cart', async (req, res, next) => {
   try {
     const currentCart = await Order.findOne({
       where: {
         userId: req.params.userId,
-        status: "in progress",
+        status: 'in progress',
       },
       include: Product,
     });
@@ -48,12 +48,12 @@ router.get("/user/:userId/cart", async (req, res, next) => {
   }
 });
 
-router.get("/user/:userId/orders", async (req, res, next) => {
+router.get('/user/:userId/orders', async (req, res, next) => {
   try {
     const pastOrders = await Order.findAll({
       where: {
         userId: req.params.userId,
-        status: ["created", "processing", "canceled", "completed"],
+        status: ['created', 'processing', 'canceled', 'completed'],
       },
     });
     res.send(pastOrders).status(200);
@@ -62,23 +62,25 @@ router.get("/user/:userId/orders", async (req, res, next) => {
   }
 });
 
-router.post("/:userId/cart/create", async (req, res, next) => {
+router.post('/:userId/cart/create', async (req, res, next) => {
   try {
-    const { productId } = req.body;
-    const { userId } = req.params;
+    console.log(req.body);
+    const { productId } = req.body.data;
+    //const { userId } = req.params;
+    const user = User.byToken(req.body.headers.authorization);
     const now = new Date();
     const theProduct = await Product.findByPk(productId);
     const makeAnOrder = await Order.create({
-      userId,
-      status: "in progress",
+      userId: user.id,
+      status: 'in progress',
       total: theProduct.price,
       ordered_date: now,
       isCreated: false,
-      shipping_address: "PLACEHOLDER",
+      shipping_address: 'PLACEHOLDER',
     });
     await Order_Product.create({
       orderId: makeAnOrder.id,
-      userId,
+      //userId: user.id,
       productId,
       product_quantity: 1,
     });
@@ -95,7 +97,7 @@ router.post("/:userId/cart/create", async (req, res, next) => {
 });
 
 //post routes
-router.post("/", async (req, res, next) => {
+router.post('/', async (req, res, next) => {
   try {
     const newOrderData = req.body;
     const newOrder = await Order.create(newOrderData);
@@ -107,7 +109,7 @@ router.post("/", async (req, res, next) => {
 
 //put routes
 
-router.put("/:id", async (req, res, next) => {
+router.put('/:id', async (req, res, next) => {
   try {
     const updateData = req.body;
     const { id } = req.params;
@@ -120,7 +122,7 @@ router.put("/:id", async (req, res, next) => {
 });
 
 //delete routes
-router.delete("/:id", async (req, res, next) => {
+router.delete('/:id', async (req, res, next) => {
   try {
     const { id } = req.params;
     const orderToBeDeleted = await Order.findByPk(id);

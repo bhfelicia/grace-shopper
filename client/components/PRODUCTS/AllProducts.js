@@ -1,9 +1,9 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import { Link } from "react-router-dom";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 
-import { fetchProducts } from "../../store/thunks/productThunk";
-import { addCart } from "../../store/thunks/orderThunk";
+import { fetchProducts } from '../../store/thunks/productThunk';
+import { addCart } from '../../store/thunks/orderThunk';
 
 class AllProducts extends Component {
   constructor() {
@@ -14,8 +14,8 @@ class AllProducts extends Component {
     this.props.getProducts();
   }
   addToCart(productId) {
-    const { id } = this.props.userReducer.selectedUser;
-    this.props.createCart(productId, id);
+    //const { id } = this.props.userReducer.selectedUser;
+    this.props.createCart(productId, this.props.userReducer.selectedUser.id);
     //for now, this is just going to be to add to a cart to create a new order in progress
   }
   render() {
@@ -24,7 +24,7 @@ class AllProducts extends Component {
     return (
       <div id="all-products">
         {products
-          .filter((product) => product.status === "active")
+          .filter((product) => product.status === 'active')
           .map((product) => (
             <div key={`${product.id}`}>
               <Link to={`/products/${product.id}`}>
@@ -51,7 +51,7 @@ const mapStateToProps = ({ productReducer, userReducer }) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   getProducts: () => dispatch(fetchProducts()),
-  createCart: (id) => dispatch(addCart(id)),
+  createCart: (id, userId) => dispatch(addCart(id, userId)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(AllProducts);

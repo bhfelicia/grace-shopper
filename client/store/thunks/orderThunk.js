@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios from 'axios';
 import {
   loadOrders,
   loadOrder,
@@ -7,11 +7,11 @@ import {
   loadCart,
   deleteCart,
   editOrder,
-} from "../actionCreators/orderActionCreators";
+} from '../actionCreators/orderActionCreators';
 
 const fetchOrders = () => {
   return async (dispatch) => {
-    const { data: orders } = await axios.get("/api/orders");
+    const { data: orders } = await axios.get('/api/orders');
     dispatch(loadOrders(orders));
   };
 };
@@ -33,11 +33,14 @@ const updateOrder = (newOrderData) => {
   };
 };
 
-const addCart = (newCart, userId) => {
+const addCart = (productId, userId) => {
   return async (dispatch) => {
     const { data: cart } = await axios.post(
       `/api/orders/${userId}/cart/create`,
-      newCart
+      {
+        headers: { authorization: window.localStorage.token },
+        data: { productId },
+      }
     );
     dispatch(createCart(cart));
   };
