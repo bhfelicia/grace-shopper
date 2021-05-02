@@ -4,6 +4,18 @@ const Category = require("../../db/models/Category");
 const Product = require("../../db/models/Product");
 
 //get routes
+
+// async function requireToken(req, res, next) {
+//   try {
+//     const token = req.headers.authorization;
+//     const user = await User.byToken(token);
+//     req.user = user;
+//     next();
+//   } catch (error) {
+//     next(error);
+//   }
+// }
+
 router.get("/", async (req, res, next) => {
   try {
     const categories = await Category.findAll();

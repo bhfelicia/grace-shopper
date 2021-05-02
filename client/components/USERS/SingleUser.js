@@ -29,9 +29,13 @@ class SingleUser extends Component {
 
   render() {
     let isValid = null;
-    if (window.localStorage.isAdmin && window.localStorage.role !== "GUEST") {
+    console.log(this.props.userReducer.selectedUser, "user reducer selected");
+    if (this.props.userReducer.selectedUser.isAdmin) {
       isValid = this.displayUser();
     }
+    // if (window.localStorage.isAdmin && window.localStorage.role !== "GUEST") {
+    //   isValid = this.displayUser();
+    // }
     return <div>{isValid}</div>;
   }
 }

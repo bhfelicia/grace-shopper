@@ -37,13 +37,6 @@ class EditUser extends Component {
     this.setState({ id, first, last, password, email });
   }
 
-  componentDidUpdate(prevProps) {
-    // if (!prevProps.selectedUser.id && this.props.selectedUser.id) {
-    //   const { first, last, id, password, email } = this.props.selectedUser;
-    //   this.setState({ id, first, last, password, email });
-    // }
-  }
-
   editUserHandler(event) {
     this.setState({
       [event.target.name]: event.target.value,
@@ -60,11 +53,17 @@ class EditUser extends Component {
   }
 
   render() {
+    const style = {
+      width: 600,
+    };
     console.log(
       this.props,
       "HERE MY DUDE WHY ARE THESE PROPS LOADING 4 TIMES DF?"
     );
-    if (!!window.localStorage.isAdmin && window.localStorage.role !== "GUEST") {
+    if (
+      this.props.userReducer.selectedUser.isAdmin &&
+      this.props.userReducer.selectedUser.role !== "GUEST"
+    ) {
       return (
         <div>
           <form onSubmit={this.submitUpdateHandler}>
@@ -89,7 +88,7 @@ class EditUser extends Component {
             <br></br>
             <label>Password </label>
             <input
-              type="text"
+              type="password"
               value={this.state.password}
               name="password"
               onChange={this.editUserHandler}
@@ -112,7 +111,10 @@ class EditUser extends Component {
     } else {
       return (
         <div>
-          <img src="https://media3.giphy.com/media/8abAbOrQ9rvLG/200.gif" />
+          <img
+            src="https://media3.giphy.com/media/8abAbOrQ9rvLG/200.gif"
+            style={style}
+          />
         </div>
       );
     }
