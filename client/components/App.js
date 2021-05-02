@@ -14,9 +14,14 @@ import SingleUser from './USERS/SingleUser';
 import EditUser from './USERS/EditUser';
 import Cart from './CART/Cart';
 
-import Login from './NAVBAR/Login';
-import SignUp from './NAVBAR/SignUp';
-import Navbar from './NAVBAR/Navbar';
+import Login from "./NAVBAR/Login";
+import SignUp from "./NAVBAR/SignUp";
+import Navbar from "./NAVBAR/Navbar";
+import Header from "./HEADER/Header";
+import AllCategories from "./CATEGORIES/AllCategories";
+import SingleCategory from "./CATEGORIES/SingleCategory";
+import CreateCategory from "./CATEGORIES/CreateCategory";
+import EditCategory from "./CATEGORIES/EditCategory";
 
 class App extends Component {
   componentDidMount() {
@@ -37,8 +42,10 @@ class App extends Component {
       <Router>
         <div>
           <Navbar />
+          <Header />
           <Switch>
             <Route exact path="/" component={AllProducts} />
+            <Route exact path="/categories" component={AllCategories} />
             <Route
               exact
               path="/products/:id/reviews"
@@ -48,6 +55,9 @@ class App extends Component {
             <Route exact path="/login" component={Login} />
             <Route exact path="/signup" component={SignUp} />
             <Route exact path="/products/:id" component={SingleProduct} />
+            <Route exact path="/categories/:id" component={SingleCategory} />
+            <Route exact path="/createCategory" component={CreateCategory} />
+            <Route exact path="/categories/:id/edit" component={EditCategory} />
             <Route exact path="/orders" component={AllOrders}></Route>
             <Route exact path="/orders/:id" component={SingleOrder}></Route>
             <Route exact path="/orders/:id/edit" component={EditOrder}></Route>

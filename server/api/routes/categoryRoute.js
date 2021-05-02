@@ -38,7 +38,7 @@ router.put("/:id", async (req, res, next) => {
     const { name } = req.body;
     const { id } = req.params;
     const categoryToBeUpdated = await Category.findByPk(id);
-    const editedCategory = await categoryToBeUpdated.update({ name });
+    const editedCategory = await categoryToBeUpdated.update({name});
     res.send(editedCategory.dataValues).status(204);
   } catch (error) {
     next(error);
