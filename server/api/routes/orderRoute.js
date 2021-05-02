@@ -62,6 +62,32 @@ router.get("/user/:userId/orders", async (req, res, next) => {
   }
 });
 
+router.post("/:userId/cart/create", async (req, res, next) => {
+  try {
+    const newOrder = req.body;
+    const { product } = req.body;
+    const { userId } = req.params;
+    const now = new Date();
+    const makeAnOrder = await Order.create({
+      ...req.body,
+      userId,
+      status: "in progress",
+      total: product.price,
+      ordered_date: now,
+      isCreated: false,
+      shipping_address: "PLACEHOLDER",
+    });
+    const orderProduct = await Order_Product.create({
+      orderId: makeAnOrder.id,
+      userId,
+      productId: product.id,
+    });
+    res.send(makeAnOrder).status(204);
+  } catch (error) {
+    next(error);
+  }
+});
+
 //post routes
 router.post("/", async (req, res, next) => {
   try {
