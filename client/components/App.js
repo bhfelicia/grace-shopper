@@ -1,33 +1,32 @@
-import React, { Component } from "react";
-import { HashRouter as Router, Route, Switch } from "react-router-dom";
-import store from "../store/store";
-import { connect } from "react-redux";
-import { fetchUser, fetchUsers } from "../store/thunks/userThunk";
-import AllProducts from "./PRODUCTS/AllProducts";
-import SingleProduct from "./PRODUCTS/SingleProduct";
-import AllOrders from "./ORDERS/AllOrders";
-import SingleOrder from "./ORDERS/SingleOrder";
-import EditOrder from "./ORDERS/EditOrder";
-import ProductReviews from "./REVIEWS/ProductReviews";
-import AllUsers from "./USERS/AllUsers";
-import SingleUser from "./USERS/SingleUser";
-import EditUser from "./USERS/EditUser";
-import CreateUser from "./USERS/CreateUser";
-import Cart from "./CART/Cart";
-
-import Login from "./NAVBAR/Login";
-import SignUp from "./NAVBAR/SignUp";
-import Navbar from "./NAVBAR/Navbar";
-import Header from "./HEADER/Header";
-import AllCategories from "./CATEGORIES/AllCategories";
-import SingleCategory from "./CATEGORIES/SingleCategory";
-import CreateCategory from "./CATEGORIES/CreateCategory";
-import EditCategory from "./CATEGORIES/EditCategory";
+import React, { Component } from 'react';
+import { HashRouter as Router, Route, Switch } from 'react-router-dom';
+import store from '../store/store';
+import { connect } from 'react-redux';
+import { fetchUser, fetchUsers } from '../store/thunks/userThunk';
+import AllProducts from './PRODUCTS/AllProducts';
+import SingleProduct from './PRODUCTS/SingleProduct';
+import AllOrders from './ORDERS/AllOrders';
+import SingleOrder from './ORDERS/SingleOrder';
+import EditOrder from './ORDERS/EditOrder';
+import ProductReviews from './REVIEWS/ProductReviews';
+import AllUsers from './USERS/AllUsers';
+import SingleUser from './USERS/SingleUser';
+import EditUser from './USERS/EditUser';
+import CreateUser from './USERS/CreateUser';
+import Cart from './CART/Cart';
+import Login from './NAVBAR/Login';
+import SignUp from './NAVBAR/SignUp';
+import Navbar from './NAVBAR/Navbar';
+import Header from './HEADER/Header';
+import AllCategories from './CATEGORIES/AllCategories';
+import SingleCategory from './CATEGORIES/SingleCategory';
+import CreateCategory from './CATEGORIES/CreateCategory';
+import EditCategory from './CATEGORIES/EditCategory';
 
 class App extends Component {
   componentDidMount() {
     this.props.loadUsers();
-    this.props.loadUser();
+    this.props.loadUser(window.localStorage.userId);
   }
 
   componentDidUpdate(prevProps) {
@@ -80,12 +79,8 @@ const mapState = (state) => {
 
 const mapDispatch = (dispatch) => {
   return {
-    loadUsers: async () => {
-      dispatch(fetchUsers());
-    },
-    loadUser: async () => {
-      dispatch(fetchUser(Number(window.localStorage.userId)));
-    },
+    loadUsers: () => dispatch(fetchUsers()),
+    loadUser: (id) => dispatch(fetchUser(id)),
   };
 };
 export default connect(mapState, mapDispatch)(App);

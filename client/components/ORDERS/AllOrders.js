@@ -2,16 +2,19 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { fetchOrders } from '../../store/thunks/orderThunk';
+import { fetchUser } from '../../store/thunks/userThunk';
 
 class AllOrders extends React.Component {
   constructor(props) {
     super(props);
+    this.props.loadUser(Number(window.localStorage.userId));
     this.renderOrders = this.renderOrders.bind(this);
     this.state = {
       orders: [],
     };
   }
   async componentDidMount() {
+    await this.props.loadUser(Number(window.localStorage.userId));
     await this.props.getOrders();
     this.setState({ orders: this.props.orderReducer.orders });
   }
@@ -88,6 +91,7 @@ const mapStateToProps = ({ orderReducer, userReducer }) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   getOrders: () => dispatch(fetchOrders()),
+  loadUser: (id) => dispatch(fetchUser(id)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(AllOrders);

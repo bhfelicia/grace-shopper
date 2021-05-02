@@ -33,9 +33,15 @@ const updateOrder = (newOrderData) => {
   };
 };
 
-const addCart = (newCart) => {
+const addCart = (productId, userId) => {
   return async (dispatch) => {
-    const { data: cart } = await axios.post(`/api/orders/`, newCart);
+    const { data: cart } = await axios.post(
+      `/api/orders/${userId}/cart/create`,
+      {
+        headers: { authorization: window.localStorage.token },
+        data: { productId },
+      }
+    );
     dispatch(createCart(cart));
   };
 };
