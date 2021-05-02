@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
-import { fetchProducts } from '../../store/thunks/productThunk';
-import { fetchUsers, destroyUser } from '../../store/thunks/userThunk';
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import { Link } from "react-router-dom";
+import { fetchProducts } from "../../store/thunks/productThunk";
+import { fetchUsers, destroyUser } from "../../store/thunks/userThunk";
 
 class AllUsers extends Component {
   constructor(props) {
@@ -44,9 +44,12 @@ class AllUsers extends Component {
   }
 
   render() {
+    const style = {
+      width: 600,
+    };
     if (
-      window.localStorage.isAdmin === 'true' &&
-      window.localStorage.role !== 'GUEST'
+      window.localStorage.isAdmin === "true" &&
+      window.localStorage.role !== "GUEST"
     ) {
       return (
         <div>
@@ -56,7 +59,10 @@ class AllUsers extends Component {
     } else {
       return (
         <div>
-          <img src="https://media3.giphy.com/media/8abAbOrQ9rvLG/200.gif" />
+          <img
+            src="https://media3.giphy.com/media/8abAbOrQ9rvLG/200.gif"
+            style={style}
+          />
         </div>
       );
     }
