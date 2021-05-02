@@ -18,14 +18,11 @@ import Cart from "./CART/Cart";
 import Login from "./NAVBAR/Login";
 import SignUp from "./NAVBAR/SignUp";
 import Navbar from "./NAVBAR/Navbar";
-<<<<<<< HEAD
-=======
 import Header from "./HEADER/Header";
 import AllCategories from "./CATEGORIES/AllCategories";
 import SingleCategory from "./CATEGORIES/SingleCategory";
 import CreateCategory from "./CATEGORIES/CreateCategory";
 import EditCategory from "./CATEGORIES/EditCategory";
->>>>>>> master
 
 class App extends Component {
   componentDidMount() {
