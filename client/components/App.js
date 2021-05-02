@@ -1,16 +1,18 @@
-import React, { Component } from "react";
-import { HashRouter as Router, Route, Switch } from "react-router-dom";
-import store from "../store/store";
-import { connect } from "react-redux";
-import { fetchUser, fetchUsers } from "../store/thunks/userThunk";
-import AllProducts from "./PRODUCTS/AllProducts";
-import SingleProduct from "./PRODUCTS/SingleProduct";
-import AllOrders from "./ORDERS/AllOrders";
-import SingleOrder from "./ORDERS/SingleOrder";
-import ProductReviews from "./REVIEWS/ProductReviews";
-import AllUsers from "./USERS/AllUsers";
-import SingleUser from "./USERS/SingleUser";
-import EditUser from "./USERS/EditUser";
+import React, { Component } from 'react';
+import { HashRouter as Router, Route, Switch } from 'react-router-dom';
+import store from '../store/store';
+import { connect } from 'react-redux';
+import { fetchUser, fetchUsers } from '../store/thunks/userThunk';
+import AllProducts from './PRODUCTS/AllProducts';
+import SingleProduct from './PRODUCTS/SingleProduct';
+import AllOrders from './ORDERS/AllOrders';
+import SingleOrder from './ORDERS/SingleOrder';
+import EditOrder from './ORDERS/EditOrder';
+import ProductReviews from './REVIEWS/ProductReviews';
+import AllUsers from './USERS/AllUsers';
+import SingleUser from './USERS/SingleUser';
+import EditUser from './USERS/EditUser';
+import Cart from './CART/Cart';
 
 import Login from "./NAVBAR/Login";
 import SignUp from "./NAVBAR/SignUp";
@@ -58,9 +60,11 @@ class App extends Component {
             <Route exact path="/categories/:id/edit" component={EditCategory} />
             <Route exact path="/orders" component={AllOrders}></Route>
             <Route exact path="/orders/:id" component={SingleOrder}></Route>
+            <Route exact path="/orders/:id/edit" component={EditOrder}></Route>
             <Route exact path="/users" component={AllUsers}></Route>
             <Route exact path="/users/:id" component={SingleUser}></Route>
             <Route exact path="/users/:id/edit" component={EditUser}></Route>
+            <Route exact path="/cart" component={Cart}></Route>
             {/* <Route exact path="/users/:id/edit" component={EditUser}></Route> Most likely don't need this if I am going to include the edit user form on a single user view regardless!*/}
           </Switch>
         </div>

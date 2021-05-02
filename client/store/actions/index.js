@@ -15,12 +15,15 @@ export const LOAD_CATEGORY = 'LOAD_CATEGORY';
 //loading orders is to look at all past, COMPLETE orders
 export const LOAD_ORDERS = 'LOAD_ORDERS';
 export const LOAD_ORDER = 'LOAD_ORDER';
+export const UPDATE_ORDER = 'UPDATE_ORDER';
 //a cart is an order that's status is "in progress"
 //when a user first adds a product to their cart, that cart is then going to be created and added to the database and our redux store
 export const CREATE_CART = 'CREATE_CART';
 export const EDIT_CART = 'EDIT_CART';
 export const DELETE_CART = 'DELETE_CART';
 export const LOAD_CART = 'LOAD_CART';
+
+export const LOAD_ORDER_PRODUCT = 'LOAD_ORDER_PRODUCT';
 
 export const LOAD_REVIEWS = 'LOAD_REVIEWS';
 export const CREATE_REVIEW = 'CREATE_REVIEW';

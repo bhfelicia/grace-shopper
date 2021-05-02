@@ -22,18 +22,17 @@ const orderReducer = (state = initialState, action) => {
     case CREATE_CART:
       return { ...state, currentCart: action.cart };
     case LOAD_CART:
-      const currCart = state.orders.filter(
-        (order) => order.status === 'in progress'
-      )[0];
-      return { ...state, currentCart: currCart };
+      return { ...state, currentCart: action.cart };
     case EDIT_CART:
-      const filteredOrder = state.orders.filter((order) => {
-        return order.id !== state.currentCart.id;
-      });
-      return {
-        orders: [...filteredOrder, action.cart],
-        currentCart: action.cart,
-      }; //revisit cause arjan can't think right now
+      // const filteredOrder = state.orders.filter((order) => {
+      //   return order.id !== state.currentCart.id;
+      // });
+      // return {
+      //   orders: [...filteredOrder, action.cart],
+      //   currentCart: action.cart,
+      // }; //revisit cause arjan can't think right now
+      //ARJAN DID THIS DONT WORRY ABOUT IT
+      return { ...state, currentCart: action.cart };
     case DELETE_CART:
       return { ...state, currentCart: {} };
     default:
