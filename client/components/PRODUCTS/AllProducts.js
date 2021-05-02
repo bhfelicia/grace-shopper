@@ -15,7 +15,11 @@ class AllProducts extends Component {
   }
   addToCart(productId) {
     //const { id } = this.props.userReducer.selectedUser;
-    this.props.createCart(productId, this.props.userReducer.selectedUser.id);
+    if (!this.props.orderReducer.currentCart) {
+      this.props.createCart(productId, this.props.userReducer.selectedUser.id);
+    } else {
+      //update cart
+    }
     //for now, this is just going to be to add to a cart to create a new order in progress
   }
   render() {
@@ -44,9 +48,10 @@ class AllProducts extends Component {
   }
 }
 
-const mapStateToProps = ({ productReducer, userReducer }) => ({
+const mapStateToProps = ({ productReducer, userReducer, orderReducer }) => ({
   productReducer,
   userReducer,
+  orderReducer,
 });
 
 const mapDispatchToProps = (dispatch) => ({
