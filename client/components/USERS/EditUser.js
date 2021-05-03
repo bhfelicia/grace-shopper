@@ -1,6 +1,7 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import { fetchUser, updateUser } from "../../store/thunks/userThunk";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { fetchUser, updateUser } from '../../store/thunks/userThunk';
+import axios from 'axios';
 
 //bring in fetchUser thunk, use it in componentDidMount to fetch user so you can keep a user
 //on refresh
@@ -12,19 +13,31 @@ class EditUser extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      id: this.props.userReducer.selectedUser.id || "",
-      first: this.props.userReducer.selectedUser.first || "",
-      last: this.props.userReducer.selectedUser.last || "",
-      password: this.props.userReducer.selectedUser.password || "",
-      email: this.props.userReducer.selectedUser.email || "",
+      id: this.props.userReducer.selectedUser.id || '',
+      first: this.props.userReducer.selectedUser.first || '',
+      last: this.props.userReducer.selectedUser.last || '',
+      password: this.props.userReducer.selectedUser.password || '',
+      email: this.props.userReducer.selectedUser.email || '',
+      loggedInUser: {
+        fullName: '',
+        id: 0,
+        isAdmin: false,
+        role: '',
+        first: '',
+        last: '',
+        password: '',
+        email: '',
+        createdAt: '',
+        updatedAt: '',
+      },
     };
 
     this.editUserHandler = this.editUserHandler.bind(this);
     this.submitUpdateHandler = this.submitUpdateHandler.bind(this);
   }
 
-  componentDidMount() {
-    this.props.getUser(Number(this.props.match.params.id));
+  async componentDidMount() {
+    await this.props.getUser(Number(this.props.match.params.id));
     const {
       first,
       last,
@@ -32,7 +45,17 @@ class EditUser extends Component {
       password,
       email,
     } = this.props.userReducer.selectedUser;
-    this.setState({ id, first, last, password, email });
+    const { data: loggedInUser } = await axios.get('/api/auth', {
+      headers: { authorization: window.localStorage.getItem('token') },
+    });
+    this.setState({
+      id,
+      first,
+      last,
+      password,
+      email,
+      loggedInUser,
+    });
   }
 
   editUserHandler(event) {
@@ -44,8 +67,7 @@ class EditUser extends Component {
   submitUpdateHandler(event) {
     event.preventDefault();
     const editedUser = { ...this.state };
-    // editedUser.id = this.props.userReducer.selectedUser.id; //I AM USING THIS BECAUSE FOR SOME REASON THE STATE ISN'T UPDATED MY DEFAULT PARAMETERS ZZZZ
-    console.log("Hello from submit handler", this.props);
+    console.log('Hello from submit handler', this.props);
     console.log(editedUser);
     this.props.editUser(editedUser);
   }
@@ -54,14 +76,7 @@ class EditUser extends Component {
     const style = {
       width: 600,
     };
-    console.log(
-      this.props,
-      "HERE MY DUDE WHY ARE THESE PROPS LOADING 4 TIMES DF?"
-    );
-    if (
-      this.props.userReducer.selectedUser.isAdmin &&
-      this.props.userReducer.selectedUser.role !== "GUEST"
-    ) {
+    if (this.state.loggedInUser.isAdmin) {
       return (
         <div>
           <form onSubmit={this.submitUpdateHandler}>

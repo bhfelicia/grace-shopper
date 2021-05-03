@@ -1,17 +1,40 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import EditUser from "./EditUser";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import EditUser from './EditUser';
 
-import { fetchUser } from "../../store/thunks/userThunk";
-import { Link } from "react-router-dom";
+import { fetchUser } from '../../store/thunks/userThunk';
+import { Link } from 'react-router-dom';
+
+import axios from 'axios';
 
 class SingleUser extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
+    this.state = {
+      loggedInUser: {
+        fullName: '',
+        id: 0,
+        isAdmin: false,
+        role: '',
+        first: '',
+        last: '',
+        password: '',
+        email: '',
+        createdAt: '',
+        updatedAt: '',
+      },
+    };
+    console.log(this.props, 'at constructor');
   }
 
-  componentDidMount() {
-    this.props.getUser(Number(this.props.match.params.id));
+  async componentDidMount() {
+    await this.props.getUser(Number(this.props.match.params.id));
+    console.log(this.props, 'at mount');
+    const { data: loggedInUser } = await axios.get('/api/auth', {
+      headers: { authorization: window.localStorage.getItem('token') },
+    });
+    console.log(loggedInUser, 'LOGGED IN USER');
+    this.setState({ loggedInUser });
   }
 
   displayUser() {
@@ -28,15 +51,15 @@ class SingleUser extends Component {
   }
 
   render() {
-    let isValid = null;
-    console.log(this.props.userReducer.selectedUser, "user reducer selected");
-    if (this.props.userReducer.selectedUser.isAdmin) {
-      isValid = this.displayUser();
+    console.log(this.state, 'state here!!!!');
+    if (this.state.loggedInUser.isAdmin) {
+      return <div>{this.displayUser()}</div>;
+    } else {
+      return <div>You do not have access!</div>;
     }
     // if (window.localStorage.isAdmin && window.localStorage.role !== "GUEST") {
     //   isValid = this.displayUser();
     // }
-    return <div>{isValid}</div>;
   }
 }
 
