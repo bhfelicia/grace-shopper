@@ -40,8 +40,25 @@ router.get("/:id/reviews", async (req, res, next) => {
 router.post("/", async (req, res, next) => {
   try {
     const newProductData = req.body;
-    const newProduct = await Product.create(newProductData);
-    res.status(201).send(newProduct);
+    const { name, description, price, size, image, inventory } = req.body;
+    console.log({
+      name,
+      description,
+      price: +price,
+      size,
+      image,
+      inventory: +inventory,
+    });
+    const newProduct = await Product.create({
+      name,
+      description,
+      price: +price,
+      size,
+      image,
+      inventory: +inventory,
+    });
+    console.log("new product is: ", newProduct);
+    res.send(newProduct).status(201);
   } catch (error) {
     next(error);
   }
