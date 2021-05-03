@@ -1,8 +1,8 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
-import { fetchOrders } from '../../store/thunks/orderThunk';
-import { fetchUser } from '../../store/thunks/userThunk';
+import React from "react";
+import { connect } from "react-redux";
+import { Link } from "react-router-dom";
+import { fetchOrders } from "../../store/thunks/orderThunk";
+import { fetchUser } from "../../store/thunks/userThunk";
 
 class AllOrders extends React.Component {
   constructor(props) {
@@ -22,7 +22,6 @@ class AllOrders extends React.Component {
     const filteredOrders = this.props.orderReducer.orders.filter(
       (order) => order.status === orderType
     );
-    console.log(filteredOrders);
     this.setState({ orders: filteredOrders });
   }
   render() {
@@ -31,19 +30,19 @@ class AllOrders extends React.Component {
       return (
         <div>
           <div>
-            <button onClick={() => this.renderOrders('in progress')}>
+            <button onClick={() => this.renderOrders("in progress")}>
               in progress
             </button>
-            <button onClick={() => this.renderOrders('created')}>
+            <button onClick={() => this.renderOrders("created")}>
               created
             </button>
-            <button onClick={() => this.renderOrders('processing')}>
+            <button onClick={() => this.renderOrders("processing")}>
               processing
             </button>
-            <button onClick={() => this.renderOrders('cancelled')}>
+            <button onClick={() => this.renderOrders("cancelled")}>
               cancelled
             </button>
-            <button onClick={() => this.renderOrders('completed')}>
+            <button onClick={() => this.renderOrders("completed")}>
               completed
             </button>
           </div>
@@ -67,7 +66,7 @@ class AllOrders extends React.Component {
         <div>
           {this.props.orderReducer.orders
             .filter((order) => order.userId === activeUser.id)
-            .filter((order) => order.status !== 'in progress')
+            .filter((order) => order.status !== "in progress")
             .map((filteredOrder) => {
               return (
                 <Link key={filteredOrder.id} to={`/orders/${filteredOrder.id}`}>

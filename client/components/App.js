@@ -11,6 +11,7 @@ import AllOrders from "./ORDERS/AllOrders";
 import SingleOrder from "./ORDERS/SingleOrder";
 import EditOrder from "./ORDERS/EditOrder";
 import ProductReviews from "./REVIEWS/ProductReviews";
+import CreateReview from "./REVIEWS/CreateReview";
 import AllUsers from "./USERS/AllUsers";
 import SingleUser from "./USERS/SingleUser";
 import EditUser from "./USERS/EditUser";

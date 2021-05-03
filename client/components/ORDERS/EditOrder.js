@@ -1,6 +1,6 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import { updateOrder, fetchOrder } from '../../store/thunks/orderThunk';
+import React from "react";
+import { connect } from "react-redux";
+import { updateOrder, fetchOrder } from "../../store/thunks/orderThunk";
 
 class EditOrder extends React.Component {
   constructor(props) {
@@ -17,8 +17,6 @@ class EditOrder extends React.Component {
     };
   }
   componentDidMount() {
-    //{id} = this.props.match.params.id;
-    console.log(this.props);
     this.props.getOrder(this.props.match.params.id);
   }
   onChange(ev) {
