@@ -10,7 +10,6 @@ async function requireToken(req, res, next) {
     const token = req.headers.authorization;
     const user = await User.byToken(token);
     req.user = user;
-    console.log(req.user, "IN TOKEN");
     next();
   } catch (error) {
     next(error);
