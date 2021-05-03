@@ -115,8 +115,8 @@ const mapStateToProps = ({ productReducer, userReducer }) => ({
   userReducer,
 });
 
-const mapDispatchToProps = (dispatch) => ({
-  createProduct: (product) => dispatch(addProduct(product)),
+const mapDispatchToProps = (dispatch, { history }) => ({
+  createProduct: (product) => dispatch(addProduct(product, history)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(CreateProduct);

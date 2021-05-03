@@ -24,10 +24,11 @@ const fetchProduct = (productId) => {
   };
 };
 
-const addProduct = (newProduct) => {
+const addProduct = (newProduct, history) => {
   return async (dispatch) => {
     const { data: product } = await axios.post(`/api/products/`, newProduct);
     dispatch(createProduct(product));
+    history.push(`/products/${product.id}`);
   };
 };
 
