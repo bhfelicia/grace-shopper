@@ -12,10 +12,9 @@ class Cart extends Component {
     //   currentCart: {},
     // };
   }
-
   componentDidMount() {
     this.props.getOrders();
-    this.props.getCart(Number(window.localStorage.userId));
+    this.props.getCart();
   }
 
   render() {
@@ -29,8 +28,16 @@ class Cart extends Component {
               <li key={product.id}>
                 <img src={product.image}></img>
                 <hr />
-                {product.order_product.product_quantity} x {product.name} - $
-                {product.price * product.order_product.product_quantity}
+                <button>+</button>
+                {'   '}
+                {product.order_product.product_quantity}
+                {'   '}
+                <button onClick={() => this.deleteProductFromCart()}>
+                  --
+                </button>{' '}
+                x {product.name} - $
+                {product.price * product.order_product.product_quantity} {'   '}
+                <button>Delete</button>
               </li>
             ))}
           </ol>
@@ -54,7 +61,7 @@ class Cart extends Component {
 const mapStateToProps = ({ orderReducer }) => ({ orderReducer });
 
 const mapDispatchToProps = (dispatch) => ({
-  getCart: (id) => dispatch(fetchCart(id)),
+  getCart: () => dispatch(fetchCart()),
   getOrders: () => dispatch(fetchOrders()),
 });
 
