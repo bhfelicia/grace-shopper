@@ -1,11 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import CreateUser from '../USERS/CreateUser';
 
 const SignUp = () => {
   return (
     <div>
-      {' '}
-      here the sign up page. just have to link to the userCreate component{' '}
+      <CreateUser/>
     </div>
   );
 };

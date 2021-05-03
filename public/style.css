@@ -111,7 +111,26 @@ nav {
 
 /*Link*/
 #link {
-  text-decoration: 'none';
+  text-decoration: "none";
 }
 
 /* images*/
+
+/* settings*/
+.settings-container {
+  /* display: flex; */
+}
+
+.settings-container-left {
+  display: flex;
+  width: 30%;
+  background: honeydew;
+  flex-direction: column;
+}
+.settings-container-right {
+  display: flex;
+  margin-left: 30%;
+  background: ivory;
+  justify-content: space-between;
+  align-items: center;
+}
