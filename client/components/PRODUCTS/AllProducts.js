@@ -29,6 +29,7 @@ class AllProducts extends Component {
         this.props.amendCart(productId, cartId, false);
       }
     }
+    this.componentDidMount();
   }
   render() {
     const { products } = this.props.productReducer;
@@ -43,12 +44,9 @@ class AllProducts extends Component {
                 <img src={product.image}></img>
                 <h2>{product.name}</h2>
                 <h3>${product.price}</h3>
-                <div>
-                  <button onClick={() => addToCart(product.id)}>
-                    Add To Cart
-                  </button>
-                </div>
+                <div></div>
               </Link>
+              <button onClick={() => addToCart(product.id)}>Add To Cart</button>
             </div>
           ))}
       </div>
