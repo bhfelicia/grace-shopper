@@ -93,8 +93,7 @@ const seed = async () => {
       price: 150,
       size: "medium",
       categoryId: vases.id,
-      image:
-        "https://bloximages.newyork1.vip.townnews.com/hoosiertimes.com/content/tncms/assets/v3/editorial/c/3a/c3a186da-5ed3-5f55-896f-b63a7298aeab/5c479e283eddf.image.jpg",
+      image: "https://imgur.com/amaUzq7.png",
     });
     const groovyLizard = await Product.create({
       name: "Groovy Lizard",
@@ -103,8 +102,7 @@ const seed = async () => {
       price: 200,
       size: "medium",
       categoryId: vases.id,
-      image:
-        "https://www.artfulhome.com/item_images/Additional/P/6701-6800/6799/large/302ad5d0-3237-4fe8-9f11-f36f0975639d_124640_l.jpg",
+      image: "https://imgur.com/ucsbxMV.png",
     });
     const honeycomb = await Product.create({
       name: "Honeycomb",
@@ -113,8 +111,7 @@ const seed = async () => {
       price: 90,
       size: "medium",
       categoryId: bowls.id,
-      image:
-        "https://images.squarespace-cdn.com/content/v1/5ab995b1c3c16a02995e339c/1605741019247-3U7KH9ZDY6TCCXCX3H9M/ke17ZwdGBToddI8pDm48kNiEM88mrzHRsd1mQ3bxVct7gQa3H78H3Y0txjaiv_0fDoOvxcdMmMKkDsyUqMSsMWxHk725yiiHCCLfrh8O1z4YTzHvnKhyp6Da-NYroOW3ZGjoBKy3azqku80C789l0s0XaMNjCqAzRibjnE_wBlkZ2axuMlPfqFLWy-3Tjp4nKScCHg1XF4aLsQJlo6oYbA/LrvRCO78S0qepLVLRC3mNA.jpg",
+      image: "https://imgur.com/balfjQb.png",
     });
     const delilah = await Product.create({
       name: "Delilah",
@@ -123,8 +120,7 @@ const seed = async () => {
       price: 68,
       size: "small",
       categoryId: bowls.id,
-      image:
-        "https://rs.apolloboxassets.com/images/sku2157-Japanese-Bowl/Array_1.jpg",
+      image: "https://imgur.com/c2JEWHj.png",
     });
     const sereneGreen = await Product.create({
       name: "Serene Green",
@@ -133,8 +129,7 @@ const seed = async () => {
       price: 40,
       size: "small",
       categoryId: mugs.id,
-      image:
-        "https://i.etsystatic.com/19129317/r/il/d6e67e/1719388040/il_794xN.1719388040_ttj6.jpg",
+      image: "https://imgur.com/2bIObBw.png",
     });
     const bubblingUp = await Product.create({
       name: "Bubbling Up",
@@ -143,8 +138,7 @@ const seed = async () => {
       price: 45,
       size: "small",
       categoryId: mugs.id,
-      image:
-        "https://i.pinimg.com/1200x/da/57/37/da5737247202b033580f8ee212a07aa2.jpg",
+      image: "https://imgur.com/2xQPbVY.png",
     });
 
     const coolSplash = await Product.create({
@@ -154,8 +148,7 @@ const seed = async () => {
       price: 50,
       size: "small",
       categoryId: mugs.id,
-      image:
-        "https://www.bluehavenbee.com/wp-content/uploads/2017/02/Handcrafted-Ceramic-Mug.jpg",
+      image: "https://i.imgur.com/6zKzojO.png",
     });
     const downToEarth = await Product.create({
       name: "Down to Earth",
@@ -164,8 +157,7 @@ const seed = async () => {
       price: 55,
       size: "small",
       categoryId: plantPots.id,
-      image:
-        "https://i.pinimg.com/originals/36/d7/90/36d79095c4f5274ba22a0323c03a9fbd.jpg",
+      image: "https://imgur.com/SHG1Pqo.png",
     });
     const royal = await Product.create({
       name: "Royal",
@@ -184,8 +176,7 @@ const seed = async () => {
       price: 20,
       size: "medium",
       categoryId: plantPots.id,
-      image:
-        "https://hips.hearstapps.com/vader-prod.s3.amazonaws.com/1591095721-51tKQznTVmL.jpg",
+      image: "https://imgur.com/N8zfVw9.png",
     });
     const gardenParty = await Product.create({
       name: "Garden Party",
@@ -194,8 +185,7 @@ const seed = async () => {
       price: 70,
       size: "medium",
       categoryId: teapots.id,
-      image:
-        "http://www.whitepinesestate.com/uploads/1/0/8/4/108427399/s699567613853087433_p113_i3_w267.jpeg",
+      image: "https://imgur.com/1Hf1yrk.png",
     });
     const prettyInPink = await Product.create({
       name: "Pretty in Pink",
@@ -204,8 +194,7 @@ const seed = async () => {
       price: 60,
       size: "medium",
       categoryId: teapots.id,
-      image:
-        "https://images-na.ssl-images-amazon.com/images/I/51pyAiTKX6L._AC_SL1001_.jpg",
+      image: "https://imgur.com/DtpMrtI.png",
     });
     const kickItUp = await Product.create({
       name: "Kick it up a Notch",
@@ -214,8 +203,7 @@ const seed = async () => {
       price: 65,
       size: "medium",
       categoryId: teapots.id,
-      image:
-        "https://www.artfulhome.com/item_images/Additional/P/801-900/872/full/c94210c4-5698-466a-90fd-09945b93447c_28295_f.jpg",
+      image: "https://imgur.com/JAB78CF.png",
     });
     const byTheSeashore = await Product.create({
       name: "By the Seashore",
@@ -254,8 +242,7 @@ const seed = async () => {
       price: 300,
       size: "medium",
       categoryId: sculptures.id,
-      image:
-        "https://i.pinimg.com/originals/8a/f5/09/8af509adf80d843df00c9628114dc530.jpg",
+      image: "https://imgur.com/8HKTwwi.png",
     });
     const flowThrough = await Product.create({
       name: "Flow Through",
@@ -264,8 +251,7 @@ const seed = async () => {
       price: 280,
       size: "medium",
       categoryId: sculptures.id,
-      image:
-        "https://www.arch2o.com/wp-content/uploads/2012/09/Arch2O-ceramic-sculptures-eva-hild-5-1806x1600.jpg",
+      image: "https://imgur.com/pWa6xW8.png",
     });
     const waveItOut = await Product.create({
       name: "Wave It Out",
@@ -274,8 +260,7 @@ const seed = async () => {
       price: 200,
       size: "medium",
       categoryId: sculptures.id,
-      image:
-        "https://mymodernmet.com/wp/wp-content/uploads/archive/9kz1fX7C3OzLWsbHMlY9_deniseromecki01.jpg",
+      image: "https://imgur.com/wivxVqL.png",
     });
 
     //category_product data (so products can belong to many categories)
