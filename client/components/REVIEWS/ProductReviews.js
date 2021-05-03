@@ -33,10 +33,11 @@ class ProductReviews extends Component {
     return (
       <div>
         {this.props.reviewReducer.reviews.map((review) => (
-          <div key={review.id}>
+          <div key={review.id || review.newReview.id}>
             <h4>Review from {review.user.fullName}</h4>
-            <h5>{review.title}</h5> <p>{review.rating} stars</p>
-            <p>{review.description}</p>
+            <h5>{review.title}</h5>{" "}
+            <p>{review.rating || review.newReview.rating} stars</p>
+            <p>{review.description || review.newReview.description}</p>
           </div>
         ))}
       </div>

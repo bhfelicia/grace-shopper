@@ -24,8 +24,6 @@ class EditUser extends Component {
   }
 
   componentDidMount() {
-    console.log(this.props, "COMPONENT DID MOUNT");
-
     this.props.getUser(Number(this.props.match.params.id));
     const {
       first,

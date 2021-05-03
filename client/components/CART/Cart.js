@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
+import React, { Component } from "react";
+import { connect } from "react-redux";
 
-import { fetchCart, fetchOrders } from '../../store/thunks/orderThunk';
+import { fetchCart, fetchOrders } from "../../store/thunks/orderThunk";
 
 let theCart;
 
@@ -29,22 +29,22 @@ class Cart extends Component {
                 <img src={product.image}></img>
                 <hr />
                 <button>+</button>
-                {'   '}
+                {"   "}
                 {product.order_product.product_quantity}
-                {'   '}
+                {"   "}
                 <button onClick={() => this.deleteProductFromCart()}>
                   --
-                </button>{' '}
+                </button>{" "}
                 x {product.name} - $
-                {product.price * product.order_product.product_quantity} {'   '}
+                {product.price * product.order_product.product_quantity} {"   "}
                 <button>Delete</button>
               </li>
             ))}
           </ol>
           <hr />
           <h5>Subtotal: ${currentCart.total}.00</h5>
-          <h5>Tax: ${currentCart.tax}0</h5>
-          <h3>Grand total: ${Number(currentCart.total) + currentCart.tax}0</h3>
+          <h5>Tax: ${currentCart.tax}.00</h5>
+          <h3>Grand total: ${Number(currentCart.total) + currentCart.tax}</h3>
         </div>
       );
     // console.log(currentCart.products);

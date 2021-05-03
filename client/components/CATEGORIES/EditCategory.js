@@ -37,9 +37,6 @@ class EditCategory extends Component {
   onSave(ev) {
     ev.preventDefault();
     const editedCategory = { ...this.state };
-    console.log(editedCategory, "AWEEEEWEWEEWEWEEW");
-    console.log(this.props, "herrererrerererrerer");
-    //console.log(this.props.categoryReducer.selectedCategory.id, 'AWEEEEWEWEEWEWEEW')
     this.props.editCategory(editedCategory);
   }
 
