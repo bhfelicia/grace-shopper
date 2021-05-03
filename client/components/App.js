@@ -6,6 +6,7 @@ import { fetchUser, fetchUsers } from "../store/thunks/userThunk";
 import AllProducts from "./PRODUCTS/AllProducts";
 import SingleProduct from "./PRODUCTS/SingleProduct";
 import CreateProduct from "./PRODUCTS/CreateProduct";
+import EditProduct from "./PRODUCTS/EditProduct";
 import AllOrders from "./ORDERS/AllOrders";
 import SingleOrder from "./ORDERS/SingleOrder";
 import EditOrder from "./ORDERS/EditOrder";
@@ -57,6 +58,7 @@ class App extends Component {
             <Route exact path="/signup" component={SignUp} />
             <Route exact path="/products/:id" component={SingleProduct} />
             <Route exact path="/createProduct" component={CreateProduct} />
+            <Route exact path="/products/:id/edit" component={EditProduct} />
             <Route exact path="/categories/:id" component={SingleCategory} />
             <Route exact path="/createCategory" component={CreateCategory} />
             <Route exact path="/categories/:id/edit" component={EditCategory} />
