@@ -1,48 +1,70 @@
-import React from "react";
+import React, {Component} from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import SearchBar from "./SearchBar";
+import { fetchUsers } from "../../store/thunks/userThunk";
 
-const Nav = () => {
-  if (window.localStorage.role === "GUEST" || !window.localStorage.role) {
-    return (
-      <nav className="nav-container">
-        <Link style={{ textDecoration: "none" }} to="/">
-          Home
-        </Link>
-        <SearchBar />
-        <div>
-          <Link style={{ textDecoration: "none" }} to="/login">
-            Login |
+
+
+class Nav extends Component {
+  constructor(){
+    super();
+    this.logout = this.logout.bind(this);
+  }
+
+
+  componentDidMount() {
+    this.props.getUsers();
+  }
+
+  logout() {
+    window.localStorage.clear();
+  }
+
+  render(){
+    if (this.props.userReducer.selectedUser.isAdmin ) {
+      return (
+        <nav className="nav-container">
+          <Link style={{ textDecoration: "none" }} to="/">
+            Home
           </Link>
-          <Link style={{ textDecoration: "none" }} to="/signup">
-            {" "}
-            Sign Up
+          <SearchBar />
+          <div>
+            <Link style={{ textDecoration: "none" }} to="/settings">
+              Settings |
+            </Link>
+            <Link style={{ textDecoration: "none" }} to="/" onClick={()=>this.logout()}>
+              &nbsp;Logout
+            </Link>
+          </div>
+        </nav>
+      );
+    } else {
+      return (
+        <nav className="nav-container">
+          <Link style={{ textDecoration: "none" }} to="/">
+            Home
           </Link>
-        </div>
-      </nav>
-    );
-  } else {
-    return (
-      <nav className="nav-container">
-        <Link style={{ textDecoration: "none" }} to="/">
-          Home
-        </Link>
-        <SearchBar />
-        <div>
-          <Link style={{ textDecoration: "none" }} to="/orders">
-            Orders |
-          </Link>
-          <Link style={{ textDecoration: "none" }} to="/cart">
-            Cart |
-          </Link>
-          <Link style={{ textDecoration: "none" }} to="/login">
-            Logout
-          </Link>
-        </div>
-      </nav>
-    );
+          <SearchBar />
+          <div>
+            <Link style={{ textDecoration: "none" }} to="/login">
+              Login |
+            </Link>
+            <Link style={{ textDecoration: "none" }} to="/signup">
+              {" "}
+              Sign Up
+            </Link>
+          </div>
+        </nav>
+      );
+    }
   }
 };
+const mapStateToProps = ({ userReducer }) => ({
+  userReducer,
+});
 
-export default connect((state) => state)(Nav);
+const mapDispatchToProps = (dispatch) => ({
+  getUsers: () => dispatch(fetchUsers()),
+});
+export default connect(mapStateToProps, mapDispatchToProps)(Nav);
