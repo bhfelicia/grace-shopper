@@ -39,13 +39,14 @@ const destroyProduct = (product) => {
   };
 };
 
-const updateProduct = (product) => {
+const updateProduct = (product, history) => {
   return async (dispatch) => {
     const { data: updatedProduct } = await axios.put(
       `/api/products/${product.id}`,
       product
     );
     dispatch(editProduct(updatedProduct));
+    history.push(`/products/${updatedProduct.id}`);
   };
 };
 

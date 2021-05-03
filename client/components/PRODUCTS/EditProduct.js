@@ -16,12 +16,10 @@ class EditProduct extends Component {
       status: this.props.productReducer.singleProduct.status || "",
     };
     this.handleChange = this.handleChange.bind(this);
-    // this.editProductHandler = this.editProductHandler.bind(this);
+    this.editProductHandler = this.editProductHandler.bind(this);
   }
-  componentDidMount() {
-    this.props.getProduct(+this.props.match.params.id);
-    console.log("match params id", +this.props.match.params.id);
-    console.log("props in componentDidM", this.props);
+  async componentDidMount() {
+    await this.props.getProduct(+this.props.match.params.id);
     const {
       id,
       name,
@@ -32,40 +30,28 @@ class EditProduct extends Component {
       inventory,
       status,
     } = this.props.productReducer.singleProduct;
-  }
-  componentDidUpdate(prevProps) {
-    if (prevProps.singleProduct !== this.props.singleProduct) {
-      const {
-        id,
-        name,
-        description,
-        price,
-        size,
-        image,
-        inventory,
-        status,
-      } = this.props.productReducer.singleProduct;
-      this.setState({
-        id,
-        name,
-        description,
-        price,
-        size,
-        image,
-        inventory,
-        status,
-      });
-    }
+    this.setState({
+      id,
+      name,
+      description,
+      price,
+      size,
+      image,
+      inventory,
+      status,
+    });
   }
   handleChange(event) {
     this.setState({
       [event.target.name]: event.target.value,
     });
   }
-
+  editProductHandler(evt) {
+    evt.preventDefault();
+    const updatedProduct = { ...this.state };
+    this.props.editProduct(updatedProduct);
+  }
   render() {
-    console.log(this.props);
-    console.log("state is: ", this.state);
     const { singleProduct } = this.props.productReducer;
     const { selectedUser } = this.props.userReducer;
     const style = {
@@ -83,7 +69,7 @@ class EditProduct extends Component {
     } else {
       return (
         <div>
-          <form>
+          <form onSubmit={this.editProductHandler}>
             <h4>Edit Product</h4>
             <label>Name</label>
             <input
@@ -93,6 +79,55 @@ class EditProduct extends Component {
               required
               onChange={this.handleChange}
             />
+            <label>Description</label>
+            <input
+              type="text"
+              value={this.state.description}
+              name="description"
+              required
+              onChange={this.handleChange}
+            />
+            <label>Price</label>
+            <input
+              type="text"
+              value={this.state.price}
+              name="price"
+              required
+              onChange={this.handleChange}
+            />
+            <label>Size</label>
+            <input
+              type="text"
+              value={this.state.size}
+              name="size"
+              required
+              onChange={this.handleChange}
+            />
+            <label>Image</label>
+            <input
+              type="text"
+              value={this.state.image}
+              name="image"
+              required
+              onChange={this.handleChange}
+            />
+            <label>Inventory</label>
+            <input
+              type="text"
+              value={this.state.inventory}
+              name="inventory"
+              required
+              onChange={this.handleChange}
+            />
+            <label>Status</label>
+            <input
+              type="text"
+              value={this.state.status}
+              name="status"
+              required
+              onChange={this.handleChange}
+            />
+            <button type="submit">Edit this product</button>
           </form>
         </div>
       );
@@ -107,7 +142,7 @@ const mapStateToProps = ({ productReducer, userReducer }) => ({
 
 const mapDispatchToProps = (dispatch, { history }) => ({
   getProduct: (productId) => dispatch(fetchProduct(productId)),
-  editProduct: (product) => dispatch(updateProduct(product)),
+  editProduct: (product) => dispatch(updateProduct(product, history)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(EditProduct);
