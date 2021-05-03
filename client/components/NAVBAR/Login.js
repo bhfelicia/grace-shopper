@@ -1,15 +1,17 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
-import axios from 'axios';
-import { loadUser } from '../../store/actionCreators/userActionCreators';
+import React from "react";
+import { connect } from "react-redux";
+import { Link } from "react-router-dom";
+import axios from "axios";
+import { loadUser } from "../../store/actionCreators/userActionCreators";
+
+// window.GITHUB_CLIENT_ID = "<%= GITHUB_CLIENT_ID %>";
 
 class Login extends React.Component {
   constructor() {
     super();
     this.state = {
-      email: '',
-      password: '',
+      email: "",
+      password: "",
       auth: {},
     };
     this.onChange = this.onChange.bind(this);
@@ -33,23 +35,23 @@ class Login extends React.Component {
     });
   }
   async signIn(credentials) {
-    let response = await axios.post('/api/auth', credentials);
+    let response = await axios.post("/api/auth", credentials);
     const { token } = response.data;
-    window.localStorage.setItem('token', token);
+    window.localStorage.setItem("token", token);
     this.attemptTokenLogin();
   }
   logout() {
-    window.localStorage.removeItem('token');
+    window.localStorage.removeItem("token");
     this.setState({ auth: {} });
     this.props.authorizeUser({});
-    window.localStorage.removeItem('userId');
-    window.localStorage.removeItem('isAdmin');
-    window.localStorage.removeItem('role');
+    window.localStorage.removeItem("userId");
+    window.localStorage.removeItem("isAdmin");
+    window.localStorage.removeItem("role");
   }
   async attemptTokenLogin() {
-    const token = window.localStorage.getItem('token');
+    const token = window.localStorage.getItem("token");
     if (token) {
-      const response = await axios.get('/api/auth', {
+      const response = await axios.get("/api/auth", {
         headers: {
           authorization: token,
         },
@@ -57,9 +59,9 @@ class Login extends React.Component {
 
       this.setState({ auth: response.data });
       this.props.authorizeUser(this.state.auth);
-      window.localStorage.setItem('userId', this.state.auth.id);
-      window.localStorage.setItem('isAdmin', this.state.auth.isAdmin);
-      window.localStorage.setItem('role', this.state.auth.role);
+      window.localStorage.setItem("userId", this.state.auth.id);
+      window.localStorage.setItem("isAdmin", this.state.auth.isAdmin);
+      window.localStorage.setItem("role", this.state.auth.role);
     }
   }
   render() {
@@ -94,6 +96,7 @@ class Login extends React.Component {
                 Sign In
               </button>
             </div>
+            <a href={`/api/auth/oauth`}>Login With Github</a>
           </form>
         </div>
       );

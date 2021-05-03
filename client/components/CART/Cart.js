@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
+import React, { Component } from "react";
+import { connect } from "react-redux";
 
-import { fetchCart, fetchOrders } from '../../store/thunks/orderThunk';
+import { fetchCart, fetchOrders } from "../../store/thunks/orderThunk";
 
 let theCart;
 
@@ -29,14 +29,14 @@ class Cart extends Component {
                 <img src={product.image}></img>
                 <hr />
                 <button>+</button>
-                {'   '}
+                {"   "}
                 {product.order_product.product_quantity}
-                {'   '}
+                {"   "}
                 <button onClick={() => this.deleteProductFromCart()}>
                   --
-                </button>{' '}
+                </button>{" "}
                 x {product.name} - $
-                {product.price * product.order_product.product_quantity} {'   '}
+                {product.price * product.order_product.product_quantity} {"   "}
                 <button>Delete</button>
               </li>
             ))}
