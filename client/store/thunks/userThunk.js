@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios from "axios";
 
 import {
   editUser,
@@ -6,13 +6,13 @@ import {
   loadUsers,
   loadUser,
   createUser,
-} from '../actionCreators/userActionCreators';
+} from "../actionCreators/userActionCreators";
 
 //pass in entire user object to dispatch because reducer needs user object to filter out
 
 const fetchUsers = () => {
   return async (dispatch) => {
-    const response = await axios.get('/api/users');
+    const response = await axios.get("/api/users");
     const users = response.data;
     dispatch(loadUsers(users));
   };
@@ -21,7 +21,7 @@ const fetchUsers = () => {
 const fetchUser = (userId) => {
   return async (dispatch) => {
     const headerToken = {
-      headers: { authorization: window.localStorage.getItem('token') },
+      headers: { authorization: window.localStorage.getItem("token") },
     };
     console.log(headerToken);
     const { data: user } = await axios.get(`/api/users/${userId}`, headerToken);
@@ -39,7 +39,10 @@ const addUser = (newUser) => {
 //changed this from user to userId for testing
 const destroyUser = (userId) => {
   return async (dispatch) => {
-    await axios.delete(`/api/users/${userId}`);
+    const headerToken = {
+      headers: { authorization: window.localStorage.getItem("token") },
+    };
+    await axios.delete(`/api/users/${userId}`, headerToken);
     dispatch(deleteUser(userId));
   };
 };
