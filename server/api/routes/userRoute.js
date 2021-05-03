@@ -66,8 +66,10 @@ router.put("/:id", async (req, res, next) => {
 router.delete("/:id", requireToken, async (req, res, next) => {
   try {
     const { id } = req.params;
+
     // const { id } = req.user.id;
     const userToBeDeleted = await User.findByPk(id);
+
     await userToBeDeleted.destroy();
     res.send(userToBeDeleted).status(204);
   } catch (error) {

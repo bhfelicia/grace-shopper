@@ -23,7 +23,7 @@ const fetchUser = (userId) => {
     const headerToken = {
       headers: { authorization: window.localStorage.getItem("token") },
     };
-    console.log(headerToken);
+    // console.log(headerToken);
     const { data: user } = await axios.get(`/api/users/${userId}`, headerToken);
     dispatch(loadUser(user));
   };
