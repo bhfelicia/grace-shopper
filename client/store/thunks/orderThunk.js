@@ -33,32 +33,39 @@ const updateOrder = (newOrderData) => {
   };
 };
 
-const addCart = (productId, userId) => {
+const addCart = (productId) => {
   return async (dispatch) => {
-    const { data: cart } = await axios.post(
-      `/api/orders/${userId}/cart/create`,
-      {
-        headers: { authorization: window.localStorage.token },
-        data: { productId },
-      }
-    );
+    const { data: cart } = await axios.post(`/api/orders/cart/create`, {
+      headers: { authorization: window.localStorage.token },
+      data: { productId },
+    });
     dispatch(createCart(cart));
   };
 };
 
-const updateCart = (cart) => {
+const addToCart = (productId, cartId, productExists) => {
   return async (dispatch) => {
-    const { data: updatedCart } = await axios.put(
-      `/api/orders/${cart.id}`,
-      cart
-    );
+    const { data: updatedCart } = await axios.put(`/api/orders/cart/add`, {
+      data: { productId, cartId, productExists },
+    });
     dispatch(editCart(updatedCart));
   };
 };
 
-const fetchCart = (userId) => {
+const deleteFromCart = (productId, cartId, productExists) => {
+  // return async (dispatch) => {
+  //   const { data: updatedCart } = await axios.put(`/api/orders/cart/add`, {
+  //     data: { productId, cartId, productExists },
+  //   });
+  //   dispatch(editCart(updatedCart));
+  // };
+};
+
+const fetchCart = () => {
   return async (dispatch) => {
-    const { data: cart } = await axios.get(`/api/orders/user/${userId}/cart`);
+    const { data: cart } = await axios.get(`/api/orders/user/cart`, {
+      headers: { authorization: window.localStorage.token },
+    });
     dispatch(loadCart(cart));
   };
 };
@@ -73,9 +80,10 @@ const destroyCart = (cart) => {
 export {
   fetchOrders,
   addCart,
-  updateCart,
+  addToCart,
   destroyCart,
   fetchCart,
   fetchOrder,
   updateOrder,
+  deleteCart,
 };
