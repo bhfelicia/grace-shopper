@@ -52,6 +52,15 @@ const addToCart = (productId, cartId, productExists) => {
   };
 };
 
+const deleteFromCart = (productId, cartId, productExists) => {
+  // return async (dispatch) => {
+  //   const { data: updatedCart } = await axios.put(`/api/orders/cart/add`, {
+  //     data: { productId, cartId, productExists },
+  //   });
+  //   dispatch(editCart(updatedCart));
+  // };
+};
+
 const fetchCart = () => {
   return async (dispatch) => {
     const { data: cart } = await axios.get(`/api/orders/user/cart`, {
@@ -76,4 +85,5 @@ export {
   fetchCart,
   fetchOrder,
   updateOrder,
+  deleteCart,
 };

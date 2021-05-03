@@ -28,8 +28,16 @@ class Cart extends Component {
               <li key={product.id}>
                 <img src={product.image}></img>
                 <hr />
-                {product.order_product.product_quantity} x {product.name} - $
-                {product.price * product.order_product.product_quantity}
+                <button>+</button>
+                {'   '}
+                {product.order_product.product_quantity}
+                {'   '}
+                <button onClick={() => this.deleteProductFromCart()}>
+                  --
+                </button>{' '}
+                x {product.name} - $
+                {product.price * product.order_product.product_quantity} {'   '}
+                <button>Delete</button>
               </li>
             ))}
           </ol>
