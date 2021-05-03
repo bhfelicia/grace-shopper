@@ -20,7 +20,6 @@ class AllCategories extends Component {
 
   render() {
     const { categories } = this.props.categoryReducer;
-    console.log(this.props, "here in render");
     return (
       <div id="all-categories">
         <Link to={"/createCategory"}>Add Category</Link>

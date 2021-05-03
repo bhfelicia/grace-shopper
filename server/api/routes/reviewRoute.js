@@ -1,5 +1,6 @@
 const router = require("express").Router();
 const Review = require("../../db/models/Review");
+const User = require("../../db/models/User");
 
 //get routes
 router.get("/", async (req, res, next) => {
@@ -23,9 +24,17 @@ router.get("/:id", async (req, res, next) => {
 //post routes
 router.post("/", async (req, res, next) => {
   try {
-    const newReviewData = req.body;
-    const newReview = await Review.create(newReviewData);
-    res.status(201).send(newReview);
+    const { userId, productId, title, description, rating } = req.body;
+    const theUser = await User.findByPk(userId);
+    const newReview = await Review.create({
+      userId,
+      productId,
+      title,
+      description,
+      rating,
+    });
+    console.log("new review on the backend is: ", newReview);
+    res.send({ newReview, user: theUser }).status(201);
   } catch (error) {
     next(error);
   }

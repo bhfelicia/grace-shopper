@@ -3,7 +3,7 @@ import {
   CREATE_REVIEW,
   EDIT_REVIEW,
   DELETE_REVIEW,
-} from '../actions/index';
+} from "../actions/index";
 
 const initialState = {
   reviews: [],
@@ -15,7 +15,10 @@ const reviewReducer = (state = initialState, action) => {
     case LOAD_REVIEWS:
       return { ...state, reviews: action.reviews };
     case CREATE_REVIEW:
-      return { ...state, selectedReview: action.review };
+      return {
+        reviews: [...state.reviews, action.review],
+        selectedReview: action.review,
+      };
     case EDIT_REVIEW:
       const theReviews = state.reviews.filter(
         (review) => review.id !== action.review.id
