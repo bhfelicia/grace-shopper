@@ -24,10 +24,11 @@ const fetchProduct = (productId) => {
   };
 };
 
-const addProduct = (newProduct) => {
+const addProduct = (newProduct, history) => {
   return async (dispatch) => {
     const { data: product } = await axios.post(`/api/products/`, newProduct);
     dispatch(createProduct(product));
+    history.push(`/products/${product.id}`);
   };
 };
 
@@ -38,13 +39,14 @@ const destroyProduct = (product) => {
   };
 };
 
-const updateProduct = (product) => {
+const updateProduct = (product, history) => {
   return async (dispatch) => {
     const { data: updatedProduct } = await axios.put(
       `/api/products/${product.id}`,
       product
     );
     dispatch(editProduct(updatedProduct));
+    history.push(`/products/${updatedProduct.id}`);
   };
 };
 
