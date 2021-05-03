@@ -32,16 +32,16 @@ const User = db.define("user", {
   },
   last: {
     type: Sequelize.STRING,
-    allowNull: false,
-    validate: {
-      notEmpty: true,
-    },
   },
   fullName: {
     type: Sequelize.VIRTUAL,
     defaultValue: "guest",
     get() {
-      return `${this.first} ${this.last}`;
+      if (this.last) {
+        return `${this.first} ${this.last}`;
+      } else {
+        return `${this.first}`;
+      }
     },
   },
   password: {
