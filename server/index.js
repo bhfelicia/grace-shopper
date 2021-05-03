@@ -52,7 +52,7 @@ app.get("/github/callback", async (req, res, next) => {
     });
 
     //NOTE: we may not be able to use email in case someone has a null email on github
-    const { email } = response.data;
+    const { email, login } = response.data;
 
     let user = await User.findOne({
       where: {
@@ -60,14 +60,13 @@ app.get("/github/callback", async (req, res, next) => {
       },
     });
     //i am using these are hard coded tests for now below
-    const first = "John";
-    const last = "Doe";
+    const first = login;
     const password = "guest_pw";
     const role = "AUTHENTICATED";
     const isAdmin = false;
     //if user doesn't exist yet
     if (!user) {
-      user = await User.create({ isAdmin, first, last, role, password, email });
+      user = await User.create({ isAdmin, first, role, password, email });
     }
 
     const jwtToken = await jwt.sign(
