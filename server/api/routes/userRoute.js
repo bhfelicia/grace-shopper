@@ -10,7 +10,6 @@ async function requireToken(req, res, next) {
     const token = req.headers.authorization;
     const user = await User.byToken(token);
     req.user = user;
-    console.log(req.user, "IN TOKEN");
     next();
   } catch (error) {
     next(error);
@@ -66,12 +65,11 @@ router.put("/:id", async (req, res, next) => {
 //delete routes
 router.delete("/:id", requireToken, async (req, res, next) => {
   try {
-    console.log("HERE I AM");
     const { id } = req.params;
-    console.log("HERE I AM");
+
     // const { id } = req.user.id;
     const userToBeDeleted = await User.findByPk(id);
-    console.log(userToBeDeleted, "HERE SIR");
+
     await userToBeDeleted.destroy();
     res.send(userToBeDeleted).status(204);
   } catch (error) {
