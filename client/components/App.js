@@ -18,6 +18,7 @@ import EditUser from "./USERS/EditUser";
 import CreateUser from "./USERS/CreateUser";
 import Cart from "./CART/Cart";
 import Login from "./NAVBAR/Login";
+import Settings from "./NAVBAR/Settings";
 import SignUp from "./NAVBAR/SignUp";
 import Navbar from "./NAVBAR/Navbar";
 import Header from "./HEADER/Header";
@@ -57,6 +58,7 @@ class App extends Component {
             <Route exact path="/products" component={AllProducts} />
             <Route exact path="/login" component={Login} />
             <Route exact path="/signup" component={SignUp} />
+            <Route exact path="/settings" component={Settings} />
             <Route exact path="/products/:id" component={SingleProduct} />
             <Route exact path="/createProduct" component={CreateProduct} />
             <Route exact path="/products/:id/edit" component={EditProduct} />
