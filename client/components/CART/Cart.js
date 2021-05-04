@@ -42,9 +42,9 @@ class Cart extends Component {
             ))}
           </ol>
           <hr />
-          <h5>Subtotal: ${currentCart.total}.00</h5>
-          <h5>Tax: ${currentCart.tax}.00</h5>
-          <h3>Grand total: ${Number(currentCart.total) + currentCart.tax}</h3>
+          <h5>Subtotal: ${+currentCart.total}</h5>
+          <h5>Tax: ${+currentCart.tax}</h5>
+          <h3>Grand total: ${Number(currentCart.total) + +currentCart.tax}</h3>
         </div>
       );
     // console.log(currentCart.products);

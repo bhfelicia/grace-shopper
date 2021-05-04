@@ -1,11 +1,11 @@
-const router = require('express').Router();
-const Order = require('../../db/models/Order');
-const User = require('../../db/models/User');
-const Product = require('../../db/models/Product');
-const Order_Product = require('../../db/models/Order_Product');
+const router = require("express").Router();
+const Order = require("../../db/models/Order");
+const User = require("../../db/models/User");
+const Product = require("../../db/models/Product");
+const Order_Product = require("../../db/models/Order_Product");
 
 //get routes
-router.get('/', async (req, res, next) => {
+router.get("/", async (req, res, next) => {
   try {
     const orders = await Order.findAll();
     res.status(200).send(orders);
@@ -14,7 +14,7 @@ router.get('/', async (req, res, next) => {
   }
 });
 
-router.get('/:id', async (req, res, next) => {
+router.get("/:id", async (req, res, next) => {
   try {
     const order = await Order.findByPk(req.params.id);
     res.status(200).send(order);
@@ -23,7 +23,7 @@ router.get('/:id', async (req, res, next) => {
   }
 });
 
-router.get('/:id/products', async (req, res, next) => {
+router.get("/:id/products", async (req, res, next) => {
   try {
     //const order = await Order.findByPk(req.params.id);
     const products = await Order.getProducts(req.params.id);
@@ -33,13 +33,13 @@ router.get('/:id/products', async (req, res, next) => {
   }
 });
 
-router.get('/user/cart', async (req, res, next) => {
+router.get("/user/cart", async (req, res, next) => {
   try {
     const currentUser = await User.byToken(req.headers.authorization);
     const currentCart = await Order.findOne({
       where: {
         userId: currentUser.id,
-        status: 'in progress',
+        status: "in progress",
       },
       include: Product,
     });
@@ -49,12 +49,12 @@ router.get('/user/cart', async (req, res, next) => {
   }
 });
 
-router.get('/user/:userId/orders', async (req, res, next) => {
+router.get("/user/:userId/orders", async (req, res, next) => {
   try {
     const pastOrders = await Order.findAll({
       where: {
         userId: req.params.userId,
-        status: ['created', 'processing', 'canceled', 'completed'],
+        status: ["created", "processing", "canceled", "completed"],
       },
     });
     res.send(pastOrders).status(200);
@@ -65,7 +65,7 @@ router.get('/user/:userId/orders', async (req, res, next) => {
 
 //post routes
 
-router.post('/cart/create', async (req, res, next) => {
+router.post("/cart/create", async (req, res, next) => {
   try {
     const { productId } = req.body.data;
     //const { userId } = req.params;
@@ -74,11 +74,11 @@ router.post('/cart/create', async (req, res, next) => {
     const theProduct = await Product.findByPk(productId);
     const makeAnOrder = await Order.create({
       userId: user.id,
-      status: 'in progress',
+      status: "in progress",
       total: theProduct.price,
       ordered_date: now,
       isCreated: false,
-      shipping_address: 'PLACEHOLDER',
+      shipping_address: "PLACEHOLDER",
     });
     await Order_Product.create({
       orderId: makeAnOrder.dataValues.id,
@@ -98,7 +98,7 @@ router.post('/cart/create', async (req, res, next) => {
   }
 });
 
-router.post('/', async (req, res, next) => {
+router.post("/", async (req, res, next) => {
   try {
     const newOrderData = req.body;
     const newOrder = await Order.create(newOrderData);
@@ -110,7 +110,7 @@ router.post('/', async (req, res, next) => {
 
 //put routes
 
-router.put('/:id', async (req, res, next) => {
+router.put("/:id", async (req, res, next) => {
   try {
     const updateData = req.body;
     const { id } = req.params;
@@ -122,7 +122,7 @@ router.put('/:id', async (req, res, next) => {
   }
 });
 
-router.put('/cart/add', async (req, res, next) => {
+router.put("/cart/add", async (req, res, next) => {
   try {
     const { productExists, productId, cartId } = req.body.data;
     if (productExists) {
@@ -131,6 +131,7 @@ router.put('/cart/add', async (req, res, next) => {
           productId,
         },
       });
+
       const newAmount = updatedProductInCart.product_quantity + 1;
       await updatedProductInCart.update({
         product_quantity: newAmount,
@@ -142,10 +143,14 @@ router.put('/cart/add', async (req, res, next) => {
         product_quantity: 1,
       });
     }
-    const updatedOrder = await Order.findOne({
+    const theProduct = await Product.findByPk(productId);
+    const theOrder = await Order.findOne({
       where: {
         id: cartId,
       },
+    });
+    const updatedOrder = await theOrder.update({
+      total: theOrder.total + +theProduct.price,
     });
     res.send(updatedOrder).status(204);
   } catch (error) {
@@ -154,7 +159,7 @@ router.put('/cart/add', async (req, res, next) => {
 });
 
 //delete routes
-router.delete('/:id', async (req, res, next) => {
+router.delete("/:id", async (req, res, next) => {
   try {
     const { id } = req.params;
     const orderToBeDeleted = await Order.findByPk(id);
