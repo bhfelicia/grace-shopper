@@ -69,6 +69,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import Checkout from "./Checkout";
+
 import { fetchCart, fetchOrders } from "../../store/thunks/orderThunk";
 
 class Cart extends Component {
@@ -91,6 +92,7 @@ class Cart extends Component {
   showCheckoutFunc() {
     this.setState({ ...this.state, showCheckout: !this.state.showCheckout });
   }
+  async handleToken(token, address) {}
   render() {
     console.log(this.state);
     const currentCart = this.props.orderReducer.currentCart || [];
@@ -140,7 +142,7 @@ class Cart extends Component {
           <h5>Subtotal: ${currentCart.total}</h5>
           <h5>Tax: ${currentCart.tax}</h5>
           <h3>Grand total: ${Number(currentCart.total) + currentCart.tax}</h3>
-          <Checkout />
+          <Checkout cart={currentCart} />
         </div>
       );
     // console.log(currentCart.products);

@@ -37,10 +37,13 @@
     "react-dom": "^17.0.2",
     "react-redux": "^7.2.4",
     "react-router-dom": "^5.2.0",
+    "react-stripe-checkout": "^2.6.3",
+    "react-toastify": "^7.0.4",
     "redux": "^4.1.0",
     "redux-logger": "^3.0.6",
     "redux-thunk": "^2.3.0",
     "sequelize": "^6.6.2",
+    "stripe": "^8.145.0",
     "webpack": "^5.35.1",
     "webpack-cli": "^4.6.0"
   },

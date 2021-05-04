@@ -4,6 +4,12 @@ const User = require("../../db/models/User");
 const Product = require("../../db/models/Product");
 const Order_Product = require("../../db/models/Order_Product");
 
+if (process.env.NODE_ENV !== "production") {
+  require("dotenv").config();
+}
+const stripePublic = process.env.STRIPE_PUBLIC_KEY;
+const stripeSecret = process.env.STRIPE_SECRET_KEY;
+const stripe = require("stripe")(stripeSecret);
 //get routes
 router.get("/", async (req, res, next) => {
   try {
@@ -62,6 +68,17 @@ router.get("/user/:userId/orders", async (req, res, next) => {
     next(error);
   }
 });
+
+//stripe routes
+
+// router.get("/:id/stripe", async (req, res, next) => {
+//   try {
+//     const theOrder = await Order.findByPk(req.params.id)
+
+//   } catch (error) {
+//     next(error)
+//   }
+// })
 
 //post routes
 
