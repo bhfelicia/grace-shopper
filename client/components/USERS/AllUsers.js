@@ -1,18 +1,38 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import { Link } from "react-router-dom";
-import { fetchProducts } from "../../store/thunks/productThunk";
-import { fetchUsers, destroyUser } from "../../store/thunks/userThunk";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
+import { fetchProducts } from '../../store/thunks/productThunk';
+import { fetchUsers, destroyUser } from '../../store/thunks/userThunk';
+
+import axios from 'axios';
 
 class AllUsers extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      loggedInUser: {
+        fullName: '',
+        id: 0,
+        isAdmin: false,
+        role: '',
+        first: '',
+        last: '',
+        password: '',
+        email: '',
+        createdAt: '',
+        updatedAt: '',
+      },
+    };
     this.displayUsers = this.displayUsers.bind(this);
     this.deleteUserHandler = this.deleteUserHandler.bind(this);
   }
 
-  componentDidMount() {
+  async componentDidMount() {
     this.props.getUsers();
+    const { data: loggedInUser } = await axios.get('/api/auth', {
+      headers: { authorization: window.localStorage.getItem('token') },
+    });
+    this.setState({ loggedInUser });
   }
 
   deleteUserHandler(event) {
@@ -47,7 +67,7 @@ class AllUsers extends Component {
     const style = {
       width: 600,
     };
-    if (this.props.userReducer.selectedUser.isAdmin) {
+    if (this.state.loggedInUser.isAdmin) {
       return (
         <div>
           <ul>{this.displayUsers()}</ul>

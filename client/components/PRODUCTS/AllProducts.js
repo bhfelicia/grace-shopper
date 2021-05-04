@@ -10,9 +10,9 @@ class AllProducts extends Component {
     super();
     this.addToCart = this.addToCart.bind(this);
   }
-  componentDidMount() {
-    this.props.getProducts();
-    this.props.getCart();
+  async componentDidMount() {
+    await this.props.getProducts();
+    await this.props.getCart();
   }
   addToCart(productId) {
     const cartId = this.props.orderReducer.currentCart.id;

@@ -1,8 +1,10 @@
-import React from "react";
-import { connect } from "react-redux";
-import { Link } from "react-router-dom";
-import { fetchOrders } from "../../store/thunks/orderThunk";
-import { fetchUser } from "../../store/thunks/userThunk";
+import React from 'react';
+import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
+import { fetchOrders } from '../../store/thunks/orderThunk';
+import { fetchUser } from '../../store/thunks/userThunk';
+
+import axios from 'axios';
 
 class AllOrders extends React.Component {
   constructor(props) {
@@ -11,12 +13,28 @@ class AllOrders extends React.Component {
     this.renderOrders = this.renderOrders.bind(this);
     this.state = {
       orders: [],
+      loggedInUser: {
+        fullName: '',
+        id: 0,
+        isAdmin: false,
+        role: '',
+        first: '',
+        last: '',
+        password: '',
+        email: '',
+        createdAt: '',
+        updatedAt: '',
+      },
     };
   }
   async componentDidMount() {
-    await this.props.loadUser(Number(window.localStorage.userId));
+    const { data: loggedInUser } = await axios.get('/api/auth', {
+      headers: { authorization: window.localStorage.getItem('token') },
+    });
+    console.log(loggedInUser, 'logged in user');
+    await this.props.loadUser(loggedInUser.id);
     await this.props.getOrders();
-    this.setState({ orders: this.props.orderReducer.orders });
+    this.setState({ loggedInUser, orders: this.props.orderReducer.orders });
   }
   renderOrders(orderType) {
     const filteredOrders = this.props.orderReducer.orders.filter(
@@ -25,24 +43,23 @@ class AllOrders extends React.Component {
     this.setState({ orders: filteredOrders });
   }
   render() {
-    const activeUser = this.props.userReducer.selectedUser;
-    if (activeUser.isAdmin) {
+    if (this.state.loggedInUser.isAdmin) {
       return (
         <div>
           <div>
-            <button onClick={() => this.renderOrders("in progress")}>
+            <button onClick={() => this.renderOrders('in progress')}>
               in progress
             </button>
-            <button onClick={() => this.renderOrders("created")}>
+            <button onClick={() => this.renderOrders('created')}>
               created
             </button>
-            <button onClick={() => this.renderOrders("processing")}>
+            <button onClick={() => this.renderOrders('processing')}>
               processing
             </button>
-            <button onClick={() => this.renderOrders("cancelled")}>
+            <button onClick={() => this.renderOrders('cancelled')}>
               cancelled
             </button>
-            <button onClick={() => this.renderOrders("completed")}>
+            <button onClick={() => this.renderOrders('completed')}>
               completed
             </button>
           </div>
@@ -61,12 +78,15 @@ class AllOrders extends React.Component {
           </div>
         </div>
       );
-    } else if (activeUser.isAdmin === false) {
+    } else if (
+      this.state.loggedInUser.isAdmin === false &&
+      this.state.loggedInUser.role === 'AUTHENTICATED'
+    ) {
       return (
         <div>
           {this.props.orderReducer.orders
-            .filter((order) => order.userId === activeUser.id)
-            .filter((order) => order.status !== "in progress")
+            .filter((order) => order.userId === this.state.loggedInUser.id)
+            .filter((order) => order.status !== 'in progress')
             .map((filteredOrder) => {
               return (
                 <Link key={filteredOrder.id} to={`/orders/${filteredOrder.id}`}>

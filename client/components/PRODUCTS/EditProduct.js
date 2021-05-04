@@ -1,25 +1,41 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import { updateProduct, fetchProduct } from "../../store/thunks/productThunk";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { updateProduct, fetchProduct } from '../../store/thunks/productThunk';
+import axios from 'axios';
 
 class EditProduct extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      id: +this.props.match.params.id || "",
-      name: this.props.productReducer.singleProduct.name || "",
-      description: this.props.productReducer.singleProduct.description || "",
+      id: +this.props.match.params.id || '',
+      name: this.props.productReducer.singleProduct.name || '',
+      description: this.props.productReducer.singleProduct.description || '',
       price: this.props.productReducer.singleProduct.price || 0,
-      size: this.props.productReducer.singleProduct.size || "",
-      image: this.props.productReducer.singleProduct.image || "",
+      size: this.props.productReducer.singleProduct.size || '',
+      image: this.props.productReducer.singleProduct.image || '',
       inventory: this.props.productReducer.singleProduct.inventory || 0,
-      status: this.props.productReducer.singleProduct.status || "",
+      status: this.props.productReducer.singleProduct.status || '',
+      loggedInUser: {
+        fullName: '',
+        id: 0,
+        isAdmin: false,
+        role: '',
+        first: '',
+        last: '',
+        password: '',
+        email: '',
+        createdAt: '',
+        updatedAt: '',
+      },
     };
     this.handleChange = this.handleChange.bind(this);
     this.editProductHandler = this.editProductHandler.bind(this);
   }
   async componentDidMount() {
     await this.props.getProduct(+this.props.match.params.id);
+    const { data: loggedInUser } = await axios.get('/api/auth', {
+      headers: { authorization: window.localStorage.getItem('token') },
+    });
     const {
       id,
       name,
@@ -39,6 +55,7 @@ class EditProduct extends Component {
       image,
       inventory,
       status,
+      loggedInUser,
     });
   }
   handleChange(event) {
@@ -57,7 +74,7 @@ class EditProduct extends Component {
     const style = {
       width: 600,
     };
-    if (!selectedUser.isAdmin) {
+    if (!this.state.loggedInUser.isAdmin) {
       return (
         <div>
           <img
