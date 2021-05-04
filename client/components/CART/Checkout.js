@@ -53,6 +53,7 @@ class Checkout extends Component {
           stripeKey="pk_test_51InBcEEes67tS3iNBPHPk9lvUj91J4oopBOiXM2e7scJ4hS7DZkLWhV0bBp67tYQs3Ngp42OCuJ14KEmzK5r98PR00mbzeN1He"
           token={this.handleStripeToken}
           billingAddress={this.state.billingAddress}
+          shippingAddress={this.state.shippingAddress}
           amount={(+this.state.orderTotal + Number(this.state.tax)) * 100}
         />
 

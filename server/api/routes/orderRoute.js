@@ -71,6 +71,16 @@ router.get("/user/:userId/orders", async (req, res, next) => {
 
 //stripe routes
 
+// router.post("/checkout", async (req, res, next) => {
+//   try {
+//     const { token } = req.body;
+//     const customer = await stripe.customers.create({ email: token.email, source: token.id });
+//     const idempotency_key = uuid()
+//     const charge = await stripe.charges.create({})
+//   } catch (error) {
+//     next(error);
+//   }
+// });
 // router.get("/:id/stripe", async (req, res, next) => {
 //   try {
 //     const theOrder = await Order.findByPk(req.params.id)
