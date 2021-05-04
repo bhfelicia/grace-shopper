@@ -1,5 +1,4 @@
 const Sequelize = require("sequelize");
-const { WebpackOptionsValidationError } = require("webpack");
 const { db } = require("../db");
 const Product = require("./Product");
 
@@ -10,7 +9,7 @@ const Order = db.define("order", {
     defaultValue: Sequelize.UUIDV4,
   },
   total: {
-    type: Sequelize.INTEGER,
+    type: Sequelize.DECIMAL(3),
   },
   ordered_date: {
     type: Sequelize.DATE,

@@ -124,18 +124,22 @@ router.put("/:id", async (req, res, next) => {
 
 router.put("/cart/add", async (req, res, next) => {
   try {
+    let updatedOrder;
     const { productExists, productId, cartId } = req.body.data;
+    const theProduct = await Product.findByPk(productId);
     if (productExists) {
       const updatedProductInCart = await Order_Product.findOne({
         where: {
           productId,
         },
       });
-
       const newAmount = updatedProductInCart.product_quantity + 1;
       await updatedProductInCart.update({
         product_quantity: newAmount,
       });
+      const theOrder = await Order.findByPk(cartId);
+      const newTotal = theOrder.total + theProduct.price;
+      updatedOrder = await theOrder.update({ total: newTotal });
     } else {
       const newProductInCart = await Order_Product.create({
         orderId: req.body.data.cartId,
@@ -143,15 +147,14 @@ router.put("/cart/add", async (req, res, next) => {
         product_quantity: 1,
       });
     }
-    const theProduct = await Product.findByPk(productId);
-    const theOrder = await Order.findOne({
+    const anOrder = await Order.findOne({
       where: {
         id: cartId,
       },
     });
-    const updatedOrder = await theOrder.update({
-      total: theOrder.total + +theProduct.price,
-    });
+    const newTotal = Number(anOrder.total) + Number(theProduct.price);
+    console.log(newTotal);
+    updatedOrder = await anOrder.update({ total: newTotal });
     res.send(updatedOrder).status(204);
   } catch (error) {
     console.log(error);
