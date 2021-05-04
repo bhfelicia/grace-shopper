@@ -1,9 +1,8 @@
-const Sequelize = require('sequelize');
-const { WebpackOptionsValidationError } = require('webpack');
-const { db } = require('../db');
-const Product = require('./Product');
+const Sequelize = require("sequelize");
+const { db } = require("../db");
+const Product = require("./Product");
 
-const Order = db.define('order', {
+const Order = db.define("order", {
   id: {
     type: Sequelize.UUID,
     primaryKey: true,
@@ -28,13 +27,13 @@ const Order = db.define('order', {
   },
   status: {
     type: Sequelize.ENUM([
-      'in progress',
-      'created',
-      'processing',
-      'cancelled',
-      'completed',
+      "in progress",
+      "created",
+      "processing",
+      "cancelled",
+      "completed",
     ]),
-    defaultValue: 'in progress',
+    defaultValue: "in progress",
   },
   isCreated: {
     type: Sequelize.BOOLEAN,
