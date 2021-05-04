@@ -24,16 +24,13 @@ class SingleUser extends Component {
         updatedAt: '',
       },
     };
-    console.log(this.props, 'at constructor');
   }
 
   async componentDidMount() {
     await this.props.getUser(Number(this.props.match.params.id));
-    console.log(this.props, 'at mount');
     const { data: loggedInUser } = await axios.get('/api/auth', {
       headers: { authorization: window.localStorage.getItem('token') },
     });
-    console.log(loggedInUser, 'LOGGED IN USER');
     this.setState({ loggedInUser });
   }
 

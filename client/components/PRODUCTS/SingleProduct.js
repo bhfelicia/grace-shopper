@@ -1,10 +1,10 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-
-import { fetchProduct } from "../../store/thunks/productThunk";
-import ProductReviews from "../REVIEWS/ProductReviews";
-import CreateReview from "../REVIEWS/CreateReview";
-import { addCart, addToCart, fetchCart } from "../../store/thunks/orderThunk";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
+import { fetchProduct } from '../../store/thunks/productThunk';
+import ProductReviews from '../REVIEWS/ProductReviews';
+import CreateReview from '../REVIEWS/CreateReview';
+import { addCart, addToCart, fetchCart } from '../../store/thunks/orderThunk';
 
 class SingleProduct extends Component {
   constructor() {
@@ -45,6 +45,9 @@ class SingleProduct extends Component {
         <button onClick={() => this.addToCart(singleProduct.id)}>
           Add To Cart
         </button>
+        <Link to={`/products/${singleProduct.id}/edit`}>
+          <button>Edit Product Details</button>
+        </Link>
         <CreateReview productId={singleProduct.id} />
         <ProductReviews productId={singleProduct.id} />
       </div>

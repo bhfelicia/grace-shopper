@@ -1,17 +1,37 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import { Link } from "react-router-dom";
-import { fetchCategories } from "../../store/thunks/categoryThunk";
-import { destroyCategory } from "../../store/thunks/categoryThunk";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
+import { fetchCategories } from '../../store/thunks/categoryThunk';
+import { destroyCategory } from '../../store/thunks/categoryThunk';
+
+import axios from 'axios';
 
 class AllCategories extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      loggedInUser: {
+        fullName: '',
+        id: 0,
+        isAdmin: false,
+        role: '',
+        first: '',
+        last: '',
+        password: '',
+        email: '',
+        createdAt: '',
+        updatedAt: '',
+      },
+    };
     this.deleteCategoryHandler = this.deleteCategoryHandler.bind(this);
   }
 
-  componentDidMount() {
+  async componentDidMount() {
     this.props.getCategories();
+    const { data: loggedInUser } = await axios.get('/api/auth', {
+      headers: { authorization: window.localStorage.getItem('token') },
+    });
+    this.setState({ loggedInUser });
   }
 
   deleteCategoryHandler(categoryToDelete) {
@@ -22,14 +42,14 @@ class AllCategories extends Component {
     const { categories } = this.props.categoryReducer;
     return (
       <div id="all-categories">
-        <Link to={"/createCategory"}>Add Category</Link>
+        <Link to={'/createCategory'}>Add Category</Link>
         {categories.map((category) => {
-          if (this.props.userReducer.selectedUser.isAdmin) {
+          if (this.state.loggedInUser.isAdmin) {
             return (
               <div key={category.id}>
                 <Link
                   to={`/categories/${category.id}`}
-                  style={{ textDecoration: "none" }}
+                  style={{ textDecoration: 'none' }}
                 >
                   <h2>{category.name}</h2>
                 </Link>
@@ -46,15 +66,13 @@ class AllCategories extends Component {
             );
           } else {
             return (
-              <div>
-                <div key={category.id}>
-                  <Link
-                    to={`/categories/${category.id}`}
-                    style={{ textDecoration: "none" }}
-                  >
-                    <h2>{category.name}</h2>
-                  </Link>
-                </div>
+              <div key={category.id}>
+                <Link
+                  to={`/categories/${category.id}`}
+                  style={{ textDecoration: 'none' }}
+                >
+                  <h2>{category.name}</h2>
+                </Link>
               </div>
             );
           }

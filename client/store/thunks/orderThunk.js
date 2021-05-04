@@ -64,7 +64,7 @@ const deleteFromCart = (productId, cartId, productExists) => {
 const fetchCart = () => {
   return async (dispatch) => {
     const { data: cart } = await axios.get(`/api/orders/user/cart`, {
-      headers: { authorization: window.localStorage.token },
+      headers: { authorization: window.localStorage.getItem('token') },
     });
     dispatch(loadCart(cart));
   };

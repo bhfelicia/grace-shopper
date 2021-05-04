@@ -111,17 +111,17 @@ nav {
 
 /*Link*/
 #link {
-  text-decoration: "none";
+  text-decoration: 'none';
 }
 
 /* images*/
 
 /* settings*/
-.settings-container {
+/* .settings-container {
   /* display: flex; */
-}
+/* } */
 
-.settings-container-left {
+/* .settings-container-left {
   display: flex;
   width: 30%;
   background: honeydew;
@@ -133,4 +133,4 @@ nav {
   background: ivory;
   justify-content: space-between;
   align-items: center;
-}
+}  */
