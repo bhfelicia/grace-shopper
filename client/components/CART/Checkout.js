@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import axios from "axios";
 import StripeCheckout from "react-stripe-checkout";
-import { toast, ToastContainer } from "react-toastify";
+import { destroyCart } from "../../store/thunks/orderThunk";
 
 // const pubStripeKey = process.env.STRIPE_PUBLIC_KEY;
 class Checkout extends Component {
@@ -26,17 +26,16 @@ class Checkout extends Component {
       const response = await axios.post("/api/orders/checkout", {
         token,
         addresses,
-        orderTotal,
+        amount: orderTotal,
       });
-      const status = response.data;
-      if (status === "success") {
-        toast("Thank you for your purchase", { type: "success" });
+
+      if (response.status === 200) {
+        alert("Thank you for your purchase");
+        // console.log("cart id? ", this.props.cart.id);
+        // this.props.deleteCart(this.props.cart.id);
       } else {
-        toast(
-          "There was an error placing your order. Please re-enter your information to try again.",
-          {
-            type: "error",
-          }
+        alert(
+          "There was an error placing your order. Please re-enter your information to try again."
         );
       }
     } catch (error) {
@@ -68,6 +67,8 @@ const mapStateToProps = ({ userReducer, orderReducer }) => ({
   orderReducer,
 });
 
-// const mapDispatchToProps = (dispatch) =>
+const mapDispatchToProps = (dispatch) => ({
+  deleteCart: (id) => dispatch(destroyCart(id)),
+});
 
-export default connect(mapStateToProps)(Checkout);
+export default connect(mapStateToProps, mapDispatchToProps)(Checkout);
