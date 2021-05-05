@@ -42,9 +42,10 @@ const destroyProduct = (product) => {
 
 const filterProducts = (productName) => {
   return async (dispatch) => {
-    const { data: filteredProducts } = await axios.get(`/api/products/search`, {
-      productName,
-    });
+    // const { data: filteredProducts } = await axios.get(`/api/products/search`, {
+    //   productName,
+    // });
+    const { data: filteredProducts } = await axios.get(`/api/products/search`);
     dispatch(findProducts(filteredProducts));
   };
 };
