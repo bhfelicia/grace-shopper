@@ -4,6 +4,7 @@ import {
   CREATE_CART,
   EDIT_CART,
   DELETE_CART,
+  DELETE_PRODUCT_FROM_CART,
   LOAD_CART,
 } from '../actions/index';
 
@@ -35,6 +36,8 @@ const orderReducer = (state = initialState, action) => {
       return { ...state, currentCart: action.cart };
     case DELETE_CART:
       return { ...state, currentCart: {} };
+    case DELETE_PRODUCT_FROM_CART:
+      return { ...state, currentCart: action.cart };
     default:
       return state;
   }
