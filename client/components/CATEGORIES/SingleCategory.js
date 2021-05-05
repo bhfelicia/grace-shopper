@@ -1,11 +1,11 @@
-import React, { Component } from "react";
-import { Link } from "react-router-dom";
-import { connect } from "react-redux";
+import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
 
 import {
   destroyCategory,
   fetchCategory,
-} from "../../store/thunks/categoryThunk";
+} from '../../store/thunks/categoryThunk';
 
 class SingleCategory extends Component {
   componentDidMount() {
@@ -17,9 +17,9 @@ class SingleCategory extends Component {
       .selectedCategory.products;
     if (selectedCategory_products) {
       return (
-        <div>
+        <div id="singleCategoryView">
           {selectedCategory_products.map((product) => (
-            <div key={`${product.id}`}>
+            <div className="singleProductCategoryView" key={`${product.id}`}>
               <Link to={`/products/${product.id}`}>
                 <img src={product.image}></img>
                 <h2>{product.name}</h2>

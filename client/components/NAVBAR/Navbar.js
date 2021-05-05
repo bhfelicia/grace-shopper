@@ -69,32 +69,38 @@ class Nav extends Component {
             </motion.div>
           </Link>
           <SearchBar />
-          <div>
+          <div className="rightNavbar">
             <Link style={{ textDecoration: "none" }} to="/settings">
-              <Emoji text="&#128736;&#65039;" />
+              <motion.div
+                whileHover={{ scale: 1.3 }}
+                whileTap={{ scale: [0.9, 1.05] }}
+              >
+                <Emoji text="&#128736;&#65039;" />
+              </motion.div>
             </Link>
-            <Link style={{ textDecoration: "none" }} to="/cart">
-              <Emoji text=":shopping_cart:" />
-            </Link>
-            {"   |   "}
-            <Link
-              style={{ textDecoration: "none" }}
-              onClick={() => {
-                this.logout();
-                this.setState({ loggedInUser: {} });
-              }}
-              to="/login"
+            <motion.div
+              whileHover={{ scale: 1.3 }}
+              whileTap={{ scale: [0.9, 1.05] }}
             >
-              Logout
-            </Link>
-            {"   |   "}
-            <Link
-              style={{ textDecoration: "none" }}
-              to={`/users/${+this.props.userReducer.selectedUser.id}/edit`}
+              <Link style={{ textDecoration: "none" }} to="/cart">
+                <Emoji text=":shopping_cart:" />
+              </Link>
+            </motion.div>
+            <motion.div
+              whileHover={{ scale: 1.3 }}
+              whileTap={{ scale: [0.9, 1.05] }}
             >
-              Profile
-              <Emoji text=":v:" />
-            </Link>
+              <Link
+                style={{ textDecoration: "none" }}
+                onClick={() => {
+                  this.logout();
+                  this.setState({ loggedInUser: {} });
+                }}
+                to="/login"
+              >
+                <Emoji text=":v:" />
+              </Link>
+            </motion.div>
           </div>
         </nav>
       );
@@ -113,28 +119,30 @@ class Nav extends Component {
             </motion.div>
           </Link>
           <SearchBar />
-          <div>
-            <Link style={{ textDecoration: "none" }} to="/cart">
-              <Emoji text=":shopping_cart:" />
-            </Link>
-            {"   |   "}
-            <Link
-              style={{ textDecoration: "none" }}
-              onClick={() => {
-                this.logout();
-                this.setState({ loggedInUser: {} });
-              }}
-              to="/login"
+          <div className="rightNavbar">
+            <motion.div
+              whileHover={{ scale: 1.3 }}
+              whileTap={{ scale: [0.9, 1.05] }}
             >
-              Logout
-            </Link>
-            {"   |   "}
-            <Link
-              style={{ textDecoration: "none" }}
-              to={`/users/${+this.props.userReducer.selectedUser.id}/edit`}
+              <Link style={{ textDecoration: "none" }} to="/cart">
+                <Emoji text=":shopping_cart:" />
+              </Link>
+            </motion.div>
+            <motion.div
+              whileHover={{ scale: 1.3 }}
+              whileTap={{ scale: [0.9, 1.05] }}
             >
-              Profile
-            </Link>
+              <Link
+                style={{ textDecoration: "none" }}
+                onClick={() => {
+                  this.logout();
+                  this.setState({ loggedInUser: {} });
+                }}
+                to="/login"
+              >
+                &nbsp;Logout
+              </Link>
+            </motion.div>
           </div>
         </nav>
       );
@@ -150,19 +158,31 @@ class Nav extends Component {
             </motion.div>
           </Link>
           <SearchBar />
-          <div>
-            <Link style={{ textDecoration: "none" }} to="/cart">
-              <Emoji text=":shopping_cart:" />
-            </Link>
-            {"   |   "}
-            <Link style={{ textDecoration: "none" }} to="/login">
-              <Emoji text=":key:" />
-            </Link>
-            {"   |   "}
-            <Link style={{ textDecoration: "none" }} to="/signup">
-              {" "}
-              Sign Up
-            </Link>
+          <div className="rightNavbar">
+            <motion.div
+              whileHover={{ scale: 1.3 }}
+              whileTap={{ scale: [0.9, 1.05] }}
+            >
+              <Link style={{ textDecoration: "none" }} to="/cart">
+                <Emoji text=":shopping_cart:" />
+              </Link>
+            </motion.div>
+            <motion.div
+              whileHover={{ scale: 1.3 }}
+              whileTap={{ scale: [0.9, 1.05] }}
+            >
+              <Link style={{ textDecoration: "none" }} to="/login">
+                <Emoji text=":key:" />
+              </Link>
+            </motion.div>
+            <motion.div
+              whileHover={{ scale: 1.3 }}
+              whileTap={{ scale: [0.9, 1.05] }}
+            >
+              <Link style={{ textDecoration: "none" }} to="/signup">
+                <Emoji text=":writing_hand:" />
+              </Link>
+            </motion.div>
           </div>
         </nav>
       );

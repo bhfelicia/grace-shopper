@@ -41,42 +41,44 @@ class AllCategories extends Component {
   render() {
     const { categories } = this.props.categoryReducer;
     return (
-      <div id="all-categories">
+      <div>
         <Link to={'/createCategory'}>Add Category</Link>
-        {categories.map((category) => {
-          if (this.state.loggedInUser.isAdmin) {
-            return (
-              <div key={category.id}>
-                <Link
-                  to={`/categories/${category.id}`}
-                  style={{ textDecoration: 'none' }}
-                >
-                  <h2>{category.name}</h2>
-                </Link>
-                <div>
-                  <button
-                    onClick={() => this.deleteCategoryHandler(category)}
-                    value={category}
+        <div id="all-categories">
+          {categories.map((category) => {
+            if (this.state.loggedInUser.isAdmin) {
+              return (
+                <div key={category.id}>
+                  <Link
+                    to={`/categories/${category.id}`}
+                    style={{ textDecoration: 'none' }}
                   >
-                    delete
-                  </button>
-                  <Link to={`/categories/${category.id}/edit`}>edit</Link>
+                    <h2>{category.name}</h2>
+                  </Link>
+                  <div>
+                    <button
+                      onClick={() => this.deleteCategoryHandler(category)}
+                      value={category}
+                    >
+                      delete
+                    </button>
+                    <Link to={`/categories/${category.id}/edit`}>edit</Link>
+                  </div>
                 </div>
-              </div>
-            );
-          } else {
-            return (
-              <div key={category.id}>
-                <Link
-                  to={`/categories/${category.id}`}
-                  style={{ textDecoration: 'none' }}
-                >
-                  <h2>{category.name}</h2>
-                </Link>
-              </div>
-            );
-          }
-        })}
+              );
+            } else {
+              return (
+                <div key={category.id}>
+                  <Link
+                    to={`/categories/${category.id}`}
+                    style={{ textDecoration: 'none' }}
+                  >
+                    <h2>{category.name}</h2>
+                  </Link>
+                </div>
+              );
+            }
+          })}
+        </div>
       </div>
     );
   }
