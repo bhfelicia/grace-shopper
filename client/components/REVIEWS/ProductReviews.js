@@ -75,13 +75,13 @@ class ProductReviews extends Component {
           <h1>
             <Emoji text=":confused:" />
           </h1>
-          <h3>Looks like no one's reviewed this product yet.</h3>
+          <h3>looks like no one's reviewed this product yet.</h3>
         </div>
       );
     } else {
       return (
         <div>
-          <h1>Reviews</h1>
+          <h1>reviews</h1>
           <div id="reviewsTop">
             {this.props.reviewReducer.reviews.map((review) => (
               <div key={review.id || review.newReview.id}>
@@ -89,7 +89,7 @@ class ProductReviews extends Component {
                   {review.rating
                     ? this.rating(review.rating)
                     : this.rating(review.newReview.rating)}
-                  <h4>Review from {review.user.fullName}</h4>
+                  <h4>review from {review.user.fullName}</h4>
                   <h5>{review.title}</h5>
                   <p>{review.description || review.newReview.description}</p>
                 </div>
