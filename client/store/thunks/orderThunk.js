@@ -7,6 +7,7 @@ import {
   loadCart,
   deleteCart,
   editOrder,
+  deleteProductFromCart,
 } from '../actionCreators/orderActionCreators';
 
 const fetchOrders = () => {
@@ -52,13 +53,36 @@ const addToCart = (productId, cartId, productExists) => {
   };
 };
 
-const deleteFromCart = (productId, cartId, productExists) => {
+const addOneToCart = (productId, cartId) => {
+  //LEFT OFF HERE!!!!!!!!!!!!!!!!!!!!!!
   // return async (dispatch) => {
   //   const { data: updatedCart } = await axios.put(`/api/orders/cart/add`, {
   //     data: { productId, cartId, productExists },
   //   });
   //   dispatch(editCart(updatedCart));
   // };
+};
+
+const deleteFromCart = (singleItem, productId, orderId) => {
+  return async (dispatch) => {
+    if (singleItem) {
+      await axios.put('/api/orders/cart/product/deleteSingleItem', {
+        productId: productId,
+        orderId: orderId,
+      });
+    } else {
+      await axios.delete(`/api/orders/cart/product/delete`, {
+        data: {
+          productId: productId,
+          orderId: orderId,
+        },
+      });
+    }
+    const { data: updatedCart } = await axios.get(`/api/orders/user/cart`, {
+      headers: { authorization: window.localStorage.getItem('token') },
+    });
+    dispatch(deleteProductFromCart(updatedCart));
+  };
 };
 
 const fetchCart = () => {
@@ -81,9 +105,10 @@ export {
   fetchOrders,
   addCart,
   addToCart,
+  addOneToCart,
   destroyCart,
   fetchCart,
   fetchOrder,
   updateOrder,
-  deleteCart,
+  deleteFromCart,
 };
