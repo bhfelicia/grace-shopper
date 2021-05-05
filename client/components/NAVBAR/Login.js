@@ -93,6 +93,7 @@ class Login extends React.Component {
                 Sign In
               </button>
             </div>
+            <hr></hr>
             <a href={`/api/auth/oauth`}>Login With Github</a>
           </form>
         </div>

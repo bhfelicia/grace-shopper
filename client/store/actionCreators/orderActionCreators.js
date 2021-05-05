@@ -6,6 +6,7 @@ import {
   LOAD_CART,
   DELETE_CART,
   UPDATE_ORDER,
+  DELETE_PRODUCT_FROM_CART,
 } from '../actions/index';
 
 export const loadOrders = (orders) => {
@@ -53,6 +54,13 @@ export const loadCart = (cart) => {
 export const deleteCart = (cart) => {
   return {
     type: DELETE_CART,
+    cart,
+  };
+};
+
+export const deleteProductFromCart = (cart) => {
+  return {
+    type: DELETE_PRODUCT_FROM_CART,
     cart,
   };
 };

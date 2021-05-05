@@ -21,6 +21,7 @@ export const UPDATE_ORDER = 'UPDATE_ORDER';
 export const CREATE_CART = 'CREATE_CART';
 export const EDIT_CART = 'EDIT_CART';
 export const DELETE_CART = 'DELETE_CART';
+export const DELETE_PRODUCT_FROM_CART = 'DELETE_PRODUCT_FROM_CART';
 export const LOAD_CART = 'LOAD_CART';
 
 export const LOAD_ORDER_PRODUCT = 'LOAD_ORDER_PRODUCT';
