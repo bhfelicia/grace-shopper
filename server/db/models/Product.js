@@ -27,7 +27,7 @@ const Product = db.define("product", {
   },
   image: {
     type: Sequelize.TEXT,
-    defaultValue: "https://images1.novica.net/pictures/7/p361950_2a_400.jpg",
+    defaultValue: "https://imgur.com/Sk9L2ah.png",
   },
   inventory: {
     type: Sequelize.INTEGER,
