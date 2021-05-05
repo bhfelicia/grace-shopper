@@ -54,6 +54,12 @@ const addToCart = (productId, cartId, productExists) => {
 };
 
 const addOneToCart = (productId, cartId) => {
+  return async (dispatch) => {
+    const { data: updatedCart } = await axios.put('/api/orders/cart/addOne', {
+      data: { productId, cartId },
+    });
+    dispatch(editCart(updatedCart));
+  };
   //LEFT OFF HERE!!!!!!!!!!!!!!!!!!!!!!
   // return async (dispatch) => {
   //   const { data: updatedCart } = await axios.put(`/api/orders/cart/add`, {
