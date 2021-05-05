@@ -4,7 +4,7 @@ import {
   CREATE_PRODUCT,
   EDIT_PRODUCT,
   DELETE_PRODUCT,
-  FILTER_PRODUCT,
+  FILTER_PRODUCTS,
 } from "../actions/index";
 
 export const loadProducts = (products) => {
