@@ -4,6 +4,9 @@ import { Link } from "react-router-dom";
 import SearchBar from "./SearchBar";
 import { fetchUsers } from "../../store/thunks/userThunk";
 
+import { motion } from "framer-motion";
+import Emoji from "react-emoji-render";
+
 import axios from "axios";
 
 class Nav extends Component {
@@ -58,16 +61,20 @@ class Nav extends Component {
       return (
         <nav className="nav-container">
           <Link style={{ textDecoration: "none" }} to="/">
-            Home
+            <motion.div
+              whileHover={{ scale: 1.3 }}
+              whileTap={{ scale: [0.9, 1.05] }}
+            >
+              <Emoji text=":house:" />
+            </motion.div>
           </Link>
           <SearchBar />
           <div>
             <Link style={{ textDecoration: "none" }} to="/settings">
-              Settings
+              <Emoji text="&#128736;&#65039;" />
             </Link>
-            {"   |   "}
             <Link style={{ textDecoration: "none" }} to="/cart">
-              Cart
+              <Emoji text=":shopping_cart:" />
             </Link>
             {"   |   "}
             <Link
@@ -86,6 +93,7 @@ class Nav extends Component {
               to={`/users/${+this.props.userReducer.selectedUser.id}/edit`}
             >
               Profile
+              <Emoji text=":v:" />
             </Link>
           </div>
         </nav>
@@ -97,12 +105,17 @@ class Nav extends Component {
       return (
         <nav className="nav-container">
           <Link style={{ textDecoration: "none" }} to="/">
-            Home
+            <motion.div
+              whileHover={{ scale: 1.3 }}
+              whileTap={{ scale: [0.9, 1.05] }}
+            >
+              <Emoji text=":house:" />
+            </motion.div>
           </Link>
           <SearchBar />
           <div>
             <Link style={{ textDecoration: "none" }} to="/cart">
-              Cart
+              <Emoji text=":shopping_cart:" />
             </Link>
             {"   |   "}
             <Link
@@ -129,16 +142,21 @@ class Nav extends Component {
       return (
         <nav className="nav-container">
           <Link style={{ textDecoration: "none" }} to="/">
-            Home
+            <motion.div
+              whileHover={{ scale: 1.3 }}
+              whileTap={{ scale: [0.9, 1.05] }}
+            >
+              <Emoji text=":house:" />
+            </motion.div>
           </Link>
           <SearchBar />
           <div>
             <Link style={{ textDecoration: "none" }} to="/cart">
-              Cart
+              <Emoji text=":shopping_cart:" />
             </Link>
             {"   |   "}
             <Link style={{ textDecoration: "none" }} to="/login">
-              Login
+              <Emoji text=":key:" />
             </Link>
             {"   |   "}
             <Link style={{ textDecoration: "none" }} to="/signup">

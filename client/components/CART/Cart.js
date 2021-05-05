@@ -51,7 +51,13 @@ class Cart extends Component {
               <li key={product.id}>
                 <img src={product.image}></img>
                 <hr />
-                <button>+</button>
+                <button
+                  onClick={() =>
+                    this.addProductToCart(product.id, currentCart.id)
+                  }
+                >
+                  +
+                </button>
                 {product.order_product.product_quantity}
                 <button
                   onClick={() => {
@@ -103,7 +109,13 @@ class Cart extends Component {
               <li key={product.id}>
                 <img src={product.image}></img>
                 <hr />
-                <button>+</button>
+                <button
+                  onClick={() =>
+                    this.addProductToCart(product.id, currentCart.id)
+                  }
+                >
+                  +
+                </button>
                 {product.order_product.product_quantity}
                 <button
                   onClick={() => {

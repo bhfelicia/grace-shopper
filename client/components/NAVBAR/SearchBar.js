@@ -39,7 +39,7 @@ class SearchBar extends Component {
   render() {
     return (
       <div>
-        <label>Search </label>
+        {/* <label>Search </label> */}
         <input
           type="search"
           placeholder="search for item"
