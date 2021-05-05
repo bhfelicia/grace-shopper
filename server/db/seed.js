@@ -166,8 +166,7 @@ const seed = async () => {
       price: 30,
       size: "large",
       categoryId: plantPots.id,
-      image:
-        "https://images.thdstatic.com/productImages/7a1d27cc-94e7-41ba-80f4-bb6024ff0d9c/svn/blue-trendspot-plant-pots-cr10467-12-64_600.jpg",
+      image: "https://imgur.com/UKUoZKh.png",
     });
     const classic = await Product.create({
       name: "Classic",
@@ -212,8 +211,7 @@ const seed = async () => {
       price: 30,
       size: "small",
       categoryId: saltAndPepper.id,
-      image:
-        "https://cdn.shopify.com/s/files/1/0299/2645/7484/products/35IO_4e1cc50c-e99e-4a5d-bbdd-5317c99654e9.jpg",
+      image: "https://imgur.com/ALsRsWW.png",
     });
     const peasInAPod = await Product.create({
       name: "Peas in a Pod",
@@ -222,8 +220,7 @@ const seed = async () => {
       price: 35,
       size: "small",
       categoryId: saltAndPepper.id,
-      image:
-        "https://cdn11.bigcommerce.com/s-xnh7ai9k/images/stencil/2048x2048/products/4173/18606/OH8PJ0346-002__49021.1544825976.jpg",
+      image: "https://imgur.com/yvF98Dc.png",
     });
     const hootyFriends = await Product.create({
       name: "Hooty Friends",
@@ -232,8 +229,7 @@ const seed = async () => {
       price: 40,
       size: "small",
       categoryId: saltAndPepper.id,
-      image:
-        "https://cdn.shopify.com/s/files/1/0376/2949/products/29688-Salt-Pepper_1024x.jpeg",
+      image: "https://imgur.com/SwPW5ZX.png",
     });
     const seaFallin = await Product.create({
       name: "Sea Fallin'",

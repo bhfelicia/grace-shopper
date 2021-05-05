@@ -1,9 +1,12 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import { Link } from "react-router-dom";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 
-import { fetchProducts } from "../../store/thunks/productThunk";
-import { addCart, addToCart, fetchCart } from "../../store/thunks/orderThunk";
+import { fetchProducts } from '../../store/thunks/productThunk';
+import { addCart, addToCart, fetchCart } from '../../store/thunks/orderThunk';
+
+import { motion } from 'framer-motion';
+import Emoji from 'react-emoji-render';
 
 class AllProducts extends Component {
   constructor(props) {
@@ -16,7 +19,7 @@ class AllProducts extends Component {
     await this.props.getCart();
   }
   addToCart(productId) {
-    console.log("current cart is: ", this.props.orderReducer.currentCart);
+    console.log('current cart is: ', this.props.orderReducer.currentCart);
     const cartId = this.props.orderReducer.currentCart.id;
     if (!this.props.orderReducer.currentCart) {
       this.props.createCart(productId);
@@ -37,21 +40,33 @@ class AllProducts extends Component {
     const { products } = this.props.productReducer;
     const { addToCart } = this;
     return (
-      <div id="all-products">
+      <motion.div id="all-products" animate={{ scale: [0, 1] }}>
         {products
-          .filter((product) => product.status === "active")
+          .filter((product) => product.status === 'active')
           .map((product) => (
-            <div key={`${product.id}`}>
-              <Link to={`/products/${product.id}`}>
-                <img src={product.image}></img>
-                <h2>{product.name}</h2>
-                <h3>${product.price}</h3>
-                <div></div>
-              </Link>
-              <button onClick={() => addToCart(product.id)}>Add To Cart</button>
+            <div key={`${product.id}`} className="singleProduct">
+              <motion.div
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: [0.9, 1.05] }}
+              >
+                <Link to={`/products/${product.id}`}>
+                  <img src={product.image}></img>
+                  <h2>{product.name}</h2>
+                  <h3>${product.price}</h3>
+                  <div></div>
+                </Link>
+              </motion.div>
+              <motion.button
+                className="cartButton"
+                onClick={() => addToCart(product.id)}
+                whileHover={{ scale: 1.3 }}
+                whileTap={{ scale: [0.9, 1.05] }}
+              >
+                Add To Cart
+              </motion.button>
             </div>
           ))}
-      </div>
+      </motion.div>
     );
   }
 }

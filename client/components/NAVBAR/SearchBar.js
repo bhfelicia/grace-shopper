@@ -19,9 +19,9 @@ import { fetchProducts, filterProducts } from "../../store/thunks/productThunk";
 class SearchBar extends Component {
   constructor(props) {
     super(props);
-    // this.state = {
-    //   item: "",
-    // };
+    this.state = {
+      item: "",
+    };
     this.searchInputHandler = this.searchInputHandler.bind(this);
     // this.searchSubmitHandler = this.searchSubmitHandler.bind(this);
   }
@@ -39,7 +39,7 @@ class SearchBar extends Component {
   render() {
     return (
       <div>
-        <label>Search </label>
+        {/* <label>Search </label> */}
         <input
           type="search"
           placeholder="search for item"
