@@ -6,10 +6,11 @@ import { fetchProducts } from "../../store/thunks/productThunk";
 import { addCart, addToCart, fetchCart } from "../../store/thunks/orderThunk";
 
 class AllProducts extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.addToCart = this.addToCart.bind(this);
   }
+
   async componentDidMount() {
     await this.props.getProducts();
     await this.props.getCart();

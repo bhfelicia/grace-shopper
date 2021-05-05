@@ -5,6 +5,7 @@ import {
   createProduct,
   editProduct,
   deleteProduct,
+  findProducts,
 } from "../actionCreators/productActionCreators";
 
 //added delete route to product routes, check with team
@@ -39,6 +40,20 @@ const destroyProduct = (product) => {
   };
 };
 
+const filterProducts = (productName) => {
+  return async (dispatch) => {
+    //I apparently have to pass it in as a variable with the product as an object, maybe because thats how it will get accessed later?
+    const productObj = { productName };
+
+    const { data: filteredProducts } = await axios.post(
+      `/api/products/search`,
+      productObj
+    );
+
+    dispatch(findProducts(filteredProducts));
+  };
+};
+
 const updateProduct = (product, history) => {
   return async (dispatch) => {
     const { data: updatedProduct } = await axios.put(
@@ -56,4 +71,5 @@ export {
   addProduct,
   destroyProduct,
   updateProduct,
+  filterProducts,
 };
