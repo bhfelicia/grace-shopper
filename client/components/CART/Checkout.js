@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import axios from "axios";
 import StripeCheckout from "react-stripe-checkout";
-import { destroyCart } from "../../store/thunks/orderThunk";
+import { destroyCart, checkoutOrder } from "../../store/thunks/orderThunk";
 
 // const pubStripeKey = process.env.STRIPE_PUBLIC_KEY;
 class Checkout extends Component {
@@ -31,8 +31,8 @@ class Checkout extends Component {
 
       if (response.status === 200) {
         alert("Thank you for your purchase");
-        // console.log("cart id? ", this.props.cart.id);
-        // this.props.deleteCart(this.props.cart.id);
+        console.log("cart id? ", this.props.cart.id);
+        this.props.orderCheckout(this.props.cart.id);
       } else {
         alert(
           "There was an error placing your order. Please re-enter your information to try again."
@@ -68,7 +68,7 @@ const mapStateToProps = ({ userReducer, orderReducer }) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  deleteCart: (id) => dispatch(destroyCart(id)),
+  orderCheckout: (id) => dispatch(checkoutOrder(id)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Checkout);

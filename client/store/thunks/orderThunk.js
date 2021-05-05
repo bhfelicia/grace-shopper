@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios from "axios";
 import {
   loadOrders,
   loadOrder,
@@ -8,11 +8,11 @@ import {
   deleteCart,
   editOrder,
   deleteProductFromCart,
-} from '../actionCreators/orderActionCreators';
+} from "../actionCreators/orderActionCreators";
 
 const fetchOrders = () => {
   return async (dispatch) => {
-    const { data: orders } = await axios.get('/api/orders');
+    const { data: orders } = await axios.get("/api/orders");
     dispatch(loadOrders(orders));
   };
 };
@@ -31,6 +31,18 @@ const updateOrder = (newOrderData) => {
       newOrderData
     );
     dispatch(editOrder(order));
+  };
+};
+
+const checkoutOrder = (orderId) => {
+  return async (dispatch) => {
+    const { data: cartToOrder } = await axios.put(
+      `/api/orders/checkout/${orderId}`,
+      {
+        data: { id: orderId },
+      }
+    );
+    dispatch(editCart(cartToOrder));
   };
 };
 
@@ -55,7 +67,7 @@ const addToCart = (productId, cartId, productExists) => {
 
 const addOneToCart = (productId, cartId) => {
   return async (dispatch) => {
-    const { data: updatedCart } = await axios.put('/api/orders/cart/addOne', {
+    const { data: updatedCart } = await axios.put("/api/orders/cart/addOne", {
       data: { productId, cartId },
     });
     dispatch(editCart(updatedCart));
@@ -72,7 +84,7 @@ const addOneToCart = (productId, cartId) => {
 const deleteFromCart = (singleItem, productId, orderId) => {
   return async (dispatch) => {
     if (singleItem) {
-      await axios.put('/api/orders/cart/product/deleteSingleItem', {
+      await axios.put("/api/orders/cart/product/deleteSingleItem", {
         productId: productId,
         orderId: orderId,
       });
@@ -85,7 +97,7 @@ const deleteFromCart = (singleItem, productId, orderId) => {
       });
     }
     const { data: updatedCart } = await axios.get(`/api/orders/user/cart`, {
-      headers: { authorization: window.localStorage.getItem('token') },
+      headers: { authorization: window.localStorage.getItem("token") },
     });
     dispatch(deleteProductFromCart(updatedCart));
   };
@@ -94,15 +106,15 @@ const deleteFromCart = (singleItem, productId, orderId) => {
 const fetchCart = () => {
   return async (dispatch) => {
     const { data: cart } = await axios.get(`/api/orders/user/cart`, {
-      headers: { authorization: window.localStorage.getItem('token') },
+      headers: { authorization: window.localStorage.getItem("token") },
     });
     dispatch(loadCart(cart));
   };
 };
 
-const destroyCart = (cart) => {
+const destroyCart = (cartId) => {
   return async (dispatch) => {
-    await axios.delete(`/api/orders/${cart.id}`);
+    const { data: cart } = await axios.delete(`/api/orders/${cartId}`);
     dispatch(deleteCart(cart));
   };
 };
@@ -117,4 +129,5 @@ export {
   fetchOrder,
   updateOrder,
   deleteFromCart,
+  checkoutOrder,
 };
