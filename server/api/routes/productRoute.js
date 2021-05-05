@@ -14,6 +14,7 @@ router.get("/", async (req, res, next) => {
   }
 });
 
+//test route don't use please
 // router.get("/search", async (req, res, next) => {
 //   try {
 //     const testProduct = await Product.findAll({
