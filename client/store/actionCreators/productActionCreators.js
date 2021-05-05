@@ -4,7 +4,8 @@ import {
   CREATE_PRODUCT,
   EDIT_PRODUCT,
   DELETE_PRODUCT,
-} from '../actions/index';
+  FILTER_PRODUCT,
+} from "../actions/index";
 
 export const loadProducts = (products) => {
   return {
@@ -30,6 +31,14 @@ export const editProduct = (product) => {
     product,
   };
 };
+
+export const findProducts = (products) => {
+  return {
+    type: FILTER_PRODUCTS,
+    products,
+  };
+};
+
 export const deleteProduct = (product) => {
   return {
     type: DELETE_PRODUCT,

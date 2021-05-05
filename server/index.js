@@ -77,6 +77,7 @@ app.get("/github/callback", async (req, res, next) => {
     res.send(`<html>
       <head>
       <script>
+      window.localStorage.setItem('guest', 'false');
       window.localStorage.setItem('token', '${jwtToken}');
       window.document.location = '/#/login'; 
       </script>

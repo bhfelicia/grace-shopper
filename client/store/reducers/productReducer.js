@@ -9,7 +9,8 @@ import {
   CREATE_PRODUCT,
   EDIT_PRODUCT,
   DELETE_PRODUCT,
-} from '../actions/index';
+  FILTER_PRODUCTS,
+} from "../actions/index";
 
 const productReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -23,6 +24,8 @@ const productReducer = (state = initialState, action) => {
         products: [...state.products, action.product],
         selectedProduct: action.product,
       };
+    // case FILTER_PRODUCTS:
+    //   return state;
     case EDIT_PRODUCT:
       const theProducts = state.products.filter(
         (product) => product.id !== action.product.id

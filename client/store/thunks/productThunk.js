@@ -5,6 +5,7 @@ import {
   createProduct,
   editProduct,
   deleteProduct,
+  findProducts,
 } from "../actionCreators/productActionCreators";
 
 //added delete route to product routes, check with team
@@ -39,6 +40,15 @@ const destroyProduct = (product) => {
   };
 };
 
+const filterProducts = (productName) => {
+  return async (dispatch) => {
+    const { data: filteredProducts } = await axios.get(`/api/products/search`, {
+      productName,
+    });
+    dispatch(findProducts(filteredProducts));
+  };
+};
+
 const updateProduct = (product, history) => {
   return async (dispatch) => {
     const { data: updatedProduct } = await axios.put(
@@ -56,4 +66,5 @@ export {
   addProduct,
   destroyProduct,
   updateProduct,
+  filterProducts,
 };
