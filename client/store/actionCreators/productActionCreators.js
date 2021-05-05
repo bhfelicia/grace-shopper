@@ -32,10 +32,10 @@ export const editProduct = (product) => {
   };
 };
 
-export const findProducts = (products) => {
+export const findProducts = (productName) => {
   return {
     type: FILTER_PRODUCTS,
-    products,
+    productName,
   };
 };
 

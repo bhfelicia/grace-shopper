@@ -42,17 +42,14 @@ const destroyProduct = (product) => {
 
 const filterProducts = (productName) => {
   return async (dispatch) => {
-    // const { data: filteredProducts } = await axios.get(`/api/products/search`, {
-    //   productName,
-    // });
-
     //I apparently have to pass it in as a variable with the product as an object, maybe because thats how it will get accessed later?
     const productObj = { productName };
 
-    const { data: filteredProducts } = await axios.get(
+    const { data: filteredProducts } = await axios.post(
       `/api/products/search`,
       productObj
     );
+
     dispatch(findProducts(filteredProducts));
   };
 };

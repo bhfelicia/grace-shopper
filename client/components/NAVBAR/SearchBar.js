@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { fetchProducts, filterProducts } from "../../store/thunks/productThunk";
 
 // // onclick()
 // const searchBar = ()=>{
@@ -22,38 +23,42 @@ class SearchBar extends Component {
       item: "",
     };
     this.searchInputHandler = this.searchInputHandler.bind(this);
-    this.searchSubmitHandler = this.searchSubmitHandler.bind(this);
+    // this.searchSubmitHandler = this.searchSubmitHandler.bind(this);
   }
 
-  searchInputHandler(event) {
-    this.setState({
-      [event.target.name]: event.target.value,
-    });
-  }
-  //make action filtered product
-  //will filter the current products in the state with just the one we are looking for
-  //
-  searchSubmitHandler(event) {
-    event.preventDefault();
-    console.log(this.state);
+  async searchInputHandler(event) {
+    const value = event.target.value;
+    console.log(value);
+    const { getFilteredProducts } = this.props;
+    await getFilteredProducts(value);
+    if (value === "") {
+      await this.props.getProducts();
+    }
   }
 
   render() {
     return (
       <div>
-        <form onSubmit={this.searchSubmitHandler}>
-          <label>Search </label>
-          <input
-            type="search"
-            placeholder="search for item"
-            name="item"
-            value={this.state.item}
-            onChange={this.searchInputHandler}
-          />
-        </form>
+        <label>Search </label>
+        <input
+          type="search"
+          placeholder="search for item"
+          name="item"
+          // value={this.state.item}
+          onChange={this.searchInputHandler}
+        />
       </div>
     );
   }
 }
 
-export default SearchBar;
+const mapStateToProps = ({ productReducer }) => ({ productReducer });
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    getFilteredProducts: (productName) => dispatch(filterProducts(productName)),
+    getProducts: () => dispatch(fetchProducts()),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(SearchBar);

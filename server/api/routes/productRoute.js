@@ -6,6 +6,7 @@ const User = require("../../db/models/User");
 //get routes
 router.get("/", async (req, res, next) => {
   try {
+    //console.log("hello from products");
     const products = await Product.findAll();
     res.status(200).send(products);
   } catch (error) {
@@ -13,17 +14,23 @@ router.get("/", async (req, res, next) => {
   }
 });
 
+// router.get("/search", async (req, res, next) => {
+//   try {
+//     const testProduct = await Product.findAll({
+//       where: {
+//         name: "Flower Pop",
+//       },
+//     });
+//     res.status(200).send(testProduct);
+//   } catch (error) {
+//     next(error);
+//   }
+// });
+
 router.get("/:id", async (req, res, next) => {
   try {
     const product = await Product.findByPk(req.params.id);
     res.status(200).send(product);
-  } catch (error) {
-    next(error);
-  }
-});
-
-router.get("/search", async (req, res, next) => {
-  try {
   } catch (error) {
     next(error);
   }
@@ -56,6 +63,15 @@ router.post("/", async (req, res, next) => {
       inventory: +inventory,
     });
     res.send(newProduct).status(201);
+  } catch (error) {
+    next(error);
+  }
+});
+//using this route to get product name to filter in the filter part of the product reducer
+router.post("/search", async (req, res, next) => {
+  try {
+    const { productName } = req.body;
+    res.status(200).send(productName);
   } catch (error) {
     next(error);
   }
