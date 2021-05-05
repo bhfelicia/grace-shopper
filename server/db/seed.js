@@ -48,93 +48,93 @@ const seed = async () => {
     });
     //category data
     const glazed = await Category.create({
-      name: "Glazed",
+      name: "glazed",
     });
     const unglazed = await Category.create({
-      name: "Unglazed",
+      name: "unglazed",
     });
     const painted = await Category.create({
-      name: "Painted",
+      name: "painted",
     });
     const vases = await Category.create({
-      name: "Vases",
+      name: "vases",
     });
     const bowls = await Category.create({
-      name: "Bowls",
+      name: "bowls",
     });
     const mugs = await Category.create({
-      name: "Mugs",
+      name: "mugs",
     });
     const plantPots = await Category.create({
-      name: "Plant pots",
+      name: "plant pots",
     });
     const teapots = await Category.create({
-      name: "Teapots",
+      name: "teapots",
     });
     const saltAndPepper = await Category.create({
-      name: "Salt and Pepper Shakers",
+      name: "salt and pepper shakers",
     });
     const sculptures = await Category.create({
-      name: "Sculptures",
+      name: "sculptures",
     });
     //product data
     const flowerPop = await Product.create({
-      name: "Flower Pop",
+      name: "flower pop",
       description:
-        "This bright vase colorfully graces any table with style and is beautiful, with or without flowers!",
+        "this bright vase colorfully graces any table with style and is beautiful, with or without flowers!",
       price: 100,
       size: "medium",
       categoryId: vases.id,
     });
     const becomingBlue = await Product.create({
-      name: "Blue Becomes Her",
+      name: "blue becomes her",
       description:
-        "This unique centerpiece in soothing blue is sure to charm your guests and warm your space.",
+        "this unique centerpiece in soothing blue is sure to charm your guests and warm your space.",
       price: 150,
       size: "medium",
       categoryId: vases.id,
       image: "https://imgur.com/amaUzq7.png",
     });
     const groovyLizard = await Product.create({
-      name: "Groovy Lizard",
+      name: "groovy lizard",
       description:
-        "Let your funky flair show with this bright red vase with a hand-built lizard perched atop. Guaranteed to add spunk to any room!",
+        "let your funky flair show with this bright red vase with a hand-built lizard perched atop. guaranteed to add spunk to any room!",
       price: 200,
       size: "medium",
       categoryId: vases.id,
       image: "https://imgur.com/ucsbxMV.png",
     });
     const honeycomb = await Product.create({
-      name: "Honeycomb",
+      name: "honeycomb",
       description:
-        "This bright yellow bowl with hexagonal cutouts will elevate your space and entice you to reach for a fruit when you're looking for a snack.",
+        "this bright yellow bowl with hexagonal cutouts will elevate your space and entice you to reach for a fruit when you're looking for a snack.",
       price: 90,
       size: "medium",
       categoryId: bowls.id,
       image: "https://imgur.com/balfjQb.png",
     });
     const delilah = await Product.create({
-      name: "Delilah",
+      name: "delilah",
       description:
-        "Broad strokes in earthy tones make this bowl perfect for soup, salad, a grain bowl, cereal with milk... your appetite's the limit!",
+        "broad strokes in earthy tones make this bowl perfect for soup, salad, a grain bowl, cereal with milk... your appetite's the limit!",
       price: 68,
       size: "small",
       categoryId: bowls.id,
       image: "https://imgur.com/c2JEWHj.png",
     });
     const sereneGreen = await Product.create({
-      name: "Serene Green",
+      name: "serene green",
       description:
-        "Add some zen to your morning routine with this calming, hand-crafted green mug.",
+        "add some zen to your morning routine with this calming, hand-crafted green mug.",
       price: 40,
       size: "small",
       categoryId: mugs.id,
       image: "https://imgur.com/2bIObBw.png",
     });
     const bubblingUp = await Product.create({
-      name: "Bubbling Up",
+      name: "bubbling Up",
       description:
-        "Express your bubbly personality with this effervescent mug that's foamy like the crash of a wave.",
+        "express your bubbly personality with this effervescent mug that's foamy like the crash of a wave.",
       price: 45,
       size: "small",
       categoryId: mugs.id,
@@ -142,117 +142,117 @@ const seed = async () => {
     });
 
     const coolSplash = await Product.create({
-      name: "Cool Splash",
+      name: "cool splash",
       description:
-        "Scenes of island beaches with crystal-clear water will come to mind when admiring the wash of cool palettes on this mug.",
+        "scenes of island beaches with crystal-clear water will come to mind when admiring the wash of cool palettes on this mug.",
       price: 50,
       size: "small",
       categoryId: mugs.id,
       image: "https://i.imgur.com/6zKzojO.png",
     });
     const downToEarth = await Product.create({
-      name: "Down to Earth",
+      name: "down to earth",
       description:
-        "Give your plant a new face with this small, quirky plant pot with plenty of personality.",
+        "give your plant a new face with this small, quirky plant pot with plenty of personality.",
       price: 55,
       size: "small",
       categoryId: plantPots.id,
       image: "https://imgur.com/SHG1Pqo.png",
     });
     const royal = await Product.create({
-      name: "Royal",
+      name: "royal",
       description:
-        "Everyone deserves to be treated like royalty sometimes - yes, even your plant! She's queen every day in this rich blue pot.",
+        "everyone deserves to be treated like royalty sometimes - yes, even your plant! she's queen every day in this rich blue pot.",
       price: 30,
       size: "large",
       categoryId: plantPots.id,
       image: "https://imgur.com/UKUoZKh.png",
     });
     const classic = await Product.create({
-      name: "Classic",
+      name: "classic",
       description:
-        "You can't go wrong with this classic, cozy terracotta home for your beloved plant. Good for indoors and outdoors.",
+        "you can't go wrong with this classic, cozy terracotta home for your beloved plant. good for indoors and outdoors.",
       price: 20,
       size: "medium",
       categoryId: plantPots.id,
       image: "https://imgur.com/N8zfVw9.png",
     });
     const gardenParty = await Product.create({
-      name: "Garden Party",
+      name: "garden party",
       description:
-        "Dazzle your guests and uplift teatime with this whimsical teapot.",
+        "dazzle your guests and uplift teatime with this whimsical teapot.",
       price: 70,
       size: "medium",
       categoryId: teapots.id,
       image: "https://imgur.com/1Hf1yrk.png",
     });
     const prettyInPink = await Product.create({
-      name: "Pretty in Pink",
+      name: "pretty in pink",
       description:
-        "This flowy pink teapot with gold flourishes adds elegance and style to teatime, dessert, or just serving up hot cups of coffee.",
+        "this flowy pink teapot with gold flourishes adds elegance and style to teatime, dessert, or just serving up hot cups of coffee.",
       price: 60,
       size: "medium",
       categoryId: teapots.id,
       image: "https://imgur.com/DtpMrtI.png",
     });
     const kickItUp = await Product.create({
-      name: "Kick it up a Notch",
+      name: "kick it up a notch",
       description:
-        "Though it may be one color, there's nothing monotone about this teapot, which packs a punch of pizzaz. Wow your guests with this whimsical piece reminiscent of Alice in Wonderland.",
+        "though it may be one color, there's nothing monotone about this teapot, which packs a punch of pizzaz. wow your guests with this whimsical piece reminiscent of alice in wonderland.",
       price: 65,
       size: "medium",
       categoryId: teapots.id,
       image: "https://imgur.com/JAB78CF.png",
     });
     const byTheSeashore = await Product.create({
-      name: "By the Seashore",
+      name: "by the seashore",
       description:
-        "Flowing from sea blue to smooth sand, these salt and pepper shakers will transport you to a beach - you can almost feel salty ocean breeze when you sprinkle some on top of what's on the menu!",
+        "flowing from sea blue to smooth sand, these salt and pepper shakers will transport you to a beach - you can almost feel salty ocean breeze when you sprinkle some on top of what's on the menu!",
       price: 30,
       size: "small",
       categoryId: saltAndPepper.id,
       image: "https://imgur.com/ALsRsWW.png",
     });
     const peasInAPod = await Product.create({
-      name: "Peas in a Pod",
+      name: "peas in a pod",
       description:
-        "We go together like peanut butter and jelly, chips and salsa, salt and pepper...you get the idea, we're like two peas in a pod!",
+        "we go together like peanut butter and jelly, chips and salsa, salt and pepper...you get the idea, we're like two peas in a pod!",
       price: 35,
       size: "small",
       categoryId: saltAndPepper.id,
       image: "https://imgur.com/yvF98Dc.png",
     });
     const hootyFriends = await Product.create({
-      name: "Hooty Friends",
+      name: "hooty friends",
       description:
-        "Bring nature to your table with these dainty salt and pepper shakers that'll have you asking your guests - hooo wants more?",
+        "bring nature to your table with these dainty salt and pepper shakers that'll have you asking your guests - hooo wants more?",
       price: 40,
       size: "small",
       categoryId: saltAndPepper.id,
       image: "https://imgur.com/SwPW5ZX.png",
     });
     const seaFallin = await Product.create({
-      name: "Sea Fallin'",
+      name: "sea fallin'",
       description:
-        "Space is not the final frontier as it turns out... get lost in a deep dive into our coral reefs under the sea with this unique sculpture.",
+        "space is not the final frontier as it turns out... get lost in a deep dive into our coral reefs under the sea with this unique sculpture.",
       price: 300,
       size: "medium",
       categoryId: sculptures.id,
       image: "https://imgur.com/8HKTwwi.png",
     });
     const flowThrough = await Product.create({
-      name: "Flow Through",
+      name: "flow through",
       description:
-        "Flow through this mind-bending, abstract sculpture whenever you please with this as a centerpiece in your home.",
+        "flow through this mind-bending, abstract sculpture whenever you please with this as a centerpiece in your home.",
       price: 280,
       size: "medium",
       categoryId: sculptures.id,
       image: "https://imgur.com/pWa6xW8.png",
     });
     const waveItOut = await Product.create({
-      name: "Wave It Out",
+      name: "wave it out",
       description:
-        "The sea comes home with you with this elegant replica of a wave that connotes motion and carefree summer beach days.",
+        "the sea comes home with you with this elegant replica of a wave that connotes motion and carefree summer beach days.",
       price: 200,
       size: "medium",
       categoryId: sculptures.id,

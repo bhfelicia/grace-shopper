@@ -49,14 +49,14 @@ class SingleProduct extends Component {
           <img id="singleProductImageView" src={singleProduct.image}></img>
           <p>{singleProduct.description}</p>
           <h2>${singleProduct.price}</h2>
-          <p>Size: {singleProduct.size} </p>
+          <p>size: {singleProduct.size} </p>
           <p>{singleProduct.inventory} of these beauties in stock!</p>
           <button onClick={() => this.addToCart(singleProduct.id)}>
-            Add To Cart
+            add to cart
           </button>
           <br />
           <Link to={`/products/${singleProduct.id}/edit`}>
-            <button>Edit Product Details</button>
+            <button>edit product details</button>
           </Link>
         </div>
 
