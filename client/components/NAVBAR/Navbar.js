@@ -1,26 +1,26 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
-import SearchBar from './SearchBar';
-import { fetchUsers } from '../../store/thunks/userThunk';
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import { Link } from "react-router-dom";
+import SearchBar from "./SearchBar";
+import { fetchUsers } from "../../store/thunks/userThunk";
 
-import axios from 'axios';
+import axios from "axios";
 
 class Nav extends Component {
   constructor() {
     super();
     this.state = {
       loggedInUser: {
-        fullName: '',
+        fullName: "",
         id: 1,
         isAdmin: false,
-        role: '',
-        first: '',
-        last: '',
-        password: '',
-        email: '',
-        createdAt: '',
-        updatedAt: '',
+        role: "",
+        first: "",
+        last: "",
+        password: "",
+        email: "",
+        createdAt: "",
+        updatedAt: "",
       },
     };
     this.logout = this.logout.bind(this);
@@ -28,17 +28,17 @@ class Nav extends Component {
 
   async componentDidMount() {
     this.props.getUsers();
-    if (window.localStorage.getItem('guest') === 'true') {
-      let response = await axios.post('/api/auth', {
-        email: 'guest@guest.com',
-        password: 'guest_pw',
+    if (window.localStorage.getItem("guest") === "true") {
+      let response = await axios.post("/api/auth", {
+        email: "guest@guest.com",
+        password: "guest_pw",
       });
       const { token } = response.data;
-      window.localStorage.setItem('token', token);
+      window.localStorage.setItem("token", token);
     } else {
-      const { data: loggedInUser } = await axios.get('/api/auth', {
+      const { data: loggedInUser } = await axios.get("/api/auth", {
         headers: {
-          authorization: window.localStorage.getItem('token'),
+          authorization: window.localStorage.getItem("token"),
         },
       });
       this.setState({ loggedInUser });
@@ -46,10 +46,10 @@ class Nav extends Component {
   }
 
   async logout() {
-    const guestUser = await axios.get('/api/users/1');
-    window.localStorage.setItem('token', guestUser.data.password);
-    window.localStorage.setItem('guest', 'true');
-    this.props.history.push('/');
+    const guestUser = await axios.get("/api/users/1");
+    window.localStorage.setItem("token", guestUser.data.password);
+    window.localStorage.setItem("guest", "true");
+    this.props.history.push("/");
   }
 
   render() {
@@ -57,19 +57,19 @@ class Nav extends Component {
     if (this.state.loggedInUser.isAdmin) {
       return (
         <nav className="nav-container">
-          <Link style={{ textDecoration: 'none' }} to="/">
+          <Link style={{ textDecoration: "none" }} to="/">
             Home
           </Link>
           <SearchBar />
           <div>
-            <Link style={{ textDecoration: 'none' }} to="/settings">
+            <Link style={{ textDecoration: "none" }} to="/settings">
               Settings |
             </Link>
-            <Link style={{ textDecoration: 'none' }} to="/cart">
+            <Link style={{ textDecoration: "none" }} to="/cart">
               Cart |
             </Link>
             <Link
-              style={{ textDecoration: 'none' }}
+              style={{ textDecoration: "none" }}
               onClick={() => {
                 this.logout();
                 this.setState({ loggedInUser: {} });
@@ -83,21 +83,21 @@ class Nav extends Component {
       );
     } else if (
       this.state.loggedInUser.isAdmin === false &&
-      this.state.loggedInUser.role === 'AUTHENTICATED'
+      this.state.loggedInUser.role === "AUTHENTICATED"
     ) {
       return (
         <nav className="nav-container">
-          <Link style={{ textDecoration: 'none' }} to="/">
+          <Link style={{ textDecoration: "none" }} to="/">
             Home
           </Link>
           <SearchBar />
           <div>
-            <Link style={{ textDecoration: 'none' }} to="/cart">
+            <Link style={{ textDecoration: "none" }} to="/cart">
               Cart
             </Link>
-            {'   |   '}
+            {"   |   "}
             <Link
-              style={{ textDecoration: 'none' }}
+              style={{ textDecoration: "none" }}
               onClick={() => {
                 this.logout();
                 this.setState({ loggedInUser: {} });
@@ -112,21 +112,21 @@ class Nav extends Component {
     } else {
       return (
         <nav className="nav-container">
-          <Link style={{ textDecoration: 'none' }} to="/">
+          <Link style={{ textDecoration: "none" }} to="/">
             Home
           </Link>
           <SearchBar />
           <div>
-            <Link style={{ textDecoration: 'none' }} to="/cart">
+            <Link style={{ textDecoration: "none" }} to="/cart">
               Cart
             </Link>
-            {'   |   '}
-            <Link style={{ textDecoration: 'none' }} to="/login">
+            {"   |   "}
+            <Link style={{ textDecoration: "none" }} to="/login">
               Login
             </Link>
-            {'   |   '}
-            <Link style={{ textDecoration: 'none' }} to="/signup">
-              {' '}
+            {"   |   "}
+            <Link style={{ textDecoration: "none" }} to="/signup">
+              {" "}
               Sign Up
             </Link>
           </div>
