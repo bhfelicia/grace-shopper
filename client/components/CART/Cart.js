@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Checkout from './Checkout';
 
+import Emoji from 'react-emoji-render';
+import { motion } from 'framer-motion';
+
 import {
   fetchCart,
   fetchOrders,
@@ -42,16 +45,32 @@ class Cart extends Component {
     console.log(this.state);
     const currentCart = this.props.orderReducer.currentCart || [];
     if (!currentCart.products || !currentCart.products.length) {
-      return <div>Your cart is empty!</div>;
+      return (
+        <motion.h1
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ ease: 'easeOut', duration: 1 }}
+        >
+          <h1>
+            <Emoji text=":grimacing:" />
+          </h1>
+          <h2>Your cart is empty!</h2>
+        </motion.h1>
+      );
     } else if (!this.state.showCheckout) {
       return (
-        <div>
+        <motion.div
+          transition={{ ease: 'easeOut', duration: 1 }}
+          initial={{ opacity: 0 }}
+          animate={{ x: [100, 0], opacity: 1 }}
+        >
           <ol>
             {currentCart.products.map((product) => (
               <li key={product.id}>
                 <img src={product.image}></img>
                 <hr />
                 <button
+                  id="incCart"
                   onClick={() =>
                     this.addProductToCart(product.id, currentCart.id)
                   }
@@ -60,6 +79,7 @@ class Cart extends Component {
                 </button>
                 {product.order_product.product_quantity}
                 <button
+                  id="decCart"
                   onClick={() => {
                     if (product.order_product.product_quantity != 1) {
                       this.deleteProductFromCart(
@@ -76,7 +96,7 @@ class Cart extends Component {
                     }
                   }}
                 >
-                  --
+                  -
                 </button>
                 x {product.name} - $
                 {product.price * product.order_product.product_quantity}
@@ -99,11 +119,15 @@ class Cart extends Component {
           <h5>Tax: ${currentCart.tax}</h5>
           <h3>Grand total: ${Number(currentCart.total) + currentCart.tax}</h3>
           <button onClick={this.showCheckoutFunc}>Proceed to checkout</button>
-        </div>
+        </motion.div>
       );
     } else {
       return (
-        <div>
+        <motion.div
+          transition={{ ease: 'easeOut', duration: 1 }}
+          initial={{ opacity: 0 }}
+          animate={{ x: [100, 0], opacity: 1 }}
+        >
           <ol>
             {currentCart.products.map((product) => (
               <li key={product.id}>
@@ -157,7 +181,7 @@ class Cart extends Component {
           <h5>Tax: ${currentCart.tax}</h5>
           <h3>Grand total: ${Number(currentCart.total) + currentCart.tax}</h3>
           <Checkout cart={currentCart} />
-        </div>
+        </motion.div>
       );
     }
   }

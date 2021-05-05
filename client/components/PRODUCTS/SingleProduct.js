@@ -1,10 +1,13 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import { Link } from "react-router-dom";
-import { fetchProduct } from "../../store/thunks/productThunk";
-import ProductReviews from "../REVIEWS/ProductReviews";
-import CreateReview from "../REVIEWS/CreateReview";
-import { addCart, addToCart, fetchCart } from "../../store/thunks/orderThunk";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
+import { fetchProduct } from '../../store/thunks/productThunk';
+import ProductReviews from '../REVIEWS/ProductReviews';
+import CreateReview from '../REVIEWS/CreateReview';
+import { addCart, addToCart, fetchCart } from '../../store/thunks/orderThunk';
+
+import { motion } from 'framer-motion';
+import Emoji from 'react-emoji-render';
 
 class SingleProduct extends Component {
   constructor() {
@@ -35,22 +38,35 @@ class SingleProduct extends Component {
   render() {
     const { singleProduct } = this.props.productReducer;
     return (
-      <div id="single-product">
-        <h1>{singleProduct.name}</h1>
-        <img src={singleProduct.image}></img>
-        <p>{singleProduct.description}</p>
-        <h3>${singleProduct.price}</h3>
-        <p>Size: {singleProduct.size} </p>
-        <p>{singleProduct.inventory} of these beauties in stock!</p>
-        <button onClick={() => this.addToCart(singleProduct.id)}>
-          Add To Cart
-        </button>
-        <Link to={`/products/${singleProduct.id}/edit`}>
-          <button>Edit Product Details</button>
-        </Link>
-        <CreateReview productId={singleProduct.id} />
-        <ProductReviews productId={singleProduct.id} />
-      </div>
+      <motion.div
+        id="single-product"
+        transition={{ ease: 'easeOut', duration: 1 }}
+        initial={{ opacity: 0 }}
+        animate={{ x: [100, 0], opacity: 1 }}
+      >
+        <div>
+          <h1>{singleProduct.name}</h1>
+          <img id="singleProductImageView" src={singleProduct.image}></img>
+          <p>{singleProduct.description}</p>
+          <h2>${singleProduct.price}</h2>
+          <p>Size: {singleProduct.size} </p>
+          <p>{singleProduct.inventory} of these beauties in stock!</p>
+          <button onClick={() => this.addToCart(singleProduct.id)}>
+            Add To Cart
+          </button>
+          <br />
+          <Link to={`/products/${singleProduct.id}/edit`}>
+            <button>Edit Product Details</button>
+          </Link>
+        </div>
+
+        <div>
+          <ProductReviews productId={singleProduct.id} />
+        </div>
+        <div>
+          <CreateReview productId={singleProduct.id} />
+        </div>
+      </motion.div>
     );
   }
 }

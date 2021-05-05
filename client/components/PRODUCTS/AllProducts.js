@@ -40,7 +40,12 @@ class AllProducts extends Component {
     const { products } = this.props.productReducer;
     const { addToCart } = this;
     return (
-      <motion.div id="all-products" animate={{ scale: [0, 1] }}>
+      <motion.div
+        id="all-products"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ ease: 'easeOut', duration: 1 }}
+      >
         {products
           .filter((product) => product.status === 'active')
           .map((product) => (
@@ -62,7 +67,7 @@ class AllProducts extends Component {
                 whileHover={{ scale: 1.3 }}
                 whileTap={{ scale: [0.9, 1.05] }}
               >
-                Add To Cart
+                add to cart
               </motion.button>
             </div>
           ))}
