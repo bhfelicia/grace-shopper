@@ -25,7 +25,7 @@ const productReducer = (state = initialState, action) => {
         selectedProduct: action.product,
       };
     case FILTER_PRODUCTS:
-      const length = action.productName.length || 0;
+      // const length = action.productName.length || 0;
       const filteredProducts = state.products.filter((product) =>
         product.name.toLowerCase().includes(action.productName.toLowerCase())
       );

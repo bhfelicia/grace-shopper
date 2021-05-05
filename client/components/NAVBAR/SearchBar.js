@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { fetchProducts, filterProducts } from '../../store/thunks/productThunk';
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import { fetchProducts, filterProducts } from "../../store/thunks/productThunk";
 
 // // onclick()
 // const searchBar = ()=>{
@@ -20,7 +20,7 @@ class SearchBar extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      item: '',
+      item: "",
     };
     this.searchInputHandler = this.searchInputHandler.bind(this);
     // this.searchSubmitHandler = this.searchSubmitHandler.bind(this);
@@ -31,7 +31,7 @@ class SearchBar extends Component {
     console.log(value);
     const { getFilteredProducts } = this.props;
     await getFilteredProducts(value);
-    if (value === '') {
+    if (value === "") {
       await this.props.getProducts();
     }
   }
