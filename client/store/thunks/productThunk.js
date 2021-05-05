@@ -45,7 +45,14 @@ const filterProducts = (productName) => {
     // const { data: filteredProducts } = await axios.get(`/api/products/search`, {
     //   productName,
     // });
-    const { data: filteredProducts } = await axios.get(`/api/products/search`);
+
+    //I apparently have to pass it in as a variable with the product as an object, maybe because thats how it will get accessed later?
+    const productObj = { productName };
+
+    const { data: filteredProducts } = await axios.get(
+      `/api/products/search`,
+      productObj
+    );
     dispatch(findProducts(filteredProducts));
   };
 };
