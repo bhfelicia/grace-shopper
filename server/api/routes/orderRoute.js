@@ -1,3 +1,4 @@
+
 const router = require('express').Router();
 const Order = require('../../db/models/Order');
 const User = require('../../db/models/User');
@@ -6,8 +7,9 @@ const Order_Product = require('../../db/models/Order_Product');
 
 if (process.env.NODE_ENV !== 'production') {
   require('dotenv').config();
-}
-const stripePublic = process.env.STRIPE_PUBLIC_KEY;
+
+const { v4: uuidv4 } = require("uuid");
+
 const stripeSecret = process.env.STRIPE_SECRET_KEY;
 const stripe = require('stripe')(stripeSecret);
 //get routes
@@ -31,7 +33,6 @@ router.get('/:id', async (req, res, next) => {
 
 router.get('/:id/products', async (req, res, next) => {
   try {
-    //const order = await Order.findByPk(req.params.id);
     const products = await Order.getProducts(req.params.id);
     res.status(200).send(products);
   } catch (error) {
@@ -71,16 +72,45 @@ router.get('/user/:userId/orders', async (req, res, next) => {
 
 //stripe routes
 
-// router.post("/checkout", async (req, res, next) => {
-//   try {
-//     const { token } = req.body;
-//     const customer = await stripe.customers.create({ email: token.email, source: token.id });
-//     const idempotency_key = uuid()
-//     const charge = await stripe.charges.create({})
-//   } catch (error) {
-//     next(error);
-//   }
-// });
+router.post("/checkout", async (req, res, next) => {
+  try {
+    // console.log(req.body);
+    const { token, billingAddress, shippingAddress, amount } = req.body;
+    const customer = await stripe.customers.create({
+      email: token.email,
+      source: token.id,
+    });
+    const total = amount / 100;
+    const idempotencyKey = uuidv4();
+    const charge = await stripe.charges.create(
+      {
+        amount: amount,
+        currency: "usd",
+        customer: customer.id,
+        receipt_email: token.email,
+        description: `Made a purchase of ${total}`,
+        shipping: {
+          name: token.card.name,
+          address: {
+            line1: token.card.address_line1,
+            line2: token.card.address_line2,
+            city: token.card.address_city,
+            country: token.card.address_country,
+            postal_code: token.card.zip,
+          },
+        },
+      },
+      { idempotencyKey }
+    );
+    status = "success";
+    res.send(charge);
+  } catch (error) {
+    console.error("Error: ", error);
+    status = "failure";
+    // next(error);
+  }
+  // res.json({ error, status });
+});
 // router.get("/:id/stripe", async (req, res, next) => {
 //   try {
 //     const theOrder = await Order.findByPk(req.params.id)
@@ -180,7 +210,6 @@ router.put('/cart/add', async (req, res, next) => {
       },
     });
     const newTotal = Number(anOrder.total) + Number(theProduct.price);
-    console.log(newTotal);
     updatedOrder = await anOrder.update({ total: newTotal });
     res.send(updatedOrder).status(204);
   } catch (error) {
