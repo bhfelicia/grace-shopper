@@ -7,6 +7,7 @@
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
     Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   font-weight: 300;
+  color: #376d5f;
 }
 html {
   height: 100%;
@@ -21,26 +22,22 @@ body {
 }
 
 img {
-  width: 100px;
-  length: 100px;
+  width: 200px;
+  length: 200px;
+  padding: 1rem;
 }
 
 .login-container {
   margin-top: 50px;
-  width: 100%;
-  height: 100%;
   display: flex;
   justify-content: center;
-  align-items: center;
-  background: #fafafa;
+  /* align-items: center; */
 }
 
 .login-form {
-  width: 350px;
+  /* width: 350px; */
   margin: 0 auto;
-  border: 1px solid #ddd;
   padding: 2rem;
-  background: #ffffff;
 }
 
 .form-input {
@@ -52,19 +49,6 @@ img {
 
 .form-group {
   margin-bottom: 1rem;
-}
-
-.form-button {
-  background: #69d2e7;
-  border: 1px solid #ddd;
-  color: #ffffff;
-  padding: 10px;
-  width: 100%;
-  text-transform: uppercase;
-}
-
-.form-button:hover {
-  background: #69c8e7;
 }
 
 /* Search Box*/
@@ -124,23 +108,25 @@ nav {
 
 a {
   text-decoration: none;
-  color: #376d5f;
 }
 
 button {
   background-color: #f28482;
   color: white;
   border-radius: 1rem;
-  width: 7rem;
-  height: 2rem;
+  min-width: 7rem;
+  width: fit-content;
   border: black;
+  padding: 0.5rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  margin: 0.5rem;
 }
 button:hover {
   transition: 1s;
   background-color: #422ca8;
   color: white;
   border-radius: 1rem;
-  width: 7rem;
   border: black;
   cursor: pointer;
 }
@@ -152,9 +138,93 @@ input {
   height: 2rem;
 }
 
+textarea {
+  border-radius: 1rem;
+  border: none;
+  width: 10rem;
+  height: 2rem;
+}
+
 div {
   padding: 1rem;
 }
+h1 {
+  padding: 1rem;
+}
+p {
+  padding: 1rem;
+}
+#singleProductImageView {
+  height: auto;
+  width: auto;
+}
+.rightNavbar {
+  display: flex;
+  flex-flow: row wrap;
+}
+#reviewsTop {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-around;
+}
+
+#signupOptions {
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: space-between;
+}
+
+ol li {
+  list-style: none;
+}
+
+#incCart {
+  min-width: 3rem;
+  width: 1rem;
+  font-weight: 700;
+}
+#decCart {
+  min-width: 3rem;
+  width: 1rem;
+  font-weight: 700;
+}
+
+#all-products {
+  display: flex;
+  flex-flow: row wrap;
+  align-items: baseline;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+
+.singleProduct {
+  align-content: center;
+  list-style: none;
+  flex: 0 0 33.333333%;
+}
+
+/* #all-categories {
+  display: flex;
+  flex-flow: row wrap;
+  align-items: baseline;
+  justify-content: space-around;
+  flex-wrap: wrap;
+} */
+
+#singleCategoryView {
+  display: flex;
+  flex-flow: row wrap;
+  align-items: baseline;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+
+.singleProductCategoryView {
+  align-content: center;
+  list-style: none;
+  flex: 0 0 33.333333%;
+}
+
 /* images*/
 
 /* settings*/

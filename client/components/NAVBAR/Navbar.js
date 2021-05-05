@@ -1,29 +1,29 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import { Link } from "react-router-dom";
-import SearchBar from "./SearchBar";
-import { fetchUsers } from "../../store/thunks/userThunk";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
+import SearchBar from './SearchBar';
+import { fetchUsers } from '../../store/thunks/userThunk';
 
-import { motion } from "framer-motion";
-import Emoji from "react-emoji-render";
+import { motion } from 'framer-motion';
+import Emoji from 'react-emoji-render';
 
-import axios from "axios";
+import axios from 'axios';
 
 class Nav extends Component {
   constructor() {
     super();
     this.state = {
       loggedInUser: {
-        fullName: "",
+        fullName: '',
         id: 1,
         isAdmin: false,
-        role: "",
-        first: "",
-        last: "",
-        password: "",
-        email: "",
-        createdAt: "",
-        updatedAt: "",
+        role: '',
+        first: '',
+        last: '',
+        password: '',
+        email: '',
+        createdAt: '',
+        updatedAt: '',
       },
     };
     this.logout = this.logout.bind(this);
@@ -31,17 +31,17 @@ class Nav extends Component {
 
   async componentDidMount() {
     this.props.getUsers();
-    if (window.localStorage.getItem("guest") === "true") {
-      let response = await axios.post("/api/auth", {
-        email: "guest@guest.com",
-        password: "guest_pw",
+    if (window.localStorage.getItem('guest') === 'true') {
+      let response = await axios.post('/api/auth', {
+        email: 'guest@guest.com',
+        password: 'guest_pw',
       });
       const { token } = response.data;
-      window.localStorage.setItem("token", token);
+      window.localStorage.setItem('token', token);
     } else {
-      const { data: loggedInUser } = await axios.get("/api/auth", {
+      const { data: loggedInUser } = await axios.get('/api/auth', {
         headers: {
-          authorization: window.localStorage.getItem("token"),
+          authorization: window.localStorage.getItem('token'),
         },
       });
       this.setState({ loggedInUser });
@@ -49,10 +49,10 @@ class Nav extends Component {
   }
 
   async logout() {
-    const guestUser = await axios.get("/api/users/1");
-    window.localStorage.setItem("token", guestUser.data.password);
-    window.localStorage.setItem("guest", "true");
-    this.props.history.push("/");
+    const guestUser = await axios.get('/api/users/1');
+    window.localStorage.setItem('token', guestUser.data.password);
+    window.localStorage.setItem('guest', 'true');
+    this.props.history.push('/');
   }
 
   render() {
@@ -60,7 +60,7 @@ class Nav extends Component {
     if (this.state.loggedInUser.isAdmin) {
       return (
         <nav className="nav-container">
-          <Link style={{ textDecoration: "none" }} to="/">
+          <Link style={{ textDecoration: 'none' }} to="/">
             <motion.div
               whileHover={{ scale: 1.3 }}
               whileTap={{ scale: [0.9, 1.05] }}
@@ -69,33 +69,48 @@ class Nav extends Component {
             </motion.div>
           </Link>
           <SearchBar />
-          <div>
-            <Link style={{ textDecoration: "none" }} to="/settings">
-              <Emoji text="&#128736;&#65039;" />
+          <div className="rightNavbar">
+            <Link style={{ textDecoration: 'none' }} to="/settings">
+              <motion.div
+                whileHover={{ scale: 1.3 }}
+                whileTap={{ scale: [0.9, 1.05] }}
+              >
+                <Emoji text="&#128736;&#65039;" />
+              </motion.div>
             </Link>
-            <Link style={{ textDecoration: "none" }} to="/cart">
-              <Emoji text=":shopping_cart:" />
-            </Link>
-            <Link
-              style={{ textDecoration: "none" }}
-              onClick={() => {
-                this.logout();
-                this.setState({ loggedInUser: {} });
-              }}
-              to="/login"
+            <motion.div
+              whileHover={{ scale: 1.3 }}
+              whileTap={{ scale: [0.9, 1.05] }}
             >
-              <Emoji text=":v:" />
-            </Link>
+              <Link style={{ textDecoration: 'none' }} to="/cart">
+                <Emoji text=":shopping_cart:" />
+              </Link>
+            </motion.div>
+            <motion.div
+              whileHover={{ scale: 1.3 }}
+              whileTap={{ scale: [0.9, 1.05] }}
+            >
+              <Link
+                style={{ textDecoration: 'none' }}
+                onClick={() => {
+                  this.logout();
+                  this.setState({ loggedInUser: {} });
+                }}
+                to="/login"
+              >
+                <Emoji text=":v:" />
+              </Link>
+            </motion.div>
           </div>
         </nav>
       );
     } else if (
       this.state.loggedInUser.isAdmin === false &&
-      this.state.loggedInUser.role === "AUTHENTICATED"
+      this.state.loggedInUser.role === 'AUTHENTICATED'
     ) {
       return (
         <nav className="nav-container">
-          <Link style={{ textDecoration: "none" }} to="/">
+          <Link style={{ textDecoration: 'none' }} to="/">
             <motion.div
               whileHover={{ scale: 1.3 }}
               whileTap={{ scale: [0.9, 1.05] }}
@@ -104,28 +119,37 @@ class Nav extends Component {
             </motion.div>
           </Link>
           <SearchBar />
-          <div>
-            <Link style={{ textDecoration: "none" }} to="/cart">
-              <Emoji text=":shopping_cart:" />
-            </Link>
-            {"   |   "}
-            <Link
-              style={{ textDecoration: "none" }}
-              onClick={() => {
-                this.logout();
-                this.setState({ loggedInUser: {} });
-              }}
-              to="/login"
+          <div className="rightNavbar">
+            <motion.div
+              whileHover={{ scale: 1.3 }}
+              whileTap={{ scale: [0.9, 1.05] }}
             >
-              &nbsp;Logout
-            </Link>
+              <Link style={{ textDecoration: 'none' }} to="/cart">
+                <Emoji text=":shopping_cart:" />
+              </Link>
+            </motion.div>
+            <motion.div
+              whileHover={{ scale: 1.3 }}
+              whileTap={{ scale: [0.9, 1.05] }}
+            >
+              <Link
+                style={{ textDecoration: 'none' }}
+                onClick={() => {
+                  this.logout();
+                  this.setState({ loggedInUser: {} });
+                }}
+                to="/login"
+              >
+                &nbsp;Logout
+              </Link>
+            </motion.div>
           </div>
         </nav>
       );
     } else {
       return (
         <nav className="nav-container">
-          <Link style={{ textDecoration: "none" }} to="/">
+          <Link style={{ textDecoration: 'none' }} to="/">
             <motion.div
               whileHover={{ scale: 1.3 }}
               whileTap={{ scale: [0.9, 1.05] }}
@@ -134,19 +158,31 @@ class Nav extends Component {
             </motion.div>
           </Link>
           <SearchBar />
-          <div>
-            <Link style={{ textDecoration: "none" }} to="/cart">
-              <Emoji text=":shopping_cart:" />
-            </Link>
-            {"   |   "}
-            <Link style={{ textDecoration: "none" }} to="/login">
-              <Emoji text=":key:" />
-            </Link>
-            {"   |   "}
-            <Link style={{ textDecoration: "none" }} to="/signup">
-              {" "}
-              Sign Up
-            </Link>
+          <div className="rightNavbar">
+            <motion.div
+              whileHover={{ scale: 1.3 }}
+              whileTap={{ scale: [0.9, 1.05] }}
+            >
+              <Link style={{ textDecoration: 'none' }} to="/cart">
+                <Emoji text=":shopping_cart:" />
+              </Link>
+            </motion.div>
+            <motion.div
+              whileHover={{ scale: 1.3 }}
+              whileTap={{ scale: [0.9, 1.05] }}
+            >
+              <Link style={{ textDecoration: 'none' }} to="/login">
+                <Emoji text=":key:" />
+              </Link>
+            </motion.div>
+            <motion.div
+              whileHover={{ scale: 1.3 }}
+              whileTap={{ scale: [0.9, 1.05] }}
+            >
+              <Link style={{ textDecoration: 'none' }} to="/signup">
+                <Emoji text=":writing_hand:" />
+              </Link>
+            </motion.div>
           </div>
         </nav>
       );

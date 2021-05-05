@@ -1,16 +1,18 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
-import { addReview } from "../../store/thunks/reviewThunk";
+import { addReview } from '../../store/thunks/reviewThunk';
+
+import Emoji from 'react-emoji-render';
 
 class CreateReview extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      userId: this.props.userReducer.selectedUser.id || "",
-      productId: this.props.productId || "",
-      title: "",
-      description: "",
+      userId: this.props.userReducer.selectedUser.id || '',
+      productId: this.props.productId || '',
+      title: '',
+      description: '',
       rating: 1,
     };
     this.handleChange = this.handleChange.bind(this);
@@ -32,39 +34,48 @@ class CreateReview extends Component {
     this.props.createReview(newReview);
   }
   render() {
-    console.log("current props: ", this.props);
+    console.log('current props: ', this.props);
     if (!this.props.userReducer.selectedUser.id) {
       return null;
     } else {
-      const ratings = ["--", 1, 2, 3, 4, 5];
+      const ratings = ['--', 1, 2, 3, 4, 5];
       return (
-        <div>
+        <div id="createReviewTop">
           <form onSubmit={this.createReviewHandler}>
-            <h4>Add a review for this product</h4>
-            <label>Title </label>
-            <input
-              type="text"
-              value={this.state.title}
-              name="title"
-              onChange={this.handleChange}
-            />
-            <br></br>
-            <label>Description </label>
-            <input
-              type="text"
-              value={this.state.description}
-              name="description"
-              onChange={this.handleChange}
-            />
-            <br></br>
-            <label>Rating </label>
-            <select name="rating" onChange={this.handleChange}>
-              {ratings.map((rating) => (
-                <option key={rating}>{rating}</option>
-              ))}
-            </select>
-            <br></br>
-            <button type="submit">Add your review</button>
+            <h3>
+              Already purchased? Add a review for this product below!{' '}
+              <Emoji text=":point_down:" />
+            </h3>
+            <div id="createReviewBody">
+              <div>
+                {/* <label>Title </label> */}
+                <input
+                  type="text"
+                  value={this.state.title}
+                  name="title"
+                  onChange={this.handleChange}
+                  placeholder="title"
+                />
+              </div>
+              <div>
+                {/* <label>Description </label> */}
+                <textarea
+                  type="text"
+                  value={this.state.description}
+                  name="description"
+                  onChange={this.handleChange}
+                  placeholder="description"
+                />
+              </div>
+              <label>Rating </label>
+              <select name="rating" onChange={this.handleChange}>
+                {ratings.map((rating) => (
+                  <option key={rating}>{rating}</option>
+                ))}
+              </select>
+              <br></br>
+              <button type="submit">Add your review</button>
+            </div>
           </form>
         </div>
       );

@@ -1,9 +1,12 @@
-import React from "react";
-import { connect } from "react-redux";
-import { Link } from "react-router-dom";
-import axios from "axios";
-import { loadUser } from "../../store/actionCreators/userActionCreators";
-import GitHubIcon from "@material-ui/icons/GitHub";
+import React from 'react';
+import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
+import axios from 'axios';
+import { loadUser } from '../../store/actionCreators/userActionCreators';
+import GitHubIcon from '@material-ui/icons/GitHub';
+
+import { motion } from 'framer-motion';
+import Emoji from 'react-emoji-render';
 
 // window.GITHUB_CLIENT_ID = "<%= GITHUB_CLIENT_ID %>";
 
@@ -11,8 +14,8 @@ class Login extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      email: "",
-      password: "",
+      email: '',
+      password: '',
       auth: {},
     };
     this.onChange = this.onChange.bind(this);
@@ -36,30 +39,30 @@ class Login extends React.Component {
     });
   }
   async signIn(credentials) {
-    let response = await axios.post("/api/auth", credentials);
+    let response = await axios.post('/api/auth', credentials);
     const { token } = response.data;
-    window.localStorage.setItem("token", token);
+    window.localStorage.setItem('token', token);
     this.attemptTokenLogin();
   }
   logout() {
-    window.localStorage.removeItem("token");
-    window.localStorage.setItem("guest", "true");
+    window.localStorage.removeItem('token');
+    window.localStorage.setItem('guest', 'true');
     this.setState({ auth: {} });
     this.props.authorizeUser({});
   }
   async attemptTokenLogin() {
-    const token = window.localStorage.getItem("token");
+    const token = window.localStorage.getItem('token');
     if (token) {
-      const response = await axios.get("/api/auth", {
+      const response = await axios.get('/api/auth', {
         headers: {
           authorization: token,
         },
       });
       this.setState({ auth: response.data });
       this.props.authorizeUser(this.state.auth);
-      this.setState({ email: "", password: "", auth: {} });
-      window.localStorage.setItem("guest", "false");
-      this.props.history.push("/");
+      this.setState({ email: '', password: '', auth: {} });
+      window.localStorage.setItem('guest', 'false');
+      this.props.history.push('/');
     }
   }
   render() {
@@ -95,9 +98,28 @@ class Login extends React.Component {
               </button>
             </div>
             <hr></hr>
-            <a href={`/api/auth/oauth`}>
-              {<GitHubIcon style={{ fontSize: 40, color: "black" }} />}
-            </a>
+            <div id="signupOptions">
+              <div>
+                <motion.h1
+                  whileHover={{ scale: 1.3 }}
+                  whileTap={{ scale: [0.9, 1.05] }}
+                >
+                  <a href={`/api/auth/oauth`}>
+                    {<GitHubIcon style={{ fontSize: 40, color: 'black' }} />}
+                  </a>
+                </motion.h1>
+              </div>
+              <div>
+                <motion.h1
+                  whileHover={{ scale: 1.3 }}
+                  whileTap={{ scale: [0.9, 1.05] }}
+                >
+                  <Link style={{ textDecoration: 'none' }} to="/signup">
+                    <Emoji text=":writing_hand:" />
+                  </Link>
+                </motion.h1>
+              </div>
+            </div>
           </form>
         </div>
       );
