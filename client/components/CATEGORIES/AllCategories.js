@@ -1,26 +1,26 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
-import { fetchCategories } from '../../store/thunks/categoryThunk';
-import { destroyCategory } from '../../store/thunks/categoryThunk';
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import { Link } from "react-router-dom";
+import { fetchCategories } from "../../store/thunks/categoryThunk";
+import { destroyCategory } from "../../store/thunks/categoryThunk";
 
-import axios from 'axios';
+import axios from "axios";
 
 class AllCategories extends Component {
   constructor(props) {
     super(props);
     this.state = {
       loggedInUser: {
-        fullName: '',
+        fullName: "",
         id: 0,
         isAdmin: false,
-        role: '',
-        first: '',
-        last: '',
-        password: '',
-        email: '',
-        createdAt: '',
-        updatedAt: '',
+        role: "",
+        first: "",
+        last: "",
+        password: "",
+        email: "",
+        createdAt: "",
+        updatedAt: "",
       },
     };
     this.deleteCategoryHandler = this.deleteCategoryHandler.bind(this);
@@ -28,8 +28,8 @@ class AllCategories extends Component {
 
   async componentDidMount() {
     this.props.getCategories();
-    const { data: loggedInUser } = await axios.get('/api/auth', {
-      headers: { authorization: window.localStorage.getItem('token') },
+    const { data: loggedInUser } = await axios.get("/api/auth", {
+      headers: { authorization: window.localStorage.getItem("token") },
     });
     this.setState({ loggedInUser });
   }
@@ -40,9 +40,14 @@ class AllCategories extends Component {
 
   render() {
     const { categories } = this.props.categoryReducer;
+    let showAddCategory = null;
+    if (this.state.loggedInUser.isAdmin) {
+      showAddCategory = <Link to={"/createCategory"}>Add Category</Link>;
+    }
     return (
       <div>
-        <Link to={'/createCategory'}>Add Category</Link>
+        {/* <Link to={"/createCategory"}>Add Category</Link> */}
+        {showAddCategory}
         <div id="all-categories">
           {categories.map((category) => {
             if (this.state.loggedInUser.isAdmin) {
@@ -50,7 +55,7 @@ class AllCategories extends Component {
                 <div key={category.id}>
                   <Link
                     to={`/categories/${category.id}`}
-                    style={{ textDecoration: 'none' }}
+                    style={{ textDecoration: "none" }}
                   >
                     <h2>{category.name}</h2>
                   </Link>
@@ -70,7 +75,7 @@ class AllCategories extends Component {
                 <div key={category.id}>
                   <Link
                     to={`/categories/${category.id}`}
-                    style={{ textDecoration: 'none' }}
+                    style={{ textDecoration: "none" }}
                   >
                     <h2>{category.name}</h2>
                   </Link>

@@ -70,6 +70,14 @@ class Nav extends Component {
           </Link>
           <SearchBar />
           <div className="rightNavbar">
+            <motion.div
+              whileHover={{ scale: 1.3 }}
+              whileTap={{ scale: [0.9, 1.05] }}
+            >
+              <Link style={{ textDecoration: "none" }} to="/categories">
+                <Emoji text=":cat:" />
+              </Link>
+            </motion.div>
             <Link style={{ textDecoration: "none" }} to="/settings">
               <motion.div
                 whileHover={{ scale: 1.3 }}
@@ -124,6 +132,14 @@ class Nav extends Component {
               whileHover={{ scale: 1.3 }}
               whileTap={{ scale: [0.9, 1.05] }}
             >
+              <Link style={{ textDecoration: "none" }} to="/categories">
+                <Emoji text=":cat:" />
+              </Link>
+            </motion.div>
+            <motion.div
+              whileHover={{ scale: 1.3 }}
+              whileTap={{ scale: [0.9, 1.05] }}
+            >
               <Link style={{ textDecoration: "none" }} to="/cart">
                 <Emoji text=":shopping_cart:" />
               </Link>
@@ -159,6 +175,14 @@ class Nav extends Component {
           </Link>
           <SearchBar />
           <div className="rightNavbar">
+            <motion.div
+              whileHover={{ scale: 1.3 }}
+              whileTap={{ scale: [0.9, 1.05] }}
+            >
+              <Link style={{ textDecoration: "none" }} to="/categories">
+                <Emoji text=":cat:" />
+              </Link>
+            </motion.div>
             <motion.div
               whileHover={{ scale: 1.3 }}
               whileTap={{ scale: [0.9, 1.05] }}
