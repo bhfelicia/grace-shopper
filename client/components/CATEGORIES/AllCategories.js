@@ -42,7 +42,7 @@ class AllCategories extends Component {
     const { categories } = this.props.categoryReducer;
     let showAddCategory = null;
     if (this.state.loggedInUser.isAdmin) {
-      showAddCategory = <Link to={"/createCategory"}>Add Category</Link>;
+      showAddCategory = <Link to={"/createCategory"}>add category</Link>;
     }
     return (
       <div>
