@@ -98,7 +98,7 @@ nav {
   align-items: center;
   font-size: xx-large;
   padding-right: 0;
-  border-radius: 1rem;
+  border-radius: 2rem;
 }
 
 /*Link*/
@@ -220,6 +220,17 @@ ol li {
 ::-webkit-scrollbar {
   width: 25px;
 }
+#individualCartItem {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+#cartButtons {
+}
+
+/* images*/
 
 ::-webkit-scrollbar-track {
   background: #f6bd60;

@@ -43,42 +43,38 @@ class AllProducts extends Component {
     const { products } = this.props.productReducer;
     const { addToCart } = this;
     return (
-      <div>
-        <Home />
-        <ImageSlider slides={SliderData} />
-        <motion.div
-          id="all-products"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ ease: "easeOut", duration: 1 }}
-        >
-          {products
-            .filter((product) => product.status === "active")
-            .map((product) => (
-              <div key={`${product.id}`} className="singleProduct">
-                <motion.div
-                  whileHover={{ scale: 1.1 }}
-                  whileTap={{ scale: [0.9, 1.05] }}
-                >
-                  <Link to={`/products/${product.id}`}>
-                    <img src={product.image}></img>
-                    <h2>{product.name}</h2>
-                    <h3>${product.price}</h3>
-                    <div></div>
-                  </Link>
-                </motion.div>
-                <motion.button
-                  className="cartButton"
-                  onClick={() => addToCart(product.id)}
-                  whileHover={{ scale: 1.3 }}
-                  whileTap={{ scale: [0.9, 1.05] }}
-                >
-                  add to cart
-                </motion.button>
-              </div>
-            ))}
-        </motion.div>
-      </div>
+      <motion.div
+        id="all-products"
+        transition={{ ease: "easeOut", duration: 1 }}
+        initial={{ opacity: 0 }}
+        animate={{ x: [100, 0], opacity: 1 }}
+      >
+        {products
+          .filter((product) => product.status === "active")
+          .map((product) => (
+            <div key={`${product.id}`} className="singleProduct">
+              <motion.div
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: [0.9, 1.05] }}
+              >
+                <Link to={`/products/${product.id}`}>
+                  <img src={product.image}></img>
+                  <h2>{product.name}</h2>
+                  <h3>${product.price}</h3>
+                  <div></div>
+                </Link>
+              </motion.div>
+              <motion.button
+                className="cartButton"
+                onClick={() => addToCart(product.id)}
+                whileHover={{ scale: 1.3 }}
+                whileTap={{ scale: [0.9, 1.05] }}
+              >
+                add to cart
+              </motion.button>
+            </div>
+          ))}
+      </motion.div>
     );
   }
 }

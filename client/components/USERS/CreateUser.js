@@ -1,16 +1,20 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import { addUser } from "../../store/thunks/userThunk";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { addUser } from '../../store/thunks/userThunk';
+
+import { motion } from 'framer-motion';
+import Emoji from 'react-emoji-render';
+
 class CreateUser extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      first: "",
-      last: "",
-      password: "",
-      email: "",
-      role: "",
-      message: "Please Enter Proper Credentials",
+      first: '',
+      last: '',
+      password: '',
+      email: '',
+      role: '',
+      message: 'sign up below',
       isCreated: false,
     };
     this.userDetailsHandler = this.userDetailsHandler.bind(this);
@@ -30,7 +34,7 @@ class CreateUser extends Component {
     this.props.createUser(newUser);
     this.setState({
       message:
-        "Thank you your account has been created, you can now log in with your credentials!",
+        'Thank you your account has been created, you can now log in with your credentials!',
       isCreated: true,
     });
   }
@@ -39,44 +43,44 @@ class CreateUser extends Component {
     return (
       <div>
         <form onSubmit={this.createUserHandler}>
-          <h4>Create User</h4>
-          <label>First Name </label>
-          <input
-            type="text"
-            value={this.state.first}
-            name="first"
-            onChange={this.userDetailsHandler}
-            required
-          />
+          <div>
+            <input
+              type="text"
+              value={this.state.first}
+              name="first"
+              onChange={this.userDetailsHandler}
+              required
+              placeholder="first"
+            />
+            <input
+              type="text"
+              value={this.state.last}
+              name="last"
+              onChange={this.userDetailsHandler}
+              required
+              placeholder="last"
+            />
+          </div>
+          <div>
+            <input
+              type="text"
+              value={this.state.email}
+              name="email"
+              onChange={this.userDetailsHandler}
+              required
+              placeholder="email"
+            />
+            <input
+              type="password"
+              value={this.state.password}
+              name="password"
+              onChange={this.userDetailsHandler}
+              required
+              placeholder="password"
+            />
+          </div>
           <br></br>
-          <label>Last Name </label>
-          <input
-            type="text"
-            value={this.state.last}
-            name="last"
-            onChange={this.userDetailsHandler}
-            required
-          />
-          <br></br>
-          <label>Password </label>
-          <input
-            type="password"
-            value={this.state.password}
-            name="password"
-            onChange={this.userDetailsHandler}
-            required
-          />
-          <br></br>
-          <label>Email </label>
-          <input
-            type="text"
-            value={this.state.email}
-            name="email"
-            onChange={this.userDetailsHandler}
-            required
-          />
-          <br></br>
-          <button type="submit">CREATE</button>
+          <button type="submit">create</button>
         </form>
       </div>
     );
@@ -84,11 +88,15 @@ class CreateUser extends Component {
 
   render() {
     return (
-      <div>
+      <motion.div
+        transition={{ ease: 'easeOut', duration: 1 }}
+        initial={{ opacity: 0 }}
+        animate={{ x: [100, 0], opacity: 1 }}
+      >
         {this.state.message}
         <br></br>
         {this.state.isCreated ? null : this.displayForm()}
-      </div>
+      </motion.div>
     );
   }
 }

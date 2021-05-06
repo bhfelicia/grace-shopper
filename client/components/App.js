@@ -62,18 +62,9 @@ class App extends Component {
       },
     });
     this.setState({ loggedInUser });
-    this.props.loadUsers();
-    this.props.loadUser(this.state.loggedInUser.id);
-    //window.localStorage.setItem('token');
+    await this.props.loadUsers();
+    await this.props.loadUser(this.state.loggedInUser.id);
   }
-
-  // componentDidUpdate(prevProps) {
-  //   if (
-  //     prevProps.userReducer.selectedUser !== this.props.userReducer.selectedUser
-  //   ) {
-  //     this.render();
-  //   }
-  // }
 
   render() {
     return (
