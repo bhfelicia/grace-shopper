@@ -11,6 +11,7 @@ import EditProduct from "./PRODUCTS/EditProduct";
 import AllOrders from "./ORDERS/AllOrders";
 import SingleOrder from "./ORDERS/SingleOrder";
 import EditOrder from "./ORDERS/EditOrder";
+import OrderSummary from "./CART/OrderSummary";
 import ProductReviews from "./REVIEWS/ProductReviews";
 import CreateReview from "./REVIEWS/CreateReview";
 import AllUsers from "./USERS/AllUsers";
@@ -18,6 +19,7 @@ import SingleUser from "./USERS/SingleUser";
 import EditUser from "./USERS/EditUser";
 import CreateUser from "./USERS/CreateUser";
 import Cart from "./CART/Cart";
+import Checkout from "./CART/Checkout";
 import Login from "./NAVBAR/Login";
 import Settings from "./NAVBAR/Settings";
 import SignUp from "./NAVBAR/SignUp";
@@ -106,6 +108,8 @@ class App extends Component {
             <Route exact path="/signup/create" component={CreateUser}></Route>
             <Route exact path="/cart" component={Cart}></Route>
             <Route exact path="/about" component={About}></Route>
+            <Route exact path="/orderSummary" component={OrderSummary}></Route>
+            <Route exact path="/checkout" component={Checkout}></Route>
             {/* <Route exact path="/users/:id/edit" component={EditUser}></Route> Most likely don't need this if I am going to include the edit user form on a single user view regardless!*/}
           </Switch>
         </div>

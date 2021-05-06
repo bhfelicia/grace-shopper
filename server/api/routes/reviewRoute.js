@@ -33,7 +33,6 @@ router.post("/", async (req, res, next) => {
       description,
       rating,
     });
-    console.log("new review on the backend is: ", newReview);
     res.send({ newReview, user: theUser }).status(201);
   } catch (error) {
     next(error);

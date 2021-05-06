@@ -56,7 +56,6 @@ class Nav extends Component {
   }
 
   render() {
-    console.log(this.state);
     if (this.state.loggedInUser.isAdmin) {
       return (
         <nav className="nav-container">

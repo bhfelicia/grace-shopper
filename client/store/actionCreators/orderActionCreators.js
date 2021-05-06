@@ -7,7 +7,8 @@ import {
   DELETE_CART,
   UPDATE_ORDER,
   DELETE_PRODUCT_FROM_CART,
-} from '../actions/index';
+  SET_RECENT_ORDER,
+} from "../actions/index";
 
 export const loadOrders = (orders) => {
   return {
@@ -62,5 +63,12 @@ export const deleteProductFromCart = (cart) => {
   return {
     type: DELETE_PRODUCT_FROM_CART,
     cart,
+  };
+};
+
+export const getRecent = (order) => {
+  return {
+    type: SET_RECENT_ORDER,
+    order,
   };
 };

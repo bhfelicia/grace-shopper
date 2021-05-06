@@ -1,16 +1,16 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import Checkout from './Checkout';
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import Checkout from "./Checkout";
 
-import Emoji from 'react-emoji-render';
-import { motion } from 'framer-motion';
+import Emoji from "react-emoji-render";
+import { motion } from "framer-motion";
 
 import {
   fetchCart,
   fetchOrders,
   deleteFromCart,
   addOneToCart,
-} from '../../store/thunks/orderThunk';
+} from "../../store/thunks/orderThunk";
 
 class Cart extends Component {
   constructor(props) {
@@ -40,16 +40,14 @@ class Cart extends Component {
   showCheckoutFunc() {
     this.setState({ ...this.state, showCheckout: !this.state.showCheckout });
   }
-  async handleToken(token, address) {}
   render() {
-    console.log(this.state);
     const currentCart = this.props.orderReducer.currentCart || [];
     if (!currentCart.products || !currentCart.products.length) {
       return (
         <motion.h1
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ ease: 'easeOut', duration: 1 }}
+          transition={{ ease: "easeOut", duration: 1 }}
         >
           <h1>
             <Emoji text=":grimacing:" />
@@ -60,7 +58,7 @@ class Cart extends Component {
     } else if (!this.state.showCheckout) {
       return (
         <motion.div
-          transition={{ ease: 'easeOut', duration: 1 }}
+          transition={{ ease: "easeOut", duration: 1 }}
           initial={{ opacity: 0 }}
           animate={{ x: [100, 0], opacity: 1 }}
         >
@@ -124,7 +122,7 @@ class Cart extends Component {
     } else {
       return (
         <motion.div
-          transition={{ ease: 'easeOut', duration: 1 }}
+          transition={{ ease: "easeOut", duration: 1 }}
           initial={{ opacity: 0 }}
           animate={{ x: [100, 0], opacity: 1 }}
         >

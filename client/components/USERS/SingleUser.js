@@ -1,35 +1,35 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import EditUser from './EditUser';
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import EditUser from "./EditUser";
 
-import { fetchUser } from '../../store/thunks/userThunk';
-import { Link } from 'react-router-dom';
+import { fetchUser } from "../../store/thunks/userThunk";
+import { Link } from "react-router-dom";
 
-import axios from 'axios';
+import axios from "axios";
 
 class SingleUser extends Component {
   constructor(props) {
     super(props);
     this.state = {
       loggedInUser: {
-        fullName: '',
+        fullName: "",
         id: 0,
         isAdmin: false,
-        role: '',
-        first: '',
-        last: '',
-        password: '',
-        email: '',
-        createdAt: '',
-        updatedAt: '',
+        role: "",
+        first: "",
+        last: "",
+        password: "",
+        email: "",
+        createdAt: "",
+        updatedAt: "",
       },
     };
   }
 
   async componentDidMount() {
     await this.props.getUser(Number(this.props.match.params.id));
-    const { data: loggedInUser } = await axios.get('/api/auth', {
-      headers: { authorization: window.localStorage.getItem('token') },
+    const { data: loggedInUser } = await axios.get("/api/auth", {
+      headers: { authorization: window.localStorage.getItem("token") },
     });
     this.setState({ loggedInUser });
   }
@@ -48,7 +48,6 @@ class SingleUser extends Component {
   }
 
   render() {
-    console.log(this.state, 'state here!!!!');
     if (this.state.loggedInUser.isAdmin) {
       return <div>{this.displayUser()}</div>;
     } else {

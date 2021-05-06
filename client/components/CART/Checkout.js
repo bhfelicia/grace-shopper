@@ -2,7 +2,12 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import axios from "axios";
 import StripeCheckout from "react-stripe-checkout";
-import { destroyCart, checkoutOrder } from "../../store/thunks/orderThunk";
+import {
+  destroyCart,
+  checkoutOrder,
+  fetchRecent,
+} from "../../store/thunks/orderThunk";
+import { withRouter } from "react-router";
 
 // const pubStripeKey = process.env.STRIPE_PUBLIC_KEY;
 class Checkout extends Component {
@@ -31,7 +36,7 @@ class Checkout extends Component {
 
       if (response.status === 200) {
         alert("Thank you for your purchase");
-        console.log("cart id? ", this.props.cart.id);
+        this.props.getRecent(this.props.cart.id);
         this.props.orderCheckout(this.props.cart.id);
       } else {
         alert(
@@ -55,8 +60,6 @@ class Checkout extends Component {
           shippingAddress={this.state.shippingAddress}
           amount={(+this.state.orderTotal + Number(this.state.tax)) * 100}
         />
-
-        {/* <form onSubmit={this.handleSubmit}></form> */}
       </div>
     );
   }
@@ -67,8 +70,11 @@ const mapStateToProps = ({ userReducer, orderReducer }) => ({
   orderReducer,
 });
 
-const mapDispatchToProps = (dispatch) => ({
-  orderCheckout: (id) => dispatch(checkoutOrder(id)),
+const mapDispatchToProps = (dispatch, { history }) => ({
+  orderCheckout: (id) => dispatch(checkoutOrder(id, history)),
+  getRecent: (id) => dispatch(fetchRecent(id)),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Checkout);
+export default withRouter(
+  connect(mapStateToProps, mapDispatchToProps)(Checkout)
+);

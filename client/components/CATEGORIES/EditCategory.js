@@ -41,7 +41,6 @@ class EditCategory extends Component {
   }
 
   render() {
-    // console.log(this.props, "rendererrer");
     let selectedCategoryName = this.props.categoryReducer.selectedCategory.name;
     return (
       <form onSubmit={this.onSave}>
