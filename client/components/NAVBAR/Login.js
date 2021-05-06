@@ -63,6 +63,7 @@ class Login extends React.Component {
       this.setState({ email: '', password: '', auth: {} });
       window.localStorage.setItem('guest', 'false');
       this.props.history.push('/');
+      location.reload();
     }
   }
   render() {
@@ -70,7 +71,12 @@ class Login extends React.Component {
     const { email, password, auth } = this.state;
     if (!auth.id) {
       return (
-        <div className="login-container">
+        <motion.div
+          className="login-container"
+          transition={{ ease: 'easeOut', duration: 1 }}
+          initial={{ opacity: 0 }}
+          animate={{ x: [100, 0], opacity: 1 }}
+        >
           <form onSubmit={onSubmit} className="login-form">
             <div className="form-group">
               <input
@@ -92,11 +98,15 @@ class Login extends React.Component {
                 placeholder="password"
               />
             </div>
-            <div className="form-group">
+            <motion.div
+              className="form-group"
+              whileHover={{ scale: 1.3 }}
+              whileTap={{ scale: [0.9, 1.05] }}
+            >
               <button type="submit" className="form-button">
-                Sign In
+                sign in
               </button>
-            </div>
+            </motion.div>
             <hr></hr>
             <div id="signupOptions">
               <div>
@@ -121,7 +131,7 @@ class Login extends React.Component {
               </div>
             </div>
           </form>
-        </div>
+        </motion.div>
       );
     } else {
       return (

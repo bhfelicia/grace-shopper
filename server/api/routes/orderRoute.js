@@ -1,17 +1,17 @@
-const router = require("express").Router();
-const Order = require("../../db/models/Order");
-const User = require("../../db/models/User");
-const Product = require("../../db/models/Product");
-const Order_Product = require("../../db/models/Order_Product");
+const router = require('express').Router();
+const Order = require('../../db/models/Order');
+const User = require('../../db/models/User');
+const Product = require('../../db/models/Product');
+const Order_Product = require('../../db/models/Order_Product');
 
-if (process.env.NODE_ENV !== "production") {
-  require("dotenv").config();
+if (process.env.NODE_ENV !== 'production') {
+  require('dotenv').config();
 }
-const { v4: uuidv4 } = require("uuid");
+const { v4: uuidv4 } = require('uuid');
 const stripeSecret = process.env.STRIPE_SECRET_KEY;
-const stripe = require("stripe")(stripeSecret);
+const stripe = require('stripe')(stripeSecret);
 //get routes
-router.get("/", async (req, res, next) => {
+router.get('/', async (req, res, next) => {
   try {
     const orders = await Order.findAll();
     res.status(200).send(orders);
@@ -20,7 +20,7 @@ router.get("/", async (req, res, next) => {
   }
 });
 
-router.get("/:id", async (req, res, next) => {
+router.get('/:id', async (req, res, next) => {
   try {
     const order = await Order.findByPk(req.params.id, {
       include: Product,
@@ -31,7 +31,7 @@ router.get("/:id", async (req, res, next) => {
   }
 });
 
-router.get("/:id/products", async (req, res, next) => {
+router.get('/:id/products', async (req, res, next) => {
   try {
     const products = await Order.getProducts(req.params.id);
     res.status(200).send(products);
@@ -40,13 +40,13 @@ router.get("/:id/products", async (req, res, next) => {
   }
 });
 
-router.get("/user/cart", async (req, res, next) => {
+router.get('/user/cart', async (req, res, next) => {
   try {
     const currentUser = await User.byToken(req.headers.authorization);
     const currentCart = await Order.findOne({
       where: {
         userId: currentUser.id,
-        status: "in progress",
+        status: 'in progress',
       },
       include: Product,
     });
@@ -56,12 +56,12 @@ router.get("/user/cart", async (req, res, next) => {
   }
 });
 
-router.get("/user/:userId/orders", async (req, res, next) => {
+router.get('/user/:userId/orders', async (req, res, next) => {
   try {
     const pastOrders = await Order.findAll({
       where: {
         userId: req.params.userId,
-        status: ["created", "processing", "canceled", "completed"],
+        status: ['created', 'processing', 'canceled', 'completed'],
       },
     });
     res.send(pastOrders).status(200);
@@ -72,7 +72,7 @@ router.get("/user/:userId/orders", async (req, res, next) => {
 
 //stripe routes
 
-router.post("/checkout", async (req, res, next) => {
+router.post('/checkout', async (req, res, next) => {
   try {
     const { token, billingAddress, shippingAddress, amount } = req.body;
     const customer = await stripe.customers.create({
@@ -84,7 +84,7 @@ router.post("/checkout", async (req, res, next) => {
     const charge = await stripe.charges.create(
       {
         amount: amount,
-        currency: "usd",
+        currency: 'usd',
         customer: customer.id,
         receipt_email: token.email,
         description: `Made a purchase of ${total}`,
@@ -101,11 +101,11 @@ router.post("/checkout", async (req, res, next) => {
       },
       { idempotencyKey }
     );
-    status = "success";
+    status = 'success';
     res.send(charge);
   } catch (error) {
-    console.error("Error: ", error);
-    status = "failure";
+    console.error('Error: ', error);
+    status = 'failure';
     // next(error);
   }
   // res.json({ error, status });
@@ -121,7 +121,7 @@ router.post("/checkout", async (req, res, next) => {
 
 //post routes
 
-router.post("/cart/create", async (req, res, next) => {
+router.post('/cart/create', async (req, res, next) => {
   try {
     const { productId } = req.body.data;
     //const { userId } = req.params;
@@ -130,11 +130,11 @@ router.post("/cart/create", async (req, res, next) => {
     const theProduct = await Product.findByPk(productId);
     const makeAnOrder = await Order.create({
       userId: user.id,
-      status: "in progress",
+      status: 'in progress',
       total: theProduct.price,
       ordered_date: now,
       isCreated: false,
-      shipping_address: "PLACEHOLDER",
+      shipping_address: 'PLACEHOLDER',
     });
     await Order_Product.create({
       orderId: makeAnOrder.dataValues.id,
@@ -154,7 +154,7 @@ router.post("/cart/create", async (req, res, next) => {
   }
 });
 
-router.post("/", async (req, res, next) => {
+router.post('/', async (req, res, next) => {
   try {
     const newOrderData = req.body;
     const newOrder = await Order.create(newOrderData);
@@ -166,7 +166,7 @@ router.post("/", async (req, res, next) => {
 
 //put routes
 
-router.put("/:id", async (req, res, next) => {
+router.put('/:id', async (req, res, next) => {
   try {
     const updateData = req.body;
     const { id } = req.params;
@@ -178,7 +178,7 @@ router.put("/:id", async (req, res, next) => {
   }
 });
 
-router.put("/cart/add", async (req, res, next) => {
+router.put('/cart/add', async (req, res, next) => {
   try {
     let updatedOrder;
     const { productExists, productId, cartId } = req.body.data;
@@ -216,7 +216,7 @@ router.put("/cart/add", async (req, res, next) => {
   }
 });
 
-router.put("/cart/addOne", async (req, res, next) => {
+router.put('/cart/addOne', async (req, res, next) => {
   try {
     const { productId, cartId } = req.body.data;
     const productToBeUpdated = await Order_Product.findOne({
@@ -254,7 +254,7 @@ router.put("/cart/addOne", async (req, res, next) => {
 //delete routes
 
 // route for deleting entire product from a cart
-router.delete("/cart/product/delete", async (req, res, next) => {
+router.delete('/cart/product/delete', async (req, res, next) => {
   try {
     const { productId, orderId } = req.body;
     const productToBeDeleted = await Order_Product.findOne({
@@ -274,7 +274,8 @@ router.delete("/cart/product/delete", async (req, res, next) => {
       },
     });
     const newTotal =
-      orderToBeUpdated.dataValues.total - product.dataValues.price;
+      orderToBeUpdated.dataValues.total -
+      product.dataValues.price * productToBeDeleted.product_quantity;
     await orderToBeUpdated.update({ total: newTotal });
     await productToBeDeleted.destroy();
     res.send(productToBeDeleted).status(204);
@@ -283,7 +284,7 @@ router.delete("/cart/product/delete", async (req, res, next) => {
   }
 });
 
-router.put("/cart/product/deleteSingleItem", async (req, res, next) => {
+router.put('/cart/product/deleteSingleItem', async (req, res, next) => {
   try {
     const { productId, orderId } = req.body;
     const productToBeUpdated = await Order_Product.findOne({
@@ -300,13 +301,13 @@ router.put("/cart/product/deleteSingleItem", async (req, res, next) => {
   }
 });
 
-router.put("/checkout/:id", async (req, res, next) => {
+router.put('/checkout/:id', async (req, res, next) => {
   try {
     const { id } = req.params;
     const orderToBeUpdated = await Order.findByPk(id);
     const updatedOrder = await orderToBeUpdated.update({
-      status: "created",
-      isCreated: "true",
+      status: 'created',
+      isCreated: 'true',
     });
     res.send(updatedOrder).status(204);
   } catch (error) {

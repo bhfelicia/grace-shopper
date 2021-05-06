@@ -1,16 +1,16 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import Checkout from "./Checkout";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import Checkout from './Checkout';
 
-import Emoji from "react-emoji-render";
-import { motion } from "framer-motion";
+import Emoji from 'react-emoji-render';
+import { motion } from 'framer-motion';
 
 import {
   fetchCart,
   fetchOrders,
   deleteFromCart,
   addOneToCart,
-} from "../../store/thunks/orderThunk";
+} from '../../store/thunks/orderThunk';
 
 class Cart extends Component {
   constructor(props) {
@@ -44,140 +44,142 @@ class Cart extends Component {
     const currentCart = this.props.orderReducer.currentCart || [];
     if (!currentCart.products || !currentCart.products.length) {
       return (
-        <motion.h1
+        <motion.div
+          transition={{ ease: 'easeOut', duration: 1 }}
           initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ ease: "easeOut", duration: 1 }}
+          animate={{ x: [100, 0], opacity: 1 }}
         >
           <h1>
             <Emoji text=":grimacing:" />
           </h1>
-          <h2>Your cart is empty!</h2>
-        </motion.h1>
+          <h2>your cart is empty!</h2>
+        </motion.div>
       );
     } else if (!this.state.showCheckout) {
       return (
         <motion.div
-          transition={{ ease: "easeOut", duration: 1 }}
+          transition={{ ease: 'easeOut', duration: 1 }}
           initial={{ opacity: 0 }}
           animate={{ x: [100, 0], opacity: 1 }}
         >
           <ol>
             {currentCart.products.map((product) => (
-              <li key={product.id}>
+              <li key={product.id} id="individualCartItem">
                 <img src={product.image}></img>
-                <hr />
-                <button
-                  id="incCart"
-                  onClick={() =>
-                    this.addProductToCart(product.id, currentCart.id)
-                  }
-                >
-                  +
-                </button>
-                {product.order_product.product_quantity}
-                <button
-                  id="decCart"
-                  onClick={() => {
-                    if (product.order_product.product_quantity != 1) {
-                      this.deleteProductFromCart(
-                        true,
-                        product.id,
-                        currentCart.id
-                      );
-                    } else {
+                <div id="cartButtons">
+                  <button
+                    id="incCart"
+                    onClick={() =>
+                      this.addProductToCart(product.id, currentCart.id)
+                    }
+                  >
+                    +
+                  </button>
+                  {product.order_product.product_quantity}
+                  <button
+                    id="decCart"
+                    onClick={() => {
+                      if (product.order_product.product_quantity != 1) {
+                        this.deleteProductFromCart(
+                          true,
+                          product.id,
+                          currentCart.id
+                        );
+                      } else {
+                        this.deleteProductFromCart(
+                          false,
+                          product.id,
+                          currentCart.id
+                        );
+                      }
+                    }}
+                  >
+                    -
+                  </button>
+                  x {product.name} - $
+                  {product.price * product.order_product.product_quantity}
+                  <button
+                    onClick={() =>
                       this.deleteProductFromCart(
                         false,
                         product.id,
                         currentCart.id
-                      );
+                      )
                     }
-                  }}
-                >
-                  -
-                </button>
-                x {product.name} - $
-                {product.price * product.order_product.product_quantity}
-                <button
-                  onClick={() =>
-                    this.deleteProductFromCart(
-                      false,
-                      product.id,
-                      currentCart.id
-                    )
-                  }
-                >
-                  Delete
-                </button>
+                  >
+                    delete
+                  </button>
+                </div>
               </li>
             ))}
           </ol>
           <hr />
-          <h5>Subtotal: ${currentCart.total}</h5>
-          <h5>Tax: ${currentCart.tax}</h5>
-          <h3>Grand total: ${Number(currentCart.total) + currentCart.tax}</h3>
-          <button onClick={this.showCheckoutFunc}>Proceed to checkout</button>
+          <h5>subtotal: ${currentCart.total}</h5>
+          <h5>tax: ${currentCart.tax}</h5>
+          <h3>grand total: ${Number(currentCart.total) + currentCart.tax}</h3>
+          <button onClick={this.showCheckoutFunc}>checkout</button>
         </motion.div>
       );
     } else {
       return (
         <motion.div
-          transition={{ ease: "easeOut", duration: 1 }}
+          transition={{ ease: 'easeOut', duration: 1 }}
           initial={{ opacity: 0 }}
           animate={{ x: [100, 0], opacity: 1 }}
         >
           <ol>
             {currentCart.products.map((product) => (
-              <li key={product.id}>
+              <li key={product.id} id="individualCartItem">
                 <img src={product.image}></img>
-                <hr />
-                <button
-                  onClick={() =>
-                    this.addProductToCart(product.id, currentCart.id)
-                  }
-                >
-                  +
-                </button>
-                {product.order_product.product_quantity}
-                <button
-                  onClick={() => {
-                    if (product.order_product.product_quantity != 1) {
-                      this.deleteProductFromCart(
-                        true,
-                        product.id,
-                        currentCart.id
-                      );
-                    } else {
+                <div id="cartButtons">
+                  <button
+                    onClick={() =>
+                      this.addProductToCart(product.id, currentCart.id)
+                    }
+                  >
+                    +
+                  </button>
+                  {product.order_product.product_quantity}
+                  <button
+                    onClick={() => {
+                      if (product.order_product.product_quantity != 1) {
+                        this.deleteProductFromCart(
+                          true,
+                          product.id,
+                          currentCart.id
+                        );
+                      } else {
+                        this.deleteProductFromCart(
+                          false,
+                          product.id,
+                          currentCart.id
+                        );
+                      }
+                    }}
+                  >
+                    --
+                  </button>
+                  x {product.name} - $
+                  {product.price * product.order_product.product_quantity}
+                  <button
+                    onClick={() =>
                       this.deleteProductFromCart(
                         false,
                         product.id,
                         currentCart.id
-                      );
+                      )
                     }
-                  }}
-                >
-                  --
-                </button>
-                x {product.name} - $
-                {product.price * product.order_product.product_quantity}
-                <button
-                  onClick={() =>
-                    this.deleteProductFromCart(
-                      false,
-                      product.id,
-                      currentCart.id
-                    )
-                  }
-                >
-                  Delete
-                </button>
+                  >
+                    delete
+                  </button>
+                </div>
               </li>
             ))}
           </ol>
           <hr />
-          <h5>Subtotal: ${currentCart.total}</h5>
-          <h5>Tax: ${currentCart.tax}</h5>
-          <h3>Grand total: ${Number(currentCart.total) + currentCart.tax}</h3>
+          <h5>subtotal: ${currentCart.total}</h5>
+          <h5>tax: ${currentCart.tax}</h5>
+          <h3>grand total: ${Number(currentCart.total) + currentCart.tax}</h3>
           <Checkout cart={currentCart} />
         </motion.div>
       );

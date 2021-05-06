@@ -4,6 +4,8 @@ import { Link } from 'react-router-dom';
 import { fetchUsers } from '../../store/thunks/userThunk';
 
 import axios from 'axios';
+import { motion } from 'framer-motion';
+import Emoji from 'react-emoji-render';
 
 class Settings extends Component {
   constructor(props) {
@@ -42,33 +44,50 @@ class Settings extends Component {
       this.state.loggedInUser.first + ' ' + this.state.loggedInUser.last;
     if (this.state.loggedInUser.isAdmin) {
       return (
-        <div className="settings-container">
+        <motion.div
+          className="settings-container"
+          transition={{ ease: 'easeOut', duration: 1 }}
+          initial={{ opacity: 0 }}
+          animate={{ x: [100, 0], opacity: 1 }}
+        >
           <div className="settings-container-left">
-            <div>Welcome {fullName} </div>
+            <h1>welcome, {fullName} </h1>
           </div>
           <div className="settings-container-right">
-            <div>
+            <motion.h1
+              whileHover={{ scale: 1.4 }}
+              whileTap={{ scale: [0.9, 1.05] }}
+            >
               <Link style={{ textDecoration: 'none' }} to="/categories">
-                Categories
+                <Emoji text=":books:" /> categories
               </Link>
-            </div>
-            <div>
+            </motion.h1>
+            <motion.h1
+              whileHover={{ scale: 1.4 }}
+              whileTap={{ scale: [0.9, 1.05] }}
+            >
               <Link style={{ textDecoration: 'none' }} to="/products">
-                Products
+                <Emoji text="&#129750;" /> products
               </Link>
-            </div>
-            <div>
+            </motion.h1>
+            <motion.h1
+              whileHover={{ scale: 1.4 }}
+              whileTap={{ scale: [0.9, 1.05] }}
+            >
               <Link style={{ textDecoration: 'none' }} to="/users">
-                Users
+                <Emoji text=":busts_in_silhouette:" /> users
               </Link>
-            </div>
-            <div>
+            </motion.h1>
+            <motion.h1
+              whileHover={{ scale: 1.4 }}
+              whileTap={{ scale: [0.9, 1.05] }}
+            >
               <Link style={{ textDecoration: 'none' }} to="/orders">
-                Orders
+                <Emoji text="&#128450;&#65039;" /> orders
               </Link>
-            </div>
+            </motion.h1>
           </div>
-        </div>
+        </motion.div>
       );
     } else {
       return <div>You do not have access.</div>;
