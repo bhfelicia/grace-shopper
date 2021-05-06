@@ -303,7 +303,7 @@ router.put("/cart/product/deleteSingleItem", async (req, res, next) => {
 router.put("/checkout/:id", async (req, res, next) => {
   try {
     const { id } = req.params;
-    const orderToBeUpdated = await Order.findByPk(id);
+    const orderToBeUpdated = await Order.findByPk(id, { include: Product });
     const updatedOrder = await orderToBeUpdated.update({
       status: "created",
       isCreated: "true",
