@@ -19,7 +19,6 @@ class AllProducts extends Component {
     await this.props.getCart();
   }
   addToCart(productId) {
-    console.log('current cart is: ', this.props.orderReducer.currentCart);
     const cartId = this.props.orderReducer.currentCart.id;
     if (!this.props.orderReducer.currentCart) {
       this.props.createCart(productId);

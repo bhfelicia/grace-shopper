@@ -40,9 +40,7 @@ class Cart extends Component {
   showCheckoutFunc() {
     this.setState({ ...this.state, showCheckout: !this.state.showCheckout });
   }
-  async handleToken(token, address) {}
   render() {
-    console.log(this.state);
     const currentCart = this.props.orderReducer.currentCart || [];
     if (!currentCart.products || !currentCart.products.length) {
       return (

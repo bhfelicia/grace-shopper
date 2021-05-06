@@ -17,6 +17,8 @@ export const LOAD_CATEGORY = "LOAD_CATEGORY";
 export const LOAD_ORDERS = "LOAD_ORDERS";
 export const LOAD_ORDER = "LOAD_ORDER";
 export const UPDATE_ORDER = "UPDATE_ORDER";
+// export const GET_RECENT_ORDER = "GET_RECENT_ORDER";
+export const SET_RECENT_ORDER = "SET_RECENT_ORDER";
 //a cart is an order that's status is "in progress"
 //when a user first adds a product to their cart, that cart is then going to be created and added to the database and our redux store
 export const CREATE_CART = "CREATE_CART";

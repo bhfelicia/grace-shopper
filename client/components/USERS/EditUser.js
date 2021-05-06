@@ -67,8 +67,6 @@ class EditUser extends Component {
   submitUpdateHandler(event) {
     event.preventDefault();
     const editedUser = { ...this.state };
-    console.log("Hello from submit handler", this.props);
-    console.log(editedUser);
     this.props.editUser(editedUser);
   }
 

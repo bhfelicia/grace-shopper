@@ -2,20 +2,6 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { fetchProducts, filterProducts } from "../../store/thunks/productThunk";
 
-// // onclick()
-// const searchBar = ()=>{
-//     return(
-
-//         <div className="search-container">
-//             {/* <i className="fa fa-search searchIcon"></i> */}
-//             <input className="searchBox" type="search" name="search" placeholder="Search by category"/>
-//             <button type ="submit" value="search" className="searchButton" onClick={()=> console.log('Clicked the searchbox')}>enter</button>
-//         </div>
-//     );
-// }
-
-// export default connect(state => state)(searchBar);
-
 class SearchBar extends Component {
   constructor(props) {
     super(props);
@@ -23,12 +9,10 @@ class SearchBar extends Component {
       item: "",
     };
     this.searchInputHandler = this.searchInputHandler.bind(this);
-    // this.searchSubmitHandler = this.searchSubmitHandler.bind(this);
   }
 
   async searchInputHandler(event) {
     const value = event.target.value;
-    console.log(value);
     const { getFilteredProducts } = this.props;
     await getFilteredProducts(value);
     if (value === "") {

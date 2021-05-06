@@ -34,7 +34,6 @@ class AllOrders extends React.Component {
     const { data: loggedInUser } = await axios.get('/api/auth', {
       headers: { authorization: window.localStorage.getItem('token') },
     });
-    console.log(loggedInUser, 'logged in user');
     await this.props.loadUser(loggedInUser.id);
     await this.props.getOrders();
     this.setState({ loggedInUser, orders: this.props.orderReducer.orders });
