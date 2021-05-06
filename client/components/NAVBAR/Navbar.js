@@ -52,14 +52,19 @@ class Nav extends Component {
     const guestUser = await axios.get('/api/users/1');
     window.localStorage.setItem('token', guestUser.data.password);
     window.localStorage.setItem('guest', 'true');
-    this.props.history.push('/');
+    this.setState({ loggedInUser: {} });
   }
 
   render() {
     console.log(this.state);
     if (this.state.loggedInUser.isAdmin) {
       return (
-        <nav className="nav-container">
+        <motion.nav
+          className="nav-container"
+          transition={{ ease: 'easeOut', duration: 1 }}
+          initial={{ opacity: 0 }}
+          animate={{ x: [-100, 0], opacity: 1 }}
+        >
           <Link style={{ textDecoration: 'none' }} to="/">
             <motion.div
               whileHover={{ scale: 1.3 }}
@@ -82,6 +87,14 @@ class Nav extends Component {
               whileHover={{ scale: 1.3 }}
               whileTap={{ scale: [0.9, 1.05] }}
             >
+              <Link style={{ textDecoration: 'none' }} to={`/orders`}>
+                <Emoji text=":notebook_with_decorative_cover:" />
+              </Link>
+            </motion.div>
+            <motion.div
+              whileHover={{ scale: 1.3 }}
+              whileTap={{ scale: [0.9, 1.05] }}
+            >
               <Link style={{ textDecoration: 'none' }} to="/cart">
                 <Emoji text=":shopping_cart:" />
               </Link>
@@ -94,7 +107,6 @@ class Nav extends Component {
                 style={{ textDecoration: 'none' }}
                 onClick={() => {
                   this.logout();
-                  this.setState({ loggedInUser: {} });
                 }}
                 to="/login"
               >
@@ -102,7 +114,7 @@ class Nav extends Component {
               </Link>
             </motion.div>
           </div>
-        </nav>
+        </motion.nav>
       );
     } else if (
       this.state.loggedInUser.isAdmin === false &&
@@ -142,9 +154,19 @@ class Nav extends Component {
             >
               <Link
                 style={{ textDecoration: 'none' }}
+                to={`/users/${this.state.loggedInUser.id}`}
+              >
+                <Emoji text=":bust_in_silhouette:" />
+              </Link>
+            </motion.div>
+            <motion.div
+              whileHover={{ scale: 1.3 }}
+              whileTap={{ scale: [0.9, 1.05] }}
+            >
+              <Link
+                style={{ textDecoration: 'none' }}
                 onClick={() => {
                   this.logout();
-                  this.setState({ loggedInUser: {} });
                 }}
                 to="/login"
               >

@@ -63,6 +63,7 @@ class Login extends React.Component {
       this.setState({ email: '', password: '', auth: {} });
       window.localStorage.setItem('guest', 'false');
       this.props.history.push('/');
+      location.reload();
     }
   }
   render() {

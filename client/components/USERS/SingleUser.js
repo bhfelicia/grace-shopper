@@ -49,7 +49,10 @@ class SingleUser extends Component {
 
   render() {
     console.log(this.state, 'state here!!!!');
-    if (this.state.loggedInUser.isAdmin) {
+    if (
+      this.state.loggedInUser.isAdmin ||
+      this.state.loggedInUser.id === this.props.userReducer.selectedUser.id
+    ) {
       return <div>{this.displayUser()}</div>;
     } else {
       return <div>You do not have access!</div>;
