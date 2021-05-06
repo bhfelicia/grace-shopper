@@ -67,9 +67,7 @@ img {
 } */
 
 .searchBox {
-  border: 0;
-  padding: 0.5rem 0.5rem 0.5rem 0;
-  flex: 1;
+  width: 30rem;
 }
 
 .searchButton {
@@ -180,6 +178,9 @@ p {
 ol li {
   list-style: none;
 }
+li {
+  list-style: none;
+}
 
 #incCart {
   min-width: 3rem;
@@ -261,6 +262,18 @@ ol li {
 #aboutLink {
   margin-top: 5rem;
   font-size: xx-large;
+}
+
+select {
+  border-radius: 1rem;
+  border: none;
+  width: 10rem;
+  height: 2rem;
+  text-align-last: center;
+}
+
+option {
+  text-align: center;
 }
 
 /* images*/

@@ -1,7 +1,10 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import { fetchUser, updateUser } from "../../store/thunks/userThunk";
-import axios from "axios";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { fetchUser, updateUser } from '../../store/thunks/userThunk';
+import axios from 'axios';
+
+import { motion } from 'framer-motion';
+import Emoji from 'react-emoji-render';
 
 //bring in fetchUser thunk, use it in componentDidMount to fetch user so you can keep a user
 //on refresh
@@ -13,22 +16,22 @@ class EditUser extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      id: this.props.userReducer.selectedUser.id || "",
-      first: this.props.userReducer.selectedUser.first || "",
-      last: this.props.userReducer.selectedUser.last || "",
-      password: this.props.userReducer.selectedUser.password || "",
-      email: this.props.userReducer.selectedUser.email || "",
+      id: this.props.userReducer.selectedUser.id || '',
+      first: this.props.userReducer.selectedUser.first || '',
+      last: this.props.userReducer.selectedUser.last || '',
+      password: this.props.userReducer.selectedUser.password || '',
+      email: this.props.userReducer.selectedUser.email || '',
       loggedInUser: {
-        fullName: "",
+        fullName: '',
         id: 0,
         isAdmin: false,
-        role: "",
-        first: "",
-        last: "",
-        password: "",
-        email: "",
-        createdAt: "",
-        updatedAt: "",
+        role: '',
+        first: '',
+        last: '',
+        password: '',
+        email: '',
+        createdAt: '',
+        updatedAt: '',
       },
     };
 
@@ -45,8 +48,8 @@ class EditUser extends Component {
       password,
       email,
     } = this.props.userReducer.selectedUser;
-    const { data: loggedInUser } = await axios.get("/api/auth", {
-      headers: { authorization: window.localStorage.getItem("token") },
+    const { data: loggedInUser } = await axios.get('/api/auth', {
+      headers: { authorization: window.localStorage.getItem('token') },
     });
     this.setState({
       id,
@@ -79,57 +82,73 @@ class EditUser extends Component {
       this.props.userReducer.selectedUser.id === +this.props.match.params.id
     ) {
       return (
-        <div>
+        <motion.div
+          transition={{ ease: 'easeOut', duration: 1 }}
+          initial={{ opacity: 0 }}
+          animate={{ x: [100, 0], opacity: 1 }}
+        >
           <form onSubmit={this.submitUpdateHandler}>
             <h4>Edit User</h4>
-            <label>First Name </label>
-            <input
-              type="text"
-              value={this.state.first}
-              name="first"
-              onChange={this.editUserHandler}
-              required
-            />
-            <br></br>
-            <label>Last Name </label>
-            <input
-              type="text"
-              value={this.state.last}
-              name="last"
-              onChange={this.editUserHandler}
-              required
-            />
-            <br></br>
-            <label>Password </label>
-            <input
-              type="password"
-              value={this.state.password}
-              name="password"
-              onChange={this.editUserHandler}
-              required
-            />
-            <br></br>
-            <label>Email </label>
-            <input
-              type="text"
-              value={this.state.email}
-              name="email"
-              onChange={this.editUserHandler}
-              required
-            />
-            <br></br>
-            <button type="submit">Update</button>
+            <div>
+              <input
+                type="text"
+                value={this.state.first}
+                name="first"
+                onChange={this.editUserHandler}
+                required
+              />
+            </div>
+            <div>
+              <input
+                type="text"
+                value={this.state.last}
+                name="last"
+                onChange={this.editUserHandler}
+                required
+              />
+            </div>
+            <div>
+              <input
+                type="text"
+                value={this.state.email}
+                name="email"
+                onChange={this.editUserHandler}
+                required
+              />
+            </div>
+            <div>
+              <input
+                type="password"
+                // value={this.state.password}
+                name="password"
+                onChange={this.editUserHandler}
+                required
+                placeholder="password"
+              />
+            </div>
+
+            <motion.button
+              whileHover={{ scale: 1.3 }}
+              whileTap={{ scale: [0.9, 1.05] }}
+              type="submit"
+            >
+              update
+            </motion.button>
           </form>
-        </div>
+        </motion.div>
       );
     } else {
       return (
-        <div>
-          <img
-            src="https://media3.giphy.com/media/8abAbOrQ9rvLG/200.gif"
-            style={style}
-          />
-        </div>
+        <motion.div
+          transition={{ ease: 'easeOut', duration: 1 }}
+          initial={{ opacity: 0 }}
+          animate={{ x: [100, 0], opacity: 1 }}
+        >
+          <h1>
+            <Emoji text=":grimacing:" />
+          </h1>
+          <h2>You do not have access.</h2>
+        </motion.div>
       );
     }
   }

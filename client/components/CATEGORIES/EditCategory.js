@@ -60,7 +60,12 @@ class EditCategory extends Component {
               onChange={this.onChange}
               placeholder="new name"
             />
-            <button>save</button>
+            <motion.button
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: [0.9, 1.05] }}
+            >
+              save
+            </motion.button>
           </div>
         </motion.div>
       </form>

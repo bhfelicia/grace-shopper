@@ -70,22 +70,28 @@ class SingleOrder extends React.Component {
         <div>
           <div>
             <form onSubmit={this.onSave}>
-              {order.tracking_number}: {order.status}
-              <select name="status" onChange={this.onChange}>
+              <h2>tracking number: {order.tracking_number}</h2>
+              <h2 style={{ fontWeight: 700 }}>status: {order.status}</h2>
+              <select
+                name="status"
+                onChange={this.onChange}
+                value={this.state.status}
+              >
                 <option>-----</option>
                 <option>created</option>
                 <option>processing</option>
                 <option>cancelled</option>
                 <option>completed</option>
               </select>
-              <button>Update</button>
+              <button>update</button>
             </form>
           </div>
+          <h3>order placed: {order.ordered_date}</h3>
+          <h3>order delivered: {order.delivered_date}</h3>
           <div>
-            {order.ordered_date} - {order.delivered_date}
+            <h3>shipping address: {order.shipping_address}</h3>
           </div>
-          <div>Shipping Address: {order.shipping_address}</div>
-          <div>Total: {order.total}</div>
+          <div>order total: {order.total}</div>
         </div>
       );
     } else {

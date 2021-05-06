@@ -47,7 +47,12 @@ class CreateCategory extends Component {
               onChange={onChange}
               placeholder="name"
             />
-            <button> save </button>
+            <motion.button
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: [0.9, 1.05] }}
+            >
+              save
+            </motion.button>
           </div>
         </motion.div>
       </form>

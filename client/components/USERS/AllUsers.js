@@ -6,6 +6,8 @@ import { fetchUsers, destroyUser } from '../../store/thunks/userThunk';
 
 import axios from 'axios';
 
+import { motion } from 'framer-motion';
+
 class AllUsers extends Component {
   constructor(props) {
     super(props);
@@ -47,16 +49,29 @@ class AllUsers extends Component {
     } else {
       const userList = users.map((user) => {
         return (
-          <li key={user.id}>
-            {<Link to={`/users/${user.id}`}>{user.fullName}</Link>}
-            <button
+          <motion.div key={user.id}>
+            <motion.h2
+              transition={{ ease: 'easeOut', duration: 1 }}
+              initial={{ opacity: 0 }}
+              animate={{ x: [100, 0], opacity: 1 }}
+              whileHover={{ scale: 1.2 }}
+              whileTap={{ scale: [0.9, 1.05] }}
+            >
+              <Link to={`/users/${user.id}`}>{user.fullName}</Link>
+            </motion.h2>
+            <motion.button
+              transition={{ ease: 'easeOut', duration: 1 }}
+              initial={{ opacity: 0 }}
+              animate={{ x: [-100, 0], opacity: 1 }}
+              whileHover={{ scale: 1.2 }}
+              whileTap={{ scale: [0.9, 1.05] }}
               type="button"
               onClick={this.deleteUserHandler}
               value={user.id}
             >
               Delete User
-            </button>
-          </li>
+            </motion.button>
+          </motion.div>
         );
       });
       return userList;
@@ -70,7 +85,7 @@ class AllUsers extends Component {
     if (this.state.loggedInUser.isAdmin) {
       return (
         <div>
-          <ul>{this.displayUsers()}</ul>
+          <motion.ul>{this.displayUsers()}</motion.ul>
         </div>
       );
     } else {
