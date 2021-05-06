@@ -1,18 +1,18 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
+import React, { Component } from "react";
+import { connect } from "react-redux";
 
-import { addReview } from '../../store/thunks/reviewThunk';
+import { addReview } from "../../store/thunks/reviewThunk";
 
-import Emoji from 'react-emoji-render';
+import Emoji from "react-emoji-render";
 
 class CreateReview extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      userId: this.props.userReducer.selectedUser.id || '',
-      productId: this.props.productId || '',
-      title: '',
-      description: '',
+      userId: this.props.userReducer.selectedUser.id || "",
+      productId: this.props.productId || "",
+      title: "",
+      description: "",
       rating: 1,
     };
     this.handleChange = this.handleChange.bind(this);
@@ -34,16 +34,15 @@ class CreateReview extends Component {
     this.props.createReview(newReview);
   }
   render() {
-    console.log('current props: ', this.props);
     if (!this.props.userReducer.selectedUser.id) {
       return null;
     } else {
-      const ratings = ['--', 1, 2, 3, 4, 5];
+      const ratings = ["--", 1, 2, 3, 4, 5];
       return (
         <div id="createReviewTop">
           <form onSubmit={this.createReviewHandler}>
             <h3>
-              Already purchased? Add a review for this product below!{' '}
+              Already purchased? Add a review for this product below!{" "}
               <Emoji text=":point_down:" />
             </h3>
             <div id="createReviewBody">

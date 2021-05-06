@@ -1,9 +1,9 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
+import React, { Component } from "react";
+import { connect } from "react-redux";
 
-import { fetchReviews } from '../../store/thunks/reviewThunk';
+import { fetchReviews } from "../../store/thunks/reviewThunk";
 
-import Emoji from 'react-emoji-render';
+import Emoji from "react-emoji-render";
 
 class ProductReviews extends Component {
   constructor(props) {
@@ -90,7 +90,7 @@ class ProductReviews extends Component {
                     ? this.rating(review.rating)
                     : this.rating(review.newReview.rating)}
                   <h4>Review from {review.user.fullName}</h4>
-                  <h5>{review.title}</h5>
+                  <h5>{review.title || review.newReview.title}</h5>
                   <p>{review.description || review.newReview.description}</p>
                 </div>
               </div>

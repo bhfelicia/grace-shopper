@@ -18,7 +18,7 @@ class OrderSummary extends Component {
         </h1>
         <h3>order id: {`${recentOrder.id}`}</h3>
         <h3>order total: ${`${+recentOrder.total + recentOrder.tax}`}</h3>
-        <h3>order status: {`${recentOrder.status}`}</h3>
+        <h3>order status: created</h3>
         <h4>order date: {`${recentOrder.ordered_date}`}</h4>
         <div>
           you bought:

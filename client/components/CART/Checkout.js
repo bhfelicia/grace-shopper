@@ -36,11 +36,8 @@ class Checkout extends Component {
 
       if (response.status === 200) {
         alert("Thank you for your purchase");
-        console.log("cart id? ", this.props.cart.id);
         this.props.getRecent(this.props.cart.id);
-        console.log("line 41 in checkout ");
         this.props.orderCheckout(this.props.cart.id);
-        console.log("line 43 in checkout");
       } else {
         alert(
           "There was an error placing your order. Please re-enter your information to try again."
@@ -54,7 +51,6 @@ class Checkout extends Component {
     ev.preventDefault();
   }
   render() {
-    console.log(this.props);
     return (
       <div>
         <StripeCheckout

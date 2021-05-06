@@ -74,7 +74,6 @@ router.get("/user/:userId/orders", async (req, res, next) => {
 
 router.post("/checkout", async (req, res, next) => {
   try {
-    // console.log(req.body);
     const { token, billingAddress, shippingAddress, amount } = req.body;
     const customer = await stripe.customers.create({
       email: token.email,
@@ -286,7 +285,6 @@ router.delete("/cart/product/delete", async (req, res, next) => {
 
 router.put("/cart/product/deleteSingleItem", async (req, res, next) => {
   try {
-    console.log(req.body);
     const { productId, orderId } = req.body;
     const productToBeUpdated = await Order_Product.findOne({
       where: {
