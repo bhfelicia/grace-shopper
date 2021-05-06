@@ -1,12 +1,14 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import { addCategory } from "../../store/thunks/categoryThunk";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { addCategory } from '../../store/thunks/categoryThunk';
+
+import { motion } from 'framer-motion';
 
 class CreateCategory extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      name: "",
+      name: '',
     };
     this.onChange = this.onChange.bind(this);
     this.onSave = this.onSave.bind(this);
@@ -32,9 +34,22 @@ class CreateCategory extends Component {
     const { onChange, onSave } = this;
     return (
       <form onSubmit={onSave}>
-        <label>name Category</label>
-        <input name="name" value={name} onChange={onChange} />
-        <button> save </button>
+        <motion.div
+          transition={{ ease: 'easeOut', duration: 1 }}
+          initial={{ opacity: 0 }}
+          animate={{ x: [100, 0], opacity: 1 }}
+        >
+          <h2>new category</h2>
+          <div>
+            <input
+              name="name"
+              value={name}
+              onChange={onChange}
+              placeholder="name"
+            />
+            <button> save </button>
+          </div>
+        </motion.div>
       </form>
     );
   }

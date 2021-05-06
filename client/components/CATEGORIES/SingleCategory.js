@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
+import { motion } from 'framer-motion';
+
 import {
   destroyCategory,
   fetchCategory,
@@ -17,7 +19,12 @@ class SingleCategory extends Component {
       .selectedCategory.products;
     if (selectedCategory_products) {
       return (
-        <div id="singleCategoryView">
+        <motion.div
+          id="singleCategoryView"
+          transition={{ ease: 'easeOut', duration: 1 }}
+          initial={{ opacity: 0 }}
+          animate={{ x: [100, 0], opacity: 1 }}
+        >
           {selectedCategory_products.map((product) => (
             <div className="singleProductCategoryView" key={`${product.id}`}>
               <Link to={`/products/${product.id}`}>
@@ -27,7 +34,7 @@ class SingleCategory extends Component {
               </Link>
             </div>
           ))}
-        </div>
+        </motion.div>
       );
     } else {
       return <div>Is Loading....</div>;
