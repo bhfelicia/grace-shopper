@@ -32,7 +32,7 @@ class CreateCategory extends Component {
     const { onChange, onSave } = this;
     return (
       <form onSubmit={onSave}>
-        <label>name Category</label>
+        <label>new category </label>
         <input name="name" value={name} onChange={onChange} />
         <button> save </button>
       </form>

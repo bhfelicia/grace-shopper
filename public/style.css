@@ -203,14 +203,6 @@ ol li {
   flex: 0 0 33.333333%;
 }
 
-/* #all-categories {
-  display: flex;
-  flex-flow: row wrap;
-  align-items: baseline;
-  justify-content: space-around;
-  flex-wrap: wrap;
-} */
-
 #singleCategoryView {
   display: flex;
   flex-flow: row wrap;
@@ -225,6 +217,9 @@ ol li {
   flex: 0 0 33.333333%;
 }
 
+::-webkit-scrollbar {
+  width: 25px;
+}
 #individualCartItem {
   display: flex;
   flex-flow: row wrap;
@@ -237,82 +232,6 @@ ol li {
 
 /* images*/
 
-/* settings*/
-/* .settings-container {
-  /* display: flex; */
-/* } */
-
-/* .settings-container-left {
-  display: flex;
-  width: 30%;
-  background: honeydew;
-  flex-direction: column;
-}
-.settings-container-right {
-  display: flex;
-  margin-left: 30%;
-  background: ivory;
-  justify-content: space-between;
-  align-items: center;
-}  */
-/* 
-::-webkit-scrollbar {
-  width: 0;
-}
-
-#scrollPath {
-  position: fixed;
-  top: 0;
-  right: 0;
-  width: 10px;
-  height: 100%;
-  background: rgba(255, 255 255 0.05);
-}
-
-#progressbar {
-  position: fixed;
-  top: 0;
-  right: 0;
-  width: 10px;
-  background: linear-gradient(to top, #008aff, #00ffe7);
-  animation: animate 5s linear infinite;
-}
-@keyframes animate {
-  0%,
-  100% {
-    filter: hue-rotate(0deg);
-  }
-  50% {
-    filter: hue-rotate(360deg);
-  }
-}
-
-#progressbar:before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(to top, #008aff, #00ffe7);
-  filter: blur(30px);
-}
-
-#progressbar:after {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(to top, #008aff, #00ffe7);
-  filter: blur(30px);
-} */
-
-::-webkit-scrollbar {
-  width: 25px;
-}
-
 ::-webkit-scrollbar-track {
   background: #f6bd60;
 }
@@ -320,4 +239,54 @@ ol li {
 ::-webkit-scrollbar-thumb {
   background: #376d5f;
   border-radius: 25px;
+}
+/*
+****************************
+*/
+
+.slider {
+  position: relative;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.image {
+  width: 1000px;
+  height: 600px;
+  border-radius: 10px;
+}
+
+.right-arrow {
+  position: absolute;
+  top: 50%;
+  right: 32px;
+  font-size: 3rem;
+  color: black;
+  z-index: 10;
+  cursor: pointer;
+  user-select: none;
+}
+
+.left-arrow {
+  position: absolute;
+  top: 50%;
+  left: 32px;
+  font-size: 3rem;
+  color: black;
+  z-index: 10;
+  cursor: pointer;
+  user-select: none;
+}
+
+.slide {
+  opacity: 0;
+  transition-duration: 1s ease;
+}
+
+.slide.active {
+  opacity: 1;
+  transition-duration: 1s;
+  transform: scale(1.08);
 }

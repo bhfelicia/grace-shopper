@@ -1,12 +1,16 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import { Link } from "react-router-dom";
+import Home from "../NAVBAR/Home";
 
-import { fetchProducts } from '../../store/thunks/productThunk';
-import { addCart, addToCart, fetchCart } from '../../store/thunks/orderThunk';
+import { fetchProducts } from "../../store/thunks/productThunk";
+import { addCart, addToCart, fetchCart } from "../../store/thunks/orderThunk";
 
-import { motion } from 'framer-motion';
-import Emoji from 'react-emoji-render';
+import { motion } from "framer-motion";
+import Emoji from "react-emoji-render";
+
+import ImageSlider from "../SLIDES/ImageSlider";
+import { SliderData } from "../SLIDES/SliderData";
 
 class AllProducts extends Component {
   constructor(props) {
@@ -41,12 +45,12 @@ class AllProducts extends Component {
     return (
       <motion.div
         id="all-products"
-        transition={{ ease: 'easeOut', duration: 1 }}
+        transition={{ ease: "easeOut", duration: 1 }}
         initial={{ opacity: 0 }}
         animate={{ x: [100, 0], opacity: 1 }}
       >
         {products
-          .filter((product) => product.status === 'active')
+          .filter((product) => product.status === "active")
           .map((product) => (
             <div key={`${product.id}`} className="singleProduct">
               <motion.div
