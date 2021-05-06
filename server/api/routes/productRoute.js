@@ -82,10 +82,27 @@ router.post("/search", async (req, res, next) => {
 router.put("/:id", async (req, res, next) => {
   try {
     const updateData = req.body;
+    const {
+      name,
+      description,
+      price,
+      size,
+      image,
+      inventory,
+      status,
+    } = req.body;
     const { id } = req.params;
 
     const productToBeUpdated = await Product.findByPk(id);
-    const editedProduct = await productToBeUpdated.update(updateData);
+    const editedProduct = await productToBeUpdated.update({
+      name,
+      description,
+      price,
+      size,
+      image,
+      inventory,
+      status,
+    });
 
     res.send(editedProduct.dataValues).status(204);
   } catch (error) {
