@@ -1,15 +1,15 @@
-const Sequelize = require("sequelize");
-const { db } = require("../db");
-const Product = require("./Product");
+const Sequelize = require('sequelize');
+const { db } = require('../db');
+const Product = require('./Product');
 
-const Order = db.define("order", {
+const Order = db.define('order', {
   id: {
     type: Sequelize.UUID,
     primaryKey: true,
     defaultValue: Sequelize.UUIDV4,
   },
   total: {
-    type: Sequelize.DECIMAL(3),
+    type: Sequelize.DECIMAL(10),
   },
   ordered_date: {
     type: Sequelize.DATE,
@@ -27,13 +27,13 @@ const Order = db.define("order", {
   },
   status: {
     type: Sequelize.ENUM([
-      "in progress",
-      "created",
-      "processing",
-      "cancelled",
-      "completed",
+      'in progress',
+      'created',
+      'processing',
+      'cancelled',
+      'completed',
     ]),
-    defaultValue: "in progress",
+    defaultValue: 'in progress',
   },
   isCreated: {
     type: Sequelize.BOOLEAN,

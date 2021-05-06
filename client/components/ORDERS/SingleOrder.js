@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { updateOrder, fetchOrder } from '../../store/thunks/orderThunk';
 
+import axios from 'axios';
+
 class SingleOrder extends React.Component {
   constructor(props) {
     super(props);
@@ -15,12 +17,29 @@ class SingleOrder extends React.Component {
       isCreated: this.props.orderReducer.order.isCreated,
       tracking_number: this.props.orderReducer.order.tracking_number,
       shipping_address: this.props.orderReducer.order.shipping_address,
+      loggedInUser: {
+        fullName: '',
+        id: 1,
+        isAdmin: false,
+        role: '',
+        first: '',
+        last: '',
+        password: '',
+        email: '',
+        createdAt: '',
+        updatedAt: '',
+      },
     };
     this.onChange = this.onChange.bind(this);
     this.onSave = this.onSave.bind(this);
   }
   async componentDidMount() {
     await this.props.getOrder(this.props.match.params.id);
+    const { data: loggedInUser } = await axios.get('/api/auth', {
+      headers: {
+        authorization: window.localStorage.getItem('token'),
+      },
+    });
     this.setState({
       id: this.props.orderReducer.order.id,
       total: this.props.orderReducer.order.total,
@@ -30,7 +49,9 @@ class SingleOrder extends React.Component {
       isCreated: this.props.orderReducer.order.isCreated,
       tracking_number: this.props.orderReducer.order.tracking_number,
       shipping_address: this.props.orderReducer.order.shipping_address,
+      loggedInUser: loggedInUser,
     });
+    console.log(this.state, 'jdfksdafkjshdn');
   }
   onChange(ev) {
     const change = {};
@@ -44,7 +65,7 @@ class SingleOrder extends React.Component {
   }
   render() {
     const order = this.props.orderReducer.order;
-    if (window.localStorage.isAdmin === 'true') {
+    if (this.state.loggedInUser.isAdmin) {
       return (
         <div>
           <div>
