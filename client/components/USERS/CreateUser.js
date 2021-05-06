@@ -83,7 +83,6 @@ class CreateUser extends Component {
   }
 
   render() {
-    // console.log("create user", this.props); //why does this keep console.logging everything
     return (
       <div>
         {this.state.message}

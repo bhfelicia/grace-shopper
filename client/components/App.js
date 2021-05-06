@@ -1,59 +1,61 @@
-import React, { Component } from 'react';
-import { HashRouter as Router, Route, Switch } from 'react-router-dom';
-import store from '../store/store';
-import axios from 'axios';
-import { connect } from 'react-redux';
-import { fetchUser, fetchUsers } from '../store/thunks/userThunk';
-import AllProducts from './PRODUCTS/AllProducts';
-import SingleProduct from './PRODUCTS/SingleProduct';
-import CreateProduct from './PRODUCTS/CreateProduct';
-import EditProduct from './PRODUCTS/EditProduct';
-import AllOrders from './ORDERS/AllOrders';
-import SingleOrder from './ORDERS/SingleOrder';
-import EditOrder from './ORDERS/EditOrder';
-import ProductReviews from './REVIEWS/ProductReviews';
-import CreateReview from './REVIEWS/CreateReview';
-import AllUsers from './USERS/AllUsers';
-import SingleUser from './USERS/SingleUser';
-import EditUser from './USERS/EditUser';
-import CreateUser from './USERS/CreateUser';
-import Cart from './CART/Cart';
-import Login from './NAVBAR/Login';
-import Settings from './NAVBAR/Settings';
-import SignUp from './NAVBAR/SignUp';
-import Navbar from './NAVBAR/Navbar';
-import Header from './HEADER/Header';
-import AllCategories from './CATEGORIES/AllCategories';
-import SingleCategory from './CATEGORIES/SingleCategory';
-import CreateCategory from './CATEGORIES/CreateCategory';
-import EditCategory from './CATEGORIES/EditCategory';
+import React, { Component } from "react";
+import { HashRouter as Router, Route, Switch } from "react-router-dom";
+import store from "../store/store";
+import axios from "axios";
+import { connect } from "react-redux";
+import { fetchUser, fetchUsers } from "../store/thunks/userThunk";
+import AllProducts from "./PRODUCTS/AllProducts";
+import SingleProduct from "./PRODUCTS/SingleProduct";
+import CreateProduct from "./PRODUCTS/CreateProduct";
+import EditProduct from "./PRODUCTS/EditProduct";
+import AllOrders from "./ORDERS/AllOrders";
+import SingleOrder from "./ORDERS/SingleOrder";
+import EditOrder from "./ORDERS/EditOrder";
+import OrderSummary from "./CART/OrderSummary";
+import ProductReviews from "./REVIEWS/ProductReviews";
+import CreateReview from "./REVIEWS/CreateReview";
+import AllUsers from "./USERS/AllUsers";
+import SingleUser from "./USERS/SingleUser";
+import EditUser from "./USERS/EditUser";
+import CreateUser from "./USERS/CreateUser";
+import Cart from "./CART/Cart";
+import Checkout from "./CART/Checkout";
+import Login from "./NAVBAR/Login";
+import Settings from "./NAVBAR/Settings";
+import SignUp from "./NAVBAR/SignUp";
+import Navbar from "./NAVBAR/Navbar";
+import Header from "./HEADER/Header";
+import AllCategories from "./CATEGORIES/AllCategories";
+import SingleCategory from "./CATEGORIES/SingleCategory";
+import CreateCategory from "./CATEGORIES/CreateCategory";
+import EditCategory from "./CATEGORIES/EditCategory";
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
       loggedInUser: {
-        fullName: '',
+        fullName: "",
         id: 1,
         isAdmin: false,
-        role: '',
-        first: '',
-        last: '',
-        password: '',
-        email: '',
-        createdAt: '',
-        updatedAt: '',
+        role: "",
+        first: "",
+        last: "",
+        password: "",
+        email: "",
+        createdAt: "",
+        updatedAt: "",
       },
     };
   }
 
   async componentDidMount() {
-    const token = window.localStorage.getItem('token');
+    const token = window.localStorage.getItem("token");
     if (!token) {
-      const guestUser = await axios.get('/api/users/1');
-      window.localStorage.setItem('token', guestUser.data.password);
+      const guestUser = await axios.get("/api/users/1");
+      window.localStorage.setItem("token", guestUser.data.password);
     }
-    const { data: loggedInUser } = await axios.get('/api/auth', {
+    const { data: loggedInUser } = await axios.get("/api/auth", {
       headers: {
         authorization: token,
       },
@@ -104,6 +106,8 @@ class App extends Component {
             <Route exact path="/users/:id/edit" component={EditUser}></Route>
             <Route exact path="/signup/create" component={CreateUser}></Route>
             <Route exact path="/cart" component={Cart}></Route>
+            <Route exact path="/orderSummary" component={OrderSummary}></Route>
+            <Route exact path="/checkout" component={Checkout}></Route>
             {/* <Route exact path="/users/:id/edit" component={EditUser}></Route> Most likely don't need this if I am going to include the edit user form on a single user view regardless!*/}
           </Switch>
         </div>

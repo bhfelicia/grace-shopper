@@ -1,12 +1,12 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import { Link } from "react-router-dom";
 
-import { fetchProducts } from '../../store/thunks/productThunk';
-import { addCart, addToCart, fetchCart } from '../../store/thunks/orderThunk';
+import { fetchProducts } from "../../store/thunks/productThunk";
+import { addCart, addToCart, fetchCart } from "../../store/thunks/orderThunk";
 
-import { motion } from 'framer-motion';
-import Emoji from 'react-emoji-render';
+import { motion } from "framer-motion";
+import Emoji from "react-emoji-render";
 
 class AllProducts extends Component {
   constructor(props) {
@@ -19,7 +19,6 @@ class AllProducts extends Component {
     await this.props.getCart();
   }
   addToCart(productId) {
-    console.log('current cart is: ', this.props.orderReducer.currentCart);
     const cartId = this.props.orderReducer.currentCart.id;
     if (!this.props.orderReducer.currentCart) {
       this.props.createCart(productId);
@@ -44,10 +43,10 @@ class AllProducts extends Component {
         id="all-products"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ ease: 'easeOut', duration: 1 }}
+        transition={{ ease: "easeOut", duration: 1 }}
       >
         {products
-          .filter((product) => product.status === 'active')
+          .filter((product) => product.status === "active")
           .map((product) => (
             <div key={`${product.id}`} className="singleProduct">
               <motion.div

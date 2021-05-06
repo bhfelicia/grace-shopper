@@ -6,7 +6,6 @@ const User = require("../../db/models/User");
 //get routes
 router.get("/", async (req, res, next) => {
   try {
-    //console.log("hello from products");
     const products = await Product.findAll();
     res.status(200).send(products);
   } catch (error) {
