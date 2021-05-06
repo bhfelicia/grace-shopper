@@ -29,6 +29,7 @@ import AllCategories from "./CATEGORIES/AllCategories";
 import SingleCategory from "./CATEGORIES/SingleCategory";
 import CreateCategory from "./CATEGORIES/CreateCategory";
 import EditCategory from "./CATEGORIES/EditCategory";
+import About from "./ABOUT/About";
 
 class App extends Component {
   constructor(props) {
@@ -106,6 +107,7 @@ class App extends Component {
             <Route exact path="/users/:id/edit" component={EditUser}></Route>
             <Route exact path="/signup/create" component={CreateUser}></Route>
             <Route exact path="/cart" component={Cart}></Route>
+            <Route exact path="/about" component={About}></Route>
             <Route exact path="/orderSummary" component={OrderSummary}></Route>
             <Route exact path="/checkout" component={Checkout}></Route>
             {/* <Route exact path="/users/:id/edit" component={EditUser}></Route> Most likely don't need this if I am going to include the edit user form on a single user view regardless!*/}
