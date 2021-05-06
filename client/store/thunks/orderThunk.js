@@ -8,6 +8,7 @@ import {
   deleteCart,
   editOrder,
   deleteProductFromCart,
+  getRecent,
 } from "../actionCreators/orderActionCreators";
 
 const fetchOrders = () => {
@@ -34,7 +35,7 @@ const updateOrder = (newOrderData) => {
   };
 };
 
-const checkoutOrder = (orderId) => {
+const checkoutOrder = (orderId, history) => {
   return async (dispatch) => {
     const { data: cartToOrder } = await axios.put(
       `/api/orders/checkout/${orderId}`,
@@ -43,6 +44,15 @@ const checkoutOrder = (orderId) => {
       }
     );
     dispatch(editCart(cartToOrder));
+    dispatch(deleteCart(cartToOrder));
+    history.push("/orderSummary");
+  };
+};
+
+const fetchRecent = (orderId) => {
+  return async (dispatch) => {
+    const { data: order } = await axios.get(`/api/orders/${orderId}`);
+    dispatch(getRecent(order));
   };
 };
 
@@ -112,9 +122,9 @@ const fetchCart = () => {
   };
 };
 
-const destroyCart = (cartId) => {
+const clearCart = (cartId) => {
   return async (dispatch) => {
-    const { data: cart } = await axios.delete(`/api/orders/${cartId}`);
+    const { data: cart } = await axios.put(`/api/orders/${cartId}`);
     dispatch(deleteCart(cart));
   };
 };
@@ -124,10 +134,11 @@ export {
   addCart,
   addToCart,
   addOneToCart,
-  destroyCart,
+  clearCart,
   fetchCart,
   fetchOrder,
   updateOrder,
   deleteFromCart,
   checkoutOrder,
+  fetchRecent,
 };

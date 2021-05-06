@@ -6,12 +6,14 @@ import {
   DELETE_CART,
   DELETE_PRODUCT_FROM_CART,
   LOAD_CART,
-} from '../actions/index';
+  SET_RECENT_ORDER,
+} from "../actions/index";
 
 const initialState = {
   orders: [],
   currentCart: {},
   order: [],
+  recentOrder: {},
 };
 
 const orderReducer = (state = initialState, action) => {
@@ -25,19 +27,13 @@ const orderReducer = (state = initialState, action) => {
     case LOAD_CART:
       return { ...state, currentCart: action.cart };
     case EDIT_CART:
-      // const filteredOrder = state.orders.filter((order) => {
-      //   return order.id !== state.currentCart.id;
-      // });
-      // return {
-      //   orders: [...filteredOrder, action.cart],
-      //   currentCart: action.cart,
-      // }; //revisit cause arjan can't think right now
-      //ARJAN DID THIS DONT WORRY ABOUT IT
       return { ...state, currentCart: action.cart };
     case DELETE_CART:
       return { ...state, currentCart: {} };
     case DELETE_PRODUCT_FROM_CART:
       return { ...state, currentCart: action.cart };
+    case SET_RECENT_ORDER:
+      return { ...state, recentOrder: action.order };
     default:
       return state;
   }

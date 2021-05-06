@@ -22,7 +22,9 @@ router.get("/", async (req, res, next) => {
 
 router.get("/:id", async (req, res, next) => {
   try {
-    const order = await Order.findByPk(req.params.id);
+    const order = await Order.findByPk(req.params.id, {
+      include: Product,
+    });
     res.status(200).send(order);
   } catch (error) {
     next(error);
