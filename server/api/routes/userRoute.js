@@ -1,6 +1,6 @@
-const router = require('express').Router();
-const User = require('../../db/models/User');
-const Order = require('../../db/models/Order');
+const router = require("express").Router();
+const User = require("../../db/models/User");
+const Order = require("../../db/models/Order");
 
 async function requireToken(req, res, next) {
   try {
@@ -12,8 +12,8 @@ async function requireToken(req, res, next) {
     next(error);
   }
 }
-
-router.get('/', async (req, res, next) => {
+//secured
+router.get("/", requireToken, async (req, res, next) => {
   try {
     const users = await User.findAll();
     res.status(200).send(users);
@@ -21,9 +21,8 @@ router.get('/', async (req, res, next) => {
     next(error);
   }
 });
-
-router.get('/:id', requireToken, async (req, res, next) => {
-  //removed requireToken here by arjan
+//secured
+router.get("/:id", requireToken, async (req, res, next) => {
   try {
     const user = await User.findByPk(req.params.id);
     res.status(200).send(user);
@@ -33,20 +32,22 @@ router.get('/:id', requireToken, async (req, res, next) => {
 });
 
 //post routes
-
-router.post('/', requireToken, async (req, res, next) => {
+//secured
+router.post("/", requireToken, async (req, res, next) => {
   try {
     //change authorization key to something cryptic
-    if (req.user.id === 1) {
+    if (req.user.role === "GUEST") {
       const { first, last, email, password } = req.body;
       const newUser = await User.create({
         first,
         last,
         email,
         password,
-        role: 'AUTHENTICATED',
+        role: "AUTHENTICATED",
       });
       res.status(201).send(newUser);
+    } else {
+      res.sendStatus(401);
     }
   } catch (error) {
     next(error);
@@ -54,20 +55,23 @@ router.post('/', requireToken, async (req, res, next) => {
 });
 
 //put routes
-router.put('/:id', async (req, res, next) => {
+//secured
+router.put("/:id", requireToken, async (req, res, next) => {
   try {
-    const updateData = req.body;
-    const { id } = req.params;
-    const userToBeUpdated = await User.findByPk(id);
-    const editedUser = await userToBeUpdated.update(updateData);
-    res.send(editedUser.dataValues).status(204);
+    if (req.user.id === req.params.id || req.user.isAdmin === true) {
+      const updateData = req.body;
+      const { id } = req.params;
+      const userToBeUpdated = await User.findByPk(id);
+      const editedUser = await userToBeUpdated.update(updateData);
+      res.send(editedUser.dataValues).status(204);
+    }
   } catch (error) {
     next(error);
   }
 });
 
 //delete routes
-router.delete('/:id', requireToken, async (req, res, next) => {
+router.delete("/:id", requireToken, async (req, res, next) => {
   try {
     const { id } = req.params;
 

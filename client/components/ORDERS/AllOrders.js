@@ -1,38 +1,37 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
-import { fetchOrders } from '../../store/thunks/orderThunk';
-import { fetchUser } from '../../store/thunks/userThunk';
+import React from "react";
+import { connect } from "react-redux";
+import { Link } from "react-router-dom";
+import { fetchOrders } from "../../store/thunks/orderThunk";
+import { fetchUser } from "../../store/thunks/userThunk";
 
-import axios from 'axios';
+import axios from "axios";
 
-import { motion } from 'framer-motion';
-import Emoji from 'react-emoji-render';
+import { motion } from "framer-motion";
+import Emoji from "react-emoji-render";
 
 class AllOrders extends React.Component {
   constructor(props) {
     super(props);
-    this.props.loadUser(Number(window.localStorage.userId));
     this.renderOrders = this.renderOrders.bind(this);
     this.state = {
       orders: [],
       loggedInUser: {
-        fullName: '',
+        fullName: "",
         id: 0,
         isAdmin: false,
-        role: '',
-        first: '',
-        last: '',
-        password: '',
-        email: '',
-        createdAt: '',
-        updatedAt: '',
+        role: "",
+        first: "",
+        last: "",
+        password: "",
+        email: "",
+        createdAt: "",
+        updatedAt: "",
       },
     };
   }
   async componentDidMount() {
-    const { data: loggedInUser } = await axios.get('/api/auth', {
-      headers: { authorization: window.localStorage.getItem('token') },
+    const { data: loggedInUser } = await axios.get("/api/auth", {
+      headers: { authorization: window.localStorage.getItem("token") },
     });
     await this.props.loadUser(loggedInUser.id);
     await this.props.getOrders();
@@ -48,7 +47,7 @@ class AllOrders extends React.Component {
     if (this.state.loggedInUser.isAdmin) {
       return (
         <motion.div
-          transition={{ ease: 'easeOut', duration: 1 }}
+          transition={{ ease: "easeOut", duration: 1 }}
           initial={{ opacity: 0 }}
           animate={{ x: [100, 0], opacity: 1 }}
         >
@@ -56,35 +55,35 @@ class AllOrders extends React.Component {
             <motion.button
               whileHover={{ scale: 1.2 }}
               whileTap={{ scale: [0.9, 1.05] }}
-              onClick={() => this.renderOrders('in progress')}
+              onClick={() => this.renderOrders("in progress")}
             >
               in progress
             </motion.button>
             <motion.button
               whileHover={{ scale: 1.2 }}
               whileTap={{ scale: [0.9, 1.05] }}
-              onClick={() => this.renderOrders('created')}
+              onClick={() => this.renderOrders("created")}
             >
               created
             </motion.button>
             <motion.button
               whileHover={{ scale: 1.2 }}
               whileTap={{ scale: [0.9, 1.05] }}
-              onClick={() => this.renderOrders('processing')}
+              onClick={() => this.renderOrders("processing")}
             >
               processing
             </motion.button>
             <motion.button
               whileHover={{ scale: 1.2 }}
               whileTap={{ scale: [0.9, 1.05] }}
-              onClick={() => this.renderOrders('cancelled')}
+              onClick={() => this.renderOrders("cancelled")}
             >
               cancelled
             </motion.button>
             <motion.button
               whileHover={{ scale: 1.2 }}
               whileTap={{ scale: [0.9, 1.05] }}
-              onClick={() => this.renderOrders('completed')}
+              onClick={() => this.renderOrders("completed")}
             >
               completed
             </motion.button>
@@ -112,13 +111,13 @@ class AllOrders extends React.Component {
       );
     } else if (
       this.state.loggedInUser.isAdmin === false &&
-      this.state.loggedInUser.role === 'AUTHENTICATED'
+      this.state.loggedInUser.role === "AUTHENTICATED"
     ) {
       return (
         <div>
           {this.props.orderReducer.orders
             .filter((order) => order.userId === this.state.loggedInUser.id)
-            .filter((order) => order.status !== 'in progress')
+            .filter((order) => order.status !== "in progress")
             .map((filteredOrder) => {
               return (
                 <Link key={filteredOrder.id} to={`/orders/${filteredOrder.id}`}>

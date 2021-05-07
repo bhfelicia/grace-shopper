@@ -5,8 +5,6 @@ import { FaArrowAltCircleRight, FaArrowAltCircleLeft } from "react-icons/fa";
 const ImageSlider = ({ slides }) => {
   const [current, setCurrent] = useState(0);
   const length = slides.length;
-  console.log(slides);
-
   if (!Array.isArray(slides) || slides.length <= 0) {
     return null;
   }

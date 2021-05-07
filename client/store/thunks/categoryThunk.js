@@ -21,11 +21,15 @@ const fetchCategory = (categoryId) => {
   };
 };
 
-const addCategory = (newCategory, { history }) => {
+const addCategory = (newCategory, history) => {
   return async (dispatch) => {
+    const headerToken = {
+      headers: { authorization: window.localStorage.getItem("token") },
+    };
     const { data: category } = await axios.post(
-      `/api/categories/`,
-      newCategory
+      `/api/categories`,
+      newCategory,
+      headerToken
     );
     dispatch(createCategory(category));
     history.push("/categories");
@@ -34,16 +38,23 @@ const addCategory = (newCategory, { history }) => {
 
 const destroyCategory = (category) => {
   return async (dispatch) => {
-    await axios.delete(`/api/categories/${category.id}`);
+    const headerToken = {
+      headers: { authorization: window.localStorage.getItem("token") },
+    };
+    await axios.delete(`/api/categories/${category.id}`, headerToken);
     dispatch(deleteCategory(category));
   };
 };
 
 const updateCategory = (category, history) => {
   return async (dispatch) => {
+    const headerToken = {
+      headers: { authorization: window.localStorage.getItem("token") },
+    };
     const { data: updatedCategory } = await axios.put(
       `/api/categories/${category.id}`,
-      category
+      category,
+      headerToken
     );
     dispatch(editCategory(updatedCategory));
     history.push(`/categories/`);
