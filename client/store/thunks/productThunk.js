@@ -63,9 +63,13 @@ const filterProducts = (productName) => {
 
 const updateProduct = (product, history) => {
   return async (dispatch) => {
+    const headerToken = {
+      headers: { authorization: window.localStorage.getItem("token") },
+    };
     const { data: updatedProduct } = await axios.put(
       `/api/products/${product.id}`,
-      product
+      product,
+      headerToken
     );
     dispatch(editProduct(updatedProduct));
     history.push(`/products/${updatedProduct.id}`);

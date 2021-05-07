@@ -47,6 +47,7 @@ router.get("/:id/reviews", async (req, res, next) => {
 });
 
 //post routes
+//secured
 router.post("/", requireToken, async (req, res, next) => {
   try {
     if (req.user.isAdmin) {
@@ -78,33 +79,36 @@ router.post("/search", async (req, res, next) => {
 });
 
 //put routes
-
-router.put("/:id", async (req, res, next) => {
+//secured
+router.put("/:id", requireToken, async (req, res, next) => {
   try {
-    const updateData = req.body;
-    const {
-      name,
-      description,
-      price,
-      size,
-      image,
-      inventory,
-      status,
-    } = req.body;
-    const { id } = req.params;
+    if (req.user.isAdmin) {
+      const {
+        name,
+        description,
+        price,
+        size,
+        image,
+        inventory,
+        status,
+      } = req.body;
+      const { id } = req.params;
 
-    const productToBeUpdated = await Product.findByPk(id);
-    const editedProduct = await productToBeUpdated.update({
-      name,
-      description,
-      price,
-      size,
-      image,
-      inventory,
-      status,
-    });
+      const productToBeUpdated = await Product.findByPk(id);
+      const editedProduct = await productToBeUpdated.update({
+        name,
+        description,
+        price,
+        size,
+        image,
+        inventory,
+        status,
+      });
 
-    res.send(editedProduct.dataValues).status(204);
+      res.send(editedProduct.dataValues).status(204);
+    } else {
+      res.sendStatus(401);
+    }
   } catch (error) {
     next(error);
   }
