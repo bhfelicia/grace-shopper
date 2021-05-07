@@ -46,6 +46,8 @@ router.post("/", requireToken, async (req, res, next) => {
         role: "AUTHENTICATED",
       });
       res.status(201).send(newUser);
+    } else {
+      res.sendStatus(401);
     }
   } catch (error) {
     next(error);
@@ -53,6 +55,7 @@ router.post("/", requireToken, async (req, res, next) => {
 });
 
 //put routes
+//secured
 router.put("/:id", requireToken, async (req, res, next) => {
   try {
     if (req.user.id === req.params.id || req.user.isAdmin === true) {
