@@ -1,14 +1,14 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { addCategory } from '../../store/thunks/categoryThunk';
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import { addCategory } from "../../store/thunks/categoryThunk";
 
-import { motion } from 'framer-motion';
+import { motion } from "framer-motion";
 
 class CreateCategory extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      name: '',
+      name: "",
     };
     this.onChange = this.onChange.bind(this);
     this.onSave = this.onSave.bind(this);
@@ -20,13 +20,10 @@ class CreateCategory extends Component {
     this.setState(change);
   }
 
-  async onSave(ev) {
+  onSave(ev) {
     ev.preventDefault();
-    try {
-      await this.props.createCategory(this.state);
-    } catch (ex) {
-      console.log(ex);
-    }
+
+    this.props.createCategory(this.state);
   }
 
   render() {
@@ -35,7 +32,7 @@ class CreateCategory extends Component {
     return (
       <form onSubmit={onSave}>
         <motion.div
-          transition={{ ease: 'easeOut', duration: 1 }}
+          transition={{ ease: "easeOut", duration: 1 }}
           initial={{ opacity: 0 }}
           animate={{ x: [100, 0], opacity: 1 }}
         >
@@ -62,7 +59,7 @@ class CreateCategory extends Component {
 
 const mapDispatchToProps = (dispatch, { history }) => {
   return {
-    createCategory: (category) => dispatch(addCategory(category, { history })),
+    createCategory: (category) => dispatch(addCategory(category, history)),
   };
 };
 export default connect(null, mapDispatchToProps)(CreateCategory);

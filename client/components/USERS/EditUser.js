@@ -1,10 +1,10 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { fetchUser, updateUser } from '../../store/thunks/userThunk';
-import axios from 'axios';
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import { fetchUser, updateUser } from "../../store/thunks/userThunk";
+import axios from "axios";
 
-import { motion } from 'framer-motion';
-import Emoji from 'react-emoji-render';
+import { motion } from "framer-motion";
+import Emoji from "react-emoji-render";
 
 //bring in fetchUser thunk, use it in componentDidMount to fetch user so you can keep a user
 //on refresh
@@ -16,29 +16,33 @@ class EditUser extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      id: this.props.userReducer.selectedUser.id || '',
-      first: this.props.userReducer.selectedUser.first || '',
-      last: this.props.userReducer.selectedUser.last || '',
-      password: this.props.userReducer.selectedUser.password || '',
-      email: this.props.userReducer.selectedUser.email || '',
+      id: this.props.userReducer.selectedUser.id || "",
+      first: this.props.userReducer.selectedUser.first || "",
+      last: this.props.userReducer.selectedUser.last || "",
+      password: this.props.userReducer.selectedUser.password || "",
+      email: this.props.userReducer.selectedUser.email || "",
       loggedInUser: {
-        fullName: '',
+        fullName: "",
         id: 0,
         isAdmin: false,
-        role: '',
-        first: '',
-        last: '',
-        password: '',
-        email: '',
-        createdAt: '',
-        updatedAt: '',
+        role: "",
+        first: "",
+        last: "",
+        password: "",
+        email: "",
+        createdAt: "",
+        updatedAt: "",
       },
     };
 
     this.editUserHandler = this.editUserHandler.bind(this);
     this.submitUpdateHandler = this.submitUpdateHandler.bind(this);
   }
-
+  componentDidUpdate(prevProps) {
+    if (prevProps !== this.props) {
+      this.render();
+    }
+  }
   async componentDidMount() {
     await this.props.getUser(Number(this.props.match.params.id));
     const {
@@ -48,8 +52,8 @@ class EditUser extends Component {
       password,
       email,
     } = this.props.userReducer.selectedUser;
-    const { data: loggedInUser } = await axios.get('/api/auth', {
-      headers: { authorization: window.localStorage.getItem('token') },
+    const { data: loggedInUser } = await axios.get("/api/auth", {
+      headers: { authorization: window.localStorage.getItem("token") },
     });
     this.setState({
       id,
@@ -83,7 +87,7 @@ class EditUser extends Component {
     ) {
       return (
         <motion.div
-          transition={{ ease: 'easeOut', duration: 1 }}
+          transition={{ ease: "easeOut", duration: 1 }}
           initial={{ opacity: 0 }}
           animate={{ x: [100, 0], opacity: 1 }}
         >
@@ -140,7 +144,7 @@ class EditUser extends Component {
     } else {
       return (
         <motion.div
-          transition={{ ease: 'easeOut', duration: 1 }}
+          transition={{ ease: "easeOut", duration: 1 }}
           initial={{ opacity: 0 }}
           animate={{ x: [100, 0], opacity: 1 }}
         >

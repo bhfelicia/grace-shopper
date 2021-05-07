@@ -17,7 +17,14 @@ const fetchReviews = (productId) => {
 
 const addReview = (newReview) => {
   return async (dispatch) => {
-    const { data: review } = await axios.post(`/api/reviews/`, newReview);
+    const headerToken = {
+      headers: { authorization: window.localStorage.getItem("token") },
+    };
+    const { data: review } = await axios.post(
+      `/api/reviews/`,
+      newReview,
+      headerToken
+    );
     dispatch(createReview(review));
   };
 };

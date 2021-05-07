@@ -13,14 +13,23 @@ import {
 
 const fetchOrders = () => {
   return async (dispatch) => {
-    const { data: orders } = await axios.get("/api/orders");
+    const headerToken = {
+      headers: { authorization: window.localStorage.getItem("token") },
+    };
+    const { data: orders } = await axios.get("/api/orders", headerToken);
     dispatch(loadOrders(orders));
   };
 };
 
 const fetchOrder = (orderId) => {
   return async (dispatch) => {
-    const { data: order } = await axios.get(`/api/orders/${orderId}`);
+    const headerToken = {
+      headers: { authorization: window.localStorage.getItem("token") },
+    };
+    const { data: order } = await axios.get(
+      `/api/orders/${orderId}`,
+      headerToken
+    );
     dispatch(loadOrder(order));
   };
 };
