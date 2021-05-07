@@ -34,17 +34,19 @@ router.get('/:id', requireToken, async (req, res, next) => {
 
 //post routes
 
-router.post('/', async (req, res, next) => {
+router.post('/', requireToken, async (req, res, next) => {
   try {
-    const { first, last, email, password } = req.body;
-    const newUser = await User.create({
-      first,
-      last,
-      email,
-      password,
-      role: 'AUTHENTICATED',
-    });
-    res.status(201).send(newUser);
+    if (req.user.id === 1) {
+      const { first, last, email, password } = req.body;
+      const newUser = await User.create({
+        first,
+        last,
+        email,
+        password,
+        role: 'AUTHENTICATED',
+      });
+      res.status(201).send(newUser);
+    }
   } catch (error) {
     next(error);
   }
