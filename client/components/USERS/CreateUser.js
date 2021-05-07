@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { addUser } from '../../store/thunks/userThunk';
 
+import { fetchCart } from '../../store/thunks/orderThunk';
+
 import { motion } from 'framer-motion';
 import Emoji from 'react-emoji-render';
 
@@ -22,6 +24,10 @@ class CreateUser extends Component {
     this.displayForm = this.displayForm.bind(this);
   }
 
+  async componentDidMount() {
+    await this.props.getCart();
+  }
+
   userDetailsHandler(event) {
     this.setState({
       [event.target.name]: event.target.value,
@@ -31,7 +37,7 @@ class CreateUser extends Component {
   createUserHandler(event) {
     event.preventDefault();
     const newUser = { ...this.state };
-    this.props.createUser(newUser);
+    this.props.createUser(newUser, this.props.orderReducer.currentCart.id);
     this.setState({
       message:
         'Thank you your account has been created, you can now log in with your credentials!',
@@ -104,13 +110,15 @@ class CreateUser extends Component {
 //WHEN CREATING A USER HOW CAN WE WE CHOOSE THE ROLE WE WANT TO GIVE THEM
 //AUTHENTICATED VS GUEST???
 
-const mapStateToProps = ({ userReducer }) => ({
+const mapStateToProps = ({ userReducer, orderReducer }) => ({
   userReducer,
+  orderReducer,
 });
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    createUser: (user) => dispatch(addUser(user)),
+    createUser: (user, orderId) => dispatch(addUser(user, orderId)),
+    getCart: () => dispatch(fetchCart()),
   };
 };
 
