@@ -36,6 +36,7 @@ router.get('/:id', requireToken, async (req, res, next) => {
 
 router.post('/', requireToken, async (req, res, next) => {
   try {
+    //change authorization key to something cryptic
     if (req.user.id === 1) {
       const { first, last, email, password } = req.body;
       const newUser = await User.create({
