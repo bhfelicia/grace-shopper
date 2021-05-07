@@ -50,6 +50,8 @@ class AllProducts extends Component {
           initial={{ opacity: 0 }}
           animate={{ x: [100, 0], opacity: 1 }}
         >
+          <Home />
+          <ImageSlider slides={SliderData} />
           {products
             .filter((product) => product.status === 'active')
             .map((product) => (
