@@ -1,12 +1,16 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import Home from '../NAVBAR/Home';
 
 import { fetchProducts } from '../../store/thunks/productThunk';
 import { addCart, addToCart, fetchCart } from '../../store/thunks/orderThunk';
 
 import { motion } from 'framer-motion';
 import Emoji from 'react-emoji-render';
+
+import ImageSlider from '../SLIDES/ImageSlider';
+import { SliderData } from '../SLIDES/SliderData';
 
 class AllProducts extends Component {
   constructor(props) {

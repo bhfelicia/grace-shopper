@@ -13,8 +13,8 @@ class OrderSummary extends Component {
     return (
       <div>
         <h1>
-          thank you for your order,{" "}
-          {`${this.props.userReducer.selectedUser.fullName}`}
+          thank you for your order,
+          {` ${this.props.userReducer.selectedUser.fullName}` || "guest"}
         </h1>
         <h3>order id: {`${recentOrder.id}`}</h3>
         <h3>order total: ${`${+recentOrder.total + recentOrder.tax}`}</h3>

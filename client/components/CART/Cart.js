@@ -1,16 +1,16 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import Checkout from './Checkout';
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import Checkout from "./Checkout";
 
-import Emoji from 'react-emoji-render';
-import { motion } from 'framer-motion';
+import Emoji from "react-emoji-render";
+import { motion } from "framer-motion";
 
 import {
   fetchCart,
   fetchOrders,
   deleteFromCart,
   addOneToCart,
-} from '../../store/thunks/orderThunk';
+} from "../../store/thunks/orderThunk";
 
 class Cart extends Component {
   constructor(props) {
@@ -45,7 +45,7 @@ class Cart extends Component {
     if (!currentCart.products || !currentCart.products.length) {
       return (
         <motion.div
-          transition={{ ease: 'easeOut', duration: 1 }}
+          transition={{ ease: "easeOut", duration: 1 }}
           initial={{ opacity: 0 }}
           animate={{ x: [100, 0], opacity: 1 }}
         >
@@ -58,7 +58,7 @@ class Cart extends Component {
     } else if (!this.state.showCheckout) {
       return (
         <motion.div
-          transition={{ ease: 'easeOut', duration: 1 }}
+          transition={{ ease: "easeOut", duration: 1 }}
           initial={{ opacity: 0 }}
           animate={{ x: [100, 0], opacity: 1 }}
         >
@@ -123,7 +123,7 @@ class Cart extends Component {
     } else {
       return (
         <motion.div
-          transition={{ ease: 'easeOut', duration: 1 }}
+          transition={{ ease: "easeOut", duration: 1 }}
           initial={{ opacity: 0 }}
           animate={{ x: [100, 0], opacity: 1 }}
         >
@@ -133,6 +133,7 @@ class Cart extends Component {
                 <img src={product.image}></img>
                 <div id="cartButtons">
                   <button
+                    id="incCart"
                     onClick={() =>
                       this.addProductToCart(product.id, currentCart.id)
                     }
@@ -141,6 +142,7 @@ class Cart extends Component {
                   </button>
                   {product.order_product.product_quantity}
                   <button
+                    id="decCart"
                     onClick={() => {
                       if (product.order_product.product_quantity != 1) {
                         this.deleteProductFromCart(
@@ -157,7 +159,7 @@ class Cart extends Component {
                       }
                     }}
                   >
-                    --
+                    -
                   </button>
                   x {product.name} - $
                   {product.price * product.order_product.product_quantity}
