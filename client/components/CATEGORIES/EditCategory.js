@@ -1,17 +1,19 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import { updateCategory } from "../../store/thunks/categoryThunk";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { updateCategory } from '../../store/thunks/categoryThunk';
 import {
   fetchCategories,
   fetchCategory,
-} from "../../store/thunks/categoryThunk";
+} from '../../store/thunks/categoryThunk';
+
+import { motion } from 'framer-motion';
 
 class EditCategory extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      id: Number(this.props.match.params.id) || "",
-      name: this.props.categoryReducer.selectedCategory.name || "",
+      id: Number(this.props.match.params.id) || '',
+      name: this.props.categoryReducer.selectedCategory.name || '',
     };
     this.onChange = this.onChange.bind(this);
     this.onSave = this.onSave.bind(this);
@@ -44,17 +46,28 @@ class EditCategory extends Component {
     let selectedCategoryName = this.props.categoryReducer.selectedCategory.name;
     return (
       <form onSubmit={this.onSave}>
-        <div>
-          <p>{selectedCategoryName}</p>
-          <label> Update Category Name</label>
-          <input
-            type="text"
-            name="name"
-            value={this.state.name}
-            onChange={this.onChange}
-          />
-          <button>save</button>
-        </div>
+        <motion.div
+          transition={{ ease: 'easeOut', duration: 1 }}
+          initial={{ opacity: 0 }}
+          animate={{ x: [100, 0], opacity: 1 }}
+        >
+          <h2>{selectedCategoryName}</h2>
+          <div>
+            <input
+              type="text"
+              name="name"
+              value={this.state.name}
+              onChange={this.onChange}
+              placeholder="new name"
+            />
+            <motion.button
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: [0.9, 1.05] }}
+            >
+              save
+            </motion.button>
+          </div>
+        </motion.div>
       </form>
     );
   }

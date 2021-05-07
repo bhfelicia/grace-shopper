@@ -7,6 +7,8 @@ import { Link } from 'react-router-dom';
 
 import axios from 'axios';
 
+import { motion } from 'framer-motion';
+
 class SingleUser extends Component {
   constructor(props) {
     super(props);
@@ -38,10 +40,24 @@ class SingleUser extends Component {
     const { selectedUser } = this.props.userReducer;
     return (
       <div>
-        <h3>{selectedUser.fullName}</h3>
-        <h3>{selectedUser.email}</h3>
+        <motion.div
+          transition={{ ease: 'easeOut', duration: 1 }}
+          initial={{ opacity: 0 }}
+          animate={{ x: [100, 0], opacity: 1 }}
+        >
+          <h3>{selectedUser.fullName}</h3>
+          <h3>{selectedUser.email}</h3>
+        </motion.div>
         <br></br>
-        <Link to={`/users/${selectedUser.id}/edit`}>Edit User</Link>
+        <motion.button
+          transition={{ ease: 'easeOut', duration: 1 }}
+          initial={{ opacity: 0 }}
+          animate={{ x: [-100, 0], opacity: 1 }}
+          whileHover={{ scale: 1.1 }}
+          whileTap={{ scale: [0.9, 1.05] }}
+        >
+          <Link to={`/users/${selectedUser.id}/edit`}>edit</Link>
+        </motion.button>
         {/* <EditUser user={selectedUser} /> */}
       </div>
     );

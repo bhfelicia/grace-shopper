@@ -79,7 +79,7 @@ class Nav extends Component {
               whileTap={{ scale: [0.9, 1.05] }}
             >
               <Link style={{ textDecoration: 'none' }} to="/categories">
-                <Emoji text=":cat:" />
+                <Emoji text=":books:" />
               </Link>
             </motion.div>
             <Link style={{ textDecoration: 'none' }} to="/settings">
@@ -144,7 +144,7 @@ class Nav extends Component {
               whileTap={{ scale: [0.9, 1.05] }}
             >
               <Link style={{ textDecoration: 'none' }} to="/categories">
-                <Emoji text=":cat:" />
+                <Emoji text=":books:" />
               </Link>
             </motion.div>
             <motion.div
@@ -209,7 +209,7 @@ class Nav extends Component {
               whileTap={{ scale: [0.9, 1.05] }}
             >
               <Link style={{ textDecoration: 'none' }} to="/categories">
-                <Emoji text=":cat:" />
+                <Emoji text=":books:" />
               </Link>
             </motion.div>
             <motion.div
