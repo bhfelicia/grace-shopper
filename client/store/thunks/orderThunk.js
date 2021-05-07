@@ -13,7 +13,10 @@ import {
 
 const fetchOrders = () => {
   return async (dispatch) => {
-    const { data: orders } = await axios.get("/api/orders");
+    const headerToken = {
+      headers: { authorization: window.localStorage.getItem("token") },
+    };
+    const { data: orders } = await axios.get("/api/orders", headerToken);
     dispatch(loadOrders(orders));
   };
 };
