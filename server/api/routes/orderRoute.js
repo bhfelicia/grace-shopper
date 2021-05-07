@@ -24,23 +24,28 @@ async function requireToken(req, res, next) {
 //get routes
 router.get("/", requireToken, async (req, res, next) => {
   try {
-    if (req.user.isAdmin) {
-      const orders = await Order.findAll();
-      res.status(200).send(orders);
-    } else {
-      res.sendStatus(401);
-    }
+    const orders = await Order.findAll();
+    res.status(200).send(orders);
   } catch (error) {
     next(error);
   }
 });
 
-router.get("/:id", async (req, res, next) => {
+router.get("/:id", requireToken, async (req, res, next) => {
   try {
-    const order = await Order.findByPk(req.params.id, {
-      include: Product,
+    const orderIsUsers = await Order.findByPk(req.params.id, {
+      where: {
+        userId: req.user.id,
+      },
     });
-    res.status(200).send(order);
+    if (req.user.isAdmin || orderIsUsers) {
+      const order = await Order.findByPk(req.params.id, {
+        include: Product,
+      });
+      res.status(200).send(order);
+    } else {
+      res.sendStatus(401);
+    }
   } catch (error) {
     next(error);
   }

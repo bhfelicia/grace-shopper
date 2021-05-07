@@ -24,7 +24,6 @@ router.get("/", requireToken, async (req, res, next) => {
 //secured
 router.get("/:id", requireToken, async (req, res, next) => {
   try {
-    console.log(typeof req.params.id);
     const user = await User.findByPk(req.params.id);
     res.status(200).send(user);
   } catch (error) {
