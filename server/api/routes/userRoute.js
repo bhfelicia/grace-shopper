@@ -12,7 +12,7 @@ async function requireToken(req, res, next) {
     next(error);
   }
 }
-
+//secured
 router.get("/", requireToken, async (req, res, next) => {
   try {
     const users = await User.findAll();
@@ -21,7 +21,7 @@ router.get("/", requireToken, async (req, res, next) => {
     next(error);
   }
 });
-
+//secured
 router.get("/:id", requireToken, async (req, res, next) => {
   try {
     const user = await User.findByPk(req.params.id);
@@ -32,7 +32,7 @@ router.get("/:id", requireToken, async (req, res, next) => {
 });
 
 //post routes
-
+//secured
 router.post("/", requireToken, async (req, res, next) => {
   try {
     //change authorization key to something cryptic
@@ -53,13 +53,15 @@ router.post("/", requireToken, async (req, res, next) => {
 });
 
 //put routes
-router.put("/:id", async (req, res, next) => {
+router.put("/:id", requireToken, async (req, res, next) => {
   try {
-    const updateData = req.body;
-    const { id } = req.params;
-    const userToBeUpdated = await User.findByPk(id);
-    const editedUser = await userToBeUpdated.update(updateData);
-    res.send(editedUser.dataValues).status(204);
+    if (req.user.id === req.params.id || req.user.isAdmin === true) {
+      const updateData = req.body;
+      const { id } = req.params;
+      const userToBeUpdated = await User.findByPk(id);
+      const editedUser = await userToBeUpdated.update(updateData);
+      res.send(editedUser.dataValues).status(204);
+    }
   } catch (error) {
     next(error);
   }

@@ -55,9 +55,13 @@ const destroyUser = (userId) => {
 
 const updateUser = (user, history) => {
   return async (dispatch) => {
+    const headerToken = {
+      headers: { authorization: window.localStorage.getItem("token") },
+    };
     const { data: updatedUser } = await axios.put(
       `/api/users/${user.id}`,
-      user
+      user,
+      headerToken
     );
     dispatch(editUser(updatedUser));
     history.push(`/users/${user.id}`);
