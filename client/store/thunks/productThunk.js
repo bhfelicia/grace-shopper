@@ -42,7 +42,10 @@ const addProduct = (newProduct, history) => {
 
 const destroyProduct = (product) => {
   return async (dispatch) => {
-    await axios.delete(`/api/products/${product.id}`);
+    const headerToken = {
+      headers: { authorization: window.localStorage.getItem("token") },
+    };
+    await axios.delete(`/api/products/${product.id}`, headerToken);
     dispatch(deleteProduct(product));
   };
 };
