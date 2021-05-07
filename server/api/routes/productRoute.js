@@ -3,6 +3,16 @@ const Product = require("../../db/models/Product");
 const Review = require("../../db/models/Review");
 const User = require("../../db/models/User");
 
+async function requireToken(req, res, next) {
+  try {
+    const token = req.headers.authorization;
+    const user = await User.byToken(token);
+    req.user = user;
+    next();
+  } catch (error) {
+    next(error);
+  }
+}
 //get routes
 router.get("/", async (req, res, next) => {
   try {
@@ -12,20 +22,6 @@ router.get("/", async (req, res, next) => {
     next(error);
   }
 });
-
-//test route don't use please
-// router.get("/search", async (req, res, next) => {
-//   try {
-//     const testProduct = await Product.findAll({
-//       where: {
-//         name: "Flower Pop",
-//       },
-//     });
-//     res.status(200).send(testProduct);
-//   } catch (error) {
-//     next(error);
-//   }
-// });
 
 router.get("/:id", async (req, res, next) => {
   try {
@@ -51,18 +47,22 @@ router.get("/:id/reviews", async (req, res, next) => {
 });
 
 //post routes
-router.post("/", async (req, res, next) => {
+router.post("/", requireToken, async (req, res, next) => {
   try {
-    const { name, description, price, size, image, inventory } = req.body;
-    const newProduct = await Product.create({
-      name,
-      description,
-      price: +price,
-      size,
-      image,
-      inventory: +inventory,
-    });
-    res.send(newProduct).status(201);
+    if (req.user.isAdmin) {
+      const { name, description, price, size, image, inventory } = req.body;
+      const newProduct = await Product.create({
+        name,
+        description,
+        price: +price,
+        size,
+        image,
+        inventory: +inventory,
+      });
+      res.send(newProduct).status(201);
+    } else {
+      res.sendStatus(401);
+    }
   } catch (error) {
     next(error);
   }
