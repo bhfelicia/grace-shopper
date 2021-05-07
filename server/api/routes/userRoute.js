@@ -1,6 +1,6 @@
-const router = require("express").Router();
-const User = require("../../db/models/User");
-const Order = require("../../db/models/Order");
+const router = require('express').Router();
+const User = require('../../db/models/User');
+const Order = require('../../db/models/Order');
 
 async function requireToken(req, res, next) {
   try {
@@ -13,7 +13,7 @@ async function requireToken(req, res, next) {
   }
 }
 
-router.get("/", async (req, res, next) => {
+router.get('/', async (req, res, next) => {
   try {
     const users = await User.findAll();
     res.status(200).send(users);
@@ -22,7 +22,7 @@ router.get("/", async (req, res, next) => {
   }
 });
 
-router.get("/:id", async (req, res, next) => {
+router.get('/:id', requireToken, async (req, res, next) => {
   //removed requireToken here by arjan
   try {
     const user = await User.findByPk(req.params.id);
@@ -34,24 +34,27 @@ router.get("/:id", async (req, res, next) => {
 
 //post routes
 
-router.post("/", async (req, res, next) => {
+router.post('/', requireToken, async (req, res, next) => {
   try {
-    const { first, last, email, password } = req.body;
-    const newUser = await User.create({
-      first,
-      last,
-      email,
-      password,
-      role: "AUTHENTICATED",
-    });
-    res.status(201).send(newUser);
+    //change authorization key to something cryptic
+    if (req.user.id === 1) {
+      const { first, last, email, password } = req.body;
+      const newUser = await User.create({
+        first,
+        last,
+        email,
+        password,
+        role: 'AUTHENTICATED',
+      });
+      res.status(201).send(newUser);
+    }
   } catch (error) {
     next(error);
   }
 });
 
 //put routes
-router.put("/:id", async (req, res, next) => {
+router.put('/:id', async (req, res, next) => {
   try {
     const updateData = req.body;
     const { id } = req.params;
@@ -64,7 +67,7 @@ router.put("/:id", async (req, res, next) => {
 });
 
 //delete routes
-router.delete("/:id", requireToken, async (req, res, next) => {
+router.delete('/:id', requireToken, async (req, res, next) => {
   try {
     const { id } = req.params;
 

@@ -49,7 +49,9 @@ class Nav extends Component {
   }
 
   async logout() {
-    const guestUser = await axios.get('/api/users/1');
+    const guestUser = await axios.get('/api/users/1', {
+      headers: { authorization: window.localStorage.getItem('token') },
+    });
     window.localStorage.setItem('token', guestUser.data.password);
     window.localStorage.setItem('guest', 'true');
     this.setState({ loggedInUser: {} });
