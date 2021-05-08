@@ -44,14 +44,14 @@ class AllProducts extends Component {
     const { addToCart } = this;
     return (
       <div>
+        <Home />
+        <ImageSlider slides={SliderData} />
         <motion.div
           id="all-products"
           transition={{ ease: 'easeOut', duration: 1 }}
           initial={{ opacity: 0 }}
           animate={{ x: [100, 0], opacity: 1 }}
         >
-          <Home />
-          <ImageSlider slides={SliderData} />
           {products
             .filter((product) => product.status === 'active')
             .map((product) => (

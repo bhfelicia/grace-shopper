@@ -33,11 +33,14 @@ const fetchUser = (userId) => {
   };
 };
 
-const addUser = (newUser) => {
+const addUser = (newUser, orderId) => {
   return async (dispatch) => {
     const { data: user } = await axios.post(`/api/users/`, newUser, {
       headers: { authorization: window.localStorage.getItem("token") },
     });
+    const {
+      data: updatedOrderWithUserId,
+    } = await axios.put(`/api/orders/${orderId}`, { userId: user.id });
     dispatch(createUser(user));
   };
 };

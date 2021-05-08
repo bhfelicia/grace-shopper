@@ -1,11 +1,33 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
-import { fetchRecent } from "../../store/thunks/orderThunk";
+import { fetchRecent } from '../../store/thunks/orderThunk';
+import { fetchUser } from '../../store/thunks/userThunk';
 
 class OrderSummary extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      loggedInUser: {
+        fullName: '',
+        id: 0,
+        isAdmin: false,
+        role: '',
+        first: '',
+        last: '',
+        password: '',
+        email: '',
+        createdAt: '',
+        updatedAt: '',
+      },
+    };
+  }
+  async componentDidMount() {
+    const { data: loggedInUser } = await axios.get('/api/auth', {
+      headers: { authorization: window.localStorage.getItem('token') },
+    });
+    this.setState({ loggedInUser });
+    await this.props.getUser(Number(this.state.loggedInUser.id));
   }
 
   render() {
@@ -14,7 +36,7 @@ class OrderSummary extends Component {
       <div>
         <h1>
           thank you for your order,
-          {` ${this.props.userReducer.selectedUser.fullName}` || "guest"}
+          {` ${this.props.userReducer.selectedUser.fullName}` || 'guest'}
         </h1>
         <h3>order id: {`${recentOrder.id}`}</h3>
         <h3>order total: ${`${+recentOrder.total + recentOrder.tax}`}</h3>
@@ -46,6 +68,7 @@ const mapStateToProps = ({ orderReducer, userReducer }) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   getRecent: (id) => dispatch(fetchRecent(id)),
+  getUser: (id) => dispatch(fetchUser(id)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(OrderSummary);
