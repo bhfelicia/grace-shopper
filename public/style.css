@@ -4,8 +4,8 @@
   padding: 0;
   box-sizing: border-box;
   text-align: center;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
-    Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
   font-weight: 300;
   color: #376d5f;
 }
@@ -107,7 +107,7 @@ nav {
 
 /*Link*/
 #link {
-  text-decoration: 'none';
+  text-decoration: "none";
 }
 
 a {
@@ -304,9 +304,9 @@ option {
 }
 
 .image {
-  width: 500px;
-  height: 300px;
-  border-radius: 10px;
+  width: auto;
+  height: auto;
+  border-radius: 2rem;
 }
 
 .right-arrow {
