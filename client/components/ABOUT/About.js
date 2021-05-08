@@ -31,21 +31,21 @@ class About extends Component {
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: [0.9, 1.05] }}
             >
-              <img src="https://lh3.googleusercontent.com/proxy/00mTaiz0wUeoSaN79z6drFNCqsqVUPGRLtYbYpeaQfWYw12zYLb3zeBb0hlbXrZ0yNlXahUWlh8dpXrDXeWBGOAfO0AsPSnB-UNPBYiCYx_Gj8i7cJBBE4qJwRD1wi8YEFrLZCs3aDldd64OeSeY5HxDr4OiQqZ7DqyfMMvxxwAopV7AwQ6XlY0" />
+              <img src="public/images/IMG_5944.JPG" />
               <h2>Felicia Heiney</h2>
             </motion.div>
             <motion.div
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: [0.9, 1.05] }}
             >
-              <img src="https://i.pinimg.com/originals/3a/5c/e8/3a5ce8ab71a201a08a0cab427be1462f.png" />
+              <img src="public/images/Linda.jpeg" />
               <h2>Linda Laura</h2>
             </motion.div>
             <motion.div
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: [0.9, 1.05] }}
             >
-              <img src="https://i.kym-cdn.com/photos/images/original/002/052/347/cd3.png" />
+              <img src="public/images/IMG_9006.jpg" />
               <h2>Arjan Mitra</h2>
             </motion.div>
           </div>
@@ -60,7 +60,7 @@ class About extends Component {
           <div id="technologies">
             <img
               className="techPic"
-              src="https://www.freecodecamp.org/news/content/images/2020/02/Ekran-Resmi-2019-11-18-18.08.13.png"
+              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTbduhNrgkszKBJlQhwwD4H2o7pNiCgpsZeGQ&usqp=CAU"
             />
             <img
               className="techPic"
@@ -72,7 +72,7 @@ class About extends Component {
             />
             <img
               className="techPic"
-              src="https://www.framer.com/images/social/motion.png"
+              src="https://reactjsexample.com/content/images/2020/04/motion.png"
             />
             <img
               className="techPic"
