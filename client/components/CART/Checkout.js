@@ -1,21 +1,21 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import axios from "axios";
-import StripeCheckout from "react-stripe-checkout";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import axios from 'axios';
+import StripeCheckout from 'react-stripe-checkout';
 import {
   destroyCart,
   checkoutOrder,
   fetchRecent,
-} from "../../store/thunks/orderThunk";
-import { withRouter } from "react-router";
+} from '../../store/thunks/orderThunk';
+import { withRouter } from 'react-router';
 
 // const pubStripeKey = process.env.STRIPE_PUBLIC_KEY;
 class Checkout extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      orderTotal: this.props.cart.total || "",
-      tax: this.props.cart.tax || "",
+      orderTotal: this.props.orderReducer.currentCart.total || '',
+      tax: this.props.orderReducer.currentCart.tax || '',
       billingAddress: true,
       shippingAddress: true,
     };
@@ -23,24 +23,24 @@ class Checkout extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
   componentDidMount() {
-    this.setState({ orderTotal: this.props.cart.total });
+    this.setState({ orderTotal: this.props.orderReducer.currentCart.total });
   }
   async handleStripeToken(token, addresses) {
     try {
       const { orderTotal } = this.state;
-      const response = await axios.post("/api/orders/checkout", {
+      const response = await axios.post('/api/orders/checkout', {
         token,
         addresses,
         amount: orderTotal,
       });
 
       if (response.status === 200) {
-        alert("Thank you for your purchase");
-        this.props.getRecent(this.props.cart.id);
-        this.props.orderCheckout(this.props.cart.id);
+        alert('Thank you for your purchase');
+        this.props.getRecent(this.props.orderReducer.currentCart.id);
+        this.props.orderCheckout(this.props.orderReducer.currentCart.id);
       } else {
         alert(
-          "There was an error placing your order. Please re-enter your information to try again."
+          'There was an error placing your order. Please re-enter your information to try again.'
         );
       }
     } catch (error) {
