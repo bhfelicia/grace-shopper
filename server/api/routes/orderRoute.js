@@ -214,7 +214,7 @@ router.put("/cart/add", async (req, res, next) => {
         product_quantity: newAmount,
       });
       const theOrder = await Order.findByPk(cartId);
-      const newTotal = theOrder.total + theProduct.price;
+      const newTotal = Number(theOrder.total) + Number(theProduct.price);
       updatedOrder = await theOrder.update({ total: newTotal });
     } else {
       const newProductInCart = await Order_Product.create({

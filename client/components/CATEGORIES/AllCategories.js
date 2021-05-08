@@ -1,29 +1,29 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
-import { fetchCategories } from '../../store/thunks/categoryThunk';
-import { destroyCategory } from '../../store/thunks/categoryThunk';
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import { Link } from "react-router-dom";
+import { fetchCategories } from "../../store/thunks/categoryThunk";
+import { destroyCategory } from "../../store/thunks/categoryThunk";
 
-import axios from 'axios';
+import axios from "axios";
 
-import { motion } from 'framer-motion';
-import Emoji from 'react-emoji-render';
+import { motion } from "framer-motion";
+import Emoji from "react-emoji-render";
 
 class AllCategories extends Component {
   constructor(props) {
     super(props);
     this.state = {
       loggedInUser: {
-        fullName: '',
+        fullName: "",
         id: 0,
         isAdmin: false,
-        role: '',
-        first: '',
-        last: '',
-        password: '',
-        email: '',
-        createdAt: '',
-        updatedAt: '',
+        role: "",
+        first: "",
+        last: "",
+        password: "",
+        email: "",
+        createdAt: "",
+        updatedAt: "",
       },
     };
     this.deleteCategoryHandler = this.deleteCategoryHandler.bind(this);
@@ -31,8 +31,8 @@ class AllCategories extends Component {
 
   async componentDidMount() {
     this.props.getCategories();
-    const { data: loggedInUser } = await axios.get('/api/auth', {
-      headers: { authorization: window.localStorage.getItem('token') },
+    const { data: loggedInUser } = await axios.get("/api/auth", {
+      headers: { authorization: window.localStorage.getItem("token") },
     });
     this.setState({ loggedInUser });
   }
@@ -47,13 +47,13 @@ class AllCategories extends Component {
     if (this.state.loggedInUser.isAdmin) {
       showAddCategory = (
         <motion.button
-          transition={{ ease: 'easeOut', duration: 1 }}
+          transition={{ ease: "easeOut", duration: 1 }}
           initial={{ opacity: 0 }}
           animate={{ x: [100, 0], opacity: 1 }}
           whileHover={{ scale: 1.3 }}
           whileTap={{ scale: [0.9, 1.05] }}
         >
-          <Link to={'/createCategory'}>add</Link>
+          <Link to={"/createCategory"}>add</Link>
         </motion.button>
       );
     }
@@ -67,7 +67,7 @@ class AllCategories extends Component {
               return (
                 <motion.div key={category.id}>
                   <motion.div
-                    transition={{ ease: 'easeOut', duration: 1 }}
+                    transition={{ ease: "easeOut", duration: 1 }}
                     initial={{ opacity: 0 }}
                     animate={{ x: [-100, 0], opacity: 1 }}
                     whileHover={{ scale: 1.3 }}
@@ -75,14 +75,14 @@ class AllCategories extends Component {
                   >
                     <Link
                       to={`/categories/${category.id}`}
-                      style={{ textDecoration: 'none' }}
+                      style={{ textDecoration: "none" }}
                     >
                       <h2>{category.name}</h2>
                     </Link>
                   </motion.div>
 
                   <motion.button
-                    transition={{ ease: 'easeOut', duration: 1 }}
+                    transition={{ ease: "easeOut", duration: 1 }}
                     initial={{ opacity: 0 }}
                     animate={{ x: [100, 0], opacity: 1 }}
                     whileHover={{ scale: 1.3 }}
@@ -92,7 +92,7 @@ class AllCategories extends Component {
                   </motion.button>
 
                   <motion.button
-                    transition={{ ease: 'easeOut', duration: 1 }}
+                    transition={{ ease: "easeOut", duration: 1 }}
                     initial={{ opacity: 0 }}
                     animate={{ x: [100, 0], opacity: 1 }}
                     whileHover={{ scale: 1.3 }}
@@ -108,7 +108,7 @@ class AllCategories extends Component {
               return (
                 <div key={category.id}>
                   <motion.div
-                    transition={{ ease: 'easeOut', duration: 1 }}
+                    transition={{ ease: "easeOut", duration: 1 }}
                     initial={{ opacity: 0 }}
                     animate={{ x: [100, 0], opacity: 1 }}
                     whileHover={{ scale: 1.3 }}
@@ -116,7 +116,7 @@ class AllCategories extends Component {
                   >
                     <Link
                       to={`/categories/${category.id}`}
-                      style={{ textDecoration: 'none' }}
+                      style={{ textDecoration: "none" }}
                     >
                       <h2>{category.name}</h2>
                     </Link>

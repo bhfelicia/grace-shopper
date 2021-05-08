@@ -24,29 +24,47 @@ class About extends Component {
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: [0.9, 1.05] }}
             >
-              <img src="https://cdn141.picsart.com/312232886042211.png" />
+              <h1>
+                {" "}
+                <Emoji text=":woozy_face:" />
+              </h1>
               <h2>Inderprit Singh</h2>
             </motion.div>
             <motion.div
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: [0.9, 1.05] }}
             >
-              <img src="public/images/IMG_5944.JPG" />
+              <h1>
+                <Emoji text=":smile:" />
+              </h1>
               <h2>Felicia Heiney</h2>
             </motion.div>
             <motion.div
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: [0.9, 1.05] }}
             >
-              <img src="public/images/Linda.jpeg" />
+              <h1>
+                <Emoji text=":relaxed:" />
+              </h1>
               <h2>Linda Laura</h2>
             </motion.div>
             <motion.div
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: [0.9, 1.05] }}
             >
-              <img src="public/images/IMG_9006.jpg" />
+              <h1>
+                <Emoji text=":smiling_imp:" />
+              </h1>
               <h2>Arjan Mitra</h2>
+            </motion.div>
+            <motion.div
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: [0.9, 1.05] }}
+            >
+              <h1>
+                <Emoji text=":peach:" />
+              </h1>
+              <h2>GrownAssBaby</h2>
             </motion.div>
           </div>
         </motion.div>
@@ -64,7 +82,7 @@ class About extends Component {
             />
             <img
               className="techPic"
-              src="https://cdn.freebiesupply.com/logos/thumbs/2x/nodejs-1-logo.png"
+              src="https://miro.medium.com/max/365/1*Jr3NFSKTfQWRUyjblBSKeg.png"
             />
             <img
               className="techPic"
