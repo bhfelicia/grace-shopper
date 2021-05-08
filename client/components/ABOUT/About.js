@@ -1,8 +1,8 @@
 //Here I will include which technologies we used as well as who worked on this project
 
-import React, { Component } from 'react';
-import { motion } from 'framer-motion';
-import Emoji from 'react-emoji-render';
+import React, { Component } from "react";
+import { motion } from "framer-motion";
+import Emoji from "react-emoji-render";
 
 class About extends Component {
   constructor(props) {
@@ -14,7 +14,7 @@ class About extends Component {
     return (
       <div>
         <motion.div
-          transition={{ ease: 'easeOut', duration: 1 }}
+          transition={{ ease: "easeOut", duration: 1 }}
           initial={{ opacity: 0 }}
           animate={{ x: [-100, 0], opacity: 1 }}
         >
@@ -24,8 +24,8 @@ class About extends Component {
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: [0.9, 1.05] }}
             >
-              <img src="public/images/Image from iOS.jpg" />
-              <h2>Inderprit Sin(gh)s</h2>
+              <img src="https://cdn141.picsart.com/312232886042211.png" />
+              <h2>Inderprit Singh</h2>
             </motion.div>
             <motion.div
               whileHover={{ scale: 1.1 }}
@@ -52,7 +52,7 @@ class About extends Component {
         </motion.div>
 
         <motion.div
-          transition={{ ease: 'easeOut', duration: 1 }}
+          transition={{ ease: "easeOut", duration: 1 }}
           initial={{ opacity: 0 }}
           animate={{ x: [100, 0], opacity: 1 }}
         >

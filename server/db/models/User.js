@@ -100,6 +100,12 @@ User.addHook('beforeCreate', async (user) => {
   //}
 });
 
+User.addHook('beforeUpdate', async (user) => {
+  //if (user.changed('password')) { ////Arjan comment: i commented this out to check logging in with admin users, uncomment this when we deploy to PROD*******
+  user.password = await bcrypt.hash(user.password, 5);
+  //}
+});
+
 //define any class or instance methods
 
 //export your model

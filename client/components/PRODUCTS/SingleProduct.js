@@ -9,14 +9,34 @@ import { addCart, addToCart, fetchCart } from '../../store/thunks/orderThunk';
 import { motion } from 'framer-motion';
 import Emoji from 'react-emoji-render';
 
+import axios from 'axios';
+
 class SingleProduct extends Component {
   constructor() {
     super();
+    this.state = {
+      loggedInUser: {
+        fullName: '',
+        id: 0,
+        isAdmin: false,
+        role: '',
+        first: '',
+        last: '',
+        password: '',
+        email: '',
+        createdAt: '',
+        updatedAt: '',
+      },
+    };
     this.addToCart = this.addToCart.bind(this);
   }
-  componentDidMount() {
+  async componentDidMount() {
     this.props.getProduct(Number(this.props.match.params.id));
     this.props.getCart();
+    const { data: loggedInUser } = await axios.get('/api/auth', {
+      headers: { authorization: window.localStorage.getItem('token') },
+    });
+    this.setState({ loggedInUser });
   }
   addToCart(productId) {
     const cartId = this.props.orderReducer.currentCart.id;
@@ -55,9 +75,13 @@ class SingleProduct extends Component {
             add to cart
           </button>
           <br />
-          <Link to={`/products/${singleProduct.id}/edit`}>
-            <button>edit product details</button>
-          </Link>
+          {this.state.loggedInUser.isAdmin ? (
+            <Link to={`/products/${singleProduct.id}/edit`}>
+              <button>edit</button>
+            </Link>
+          ) : (
+            <div></div>
+          )}
         </div>
 
         <div>

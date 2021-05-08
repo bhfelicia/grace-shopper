@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { updateProduct, fetchProduct } from '../../store/thunks/productThunk';
 import axios from 'axios';
 
+import { motion } from 'framer-motion';
 class EditProduct extends Component {
   constructor(props) {
     super(props);
@@ -85,68 +86,78 @@ class EditProduct extends Component {
       );
     } else {
       return (
-        <div>
+        <motion.div
+          transition={{ ease: 'easeOut', duration: 1 }}
+          initial={{ opacity: 0 }}
+          animate={{ x: [100, 0], opacity: 1 }}
+        >
           <form onSubmit={this.editProductHandler}>
-            <h4>Edit Product</h4>
-            <label>Name</label>
-            <input
-              type="text"
-              value={this.state.name}
-              name="name"
-              required
-              onChange={this.handleChange}
-            />
-            <label>Description</label>
-            <input
-              type="text"
-              value={this.state.description}
-              name="description"
-              required
-              onChange={this.handleChange}
-            />
-            <label>Price</label>
-            <input
-              type="text"
-              value={this.state.price}
-              name="price"
-              required
-              onChange={this.handleChange}
-            />
-            <label>Size</label>
-            <input
-              type="text"
-              value={this.state.size}
-              name="size"
-              required
-              onChange={this.handleChange}
-            />
-            <label>Image</label>
-            <input
-              type="text"
-              value={this.state.image}
-              name="image"
-              required
-              onChange={this.handleChange}
-            />
-            <label>Inventory</label>
-            <input
-              type="text"
-              value={this.state.inventory}
-              name="inventory"
-              required
-              onChange={this.handleChange}
-            />
-            <label>Status</label>
-            <input
-              type="text"
-              value={this.state.status}
-              name="status"
-              required
-              onChange={this.handleChange}
-            />
-            <button type="submit">Edit this product</button>
+            <div>
+              <input
+                type="text"
+                value={this.state.name}
+                name="name"
+                required
+                onChange={this.handleChange}
+              />
+            </div>
+            <div>
+              <textarea
+                type="text"
+                value={this.state.description}
+                name="description"
+                required
+                onChange={this.handleChange}
+              />
+            </div>
+            <div>
+              <input
+                type="text"
+                value={this.state.price}
+                name="price"
+                required
+                onChange={this.handleChange}
+              />
+            </div>
+            <div>
+              <input
+                type="text"
+                value={this.state.size}
+                name="size"
+                required
+                onChange={this.handleChange}
+              />
+            </div>
+            <div>
+              <input
+                type="text"
+                value={this.state.image}
+                name="image"
+                required
+                onChange={this.handleChange}
+              />
+            </div>
+            <div>
+              <input
+                type="text"
+                value={this.state.inventory}
+                name="inventory"
+                required
+                onChange={this.handleChange}
+              />
+            </div>
+            <div>
+              <input
+                type="text"
+                value={this.state.status}
+                name="status"
+                required
+                onChange={this.handleChange}
+              />
+            </div>
+            <button type="submit">edit</button>
           </form>
-        </div>
+        </motion.div>
       );
     }
   }
