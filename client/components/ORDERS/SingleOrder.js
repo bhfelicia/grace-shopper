@@ -5,6 +5,8 @@ import { updateOrder, fetchOrder } from '../../store/thunks/orderThunk';
 
 import axios from 'axios';
 
+import { motion } from 'framer-motion';
+
 class SingleOrder extends React.Component {
   constructor(props) {
     super(props);
@@ -67,8 +69,12 @@ class SingleOrder extends React.Component {
     const order = this.props.orderReducer.order;
     if (this.state.loggedInUser.isAdmin) {
       return (
-        <div>
-          <div>
+        <motion.div>
+          <motion.div
+            transition={{ ease: 'easeOut', duration: 1 }}
+            initial={{ opacity: 0 }}
+            animate={{ x: [100, 0], opacity: 1 }}
+          >
             <form onSubmit={this.onSave}>
               <h2>tracking number: {order.tracking_number}</h2>
               <h2 style={{ fontWeight: 700 }}>status: {order.status}</h2>
@@ -85,26 +91,44 @@ class SingleOrder extends React.Component {
               </select>
               <button>update</button>
             </form>
-          </div>
-          <h3>order placed: {order.ordered_date}</h3>
-          <h3>order delivered: {order.delivered_date}</h3>
-          <div>
-            <h3>shipping address: {order.shipping_address}</h3>
-          </div>
-          <div>order total: {order.total}</div>
-        </div>
+          </motion.div>
+          <motion.div
+            transition={{ ease: 'easeOut', duration: 1 }}
+            initial={{ opacity: 0 }}
+            animate={{ x: [-100, 0], opacity: 1 }}
+          >
+            <h3>order placed: {order.ordered_date}</h3>
+            <h3>order delivered: {order.delivered_date}</h3>
+            <div>
+              <h3>shipping address: {order.shipping_address}</h3>
+            </div>
+            <div style={{ fontWeight: 700 }}>order total: {order.total}</div>
+          </motion.div>
+        </motion.div>
       );
     } else {
       return (
         <div>
-          <div>
-            {order.tracking_number}: {order.status}
-          </div>
-          <div>
-            {order.ordered_date} - {order.delivered_date}
-          </div>
-          <div>Shipping Address: {order.shipping_address}</div>
-          <div>Total: {order.total}</div>
+          <motion.div
+            transition={{ ease: 'easeOut', duration: 1 }}
+            initial={{ opacity: 0 }}
+            animate={{ x: [100, 0], opacity: 1 }}
+          >
+            <h2>tracking number: {order.tracking_number}</h2>
+            <h2 style={{ fontWeight: 700 }}>status: {order.status}</h2>
+          </motion.div>
+          <motion.div
+            transition={{ ease: 'easeOut', duration: 1 }}
+            initial={{ opacity: 0 }}
+            animate={{ x: [-100, 0], opacity: 1 }}
+          >
+            <h3>order placed: {order.ordered_date}</h3>
+            <h3>order delivered: {order.delivered_date}</h3>
+            <div>
+              <h3>shipping address: {order.shipping_address}</h3>
+            </div>
+            <div style={{ fontWeight: 700 }}>order total: {order.total}</div>
+          </motion.div>
         </div>
       );
     }

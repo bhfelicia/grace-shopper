@@ -1,6 +1,6 @@
-const router = require("express").Router();
-const User = require("../../db/models/User");
-const Order = require("../../db/models/Order");
+const router = require('express').Router();
+const User = require('../../db/models/User');
+const Order = require('../../db/models/Order');
 
 async function requireToken(req, res, next) {
   try {
@@ -13,20 +13,20 @@ async function requireToken(req, res, next) {
   }
 }
 //secured
-router.get("/", requireToken, async (req, res, next) => {
+router.get('/', requireToken, async (req, res, next) => {
   try {
-    if (req.user.isAdmin) {
-      const users = await User.findAll();
-      res.status(200).send(users);
-    } else {
-      res.sendStatus(401);
-    }
+    //if (req.user.isAdmin) { //commented our by arjan the night before bc we need to sleep
+    const users = await User.findAll();
+    res.status(200).send(users);
+    // } else {
+    //   res.sendStatus(401);
+    // }
   } catch (error) {
     next(error);
   }
 });
 //secured
-router.get("/:id", requireToken, async (req, res, next) => {
+router.get('/:id', requireToken, async (req, res, next) => {
   try {
     if (req.user.isAdmin || req.user.id === +req.params.id) {
       const user = await User.findByPk(req.params.id);
@@ -41,17 +41,17 @@ router.get("/:id", requireToken, async (req, res, next) => {
 
 //post routes
 //secured
-router.post("/", requireToken, async (req, res, next) => {
+router.post('/', requireToken, async (req, res, next) => {
   try {
     //change authorization key to something cryptic
-    if (req.user.role === "GUEST") {
+    if (req.user.role === 'GUEST') {
       const { first, last, email, password } = req.body;
       const newUser = await User.create({
         first,
         last,
         email,
         password,
-        role: "AUTHENTICATED",
+        role: 'AUTHENTICATED',
       });
       res.status(201).send(newUser);
     } else {
@@ -64,7 +64,7 @@ router.post("/", requireToken, async (req, res, next) => {
 
 //put routes
 //secured
-router.put("/:id", requireToken, async (req, res, next) => {
+router.put('/:id', requireToken, async (req, res, next) => {
   try {
     if (req.user.id === req.params.id || req.user.isAdmin === true) {
       const updateData = req.body;
@@ -79,7 +79,7 @@ router.put("/:id", requireToken, async (req, res, next) => {
 });
 
 //delete routes
-router.delete("/:id", requireToken, async (req, res, next) => {
+router.delete('/:id', requireToken, async (req, res, next) => {
   try {
     const { id } = req.params;
 

@@ -148,8 +148,8 @@ input {
 textarea {
   border-radius: 1rem;
   border: none;
-  width: 10rem;
-  height: 2rem;
+  width: 30rem;
+  height: 6rem;
 }
 
 div {
@@ -279,14 +279,14 @@ option {
 
 /* images*/
 
-::-webkit-scrollbar-track {
+/* ::-webkit-scrollbar-track {
   background: #f6bd60;
 }
 
 ::-webkit-scrollbar-thumb {
   background: #376d5f;
   border-radius: 25px;
-}
+} */
 /*
 ****************************
 */
