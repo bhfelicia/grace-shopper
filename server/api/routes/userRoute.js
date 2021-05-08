@@ -15,8 +15,12 @@ async function requireToken(req, res, next) {
 //secured
 router.get("/", requireToken, async (req, res, next) => {
   try {
-    const users = await User.findAll();
-    res.status(200).send(users);
+    if (req.user.isAdmin) {
+      const users = await User.findAll();
+      res.status(200).send(users);
+    } else {
+      res.sendStatus(401);
+    }
   } catch (error) {
     next(error);
   }
@@ -24,8 +28,12 @@ router.get("/", requireToken, async (req, res, next) => {
 //secured
 router.get("/:id", requireToken, async (req, res, next) => {
   try {
-    const user = await User.findByPk(req.params.id);
-    res.status(200).send(user);
+    if (req.user.isAdmin || req.user.id === +req.params.id) {
+      const user = await User.findByPk(req.params.id);
+      res.status(200).send(user);
+    } else {
+      res.sendStatus(401);
+    }
   } catch (error) {
     next(error);
   }

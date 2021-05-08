@@ -1,22 +1,13 @@
 export const SliderData = [
   {
     image:
-      "https://images.unsplash.com/photo-1481349518771-20055b2a7b24?ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8cmFuZG9tfGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&w=1000&q=80",
+      "https://cdn.shopify.com/s/files/1/0016/6959/5189/files/types-of-clay_grande.jpg",
   },
   {
     image:
-      "https://static.comicvine.com/uploads/original/11130/111308139/6526885-uchiha-sasuke-png-transparent-picture.png",
+      "https://images.ctfassets.net/f1fikihmjtrp/7e3uEaKP4FzqaMBEkKSHdL/24da66d3b25a839b3471a282add80feb/34204-1009-3ww-l.jpg",
   },
   {
-    image:
-      "https://media.comicbook.com/2021/01/boruto-manga-chapter-54-spoilers-sasuke-eye-injury-sharingan-rin-1253618-1280x0.jpeg",
-  },
-  {
-    image:
-      "https://media.comicbook.com/2021/03/boruto-naruto-sasuke-rinnegan-1259450.jpeg?auto=webp&width=1200&height=628&crop=1200:628,smart",
-  },
-  {
-    image:
-      "https://phillipbrande.files.wordpress.com/2013/10/random-pic-14.jpg",
+    image: "https://three-snails.com/media/wysiwyg/1_52.jpg",
   },
 ];
