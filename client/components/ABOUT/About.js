@@ -57,15 +57,6 @@ class About extends Component {
               </h1>
               <h2>Arjan Mitra</h2>
             </motion.div>
-            <motion.div
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: [0.9, 1.05] }}
-            >
-              <h1>
-                <Emoji text=":peach:" />
-              </h1>
-              <h2>GrownAssBaby</h2>
-            </motion.div>
           </div>
         </motion.div>
 
