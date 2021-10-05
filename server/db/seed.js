@@ -59,6 +59,9 @@ const seed = async () => {
     const vases = await Category.create({
       name: "vases",
     });
+    const urns = await Category.create({
+      name: "urns",
+    });
     const plates = await Category.create({
       name: "plates",
     });
@@ -69,8 +72,12 @@ const seed = async () => {
       name: "bowls",
     });
     const jars = await Category.create({ name: "jars" });
+    const dishes = await Category.create({ name: "dishes" });
     const mugs = await Category.create({
       name: "mugs",
+    });
+    const tealights = await Category.create({
+      name: "tealights",
     });
     const platters = await Category.create({
       name: "platters",
@@ -146,11 +153,11 @@ const seed = async () => {
       image: "public/images/20161202_135734.jpg",
     });
     await Product.create({
-      categoryId: mugs.id,
+      categoryId: bowls.id,
       image: "public/images/20161202_135808.jpg",
     });
     await Product.create({
-      categoryId: mugs.id,
+      categoryId: vases.id,
       image: "public/images/20161202_135826.jpg",
     });
     await Product.create({
@@ -158,39 +165,28 @@ const seed = async () => {
       image: "public/images/20161202_135905.jpg",
     });
     await Product.create({
-      categoryId: mugs.id,
+      categoryId: bowls.id,
       image: "public/images/20161202_140004.jpg",
     });
     await Product.create({
-      categoryId: mugs.id,
-      image: "public/images/20161202_140050.jpg",
-    });
-    await Product.create({
-      categoryId: mugs.id,
-      image: "public/images/20161202_140108.jpg",
-    });
-    await Product.create({
-      categoryId: mugs.id,
+      categoryId: bowls.id,
       image: "public/images/20161202_140153.jpg",
     });
     await Product.create({
-      categoryId: mugs.id,
+      categoryId: dishes.id,
       image: "public/images/20161202_140314.jpg",
     });
     await Product.create({
-      categoryId: mugs.id,
+      categoryId: dishes.id,
       image: "public/images/20161202_140320.jpg",
     });
-    await Product.create({
-      categoryId: mugs.id,
-      image: "public/images/20161202_140333.jpg",
-    });
+
     await Product.create({
       categoryId: mugs.id,
       image: "public/images/20161202_140338.jpg",
     });
     await Product.create({
-      categoryId: mugs.id,
+      categoryId: bowls.id,
       image: "public/images/20161202_140348.jpg",
     });
     await Product.create({
@@ -198,35 +194,27 @@ const seed = async () => {
       image: "public/images/20161202_140419.jpg",
     });
     await Product.create({
-      categoryId: mugs.id,
+      categoryId: bowls.id,
       image: "public/images/20161202_140438.jpg",
     });
     await Product.create({
-      categoryId: mugs.id,
+      categoryId: teapots.id,
       image: "public/images/20161202_140510.jpg",
     });
     await Product.create({
-      categoryId: mugs.id,
+      categoryId: jars.id,
       image: "public/images/20161202_140538.jpg",
     });
     await Product.create({
-      categoryId: mugs.id,
-      image: "public/images/20161202_140553.jpg",
-    });
-    await Product.create({
-      categoryId: mugs.id,
-      image: "public/images/20161202_182634.jpg",
-    });
-    await Product.create({
-      categoryId: mugs.id,
+      categoryId: teapots.id,
       image: "public/images/20170316_160018.jpg",
     });
     await Product.create({
-      categoryId: mugs.id,
+      categoryId: sculptures.id,
       image: "public/images/20170510_204115.jpg",
     });
     await Product.create({
-      categoryId: mugs.id,
+      categoryId: bowls.id,
       image: "public/images/20171016_171344.jpg",
     });
     await Product.create({
@@ -234,7 +222,7 @@ const seed = async () => {
       image: "public/images/20181213_171208.jpg",
     });
     await Product.create({
-      categoryId: mugs.id,
+      categoryId: tealights.id,
       image: "public/images/20181225_173912.jpg",
     });
     await Product.create({
@@ -246,19 +234,7 @@ const seed = async () => {
       image: "public/images/20190425_120608.jpg",
     });
     await Product.create({
-      categoryId: mugs.id,
-      image: "public/images/20181225_173912.jpg",
-    });
-    await Product.create({
-      categoryId: mugs.id,
-      image: "public/images/20190121_204654.jpg",
-    });
-    await Product.create({
-      categoryId: mugs.id,
-      image: "public/images/20190425_120608.jpg",
-    });
-    await Product.create({
-      categoryId: mugs.id,
+      categoryId: dishes.id,
       image: "public/images/20190728_143031.jpg",
     });
     await Product.create({
@@ -266,15 +242,15 @@ const seed = async () => {
       image: "public/images/20190728_144609.jpg",
     });
     await Product.create({
-      categoryId: mugs.id,
+      categoryId: bowls.id,
       image: "public/images/20190801_193612.jpg",
     });
     await Product.create({
-      categoryId: mugs.id,
+      categoryId: bowls.id,
       image: "public/images/20190801_194002.jpg",
     });
     await Product.create({
-      categoryId: mugs.id,
+      categoryId: sculptures.id,
       image: "public/images/20190801_194108.jpg",
     });
     await Product.create({
@@ -282,7 +258,7 @@ const seed = async () => {
       image: "public/images/20190801_194406.jpg",
     });
     await Product.create({
-      categoryId: mugs.id,
+      categoryId: bowls.id,
       image: "public/images/20190801_195610.jpg",
     });
     await Product.create({
@@ -298,7 +274,7 @@ const seed = async () => {
       image: "public/images/20200225_134559.jpg",
     });
     await Product.create({
-      categoryId: mugs.id,
+      categoryId: bowls.id,
       image: "public/images/20200225_134724.jpg",
     });
     await Product.create({
@@ -316,7 +292,7 @@ const seed = async () => {
       image: "public/images/A3A3E91C-982E-42B8-A5C4-D3ADE17CE64D.jpg",
     });
     await Product.create({
-      categoryId: mugs.id,
+      categoryId: dishes.id,
       image: "public/images/APC_0006-hdr.jpg",
     });
     await Product.create({
@@ -324,51 +300,48 @@ const seed = async () => {
       image: "public/images/APC_0059.jpg",
     });
     await Product.create({
-      categoryId: mugs.id,
+      categoryId: teapots.id,
       image: "public/images/APC_0063.jpg",
     });
     await Product.create({
-      categoryId: mugs.id,
+      categoryId: jugs.id,
       image: "public/images/APC_0065.jpg",
     });
     await Product.create({
-      categoryId: mugs.id,
+      categoryId: vases.id,
       image: "public/images/APC_0069.jpg",
     });
     await Product.create({
-      categoryId: mugs.id,
+      categoryId: sculptures.id,
       image: "public/images/APC_0072.jpg",
     });
     await Product.create({
-      categoryId: mugs.id,
+      categoryId: vases.id,
       image: "public/images/APC_0075.jpg",
     });
     await Product.create({
-      categoryId: mugs.id,
+      categoryId: jugs.id,
       image: "public/images/APC_0081.jpg",
     });
     await Product.create({
-      categoryId: mugs.id,
+      categoryId: urns.id,
       image: "public/images/APC_0085.jpg",
     });
     await Product.create({
-      categoryId: mugs.id,
+      categoryId: jugs.id,
       image: "public/images/APC_0087.jpg",
     });
     await Product.create({
-      categoryId: mugs.id,
+      categoryId: jugs.id,
       image: "public/images/APC_0090.jpg",
     });
+
     await Product.create({
-      categoryId: mugs.id,
-      image: "public/images/APC_0091.jpg",
-    });
-    await Product.create({
-      categoryId: mugs.id,
+      categoryId: vases.id,
       image: "public/images/B1D90B05-ABD4-4A6E-9699-95425C6DF397.jpg",
     });
     await Product.create({
-      categoryId: mugs.id,
+      categoryId: jugs.id,
       image: "public/images/C4F36915-6CA8-4F04-B8C2-7555D7B955C3.jpg",
     });
     await Product.create({
@@ -376,27 +349,27 @@ const seed = async () => {
       image: "public/images/CC48D458-CC83-48CF-9598-4854EC9FAA4E.jpg",
     });
     await Product.create({
-      categoryId: mugs.id,
+      categoryId: jugs.id,
       image: "public/images/IMG_0798.jpg",
     });
     await Product.create({
-      categoryId: mugs.id,
+      categoryId: jugs.id,
       image: "public/images/IMG_0799.jpg",
     });
     await Product.create({
-      categoryId: mugs.id,
+      categoryId: dishes.id,
       image: "public/images/IMG_4579.jpg",
     });
     await Product.create({
-      categoryId: mugs.id,
+      categoryId: vases.id,
       image: "public/images/IMG_7779.jpg",
     });
     await Product.create({
-      categoryId: mugs.id,
+      categoryId: dishes.id,
       image: "public/images/IMG951195.jpg",
     });
     await Product.create({
-      categoryId: mugs.id,
+      categoryId: bowls.id,
       image: "public/images/IMG959418.jpg",
     });
 

@@ -37,8 +37,9 @@ router.get("/", async (req, res, next) => {
 router.get("/:id", async (req, res, next) => {
   try {
     const category = await Category.findByPk(req.params.id, {
-      include: Product,
+      include: { model: Product },
     });
+    console.log("CATEGORY IS: ", category);
     res.status(200).send(category);
   } catch (error) {
     next(error);

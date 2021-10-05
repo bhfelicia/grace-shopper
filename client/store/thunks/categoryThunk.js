@@ -17,6 +17,7 @@ const fetchCategories = () => {
 const fetchCategory = (categoryId) => {
   return async (dispatch) => {
     const { data: category } = await axios.get(`/api/categories/${categoryId}`);
+    console.log("CATEGORY IN FETCHCATEGORY: ", category);
     dispatch(loadCategory(category));
   };
 };

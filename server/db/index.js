@@ -36,8 +36,8 @@ Review.belongsTo(User);
 Product.hasMany(Review);
 Review.belongsTo(Product);
 
-Category.belongsToMany(Product, { through: Category_Product });
-Product.belongsToMany(Category, { through: Category_Product });
+Category.hasMany(Product);
+Product.belongsTo(Category);
 
 //export your db and Models (so they all can be imported from a single central location)
 
