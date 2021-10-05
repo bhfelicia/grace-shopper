@@ -22,9 +22,15 @@ body {
 }
 
 img {
-  width: 200px;
-  length: 200px;
+  width: 300px;
+  length: 300px;
   padding: 1rem;
+}
+
+.hero {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .login-container {
@@ -293,7 +299,7 @@ option {
 
 .slider {
   position: relative;
-  height: 100vh;
+  /* height: 100vh; */
   display: flex;
   justify-content: center;
   align-items: center;

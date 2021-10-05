@@ -1,7 +1,7 @@
 {
-  "name": "grace-shopper",
+  "name": "allison-portfolio",
   "version": "1.0.0",
-  "description": "Hey all, this is our Grace Shopper, Plant Parenthood!",
+  "description": "Allison Sasso Portfolio Website",
   "main": "index.js",
   "scripts": {
     "test": "jest --detectOpenHandles --forceExit",

@@ -1,31 +1,31 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
-import { fetchProduct } from '../../store/thunks/productThunk';
-import ProductReviews from '../REVIEWS/ProductReviews';
-import CreateReview from '../REVIEWS/CreateReview';
-import { addCart, addToCart, fetchCart } from '../../store/thunks/orderThunk';
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import { Link } from "react-router-dom";
+import { fetchProduct } from "../../store/thunks/productThunk";
+import ProductReviews from "../REVIEWS/ProductReviews";
+import CreateReview from "../REVIEWS/CreateReview";
+import { addCart, addToCart, fetchCart } from "../../store/thunks/orderThunk";
 
-import { motion } from 'framer-motion';
-import Emoji from 'react-emoji-render';
+import { motion } from "framer-motion";
+import Emoji from "react-emoji-render";
 
-import axios from 'axios';
+import axios from "axios";
 
 class SingleProduct extends Component {
   constructor() {
     super();
     this.state = {
       loggedInUser: {
-        fullName: '',
+        fullName: "",
         id: 0,
         isAdmin: false,
-        role: '',
-        first: '',
-        last: '',
-        password: '',
-        email: '',
-        createdAt: '',
-        updatedAt: '',
+        role: "",
+        first: "",
+        last: "",
+        password: "",
+        email: "",
+        createdAt: "",
+        updatedAt: "",
       },
     };
     this.addToCart = this.addToCart.bind(this);
@@ -33,8 +33,8 @@ class SingleProduct extends Component {
   async componentDidMount() {
     this.props.getProduct(Number(this.props.match.params.id));
     this.props.getCart();
-    const { data: loggedInUser } = await axios.get('/api/auth', {
-      headers: { authorization: window.localStorage.getItem('token') },
+    const { data: loggedInUser } = await axios.get("/api/auth", {
+      headers: { authorization: window.localStorage.getItem("token") },
     });
     this.setState({ loggedInUser });
   }
@@ -43,9 +43,10 @@ class SingleProduct extends Component {
     if (!this.props.orderReducer.currentCart) {
       this.props.createCart(productId);
     } else {
-      const productExistsInCart = this.props.orderReducer.currentCart.products.filter(
-        (product) => product.id === productId
-      ).length;
+      const productExistsInCart =
+        this.props.orderReducer.currentCart.products.filter(
+          (product) => product.id === productId
+        ).length;
       if (productExistsInCart > 0) {
         //then the product exists, we must update the product quantity of the existing record in order_product
         this.props.amendCart(productId, cartId, true);
@@ -60,20 +61,13 @@ class SingleProduct extends Component {
     return (
       <motion.div
         id="single-product"
-        transition={{ ease: 'easeOut', duration: 1 }}
+        transition={{ ease: "easeOut", duration: 1 }}
         initial={{ opacity: 0 }}
         animate={{ x: [100, 0], opacity: 1 }}
       >
         <div>
-          <h1>{singleProduct.name}</h1>
           <img id="singleProductImageView" src={singleProduct.image}></img>
-          <p>{singleProduct.description}</p>
-          <h2>${singleProduct.price}</h2>
-          <p>size: {singleProduct.size} </p>
-          <p>{singleProduct.inventory} of these beauties in stock!</p>
-          <button onClick={() => this.addToCart(singleProduct.id)}>
-            add to cart
-          </button>
+
           <br />
           {this.state.loggedInUser.isAdmin ? (
             <Link to={`/products/${singleProduct.id}/edit`}>
@@ -82,13 +76,6 @@ class SingleProduct extends Component {
           ) : (
             <div></div>
           )}
-        </div>
-
-        <div>
-          <ProductReviews productId={singleProduct.id} />
-        </div>
-        <div>
-          <CreateReview productId={singleProduct.id} />
         </div>
       </motion.div>
     );

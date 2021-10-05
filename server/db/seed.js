@@ -59,11 +59,21 @@ const seed = async () => {
     const vases = await Category.create({
       name: "vases",
     });
+    const plates = await Category.create({
+      name: "plates",
+    });
+    const ashtrays = await Category.create({
+      name: "ashtrays",
+    });
     const bowls = await Category.create({
       name: "bowls",
     });
+    const jars = await Category.create({ name: "jars" });
     const mugs = await Category.create({
       name: "mugs",
+    });
+    const platters = await Category.create({
+      name: "platters",
     });
     const plantPots = await Category.create({
       name: "plant pots",
@@ -77,346 +87,320 @@ const seed = async () => {
     const sculptures = await Category.create({
       name: "sculptures",
     });
+    const jugs = await Category.create({
+      name: "jugs",
+    });
     //product data
-    const flowerPop = await Product.create({
-      name: "flower pop",
-      description:
-        "this bright vase colorfully graces any table with style and is beautiful, with or without flowers!",
-      price: 100,
-      size: "medium",
-      categoryId: vases.id,
+    await Product.create({
+      categoryId: platters.id,
+      image: "public/images/272D7748-2E22-4F0A-8E4F-21271EA62C66.jpg",
     });
-    const becomingBlue = await Product.create({
-      name: "blue becomes her",
-      description:
-        "this unique centerpiece in soothing blue is sure to charm your guests and warm your space.",
-      price: 150,
-      size: "medium",
-      categoryId: vases.id,
-      image: "https://imgur.com/amaUzq7.png",
-    });
-    const groovyLizard = await Product.create({
-      name: "groovy lizard",
-      description:
-        "let your funky flair show with this bright red vase with a hand-built lizard perched atop. guaranteed to add spunk to any room!",
-      price: 200,
-      size: "medium",
-      categoryId: vases.id,
-      image: "https://imgur.com/ucsbxMV.png",
-    });
-    const honeycomb = await Product.create({
-      name: "honeycomb",
-      description:
-        "this bright yellow bowl with hexagonal cutouts will elevate your space and entice you to reach for a fruit when you're looking for a snack.",
-      price: 90,
-      size: "medium",
-      categoryId: bowls.id,
-      image: "https://imgur.com/balfjQb.png",
-    });
-    const delilah = await Product.create({
-      name: "delilah",
-      description:
-        "broad strokes in earthy tones make this bowl perfect for soup, salad, a grain bowl, cereal with milk... your appetite's the limit!",
-      price: 68,
-      size: "small",
-      categoryId: bowls.id,
-      image: "https://imgur.com/c2JEWHj.png",
-    });
-    const sereneGreen = await Product.create({
-      name: "serene green",
-      description:
-        "add some zen to your morning routine with this calming, hand-crafted green mug.",
-      price: 40,
-      size: "small",
+    await Product.create({
       categoryId: mugs.id,
-      image: "https://imgur.com/2bIObBw.png",
-    });
-    const bubblingUp = await Product.create({
-      name: "bubbling Up",
-      description:
-        "express your bubbly personality with this effervescent mug that's foamy like the crash of a wave.",
-      price: 45,
-      size: "small",
-      categoryId: mugs.id,
-      image: "https://imgur.com/2xQPbVY.png",
+      image: "public/images/624C8B58-EB0A-4490-92C8-D5897F00478B.jpeg",
     });
 
-    const coolSplash = await Product.create({
-      name: "cool splash",
-      description:
-        "scenes of island beaches with crystal-clear water will come to mind when admiring the wash of cool palettes on this mug.",
-      price: 50,
-      size: "small",
+    await Product.create({
+      categoryId: bowls.id,
+      image: "public/images/813AE8D2-78A4-46F6-A9A3-693C9DDD8156.jpg",
+    });
+    await Product.create({
+      categoryId: jugs.id,
+      image: "public/images/919291CD-6C6F-4250-9F96-6F772F8228B6 (1).jpg",
+    });
+    await Product.create({
       categoryId: mugs.id,
-      image: "https://i.imgur.com/6zKzojO.png",
+      image: "public/images/8507712A-5F8C-49A2-93FC-B4884283409F.jpg",
     });
-    const downToEarth = await Product.create({
-      name: "down to earth",
-      description:
-        "give your plant a new face with this small, quirky plant pot with plenty of personality.",
-      price: 55,
-      size: "small",
-      categoryId: plantPots.id,
-      image: "https://imgur.com/SHG1Pqo.png",
-    });
-    const royal = await Product.create({
-      name: "royal",
-      description:
-        "everyone deserves to be treated like royalty sometimes - yes, even your plant! she's queen every day in this rich blue pot.",
-      price: 30,
-      size: "large",
-      categoryId: plantPots.id,
-      image: "https://imgur.com/UKUoZKh.png",
-    });
-    const classic = await Product.create({
-      name: "classic",
-      description:
-        "you can't go wrong with this classic, cozy terracotta home for your beloved plant. good for indoors and outdoors.",
-      price: 20,
-      size: "medium",
-      categoryId: plantPots.id,
-      image: "https://imgur.com/N8zfVw9.png",
-    });
-    const gardenParty = await Product.create({
-      name: "garden party",
-      description:
-        "dazzle your guests and uplift teatime with this whimsical teapot.",
-      price: 70,
-      size: "medium",
+    await Product.create({
       categoryId: teapots.id,
-      image: "https://imgur.com/1Hf1yrk.png",
+      image: "public/images/20121018_221231-MOTION.gif",
     });
-    const prettyInPink = await Product.create({
-      name: "pretty in pink",
-      description:
-        "this flowy pink teapot with gold flourishes adds elegance and style to teatime, dessert, or just serving up hot cups of coffee.",
-      price: 60,
-      size: "medium",
-      categoryId: teapots.id,
-      image: "https://imgur.com/DtpMrtI.png",
+    await Product.create({
+      categoryId: jars.id,
+      image: "public/images/20140107_203414.jpg",
     });
-    const kickItUp = await Product.create({
-      name: "kick it up a notch",
-      description:
-        "though it may be one color, there's nothing monotone about this teapot, which packs a punch of pizzaz. wow your guests with this whimsical piece reminiscent of alice in wonderland.",
-      price: 65,
-      size: "medium",
-      categoryId: teapots.id,
-      image: "https://imgur.com/JAB78CF.png",
+    await Product.create({
+      categoryId: bowls.id,
+      image: "public/images/20140225_213001.jpg",
     });
-    const byTheSeashore = await Product.create({
-      name: "by the seashore",
-      description:
-        "flowing from sea blue to smooth sand, these salt and pepper shakers will transport you to a beach - you can almost feel salty ocean breeze when you sprinkle some on top of what's on the menu!",
-      price: 30,
-      size: "small",
-      categoryId: saltAndPepper.id,
-      image: "https://imgur.com/ALsRsWW.png",
+    await Product.create({
+      categoryId: bowls.id,
+      image: "public/images/20140225_213018.jpg",
     });
-    const peasInAPod = await Product.create({
-      name: "peas in a pod",
-      description:
-        "we go together like peanut butter and jelly, chips and salsa, salt and pepper...you get the idea, we're like two peas in a pod!",
-      price: 35,
-      size: "small",
-      categoryId: saltAndPepper.id,
-      image: "https://imgur.com/yvF98Dc.png",
+    await Product.create({
+      categoryId: ashtrays.id,
+      image: "public/images/20140328_142656.jpg",
     });
-    const hootyFriends = await Product.create({
-      name: "hooty friends",
-      description:
-        "bring nature to your table with these dainty salt and pepper shakers that'll have you asking your guests - hooo wants more?",
-      price: 40,
-      size: "small",
-      categoryId: saltAndPepper.id,
-      image: "https://imgur.com/SwPW5ZX.png",
+    await Product.create({
+      categoryId: mugs.id,
+      image: "public/images/20161202_135604.jpg",
     });
-    const seaFallin = await Product.create({
-      name: "sea fallin'",
-      description:
-        "space is not the final frontier as it turns out... get lost in a deep dive into our coral reefs under the sea with this unique sculpture.",
-      price: 300,
-      size: "medium",
-      categoryId: sculptures.id,
-      image: "https://imgur.com/8HKTwwi.png",
+
+    await Product.create({
+      categoryId: mugs.id,
+      image: "public/images/20161202_135702.jpg",
     });
-    const flowThrough = await Product.create({
-      name: "flow through",
-      description:
-        "flow through this mind-bending, abstract sculpture whenever you please with this as a centerpiece in your home.",
-      price: 280,
-      size: "medium",
-      categoryId: sculptures.id,
-      image: "https://imgur.com/pWa6xW8.png",
+    await Product.create({
+      categoryId: mugs.id,
+      image: "public/images/20161202_135734.jpg",
     });
-    const waveItOut = await Product.create({
-      name: "wave it out",
-      description:
-        "the sea comes home with you with this elegant replica of a wave that connotes motion and carefree summer beach days.",
-      price: 200,
-      size: "medium",
-      categoryId: sculptures.id,
-      image: "https://imgur.com/wivxVqL.png",
+    await Product.create({
+      categoryId: mugs.id,
+      image: "public/images/20161202_135808.jpg",
+    });
+    await Product.create({
+      categoryId: mugs.id,
+      image: "public/images/20161202_135826.jpg",
+    });
+    await Product.create({
+      categoryId: mugs.id,
+      image: "public/images/20161202_135905.jpg",
+    });
+    await Product.create({
+      categoryId: mugs.id,
+      image: "public/images/20161202_140004.jpg",
+    });
+    await Product.create({
+      categoryId: mugs.id,
+      image: "public/images/20161202_140050.jpg",
+    });
+    await Product.create({
+      categoryId: mugs.id,
+      image: "public/images/20161202_140108.jpg",
+    });
+    await Product.create({
+      categoryId: mugs.id,
+      image: "public/images/20161202_140153.jpg",
+    });
+    await Product.create({
+      categoryId: mugs.id,
+      image: "public/images/20161202_140314.jpg",
+    });
+    await Product.create({
+      categoryId: mugs.id,
+      image: "public/images/20161202_140320.jpg",
+    });
+    await Product.create({
+      categoryId: mugs.id,
+      image: "public/images/20161202_140333.jpg",
+    });
+    await Product.create({
+      categoryId: mugs.id,
+      image: "public/images/20161202_140338.jpg",
+    });
+    await Product.create({
+      categoryId: mugs.id,
+      image: "public/images/20161202_140348.jpg",
+    });
+    await Product.create({
+      categoryId: mugs.id,
+      image: "public/images/20161202_140419.jpg",
+    });
+    await Product.create({
+      categoryId: mugs.id,
+      image: "public/images/20161202_140438.jpg",
+    });
+    await Product.create({
+      categoryId: mugs.id,
+      image: "public/images/20161202_140510.jpg",
+    });
+    await Product.create({
+      categoryId: mugs.id,
+      image: "public/images/20161202_140538.jpg",
+    });
+    await Product.create({
+      categoryId: mugs.id,
+      image: "public/images/20161202_140553.jpg",
+    });
+    await Product.create({
+      categoryId: mugs.id,
+      image: "public/images/20161202_182634.jpg",
+    });
+    await Product.create({
+      categoryId: mugs.id,
+      image: "public/images/20170316_160018.jpg",
+    });
+    await Product.create({
+      categoryId: mugs.id,
+      image: "public/images/20170510_204115.jpg",
+    });
+    await Product.create({
+      categoryId: mugs.id,
+      image: "public/images/20171016_171344.jpg",
+    });
+    await Product.create({
+      categoryId: mugs.id,
+      image: "public/images/20181213_171208.jpg",
+    });
+    await Product.create({
+      categoryId: mugs.id,
+      image: "public/images/20181225_173912.jpg",
+    });
+    await Product.create({
+      categoryId: mugs.id,
+      image: "public/images/20190121_204654.jpg",
+    });
+    await Product.create({
+      categoryId: mugs.id,
+      image: "public/images/20190425_120608.jpg",
+    });
+    await Product.create({
+      categoryId: mugs.id,
+      image: "public/images/20181225_173912.jpg",
+    });
+    await Product.create({
+      categoryId: mugs.id,
+      image: "public/images/20190121_204654.jpg",
+    });
+    await Product.create({
+      categoryId: mugs.id,
+      image: "public/images/20190425_120608.jpg",
+    });
+    await Product.create({
+      categoryId: mugs.id,
+      image: "public/images/20190728_143031.jpg",
+    });
+    await Product.create({
+      categoryId: mugs.id,
+      image: "public/images/20190728_144609.jpg",
+    });
+    await Product.create({
+      categoryId: mugs.id,
+      image: "public/images/20190801_193612.jpg",
+    });
+    await Product.create({
+      categoryId: mugs.id,
+      image: "public/images/20190801_194002.jpg",
+    });
+    await Product.create({
+      categoryId: mugs.id,
+      image: "public/images/20190801_194108.jpg",
+    });
+    await Product.create({
+      categoryId: mugs.id,
+      image: "public/images/20190801_194406.jpg",
+    });
+    await Product.create({
+      categoryId: mugs.id,
+      image: "public/images/20190801_195610.jpg",
+    });
+    await Product.create({
+      categoryId: mugs.id,
+      image: "public/images/20200225_134437.jpg",
+    });
+    await Product.create({
+      categoryId: mugs.id,
+      image: "public/images/20200225_134521.jpg",
+    });
+    await Product.create({
+      categoryId: mugs.id,
+      image: "public/images/20200225_134559.jpg",
+    });
+    await Product.create({
+      categoryId: mugs.id,
+      image: "public/images/20200225_134724.jpg",
+    });
+    await Product.create({
+      categoryId: mugs.id,
+      image:
+        "public/images/62870939602__C1199149-7E0F-45B8-B774-62BD8EC82AD8.jpg",
+    });
+    await Product.create({
+      categoryId: mugs.id,
+      image:
+        "public/images/62898770240__974FD2AC-74B9-4401-AF66-B037815E0F94.jpg",
+    });
+    await Product.create({
+      categoryId: mugs.id,
+      image: "public/images/A3A3E91C-982E-42B8-A5C4-D3ADE17CE64D.jpg",
+    });
+    await Product.create({
+      categoryId: mugs.id,
+      image: "public/images/APC_0006-hdr.jpg",
+    });
+    await Product.create({
+      categoryId: mugs.id,
+      image: "public/images/APC_0059.jpg",
+    });
+    await Product.create({
+      categoryId: mugs.id,
+      image: "public/images/APC_0063.jpg",
+    });
+    await Product.create({
+      categoryId: mugs.id,
+      image: "public/images/APC_0065.jpg",
+    });
+    await Product.create({
+      categoryId: mugs.id,
+      image: "public/images/APC_0069.jpg",
+    });
+    await Product.create({
+      categoryId: mugs.id,
+      image: "public/images/APC_0072.jpg",
+    });
+    await Product.create({
+      categoryId: mugs.id,
+      image: "public/images/APC_0075.jpg",
+    });
+    await Product.create({
+      categoryId: mugs.id,
+      image: "public/images/APC_0081.jpg",
+    });
+    await Product.create({
+      categoryId: mugs.id,
+      image: "public/images/APC_0085.jpg",
+    });
+    await Product.create({
+      categoryId: mugs.id,
+      image: "public/images/APC_0087.jpg",
+    });
+    await Product.create({
+      categoryId: mugs.id,
+      image: "public/images/APC_0090.jpg",
+    });
+    await Product.create({
+      categoryId: mugs.id,
+      image: "public/images/APC_0091.jpg",
+    });
+    await Product.create({
+      categoryId: mugs.id,
+      image: "public/images/B1D90B05-ABD4-4A6E-9699-95425C6DF397.jpg",
+    });
+    await Product.create({
+      categoryId: mugs.id,
+      image: "public/images/C4F36915-6CA8-4F04-B8C2-7555D7B955C3.jpg",
+    });
+    await Product.create({
+      categoryId: mugs.id,
+      image: "public/images/CC48D458-CC83-48CF-9598-4854EC9FAA4E.jpg",
+    });
+    await Product.create({
+      categoryId: mugs.id,
+      image: "public/images/IMG_0798.jpg",
+    });
+    await Product.create({
+      categoryId: mugs.id,
+      image: "public/images/IMG_0799.jpg",
+    });
+    await Product.create({
+      categoryId: mugs.id,
+      image: "public/images/IMG_4579.jpg",
+    });
+    await Product.create({
+      categoryId: mugs.id,
+      image: "public/images/IMG_7779.jpg",
+    });
+    await Product.create({
+      categoryId: mugs.id,
+      image: "public/images/IMG951195.jpg",
+    });
+    await Product.create({
+      categoryId: mugs.id,
+      image: "public/images/IMG959418.jpg",
     });
 
     //category_product data (so products can belong to many categories)
-    await Category_Product.create({
-      productId: becomingBlue.id,
-      categoryId: vases.id,
-    });
-    await Category_Product.create({
-      productId: becomingBlue.id,
-      categoryId: glazed.id,
-    });
-
-    await Category_Product.create({
-      productId: flowerPop.id,
-      categoryId: vases.id,
-    });
-    await Category_Product.create({
-      productId: flowerPop.id,
-      categoryId: painted.id,
-    });
-    await Category_Product.create({
-      productId: groovyLizard.id,
-      categoryId: painted.id,
-    });
-    await Category_Product.create({
-      productId: groovyLizard.id,
-      categoryId: vases.id,
-    });
-    await Category_Product.create({
-      productId: honeycomb.id,
-      categoryId: glazed.id,
-    });
-    await Category_Product.create({
-      productId: honeycomb.id,
-      categoryId: bowls.id,
-    });
-    await Category_Product.create({
-      productId: delilah.id,
-      categoryId: painted.id,
-    });
-    await Category_Product.create({
-      productId: delilah.id,
-      categoryId: bowls.id,
-    });
-    await Category_Product.create({
-      productId: sereneGreen.id,
-      categoryId: glazed.id,
-    });
-    await Category_Product.create({
-      productId: sereneGreen.id,
-      categoryId: mugs.id,
-    });
-    await Category_Product.create({
-      productId: bubblingUp.id,
-      categoryId: mugs.id,
-    });
-    await Category_Product.create({
-      productId: bubblingUp.id,
-      categoryId: glazed.id,
-    });
-    await Category_Product.create({
-      productId: coolSplash.id,
-      categoryId: mugs.id,
-    });
-    await Category_Product.create({
-      productId: coolSplash.id,
-      categoryId: painted.id,
-    });
-    await Category_Product.create({
-      productId: downToEarth.id,
-      categoryId: plantPots.id,
-    });
-    await Category_Product.create({
-      productId: downToEarth.id,
-      categoryId: unglazed.id,
-    });
-    await Category_Product.create({
-      productId: royal.id,
-      categoryId: glazed.id,
-    });
-    await Category_Product.create({
-      productId: royal.id,
-      categoryId: plantPots.id,
-    });
-    await Category_Product.create({
-      productId: classic.id,
-      categoryId: unglazed.id,
-    });
-    await Category_Product.create({
-      productId: classic.id,
-      categoryId: plantPots.id,
-    });
-    await Category_Product.create({
-      productId: gardenParty.id,
-      categoryId: teapots.id,
-    });
-    await Category_Product.create({
-      productId: prettyInPink.id,
-      categoryId: glazed.id,
-    });
-    await Category_Product.create({
-      productId: prettyInPink.id,
-      categoryId: teapots.id,
-    });
-    await Category_Product.create({
-      productId: kickItUp.id,
-      categoryId: glazed.id,
-    });
-    await Category_Product.create({
-      productId: kickItUp.id,
-      categoryId: teapots.id,
-    });
-    await Category_Product.create({
-      productId: byTheSeashore.id,
-      categoryId: saltAndPepper.id,
-    });
-    await Category_Product.create({
-      productId: byTheSeashore.id,
-      categoryId: glazed.id,
-    });
-    await Category_Product.create({
-      productId: peasInAPod.id,
-      categoryId: painted.id,
-    });
-    await Category_Product.create({
-      productId: peasInAPod.id,
-      categoryId: saltAndPepper.id,
-    });
-    await Category_Product.create({
-      productId: hootyFriends.id,
-      categoryId: saltAndPepper.id,
-    });
-    await Category_Product.create({
-      productId: hootyFriends.id,
-      categoryId: painted.id,
-    });
-    await Category_Product.create({
-      productId: seaFallin.id,
-      categoryId: sculptures.id,
-    });
-    await Category_Product.create({
-      productId: seaFallin.id,
-      categoryId: painted.id,
-    });
-    await Category_Product.create({
-      productId: flowThrough.id,
-      categoryId: glazed.id,
-    });
-    await Category_Product.create({
-      productId: flowThrough.id,
-      categoryId: sculptures.id,
-    });
-    await Category_Product.create({
-      productId: waveItOut.id,
-      categoryId: painted.id,
-    });
-    await Category_Product.create({
-      productId: waveItOut.id,
-      categoryId: sculptures.id,
-    });
 
     //order data
     const arjanOrder1 = await Order.create({

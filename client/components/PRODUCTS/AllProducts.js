@@ -1,16 +1,16 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
-import Home from '../NAVBAR/Home';
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import { Link } from "react-router-dom";
+import Home from "../NAVBAR/Home";
 
-import { fetchProducts } from '../../store/thunks/productThunk';
-import { addCart, addToCart, fetchCart } from '../../store/thunks/orderThunk';
+import { fetchProducts } from "../../store/thunks/productThunk";
+import { addCart, addToCart, fetchCart } from "../../store/thunks/orderThunk";
 
-import { motion } from 'framer-motion';
-import Emoji from 'react-emoji-render';
+import { motion } from "framer-motion";
+import Emoji from "react-emoji-render";
 
-import ImageSlider from '../SLIDES/ImageSlider';
-import { SliderData } from '../SLIDES/SliderData';
+import ImageSlider from "../SLIDES/ImageSlider";
+import { SliderData } from "../SLIDES/SliderData";
 
 class AllProducts extends Component {
   constructor(props) {
@@ -27,9 +27,10 @@ class AllProducts extends Component {
     if (!this.props.orderReducer.currentCart) {
       this.props.createCart(productId);
     } else {
-      const productExistsInCart = this.props.orderReducer.currentCart.products.filter(
-        (product) => product.id === productId
-      ).length;
+      const productExistsInCart =
+        this.props.orderReducer.currentCart.products.filter(
+          (product) => product.id === productId
+        ).length;
       if (productExistsInCart > 0) {
         //then the product exists, we must update the product quantity of the existing record in order_product
         this.props.amendCart(productId, cartId, true);
@@ -41,26 +42,28 @@ class AllProducts extends Component {
   }
   render() {
     const { products } = this.props.productReducer;
-    const { addToCart } = this;
     return (
       <div>
         <motion.div
           id="all-products"
-          transition={{ ease: 'easeOut', duration: 1 }}
+          transition={{ ease: "easeOut", duration: 1 }}
           initial={{ opacity: 0 }}
           animate={{ x: [100, 0], opacity: 1 }}
         >
-          <Home />
-          <ImageSlider slides={SliderData} />
+          <div className="hero">
+            <Home />
+            <br></br>
+            <ImageSlider slides={SliderData} />
+          </div>
         </motion.div>
         <motion.div
           id="all-products"
-          transition={{ ease: 'easeOut', duration: 1 }}
+          transition={{ ease: "easeOut", duration: 1 }}
           initial={{ opacity: 0 }}
           animate={{ x: [100, 0], opacity: 1 }}
         >
           {products
-            .filter((product) => product.status === 'active')
+            .filter((product) => product.status === "active")
             .map((product) => (
               <div key={`${product.id}`} className="singleProduct">
                 <motion.div
@@ -69,19 +72,10 @@ class AllProducts extends Component {
                 >
                   <Link to={`/products/${product.id}`}>
                     <img src={product.image}></img>
-                    <h2>{product.name}</h2>
-                    <h3>${product.price}</h3>
+
                     <div></div>
                   </Link>
                 </motion.div>
-                <motion.button
-                  className="cartButton"
-                  onClick={() => addToCart(product.id)}
-                  whileHover={{ scale: 1.3 }}
-                  whileTap={{ scale: [0.9, 1.05] }}
-                >
-                  add to cart
-                </motion.button>
               </div>
             ))}
         </motion.div>
